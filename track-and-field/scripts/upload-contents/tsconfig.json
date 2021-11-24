@@ -1,0 +1,30 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "module": "commonjs",
+    "moduleResolution": "Node",
+    "lib": ["ESNext", "ESNext.AsyncIterable", "DOM"],
+    "esModuleInterop": true,
+    "allowJs": true,
+    "sourceMap": true,
+    "strict": true,
+    "noEmit": true,
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["../../*"],
+      "@/*": ["../../*"]
+    },
+    "typeRoots": ["node_modules/@types"],
+    "types": [
+      "@nuxt/types",
+      "@nuxtjs/axios",
+      "@types/node",
+      "@types/lodash-es",
+      "@types/google-spreadsheet",
+      "@types/sharp",
+      "vuetify"
+    ]
+  },
+  "exclude": ["dist"]
+}

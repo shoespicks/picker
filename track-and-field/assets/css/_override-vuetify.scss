@@ -1,0 +1,33 @@
+.v-application.theme--light {
+  font-family: 'Noto Sans JP', 'Roboto', sans-serif;
+
+  .container {
+    padding: 0 24px;
+  }
+
+  ul,
+  ol {
+    padding: 0;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  .v-application--wrap,
+  .theme--light.v-card {
+    color: #262626;
+  }
+
+  .v-rating {
+    display: flex;
+  }
+
+  .v-input--selection-controls {
+    margin-top: 0;
+  }
+
+  .v-window {
+    overflow: visible;
+  }
+}

@@ -1,0 +1,33 @@
+# スプレッドシートの情報をContentfulにアップロード
+name: uploadSheetContents
+on: [workflow_dispatch]
+env:
+  PICKER_AWS_ACCESS_KEY_ID: ${{secrets.PICKER_AWS_ACCESS_KEY_ID}}
+  PICKER_AWS_SECRET_ACCESS_KEY: ${{secrets.PICKER_AWS_SECRET_ACCESS_KEY}}
+  PICKER_CONTENTFUL_SPACE_ID: ${{secrets.PICKER_CONTENTFUL_SPACE_ID}}
+  PICKER_CONTENTFUL_ACCESS_TOKEN: ${{secrets.PICKER_CONTENTFUL_ACCESS_TOKEN}}
+  PICKER_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN: ${{secrets.PICKER_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN}}
+  PICKER_GCP_CLIENT_EMAIL: ${{secrets.PICKER_GCP_CLIENT_EMAIL}}
+  PICKER_GCP_PRIVATE_KEY: ${{secrets.PICKER_GCP_PRIVATE_KEY}}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: "./track-and-field"
+
+    strategy:
+      matrix:
+        node-version: [16.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+      - uses: actions/checkout@master
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: "npm"
+          cache-dependency-path: "**/package-lock.json"
+      - run: npm i
+      - run: npm run uploadContents

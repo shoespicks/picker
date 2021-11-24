@@ -1,0 +1,8 @@
+dist
+node_modules
+*/generated
+*.md
+.prettierrc
+.nuxt
+.babelrc
+package-lock.json

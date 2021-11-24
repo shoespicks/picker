@@ -129,6 +129,9 @@ export default {
   },
   env: {
     // NODE_ENVはamplyfyのデプロイ時に入る環境変数値
-    contentfulEnviroment: process.env.NODE_ENV === 'prod' ? 'master' : 'staging'
+    contentfulEnviroment:
+      process.env.NODE_ENV === 'prod' ? 'master' : 'staging',
+    PICKER_CONTENTFUL_SPACE_ID: process.env.PICKER_CONTENTFUL_SPACE_ID,
+    PICKER_CONTENTFUL_ACCESS_TOKEN: process.env.PICKER_CONTENTFUL_ACCESS_TOKEN
   }
 };

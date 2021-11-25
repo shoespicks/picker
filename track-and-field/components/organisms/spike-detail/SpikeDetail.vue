@@ -1,6 +1,6 @@
 <template>
   <article class="organisms-spike-detail">
-    <Container :max-width="1244" padding="0 32px 48px">
+    <Container padding="0 32px 48px">
       <SpikeDetailTop
         :spike="spike"
         :is-favorite.sync="isFavorite"
@@ -9,18 +9,14 @@
       ></SpikeDetailTop>
     </Container>
     <div class="spike-detail-tab">
-      <Container :max-width="1244" padding="0 32px">
-        <v-tabs v-model="selectedTab" color="#262626" :height="60" grow>
+      <Container padding="0 32px">
+        <v-tabs v-model="selectedTab" color="#383838" :height="60" grow>
           <v-tab :ripple="false">Top</v-tab>
           <v-tab :ripple="false">スペック情報</v-tab>
         </v-tabs>
       </Container>
     </div>
-    <StickySidenavLayout
-      :sticky-container-top-px="140"
-      :container-max-width="1244"
-      right
-    >
+    <StickySidenavLayout :sticky-container-top-px="140" right>
       <v-tabs-items v-model="selectedTab">
         <v-tab-item>
           <SpikeDetailIntroduction :spike="spike"></SpikeDetailIntroduction>
@@ -67,14 +63,14 @@
               >
             </li>
           </ul>
-          <section class="sidenav-recomend-items-section">
+          <section class="sidenav-recommend-items-section">
             <h4>似ているスパイク</h4>
             <ul>
               <li v-for="item in spike.recommendItems" :key="item.name">
                 <router-link :to="`/search/${item.slug}`">
                   <LinkItem
                     :label="item.name"
-                    :image-url="item.colorVariationImage1[0]"
+                    :image-url="item.colorVariations[0].imageUrls[0]"
                     :image-width="40"
                   ></LinkItem>
                 </router-link>
@@ -84,7 +80,9 @@
         </div>
       </template>
     </StickySidenavLayout>
-    <SpikeRecommendLink :spike="spike"></SpikeRecommendLink>
+    <Container padding="0 32px 48px">
+      <SpikeRecommendLink :spike="spike"></SpikeRecommendLink>
+    </Container>
   </article>
 </template>
 <script lang="ts">
@@ -158,7 +156,7 @@ export default defineComponent({
       }
     }
 
-    > .sidenav-recomend-items-section {
+    > .sidenav-recommend-items-section {
       h4 {
         + * {
           margin-top: 8px;

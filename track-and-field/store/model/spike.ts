@@ -30,7 +30,7 @@ export interface IShoeKeyFeature {
 export interface ISpikeModel
   extends Omit<
       ISpikeShoesFields,
-      'spikeArticle' | 'recomendItems' | 'newModels'
+      'spikeArticle' | 'recommendItems' | 'newModels'
     >,
     ISpikeArticlesFields {
   id: string;
@@ -39,7 +39,7 @@ export interface ISpikeModel
   reviewRating?: number;
   strength?: IShoeStrength[];
   keyFeatures?: IShoeKeyFeature[];
-  recomendItems?: ISpikeModel[];
+  recommendItems?: ISpikeModel[];
   newModels?: ISpikeModel[];
 }
 
@@ -64,7 +64,7 @@ export const transrateSpikeEntityToModel = (
     reviewRating: 3.8,
     keyFeatures: createKeyFeatures(entity?.fields?.spikeArticle?.fields),
     strength: createsStrength(entity.fields?.spikeArticle?.fields?.strength),
-    recomendItems: ignoreLinkFields
+    recommendItems: ignoreLinkFields
       ? []
       : entity.fields?.recommendItems?.flatMap(
           (item) => transrateSpikeEntityToModel(item, true) || []

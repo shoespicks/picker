@@ -26,7 +26,7 @@
                 <li v-for="event in spike.events" :key="event">
                   <v-chip
                     outlined
-                    color="#262626"
+                    color="#383838"
                     x-small
                     disabled
                     style="padding: 0 8px; opacity: 1"

@@ -42,8 +42,6 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .organisms-spike-recommend-link {
-  padding: 0 32px 96px;
-
   > * + * {
     margin-top: 16px;
   }

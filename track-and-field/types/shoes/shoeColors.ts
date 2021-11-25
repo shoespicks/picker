@@ -26,7 +26,7 @@ export interface IShoeColor extends ISelectItem {
 export const shoeColors: { [key in shoeColorsCode]: IShoeColor } = {
   black: {
     id: 'black',
-    code: '#262626'
+    code: '#383838'
   },
   blue: {
     id: 'blue',

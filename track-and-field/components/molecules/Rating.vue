@@ -3,7 +3,7 @@
     <v-rating
       v-model="ratingValue"
       background-color="gray lighten"
-      color="#262626"
+      color="#383838"
       :size="size"
       dense
       half-increments

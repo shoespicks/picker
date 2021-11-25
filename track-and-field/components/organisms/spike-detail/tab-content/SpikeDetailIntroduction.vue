@@ -1,7 +1,7 @@
 <template>
   <div class="organisms-spike-detail-introduction-tab">
     <section class="spike-introduction-top-section">
-      <Container>
+      <Container :max-width="980">
         <h2>
           <span> 基本性能 </span>
           <span class="background-text background-text--wide"> 01 </span>
@@ -41,7 +41,7 @@
       </Container>
     </section>
     <section class="spike-introduction-key-features-section">
-      <Container>
+      <Container :max-width="980">
         <h2>
           <span> 特徴 </span>
           <span class="background-text"> 02 </span>

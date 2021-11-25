@@ -8,7 +8,7 @@
             <Button
               v-if="searchFormValue.eventCategory"
               class="search-spike-form-evens-input"
-              color="#262626"
+              color="#383838"
               outlined
               plain
               v-bind="attrs"

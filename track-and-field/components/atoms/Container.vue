@@ -14,7 +14,7 @@ export default defineComponent({
   props: {
     maxWidth: {
       type: Number,
-      default: 980
+      default: 1280
     },
     padding: {
       type: String,

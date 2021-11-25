@@ -926,6 +926,7 @@ export class SpreadsheetUploader {
       ?.flatten({ background: '#ffffff' })
       .resize(800, 600)
       .jpeg({ quality: 70 })
+      .rotate()
       .toBuffer();
   }
 }

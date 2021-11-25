@@ -922,15 +922,10 @@ export class SpreadsheetUploader {
   }
 
   static _reduceImageSize(driveFileBuffer: Buffer) {
-    const sharpImage = sharp(driveFileBuffer)
-      .flatten({ background: '#ffffff' })
+    return sharp(driveFileBuffer)
+      ?.flatten({ background: '#ffffff' })
       .resize(800, 600)
-      .jpeg({ quality: 70 });
-
-    if (!sharpImage) {
-      return;
-    }
-
-    return sharpImage.toBuffer();
+      .jpeg({ quality: 70 })
+      .toBuffer();
   }
 }

@@ -18,10 +18,4 @@ export default defineComponent({
   height: 2000px;
 }
 
-.top-heroimage-logo-container {
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 </style>

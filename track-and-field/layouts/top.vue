@@ -1,12 +1,25 @@
 <template>
-  <v-app class="app-top-layout">
-    <Header :height="800">
-      <template #imgContent>
+  <v-app app>
+    <Header :visible="visible"></Header>
+    <div class="fixed-header-content">
+      <HeaderContetnt></HeaderContetnt>
+    </div>
+    <div v-intersect="onHeroVideoIntersect" class="hero-video-container">
+      <video
+        class="hero-video"
+        src="~static/movies/hero-movie.mp4"
+        muted
+        autoplay
+        playsinline
+        loop
+      ></video>
+      <div class="hero-video-filter"></div>
+      <div class="hero-video-content">
         <section class="top-layout-heroimage-logo-container">
-          <h1>陸上競技者のためのシューズ検索サイト</h1>
+          <h1>データでカンタン比較<br>
+            陸上選手のためのスパイク検索サイト</h1>
           <img
-            width="180"
-            height="180"
+            width="320"
             src="~static/images/logo/logo-square.svg"
             alt="shoespicks"
           />
@@ -45,89 +58,139 @@
             </SearchLauncher>
           </div>
         </section>
-      </template>
-    </Header>
-    <main class="app-top-layout-content">
+      </div>
+    </div>
+    <v-main>
       <Nuxt />
-    </main>
+    </v-main>
     <Footer />
   </v-app>
 </template>
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api';
+import { defineComponent, ref } from '@nuxtjs/composition-api';
 import Button from '~/components/atoms/Button.vue';
+import HeaderContetnt from '~/components/organisms/header/HeaderContetnt.vue';
 import SearchLauncher from '~/components/organisms/SearchLauncher.vue';
 import Footer from '~/components/organisms/Footer.vue';
-import Header from '~/components/organisms/Header.vue';
+import Header from '~/components/organisms/header/Header.vue';
 
 export default defineComponent({
   components: {
+    HeaderContetnt,
     Button,
     SearchLauncher,
     Header,
     Footer
   },
-  setup() {}
+  setup() {
+    const visible = ref(false);
+
+    const onHeroVideoIntersect = (entries: any) => {
+      visible.value = entries[0].intersectionRatio === 0;
+    };
+
+    return {
+      visible,
+      onHeroVideoIntersect
+    };
+  }
 });
 </script>
 <style lang="scss" scoped>
-.app-top-layout {
-  .top-layout-heroimage-logo-container {
-    position: absolute;
-    display: flex;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
+.fixed-header-content {
+  position: fixed;
+  padding: 4px 16px;
+  width: 100%;
+  height: 40px;
+  z-index: 1;
+}
 
-    > * {
-      + * {
-        margin-top: 32px;
-      }
-    }
+.top-layout-heroimage-logo-container {
+  position: absolute;
+  display: flex;
+  left: 50%;
+  top: 46%;
+  transform: translate(-50%, -50%);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  z-index: 1;
 
-    h1 {
-      font-size: 16px;
+  > * {
+    + * {
+      margin-top: 32px;
     }
   }
 
-  .top-layout-heroimage-search-container {
-    width: 360px;
-    margin-top: 60px;
+  h1 {
+    text-align: center;
+    font-size: 20px;
+  }
+}
 
-    .top-layout-heroimage-search-form {
-      ::v-deep .v-input {
-        cursor: pointer;
-        border-radius: 200px;
-        border: 1px solid #ddd;
+.top-layout-heroimage-search-container {
+  width: 360px;
+  margin-top: 60px;
 
-        > .v-input__control {
-          > .v-input__slot {
+  .top-layout-heroimage-search-form {
+    ::v-deep .v-input {
+      cursor: pointer;
+      border-radius: 200px;
+      border: 1px solid #ddd;
+
+      > .v-input__control {
+        > .v-input__slot {
+          cursor: pointer;
+
+          > .v-text-field__slot {
             cursor: pointer;
 
-            > .v-text-field__slot {
+            > * {
               cursor: pointer;
-
-              > * {
-                cursor: pointer;
-              }
             }
           }
         }
       }
+    }
 
-      .v-btn {
-        position: relative;
-        right: -18px;
-      }
+    .v-btn {
+      position: relative;
+      right: -18px;
     }
   }
+}
 
-  .app-top-layout-content {
-    margin-top: 800px;
+.hero-video-container {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+
+  .hero-video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    filter: saturate(24%) blur(3px);
+
+    + .hero-video-filter {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: rgba(0, 0, 0, 0.1);
+      background-image: radial-gradient(#111 30%, transparent 31%),
+        radial-gradient(#111 30%, transparent 31%);
+      background-size: 4px 4px;
+      background-position: 0 0, 2px 2px;
+      background-repeat: repeat;
+    }
   }
 }
 </style>

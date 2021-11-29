@@ -1,21 +1,9 @@
 <template>
   <v-app class="app-default-layout">
-    <Header :height="160">
-      <template #imgContent>
-        <section class="default-layout-heroimage-logo-container">
-          <h2>陸上競技者のためのシューズ検索サイト</h2>
-          <img
-            width="60"
-            height="60"
-            src="/images/logo/logo-square.svg"
-            alt="shoespicks"
-          />
-        </section>
-      </template>
-    </Header>
-    <main class="app-default-layout-content">
+    <Header></Header>
+    <v-main class="app-default-layout-content">
       <Nuxt />
-    </main>
+    </v-main>
     <Footer />
   </v-app>
 </template>
@@ -24,7 +12,7 @@
 import { defineComponent } from '@nuxtjs/composition-api';
 
 import Footer from '~/components/organisms/Footer.vue';
-import Header from '~/components/organisms/Header.vue';
+import Header from '~/components/organisms/header/Header.vue';
 
 export default defineComponent({
   components: {
@@ -60,8 +48,6 @@ export default defineComponent({
   }
 
   main.app-default-layout-content {
-    margin-top: 160px;
-
     .page-content {
       * + article {
         margin-top: 16px;

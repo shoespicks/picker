@@ -15,7 +15,7 @@
           <slot name="imgContent"></slot>
         </v-img>
       </template>
-      <v-app-bar-nav-icon @click="openSideMenu()"></v-app-bar-nav-icon>
+      <!--      <v-app-bar-nav-icon @click="openSideMenu()"></v-app-bar-nav-icon>-->
       <NuxtLink class="header-logo" to="/">
         <img
           width="60"
@@ -39,37 +39,36 @@
         </template>
       </SearchLauncher>
     </v-app-bar>
-    <v-navigation-drawer v-model="drawer" fixed border temporary dark>
-      <div class="navigation-drawer-logo-container">
-        <NuxtLink to="/">
-          <img
-            width="40"
-            height="40"
-            src="~static/images/logo/logo-square.svg"
-            alt="shoespicks"
-          />
-        </NuxtLink>
-      </div>
-      <v-list nav dense>
-        <v-list-item-group>
-          <NuxtLink v-for="item in navItems" :key="item.label" :to="item.link">
-            <v-list-item color="#fff" :ripple="false">
-              <v-list-item-icon>
-                <v-icon size="16">{{ item.icon }}</v-icon>
-              </v-list-item-icon>
-              <v-list-item-title>{{ item.label }}</v-list-item-title>
-            </v-list-item>
-          </NuxtLink>
-        </v-list-item-group>
-      </v-list>
-    </v-navigation-drawer>
+    <!--    <v-navigation-drawer v-model="drawer" fixed border temporary dark>-->
+    <!--      <div class="navigation-drawer-logo-container">-->
+    <!--        <NuxtLink to="/">-->
+    <!--          <img-->
+    <!--            width="40"-->
+    <!--            height="40"-->
+    <!--            src="~static/images/logo/logo-square.svg"-->
+    <!--            alt="shoespicks"-->
+    <!--          />-->
+    <!--        </NuxtLink>-->
+    <!--      </div>-->
+    <!--      <v-list nav dense>-->
+    <!--        <v-list-item-group>-->
+    <!--          <NuxtLink v-for="item in navItems" :key="item.label" :to="item.link">-->
+    <!--            <v-list-item color="#fff" :ripple="false">-->
+    <!--              <v-list-item-icon>-->
+    <!--                <v-icon size="16">{{ item.icon }}</v-icon>-->
+    <!--              </v-list-item-icon>-->
+    <!--              <v-list-item-title>{{ item.label }}</v-list-item-title>-->
+    <!--            </v-list-item>-->
+    <!--          </NuxtLink>-->
+    <!--        </v-list-item-group>-->
+    <!--      </v-list>-->
+    <!--    </v-navigation-drawer>-->
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, reactive, ref } from '@nuxtjs/composition-api';
+import { defineComponent } from '@nuxtjs/composition-api';
 import Button from '~/components/atoms/Button.vue';
 import SearchLauncher from '~/components/organisms/SearchLauncher.vue';
-import { IMenuItem } from '~/types/IMenuItem';
 
 export default defineComponent({
   components: { Button, SearchLauncher },
@@ -77,42 +76,42 @@ export default defineComponent({
     height: { type: Number, default: 50 }
   },
   setup() {
-    const drawer = ref(false);
-    const navItems: IMenuItem[] = reactive([
-      {
-        id: 'spikes',
-        label: 'スパイクを探す',
-        icon: 'fas fa-search',
-        link: '/spikes'
-      },
-      {
-        id: 'hikaku',
-        label: 'スパイクを比較する',
-        icon: 'fas fa-arrows-alt-v',
-        link: '/'
-      },
-      {
-        id: 'okini',
-        label: 'お気に入りのスパイク',
-        icon: 'fas fa-heart',
-        link: '/'
-      },
-      {
-        id: 'toha',
-        label: 'ShoesPicksとは？',
-        icon: 'far fa-question-circle',
-        link: '/'
-      }
-    ]);
+    // const drawer = ref(false);
+    // const navItems: IMenuItem[] = reactive([
+    //   {
+    //     id: 'search',
+    //     label: 'スパイクを探す',
+    //     icon: 'fas fa-search',
+    //     link: '/spikes'
+    //   },
+    //   {
+    //     id: 'hikaku',
+    //     label: 'スパイクを比較する',
+    //     icon: 'fas fa-arrows-alt-v',
+    //     link: '/'
+    //   },
+    //   {
+    //     id: 'favorite',
+    //     label: 'お気に入りのスパイク',
+    //     icon: 'fas fa-heart',
+    //     link: '/'
+    //   },
+    //   {
+    //     id: 'about',
+    //     label: 'ShoesPicksとは？',
+    //     icon: 'far fa-question-circle',
+    //     link: '/'
+    //   }
+    // ]);
 
-    const openSideMenu = () => {
-      drawer.value = true;
-    };
+    // const openSideMenu = () => {
+    //   drawer.value = true;
+    // };
 
     return {
-      drawer,
-      navItems,
-      openSideMenu
+      // drawer,
+      // navItems
+      // openSideMenu
     };
   }
 });

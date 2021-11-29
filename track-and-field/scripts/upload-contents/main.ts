@@ -10,11 +10,9 @@ const main = async () => {
   await uploader.uploadContents();
 
   // 最後に、stagingをデプロイする
-  await axios
-    .post(AMPLIFY_UPLOAD_CONTENTS_WEBHOOK_URL_STAGING, {})
-    .then(() => {
-      console.log('デプロイ開始♪');
-    });
+  await axios.post(AMPLIFY_UPLOAD_CONTENTS_WEBHOOK_URL_STAGING, {}).then(() => {
+    console.log('デプロイ開始♪');
+  });
 };
 
 main().then(() => {

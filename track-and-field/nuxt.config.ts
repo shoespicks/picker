@@ -22,8 +22,7 @@ export default {
       { hid: 'description', name: 'description', content: 'データでカンタン比較 陸上選手のためのスパイク検索サイト' },
       { hid: 'og:site_name', property: 'og:site_name', content: 'PICKER for Track and Field' },
       { hid: 'og:type', property: 'og:type', content: 'website' },
-      { hid: 'og:url', property: 'og:url', content: 'サイトのURL' },
-      { hid: 'og:title', property: 'og:title', content: 'サイトタイトル' },
+      { hid: 'og:title', property: 'og:title', content: 'PICKER for Track and Field' },
       {
         hid: 'og:description',
         property: 'og:description',

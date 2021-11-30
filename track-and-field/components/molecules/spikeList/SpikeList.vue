@@ -1,24 +1,23 @@
 <template>
-  <v-container class="molecules-spike-list">
-    <v-row>
-      <v-col
-        v-for="spike in spikes"
-        :key="spike.id"
-        cols="12"
-        xs="12"
-        sm="6"
-        md="4"
-        lg="3"
-        xl="2"
-      >
-        <SpikeListItem
-          class="spike-list-item"
-          :spike="spike"
-          @click="clickItem(spike)"
-        ></SpikeListItem>
-      </v-col>
-    </v-row>
-  </v-container>
+  <v-row class="molecules-spike-list">
+    <v-col
+      v-for="spike in spikes"
+      :key="spike.id"
+      class="molecules-spike-list-col"
+      cols="12"
+      xs="12"
+      sm="12"
+      md="12"
+      lg="6"
+      xl="4"
+    >
+      <SpikeListItem
+        class="spike-list-item"
+        :spike="spike"
+        @click="clickItem(spike)"
+      ></SpikeListItem>
+    </v-col>
+  </v-row>
 </template>
 <script lang="ts">
 import { defineComponent, PropType } from '@nuxtjs/composition-api';
@@ -46,8 +45,8 @@ export default defineComponent({
 .molecules-spike-list {
   position: relative;
 
-  .spike-list-item {
-    height: 100%;
+  .molecules-spike-list-col {
+    margin-bottom: 24px;
   }
 }
 </style>

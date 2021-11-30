@@ -4,12 +4,7 @@
     :ripple="false"
     @click="clickItem()"
   >
-    <v-img
-      :src="hoverImg ? selectedColor.imageUrls[1] : selectedColor.imageUrls[0]"
-      @mouseover="changeHoverImg(true)"
-      @mouseleave="changeHoverImg(false)"
-    >
-    </v-img>
+    <v-img :src="selectedColor.imageUrls[0]"> </v-img>
     <section>
       <ColorVariationsPicker
         v-if="selectedColor"
@@ -76,10 +71,7 @@ export default defineComponent({
     }
   },
   setup(props, context) {
-    const hoverImg = ref(false);
-
     return {
-      hoverImg,
       selectedColor: props.spike?.colorVariations
         ? ref(props.spike?.colorVariations[0])
         : null,
@@ -87,9 +79,6 @@ export default defineComponent({
       shoeBrands,
       clickItem: () => {
         context.emit('click', props.spike);
-      },
-      changeHoverImg: (hover: boolean) => {
-        hoverImg.value = hover;
       }
     };
   }

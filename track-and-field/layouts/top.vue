@@ -19,7 +19,7 @@
           <h1>データでカンタン比較<br>
             陸上選手のためのスパイク検索サイト</h1>
           <img
-            width="360"
+            width="320"
             src="~static/images/logo/logo-square.svg"
             alt="shoespicks"
           />

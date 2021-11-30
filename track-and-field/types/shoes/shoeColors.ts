@@ -16,7 +16,8 @@ export type shoeColorsCode =
   | 'red'
   | 'silver'
   | 'white'
-  | 'yellow';
+  | 'yellow'
+  | 'purple';
 
 export interface IShoeColor extends ISelectItem {
   id: shoeColorsCode;
@@ -83,5 +84,9 @@ export const shoeColors: { [key in shoeColorsCode]: IShoeColor } = {
   yellow: {
     id: 'yellow',
     code: '#f1c40a'
+  },
+  purple: {
+    id: 'purple',
+    code: '#9754d7'
   }
 };

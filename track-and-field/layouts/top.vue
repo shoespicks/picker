@@ -8,6 +8,7 @@
       <video
         class="hero-video"
         src="~static/movies/hero-movie.mp4"
+        poster="~static/images/top/heroImage.jpg"
         muted
         autoplay
         playsinline
@@ -16,8 +17,10 @@
       <div class="hero-video-filter"></div>
       <div class="hero-video-content">
         <section class="top-layout-heroimage-logo-container">
-          <h1>データでカンタン比較<br>
-            陸上選手のためのスパイク検索サイト</h1>
+          <h1>
+            データでカンタン比較<br />
+            陸上選手のためのスパイク検索サイト
+          </h1>
           <img
             width="320"
             src="~static/images/logo/logo-square.svg"

@@ -369,19 +369,23 @@ export class SpreadsheetUploader {
 
   // masterシートの行からContentful上に仮オブジェクトを作成
   private async _createTargetRowsEntries(targetRows: GoogleSpreadsheetRow[]) {
-    return await Promise.all(
-      targetRows.map(async (row, index) => {
-        console.log(
-          `${index + 1} / ${targetRows.length} 件目 ${
-            row[SPREADSHEET_ID_HEADER]
-          } をcreate開始♪`
-        );
+    for (const [index, targetRow] of targetRows.entries()) {
+      console.log(
+        `${index + 1} / ${targetRows.length} 件目 ${
+          targetRow[SPREADSHEET_ID_HEADER]
+        } をcreate開始♪`
+      );
 
-        await this._createRowEntry(row);
-      })
-    ).then(() => {
-      console.log('オブジェクト仮作成完了♪');
-    });
+      await this._createRowEntry(targetRow);
+
+      console.log(
+        `${index + 1} / ${targetRows.length} 件目 ${
+          targetRow[SPREADSHEET_ID_HEADER]
+        } をcreate完了♪`
+      );
+    }
+
+    console.log('オブジェクト仮作成完了♪');
   }
 
   private async _createRowEntry(row: GoogleSpreadsheetRow) {

@@ -392,8 +392,11 @@ export class SpreadsheetUploader {
     const entry = await this._getEntryBySlug(row[SPREADSHEET_ID_HEADER]);
 
     if (entry) {
-      row[SPREADSHEET_CONTENTFUL_SYS_ID_HEADER] = entry?.sys?.id;
-      await row.save();
+      if (row[SPREADSHEET_CONTENTFUL_SYS_ID_HEADER] !== entry?.sys?.id) {
+        row[SPREADSHEET_CONTENTFUL_SYS_ID_HEADER] = entry?.sys?.id;
+        await row.save();
+      }
+
       console.log(`${row[SPREADSHEET_ID_HEADER]} はcreateしない♪`);
       return;
     }

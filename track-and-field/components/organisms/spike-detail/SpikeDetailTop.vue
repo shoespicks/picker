@@ -45,8 +45,7 @@
         <section class="spike-top-content-description-strength">
           <h3>
             {{ spike.name }}
-            <span v-if="spike.releaseYear"
-              >{{ spike.releaseYear }}年モデル</span
+            <span v-if="spike.releaseYear">{{ spike.releaseYear }}年モデル</span
             >の特徴
           </h3>
           <ul v-if="spike.strength">
@@ -94,22 +93,7 @@
     </v-row>
     <section v-if="spike.newModels" class="new-models">
       <h3>このスパイクには新モデルがあります</h3>
-      <ul>
-        <li v-for="newModel in spike.newModels" :key="newModel.slug">
-          <router-link :to="`/search/${newModel.slug}`">
-            <LinkItem
-              :title="`${newModel.price.toLocaleString()}円（税込）`"
-              :label="newModel.name"
-              :caption="`${shoeBrands[newModel.brand].name} / ${
-                shoeBrands[newModel.brand].nameEn
-              }`"
-              :image-url="newModel.colorVariationImage1[0]"
-              :image-width="180"
-              vertical
-            ></LinkItem>
-          </router-link>
-        </li>
-      </ul>
+      <SimpleSpikeList :spikes="spike.newModels"></SimpleSpikeList>
     </section>
   </section>
 </template>
@@ -122,13 +106,13 @@ import {
 } from '@nuxtjs/composition-api';
 import Button from '~/components/atoms/Button.vue';
 import ColorVariationsPicker from '~/components/molecules/ColorVariationsPicker.vue';
-import LinkItem from '~/components/molecules/links/LinkItem.vue';
+import SimpleSpikeList from '~/components/molecules/spikeList/SimpleSpikeList.vue';
 import { ISpikeModel } from '~/store/model/spike';
 import { shoeBrands } from '~/types/shoes/shoeBrands';
 import { openNewTabByUrl } from '~/utils/navigateUtils';
 
 export default defineComponent({
-  components: { LinkItem, Button, ColorVariationsPicker },
+  components: { SimpleSpikeList, Button, ColorVariationsPicker },
   props: {
     spike: {
       type: Object as PropType<ISpikeModel>,

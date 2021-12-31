@@ -6,14 +6,14 @@
         <SearchLauncher>
           <template #activator="{ on, attrs }">
             <Button
-              v-if="searchFormValue.eventCategory"
+              v-if="searchFormValue.eventOrEventCategory"
               class="search-spike-form-evens-input"
               color="#383838"
               outlined
               plain
               v-bind="attrs"
               v-on="on"
-              >{{ searchFormValue.eventCategory.label || '種目で絞り込み'
+              >{{ searchFormValue.eventOrEventCategory.label || '種目で絞り込み'
               }}<v-icon right>mdi mdi-menu-down</v-icon></Button
             >
           </template>
@@ -113,7 +113,7 @@ import { ISpikesSearchFormValue } from '~/store/model/searchSpikeInput';
 import { athleteLevels } from '~/types/shoes/athleteLevel';
 import { shoeBrands } from '~/types/shoes/shoeBrands';
 import { shoeColors } from '~/types/shoes/shoeColors';
-import { EventCategory } from '~/types/shoes/shoeEvents';
+import { IEventItem } from '~/types/shoes/shoeEvents';
 import { shoeLaceTypes } from '~/types/shoes/shoeLaceTypes';
 
 export default defineComponent({
@@ -129,13 +129,13 @@ export default defineComponent({
   },
   props: {
     event: {
-      type: Object as PropType<EventCategory>,
+      type: Object as PropType<IEventItem>,
       default: null
     }
   },
   setup(props, context) {
     const searchFormValue = ref({
-      eventCategory: props.event,
+      eventOrEventCategory: props.event,
       keyword: undefined,
       brands: [],
       level: [],

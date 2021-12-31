@@ -1,7 +1,9 @@
 import { Store } from 'vuex';
 
-import { getModule } from 'vuex-module-decorators';
+import { getModule, config } from 'vuex-module-decorators';
 import Spikes from '~/store/spikes';
+
+config.rawError = true;
 
 /**
  * vuex-module-decorators用の設定

@@ -1,13 +1,18 @@
 <template>
   <v-hover v-slot="{ hover }">
-    <v-card :elevation="hover ? 2 : 0" :ripple="false" :hover="true">
+    <v-card
+      :width="width"
+      :elevation="hover ? 2 : 0"
+      :ripple="false"
+      :hover="true"
+    >
       <div class="link-item" :class="{ 'link-item--vertical': vertical }">
-        <div class="image-container">
+        <div class="flex-shrink-0">
           <v-img
+            class='ma-auto'
             :src="imageUrl"
             :width="imageWidth"
             :height="imageHeight"
-            :aspect-ratio="1"
           ></v-img>
         </div>
         <div class="label-container">
@@ -24,6 +29,10 @@ import { defineComponent } from '@nuxtjs/composition-api';
 
 export default defineComponent({
   props: {
+    width: {
+      type: Number,
+      default: 200
+    },
     imageUrl: {
       type: String,
       required: true
@@ -62,18 +71,18 @@ export default defineComponent({
     width: 100%;
 
     .label-container {
-      p {
+      > p {
         font-size: 14px;
         line-height: 1.2;
       }
 
-      strong {
+      > strong {
         font-size: 16px;
         font-weight: 500;
         line-height: 1.2;
       }
 
-      small {
+      > small {
         font-size: 10px;
         line-height: 1.2;
         color: #808080;
@@ -84,10 +93,6 @@ export default defineComponent({
     &:not(.link-item--vertical) {
       display: flex;
       padding: 8px;
-
-      > .image-container {
-        flex: 0 0 auto;
-      }
 
       > .label-container {
         display: flex;
@@ -104,6 +109,12 @@ export default defineComponent({
     &.link-item--vertical {
       .label-container {
         padding: 8px;
+
+        > p {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
       }
     }
   }

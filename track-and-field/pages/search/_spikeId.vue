@@ -40,14 +40,15 @@ export default defineComponent({
     ]);
 
     useFetch(async () => {
-      spike.value = await spikesStore.getBySlug(
-        `${route.value.params.spikeId}`
-      );
+      spike.value =
+        (await spikesStore.getBySlug(`${route.value.params.spikeId}`)) ||
+        undefined;
 
-      breadcrumbs.value.push({
-        text: spike.value.name,
-        disabled: true
-      });
+      spike.value?.name &&
+        breadcrumbs.value.push({
+          text: spike.value.name,
+          disabled: true
+        });
       console.log('_spikeId.vueのuseFetchで取得 ' + spike.value?.name);
       console.log(spike.value);
     });

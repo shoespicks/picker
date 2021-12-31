@@ -1,28 +1,16 @@
 <template>
   <v-footer dark>
-    <section>
-      <h4>SNSをフォローして最新情報をチェック</h4>
-      <ul class="footer-sns-links">
-        <li v-for="(icon, index) in snsLinkIcons" :key="index">
-          <Button color="white" icon>
-            <v-icon size="28">{{ icon }}</v-icon>
-          </Button>
-        </li>
-      </ul>
-    </section>
     <div>
       <img
         width="80"
-        height="80"
+        height="50"
         src="~static/images/logo/logo-square.svg"
         alt="shoespicks"
       />
     </div>
     <div>
       <ul class="footer-bottom-links">
-        <li><a href="">運営会社</a></li>
-        <li><a href="">プライバシーポリシー</a></li>
-        <li><a href="">利用規約</a></li>
+        <li><a href="https://einja.net">運営会社 Einja</a></li>
       </ul>
     </div>
     <small
@@ -31,22 +19,17 @@
   </v-footer>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from '@nuxtjs/composition-api';
-import Button from '~/components/atoms/Button.vue';
+import { defineComponent } from '@nuxtjs/composition-api';
 
 export default defineComponent({
-  components: { Button },
+  components: {},
   setup() {
-    const snsLinkIcons = ref(['mdi-facebook', 'mdi-twitter', 'mdi-instagram']);
-
-    return {
-      snsLinkIcons
-    };
+    return {};
   }
 });
 </script>
 <style lang="scss">
-.v-footer {
+footer.v-footer {
   padding: 32px 32px 16px;
   flex-direction: column;
   color: #ffffff;
@@ -66,15 +49,6 @@ export default defineComponent({
   > section {
     > * + * {
       margin-top: 8px;
-    }
-  }
-
-  .footer-sns-links {
-    display: flex;
-    justify-content: center;
-
-    > li + li {
-      margin-left: 16px;
     }
   }
 

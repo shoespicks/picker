@@ -1,12 +1,15 @@
 import { AthleteLevelCode } from '~/types/shoes/athleteLevel';
 import { ShoeBrandsCode } from '~/types/shoes/shoeBrands';
 import { IShoeColor } from '~/types/shoes/shoeColors';
-import { EventCategory } from '~/types/shoes/shoeEvents';
+import { IEventItem } from '~/types/shoes/shoeEvents';
 import { ShoeLaceTypeCode } from '~/types/shoes/shoeLaceTypes';
+import { IShoeSearchOrder } from '~/types/shoes/shoeSearchOrder';
+
+export const DEFAULT_SPIKES_SEARCH_LIMIT = 200;
 
 // 検索条件フォームにバインドするデータモデルのIF
 export interface ISpikesSearchFormValue {
-  eventCategory?: EventCategory;
+  eventOrEventCategory?: IEventItem;
   keyword?: string;
   brands?: ShoeBrandsCode[];
   level?: AthleteLevelCode[];
@@ -18,6 +21,8 @@ export interface ISpikesSearchFormValue {
   };
   releaseYears?: number[];
   shoeLaceTypes?: ShoeLaceTypeCode[];
+  order?: IShoeSearchOrder;
+  limit?: number;
 }
 
 // APIに渡す検索条件のIF
@@ -25,6 +30,7 @@ export interface ISpikesSearchInput {
   // eslint-disable-next-line camelcase
   content_type: 'spikeShoes';
   query?: string;
+  'fields.events[in]'?: string;
   'fields.brand[in]'?: string;
   'fields.level[in]'?: string;
   'fields.colors[in]'?: string;
@@ -33,39 +39,20 @@ export interface ISpikesSearchInput {
   'fields.price[lte]'?: number;
   'fields.price[gte]'?: number;
   'fields.shoeLaceType[all]'?: string;
-}
-
-function convertTrackTypeFormValue(
-  trackType:
-    | { forAllWeatherTrack?: boolean; forDirtTrack?: boolean }
-    | undefined
-) {
-  if (!trackType) {
-    return undefined;
-  }
-
-  if (trackType.forAllWeatherTrack) {
-    return trackType.forDirtTrack ? undefined : true;
-  }
-
-  if (!trackType.forAllWeatherTrack) {
-    return trackType.forDirtTrack ? false : undefined;
-  }
+  limit?: number;
+  order?: string;
 }
 
 // 検索条件フォームの値をAPIの検索条件に変換
 export const createSearchInput = (formValue: ISpikesSearchFormValue) => {
-  console.log(formValue?.priceRange);
-  console.log(
-    formValue?.priceRange &&
-      formValue?.priceRange[1] < 50000 &&
-      formValue?.priceRange[1]
-  );
-
   const input: ISpikesSearchInput = {
     content_type: 'spikeShoes',
     // キーワード
     query: formValue?.keyword || undefined,
+
+    // 種目
+    'fields.events[in]':
+      formValue?.eventOrEventCategory?.events.join(',') || undefined,
 
     // メーカー
     'fields.brand[in]': formValue?.brands?.join(',') || undefined,
@@ -74,7 +61,7 @@ export const createSearchInput = (formValue: ISpikesSearchFormValue) => {
     'fields.level[in]': formValue?.level?.join(',') || undefined,
 
     // 対応環境
-    'fields.allWeatherOnly': convertTrackTypeFormValue(formValue.trackType),
+    'fields.allWeatherOnly': convertTrackTypeInput(formValue.trackType),
 
     // 発売年
     'fields.releaseYear[in]': formValue?.releaseYears?.join(',') || undefined,
@@ -94,7 +81,39 @@ export const createSearchInput = (formValue: ISpikesSearchFormValue) => {
 
     // 色
     'fields.colors[in]':
-      formValue?.colors?.map((c) => c.id).join(',') || undefined
+      formValue?.colors?.map((c) => c.id).join(',') || undefined,
+
+    // 並び順
+    order: convertOrderInput(formValue?.order),
+
+    // 取得上限数
+    limit: formValue?.limit || DEFAULT_SPIKES_SEARCH_LIMIT
   };
   return input;
 };
+
+function convertTrackTypeInput(
+  trackType:
+    | { forAllWeatherTrack?: boolean; forDirtTrack?: boolean }
+    | undefined
+) {
+  if (!trackType) {
+    return undefined;
+  }
+
+  if (trackType.forAllWeatherTrack) {
+    return trackType.forDirtTrack ? undefined : true;
+  }
+
+  if (!trackType.forAllWeatherTrack) {
+    return trackType.forDirtTrack ? false : undefined;
+  }
+}
+
+function convertOrderInput(order?: IShoeSearchOrder): string | undefined {
+  if (!order) {
+    return undefined;
+  }
+
+  return (order.isReverseSearch ? '-' : '') + `fields.${order.fieldId}`;
+}

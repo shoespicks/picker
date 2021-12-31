@@ -22,13 +22,13 @@ import SearchSpikeForm from '~/components/organisms/search-spike/SearchSpikeForm
 import { spikesStore } from '~/store';
 import { ISpikesSearchFormValue } from '~/store/model/searchSpikeInput';
 import { ISpikeModel } from '~/store/model/spike';
-import { EventCategory } from '~/types/shoes/shoeEvents';
+import { IEventItem } from '~/types/shoes/shoeEvents';
 
 export default defineComponent({
   components: { SpikeList, SearchSpikeForm },
   props: {
     event: {
-      type: Object as PropType<EventCategory>,
+      type: Object as PropType<IEventItem>,
       default: null
     }
   },
@@ -40,7 +40,7 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      search({ eventCategory: props.event });
+      search({ eventOrEventCategory: props.event });
     });
 
     return {

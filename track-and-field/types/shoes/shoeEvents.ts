@@ -21,21 +21,22 @@ export type EventCode =
   | 'javelinThrow';
 
 export type EventCategoryCode =
-  | 'short-distance'
-  | 'middle-distance'
-  | 'long-distance'
+  | 'shortDistance'
+  | 'middleDistance'
+  | 'longDistance'
   | 'jumping'
-  | 'throwing'
-  | EventCode;
+  | 'throwing';
 
-export interface EventCategory {
-  id: EventCategoryCode;
+export type EventsAndEventCategoriesCode = EventCode | EventCategoryCode;
+
+export interface IEventItem {
+  id: EventsAndEventCategoriesCode;
   label: string;
-  events: EventCategoryCode[];
+  events: EventCode[];
 }
 
-export const shoeEventCategory: {
-  [key in EventCategoryCode | EventCode]: EventCategory;
+export const shoeEvents: {
+  [key in EventCode]: IEventItem;
 } = {
   '100m': {
     id: '100m',
@@ -131,22 +132,24 @@ export const shoeEventCategory: {
     id: 'javelinThrow',
     label: 'やり投',
     events: ['javelinThrow']
-  },
+  }
+};
 
-  // ここからカテゴリ
-
-  'short-distance': {
-    id: 'short-distance',
+export const shoeEventCategories: {
+  [key in EventCategoryCode]: IEventItem;
+} = {
+  'shortDistance': {
+    id: 'shortDistance',
     label: '短距離',
     events: ['100m', '200m', '400m', '110mH', '400mH']
   },
-  'middle-distance': {
-    id: 'middle-distance',
+  'middleDistance': {
+    id: 'middleDistance',
     label: '中距離',
     events: ['800m', '1500m']
   },
-  'long-distance': {
-    id: 'long-distance',
+  'longDistance': {
+    id: 'longDistance',
     label: '長距離',
     events: ['3000m', '5000m', '10000m', '3000msc']
   },
@@ -160,4 +163,11 @@ export const shoeEventCategory: {
     label: '投てき',
     events: ['shotPut', 'discusThrow', 'javelinThrow', 'hammerThrow']
   }
+};
+
+export const shoeEventsAndEventCategories: {
+  [key in EventsAndEventCategoriesCode]: IEventItem;
+} = {
+  ...shoeEvents,
+  ...shoeEventCategories
 };

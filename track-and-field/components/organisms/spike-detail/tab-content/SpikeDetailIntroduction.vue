@@ -2,10 +2,7 @@
   <div class="organisms-spike-detail-introduction-tab">
     <section class="spike-introduction-top-section">
       <Container :max-width="980">
-        <h2>
-          <span> 基本性能 </span>
-          <span class="background-text background-text--wide"> 01 </span>
-        </h2>
+        <NumberHeading text="基本性能" :number="1"></NumberHeading>
         <v-lazy
           v-model="showReccomend"
           :options="{
@@ -42,10 +39,7 @@
     </section>
     <section class="spike-introduction-key-features-section">
       <Container :max-width="980">
-        <h2>
-          <span> 特徴 </span>
-          <span class="background-text"> 02 </span>
-        </h2>
+        <NumberHeading text="特徴" :number="2"></NumberHeading>
         <div>
           <v-lazy
             v-for="(keyFeature, index) in spike.keyFeatures"
@@ -93,11 +87,12 @@
 <script lang="ts">
 import { defineComponent, PropType, ref } from '@nuxtjs/composition-api';
 import Container from '~/components/atoms/Container.vue';
+import NumberHeading from '~/components/atoms/NumberHeading.vue';
 import RadarChart from '~/components/molecules/RadarChart.vue';
 import { ISpikeModel } from '~/store/model/spike';
 
 export default defineComponent({
-  components: { Container, RadarChart },
+  components: { NumberHeading, Container, RadarChart },
   props: {
     spike: {
       type: Object as PropType<ISpikeModel>,
@@ -121,40 +116,6 @@ $keyFeaturesTwoColBreakPoint: 1120px;
 
 // この画面幅を超えたときサイドナビを表示
 $sideNavBreakPoint: 768px;
-
-// TODO 見出しは別コンポーネント化
-h2 {
-  position: relative;
-  display: flex;
-  height: 160px;
-  align-items: center;
-
-  > span {
-    position: absolute;
-    top: 45%;
-    left: 50%;
-    z-index: 2;
-    transform: translate(-50%, -50%);
-    white-space: nowrap;
-  }
-
-  .background-text {
-    font-family: 'DJB Get Digital', sans-serif;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    z-index: 1;
-    transform: translate(-50%, -50%);
-    color: #eef3f7;
-    font-size: 120px;
-    line-height: 160px;
-    letter-spacing: 8px;
-
-    &.background-text--wide {
-      letter-spacing: 24px;
-    }
-  }
-}
 
 .organisms-spike-detail-introduction-tab {
   > section {

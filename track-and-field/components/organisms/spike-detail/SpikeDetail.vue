@@ -63,19 +63,15 @@
               >
             </li>
           </ul>
-          <section class="sidenav-recommend-items-section">
+          <section
+            v-if="spike.recommendItems"
+            class="sidenav-recommend-items-section"
+          >
             <h4>似ているスパイク</h4>
-            <ul>
-              <li v-for="item in spike.recommendItems" :key="item.name">
-                <router-link :to="`/search/${item.slug}`">
-                  <LinkItem
-                    :label="item.name"
-                    :image-url="item.colorVariations[0].imageUrls[0]"
-                    :image-width="40"
-                  ></LinkItem>
-                </router-link>
-              </li>
-            </ul>
+            <SimpleSpikeList
+              :spikes="spike.recommendItems"
+              vertical
+            ></SimpleSpikeList>
           </section>
         </div>
       </template>
@@ -90,7 +86,7 @@ import { defineComponent, PropType, ref } from '@nuxtjs/composition-api';
 import Button from '~/components/atoms/Button.vue';
 import Container from '~/components/atoms/Container.vue';
 import StickySidenavLayout from '~/components/molecules/layout/StickySidenavLayout.vue';
-import LinkItem from '~/components/molecules/links/LinkItem.vue';
+import SimpleSpikeList from '~/components/molecules/spikeList/SimpleSpikeList.vue';
 import SpikeDetailTop from '~/components/organisms/spike-detail/SpikeDetailTop.vue';
 import SpikeRecommendLink from '~/components/organisms/spike-detail/SpikeRecommendLink.vue';
 import SpikeDetailIntroduction from '~/components/organisms/spike-detail/tab-content/SpikeDetailIntroduction.vue';
@@ -100,8 +96,8 @@ import { openNewTabByUrl } from '~/utils/navigateUtils';
 
 export default defineComponent({
   components: {
+    SimpleSpikeList,
     SpikeRecommendLink,
-    LinkItem,
     SpikeDetailSpec,
     Button,
     Container,

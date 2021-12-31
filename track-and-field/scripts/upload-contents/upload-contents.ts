@@ -8,9 +8,9 @@ import { isString } from 'lodash';
 import sharp from 'sharp';
 import { IconName, icons } from '../upload-contents/constants';
 import {
-  EventCategoryCode,
+  EventsAndEventCategoriesCode,
   EventCode,
-  shoeEventCategory
+  shoeEventsAndEventCategories
 } from '../../types/shoes/shoeEvents';
 import { IShoeStrength } from '../../store/model/spike';
 import {
@@ -850,23 +850,23 @@ export class SpreadsheetUploader {
     });
   }
 
-  private _generateEventsField(row: GoogleSpreadsheetRow): EventCategoryCode[] {
+  private _generateEventsField(row: GoogleSpreadsheetRow): EventsAndEventCategoriesCode[] {
     return SPREADSHEET_EVENTS_NAMES.flatMap((eventName) => {
       if (row[eventName] === '⭕️' || row[eventName] === '◯') {
         switch (eventName) {
           case 'tjpv':
             return [
-              shoeEventCategory.tripleJump.id,
-              shoeEventCategory.poleVault.id
+              shoeEventsAndEventCategories.tripleJump.id,
+              shoeEventsAndEventCategories.poleVault.id
             ];
           case 'otherThrow':
             return [
-              shoeEventCategory.hammerThrow.id,
-              shoeEventCategory.discusThrow.id,
-              shoeEventCategory.shotPut.id
+              shoeEventsAndEventCategories.hammerThrow.id,
+              shoeEventsAndEventCategories.discusThrow.id,
+              shoeEventsAndEventCategories.shotPut.id
             ];
           default:
-            return shoeEventCategory[eventName as EventCode]?.id || [];
+            return shoeEventsAndEventCategories[eventName as EventCode]?.id || [];
         }
       }
 

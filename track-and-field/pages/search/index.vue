@@ -14,14 +14,14 @@ import {
   useRoute
 } from '@nuxtjs/composition-api';
 import SearchSpike from '~/components/organisms/search-spike/SearchSpike.vue';
-import { EventCategoryCode, shoeEventCategory } from '~/types/shoes/shoeEvents';
+import { EventsAndEventCategoriesCode, shoeEventsAndEventCategories } from '~/types/shoes/shoeEvents';
 
 export default defineComponent({
   components: { SearchSpike },
   setup() {
     const route = useRoute();
     const event = computed(
-      () => shoeEventCategory[route.value.params.events as EventCategoryCode]
+      () => shoeEventsAndEventCategories[route.value.params.events as EventsAndEventCategoriesCode]
     );
     const items = ref([
       {

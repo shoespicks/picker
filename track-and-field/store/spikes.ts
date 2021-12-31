@@ -1,12 +1,16 @@
+import { Entry, EntryCollection } from 'contentful';
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators';
 import { contentfulClient } from '~/plugins/contentful';
 import {
   createSearchInput,
-  ISpikesSearchFormValue
+  ISpikesSearchFormValue,
+  ISpikesSearchInput
 } from '~/store/model/searchSpikeInput';
 import { ISpikeModel, transrateSpikeEntityToModel } from '~/store/model/spike';
 
-import { ISpikeShoes } from '~/types/generated/contentful';
+import { ISpikeShoes, ISpikeShoesFields } from '~/types/generated/contentful';
+import { IEventItem } from '~/types/shoes/shoeEvents';
+import { shoeSearchOrders } from '~/types/shoes/shoeSearchOrder';
 
 @Module({
   name: 'spikes',
@@ -41,20 +45,42 @@ export default class Spikes extends VuexModule {
       });
   }
 
-  @Action({ rawError: true })
-  async getBySlug(slug: string): Promise<ISpikeModel> {
-    const input = {
-      content_type: 'spikeShoes',
-      'fields.slug': slug
-    };
-
-    return await contentfulClient
-      .getEntries(input)
-      .then((entries: any) => {
-        return transrateSpikeEntityToModel(entries.items[0]);
-      })
+  @Action
+  async getBySlug(slug: string): Promise<ISpikeModel | null> {
+    const entries: EntryCollection<ISpikeShoesFields> = await contentfulClient
+      .getEntries({
+        content_type: 'spikeShoes',
+        'fields.slug': slug
+      } as ISpikesSearchInput)
       .catch(() => {
         throw new Error('Spikes#getBySlug() faild');
       });
+
+    return transrateSpikeEntityToModel(entries.items[0]);
+  }
+
+  @Action
+  async getRankingByEventCategory(
+    eventCategory: IEventItem,
+    count = 10
+  ): Promise<ISpikeModel[]> {
+    const entries: EntryCollection<ISpikeShoesFields> = await contentfulClient
+      .getEntries(
+        createSearchInput({
+          eventOrEventCategory: eventCategory,
+          order: shoeSearchOrders.highscore,
+          limit: count
+        })
+      )
+      .catch(() => {
+        throw new Error('Spikes#getBySlug() faild');
+      });
+
+    return (
+      entries?.items?.flatMap(
+        (item: Entry<ISpikeShoesFields>) =>
+          transrateSpikeEntityToModel(item) || []
+      ) || []
+    );
   }
 }

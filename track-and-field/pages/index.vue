@@ -43,6 +43,7 @@
                 width="100%"
                 elevation="1"
                 rounded
+                @click="searchByFeatures()"
                 ><v-icon size="18" left>fas fa-search</v-icon>探す</Button
               >
             </v-col>
@@ -92,6 +93,7 @@
                 width="100%"
                 elevation="1"
                 rounded
+                @click="searchByLevel()"
                 ><v-icon size="18" left>fas fa-search</v-icon>探す</Button
               >
             </v-col>
@@ -120,7 +122,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, useFetch } from '@nuxtjs/composition-api';
+import {
+  defineComponent,
+  ref,
+  useFetch,
+  useRouter
+} from '@nuxtjs/composition-api';
 import Button from '~/components/atoms/Button.vue';
 import Container from '~/components/atoms/Container.vue';
 import NumberHeading from '~/components/atoms/NumberHeading.vue';
@@ -128,21 +135,27 @@ import Select from '~/components/atoms/Select.vue';
 import SimpleSpikeList from '~/components/molecules/spikeList/SimpleSpikeList.vue';
 import { spikesStore } from '~/store';
 import { ISpikeModel } from '~/store/model/spike';
-import { athleteLevels } from '~/types/shoes/athleteLevel';
-import { shoeEvents, shoeEventCategories } from '~/types/shoes/shoeEvents';
-import { shoeSearchOrders } from '~/types/shoes/shoeSearchOrder';
+import { athleteLevels, IAthleteLevel } from '~/types/shoes/athleteLevel';
+import {
+  IEventItem,
+  shoeEventCategories,
+  shoeEvents
+} from '~/types/shoes/shoeEvents';
+import {
+  IShoeSearchOrder,
+  shoeSearchOrders
+} from '~/types/shoes/shoeSearchOrder';
 
 export default defineComponent({
   components: { SimpleSpikeList, Button, NumberHeading, Container, Select },
   layout: 'top',
   setup() {
+    const router = useRouter();
     const shortRankingSpikes = ref<ISpikeModel[]>();
     const middleRankingSpikes = ref<ISpikeModel[]>();
     const longRankingSpikes = ref<ISpikeModel[]>();
 
     useFetch(async () => {
-      console.log('トップページのランキングfetch');
-
       shortRankingSpikes.value = await spikesStore.getRankingByEventCategory(
         shoeEventCategories.shortDistance
       );
@@ -156,22 +169,42 @@ export default defineComponent({
       );
     });
 
+    const featuresSearchValue = ref<{
+      eventCategory?: IEventItem;
+      features?: IShoeSearchOrder;
+    }>({});
+
+    const levelSearchValue = ref<{
+      event?: IEventItem;
+      level?: IAthleteLevel;
+    }>({});
+
     return {
       shortRankingSpikes,
       middleRankingSpikes,
       longRankingSpikes,
-      featuresSearchValue: ref({
-        eventCategory: null,
-        features: null
-      }),
-      levelSearchValue: ref({
-        event: null,
-        level: null
-      }),
+      featuresSearchValue,
+      levelSearchValue,
       events: Object.values(shoeEvents),
       eventCategories: Object.values(shoeEventCategories),
       searchOrders: Object.values(shoeSearchOrders),
-      levels: Object.values(athleteLevels)
+      levels: Object.values(athleteLevels),
+      searchByFeatures: () => {
+        spikesStore.updateSearchFormValue({
+          eventOrEventCategory: featuresSearchValue.value.eventCategory,
+          order: featuresSearchValue.value.features
+        });
+        router.push('/search');
+      },
+      searchByLevel: () => {
+        spikesStore.updateSearchFormValue({
+          eventOrEventCategory: levelSearchValue.value.event,
+          level: levelSearchValue.value.level?.id
+            ? [levelSearchValue.value.level?.id]
+            : []
+        });
+        router.push('/search/');
+      }
     };
   }
 });

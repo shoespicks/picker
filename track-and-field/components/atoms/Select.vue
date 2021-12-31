@@ -11,6 +11,7 @@
     :height="height"
     :placeholder="placeholder"
     hide-details
+    return-object
   ></v-select>
 </template>
 

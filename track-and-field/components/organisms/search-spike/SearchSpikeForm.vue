@@ -13,7 +13,8 @@
               plain
               v-bind="attrs"
               v-on="on"
-              >{{ searchFormValue.eventOrEventCategory.label || '種目で絞り込み'
+              >{{
+                searchFormValue.eventOrEventCategory.label || '種目で絞り込み'
               }}<v-icon right>mdi mdi-menu-down</v-icon></Button
             >
           </template>
@@ -101,6 +102,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType, ref } from '@nuxtjs/composition-api';
+import { cloneDeep } from 'lodash';
 import Button from '~/components/atoms/Button.vue';
 import CheckBox from '~/components/atoms/CheckBox.vue';
 import Select from '~/components/atoms/Select.vue';
@@ -113,7 +115,6 @@ import { ISpikesSearchFormValue } from '~/store/model/searchSpikeInput';
 import { athleteLevels } from '~/types/shoes/athleteLevel';
 import { shoeBrands } from '~/types/shoes/shoeBrands';
 import { shoeColors } from '~/types/shoes/shoeColors';
-import { IEventItem } from '~/types/shoes/shoeEvents';
 import { shoeLaceTypes } from '~/types/shoes/shoeLaceTypes';
 
 export default defineComponent({
@@ -128,26 +129,13 @@ export default defineComponent({
     SearchLauncher
   },
   props: {
-    event: {
-      type: Object as PropType<IEventItem>,
-      default: null
+    defaultValue: {
+      type: Object as PropType<ISpikesSearchFormValue>,
+      required: true
     }
   },
   setup(props, context) {
-    const searchFormValue = ref({
-      eventOrEventCategory: props.event,
-      keyword: undefined,
-      brands: [],
-      level: [],
-      priceRange: [0, 50000],
-      trackType: {
-        forAllWeatherTrack: false,
-        forDirtTrack: false
-      },
-      releaseYears: [],
-      shoeLaceTypes: [],
-      colors: []
-    } as ISpikesSearchFormValue);
+    const searchFormValue = ref<ISpikesSearchFormValue>(cloneDeep(props.defaultValue));
 
     return {
       searchFormValue,

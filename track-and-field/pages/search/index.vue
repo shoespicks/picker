@@ -1,41 +1,29 @@
 <template>
   <div class="page-content">
-    <v-breadcrumbs :items="items"></v-breadcrumbs>
+    <v-breadcrumbs :items="breadcrumbs"></v-breadcrumbs>
     <h2>スパイク検索結果</h2>
-    <SearchSpike :event="event"></SearchSpike>
+    <SearchSpike></SearchSpike>
   </div>
 </template>
 
 <script lang="ts">
-import {
-  computed,
-  defineComponent,
-  ref,
-  useRoute
-} from '@nuxtjs/composition-api';
+import { defineComponent } from '@nuxtjs/composition-api';
 import SearchSpike from '~/components/organisms/search-spike/SearchSpike.vue';
-import { EventsAndEventCategoriesCode, shoeEventsAndEventCategories } from '~/types/shoes/shoeEvents';
 
 export default defineComponent({
   components: { SearchSpike },
   setup() {
-    const route = useRoute();
-    const event = computed(
-      () => shoeEventsAndEventCategories[route.value.params.events as EventsAndEventCategoriesCode]
-    );
-    const items = ref([
-      {
-        text: 'ShoesPicks',
-        href: '/'
-      },
-      {
-        text: 'スパイクを探す',
-        href: '/search'
-      }
-    ]);
     return {
-      event,
-      items
+      breadcrumbs: [
+        {
+          text: 'ShoesPicks',
+          href: '/'
+        },
+        {
+          text: 'スパイクを探す',
+          href: '/search'
+        }
+      ]
     };
   }
 });

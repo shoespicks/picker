@@ -7,12 +7,12 @@ export type AthleteLevelCode =
   | 'advanced'
   | 'professional';
 
-export interface AthleteLevel extends ISelectItem {
+export interface IAthleteLevel extends ISelectItem {
   id: AthleteLevelCode;
   label: string;
 }
 
-export const athleteLevels: { [key in AthleteLevelCode]: AthleteLevel } = {
+export const athleteLevels: { [key in AthleteLevelCode]: IAthleteLevel } = {
   beginner: {
     id: 'beginner',
     label: '初心者'

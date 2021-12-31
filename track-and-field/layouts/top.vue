@@ -78,6 +78,7 @@ import Footer from '~/components/organisms/Footer.vue';
 import Header from '~/components/organisms/header/Header.vue';
 
 export default defineComponent({
+  name: 'TopLayout',
   components: {
     HeaderContetnt,
     Button,

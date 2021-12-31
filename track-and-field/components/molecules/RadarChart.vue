@@ -8,7 +8,8 @@ import {
   defineComponent,
   onMounted,
   PropType,
-  ref
+  ref,
+  watch
 } from '@nuxtjs/composition-api';
 // eslint-disable-next-line import/named
 import { ChartData, ChartOptions } from 'chart.js';
@@ -40,6 +41,8 @@ export default defineComponent({
       if (canvasRef.value === null) {
         return;
       }
+
+      chart?.destroy();
       const canvas = canvasRef.value.getContext('2d');
 
       if (canvas === null) {
@@ -119,6 +122,11 @@ export default defineComponent({
     onMounted(() => {
       createCharts();
     });
+
+    watch(
+      () => props.data,
+      () => createCharts()
+    );
 
     return {
       chart,

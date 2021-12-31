@@ -15,22 +15,12 @@
         <v-divider></v-divider>
         <div class="search-launcher-content">
           <Button
+            v-for="eventCategory in eventCategories"
+            :key="eventCategory.id"
             class="search-launcher-events-button"
             outlined
-            @click="search('100m')"
-            >100m</Button
-          >
-          <Button
-            class="search-launcher-events-button"
-            outlined
-            @click="search('200m')"
-            >200m</Button
-          >
-          <Button
-            class="search-launcher-events-button"
-            outlined
-            @click="search('400m')"
-            >400m</Button
+            @click="search(eventCategory)"
+            >{{ eventCategory.label }}</Button
           >
         </div>
       </v-card>
@@ -40,6 +30,8 @@
 <script lang="ts">
 import { defineComponent, ref, useRouter } from '@nuxtjs/composition-api';
 import Button from '~/components/atoms/Button.vue';
+import { spikesStore } from '~/store';
+import { IEventItem, shoeEventCategories } from '~/types/shoes/shoeEvents';
 
 export default defineComponent({
   components: { Button },
@@ -52,15 +44,17 @@ export default defineComponent({
 
     const router = useRouter();
 
-    const search = (path: string) => {
-      router.push(`/search?events=${path}`);
-      closeDialog();
-    };
-
     return {
+      eventCategories: Object.values(shoeEventCategories),
       dialog,
-      closeDialog,
-      search
+      search: (event: IEventItem) => {
+        spikesStore.updateSearchFormValue({
+          eventOrEventCategory: event
+        });
+        router.push('/search/');
+        closeDialog();
+      },
+      closeDialog
     };
   }
 });

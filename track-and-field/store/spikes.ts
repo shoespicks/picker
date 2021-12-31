@@ -1,4 +1,5 @@
 import { Entry, EntryCollection } from 'contentful';
+import { cloneDeep } from 'lodash';
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators';
 import { contentfulClient } from '~/plugins/contentful';
 import {
@@ -19,20 +20,30 @@ import { shoeSearchOrders } from '~/types/shoes/shoeSearchOrder';
 })
 export default class Spikes extends VuexModule {
   private _spikes: ISpikeModel[] = [];
+  private _searchFormValue: ISpikesSearchFormValue = {};
 
   get spikes(): ISpikeModel[] {
     return this._spikes;
   }
 
-  @Mutation setSpikes(val: ISpikeModel[]) {
+  get searchFormValue(): ISpikesSearchFormValue {
+    return cloneDeep(this._searchFormValue);
+  }
+
+  @Mutation private setSpikes(val: ISpikeModel[]) {
     this._spikes = val;
   }
 
-  @Action({ rawError: true })
+  @Mutation private setSearchFormValue(val: ISpikesSearchFormValue) {
+    this._searchFormValue = cloneDeep(val);
+  }
+
+  @Action
   public async search(formValue: ISpikesSearchFormValue = {}) {
     await contentfulClient
       .getEntries(createSearchInput(formValue))
       .then((items: any) => {
+        this.setSearchFormValue(formValue);
         this.setSpikes(
           items.items.map((item: ISpikeShoes) =>
             transrateSpikeEntityToModel(item)
@@ -82,5 +93,10 @@ export default class Spikes extends VuexModule {
           transrateSpikeEntityToModel(item) || []
       ) || []
     );
+  }
+
+  @Action
+  public updateSearchFormValue(formValue: ISpikesSearchFormValue = {}) {
+    this.setSearchFormValue(formValue);
   }
 }

@@ -15,6 +15,7 @@ import Footer from '~/components/organisms/Footer.vue';
 import Header from '~/components/organisms/header/Header.vue';
 
 export default defineComponent({
+  name: 'DefaultLayout',
   components: {
     Header,
     Footer

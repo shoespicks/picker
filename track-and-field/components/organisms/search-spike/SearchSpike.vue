@@ -2,7 +2,7 @@
   <div class="organisms-search-spike">
     <aside>
       <SearchSpikeForm
-        :event="event"
+        :default-value="savedSearchFormValue"
         @search="search($event)"
       ></SearchSpikeForm>
     </aside>
@@ -14,7 +14,6 @@ import {
   computed,
   defineComponent,
   onMounted,
-  PropType,
   useRouter
 } from '@nuxtjs/composition-api';
 import SpikeList from '~/components/molecules/spikeList/SpikeList.vue';
@@ -22,28 +21,42 @@ import SearchSpikeForm from '~/components/organisms/search-spike/SearchSpikeForm
 import { spikesStore } from '~/store';
 import { ISpikesSearchFormValue } from '~/store/model/searchSpikeInput';
 import { ISpikeModel } from '~/store/model/spike';
-import { IEventItem } from '~/types/shoes/shoeEvents';
 
 export default defineComponent({
   components: { SpikeList, SearchSpikeForm },
-  props: {
-    event: {
-      type: Object as PropType<IEventItem>,
-      default: null
-    }
-  },
-  setup(props) {
+  props: {},
+  setup() {
     const router = useRouter();
+
+    const savedSearchFormValue: ISpikesSearchFormValue = {
+      eventOrEventCategory: undefined,
+      keyword: undefined,
+      brands: [],
+      level: [],
+      priceRange: [0, 50000],
+      trackType: {
+        forAllWeatherTrack: false,
+        forDirtTrack: false
+      },
+      // TODO 直近3〜2年にする
+      releaseYears: [],
+      shoeLaceTypes: [],
+      colors: [],
+      ...spikesStore.searchFormValue
+    };
 
     const search = (searchFormValue: ISpikesSearchFormValue) => {
       spikesStore.search(searchFormValue);
     };
 
     onMounted(() => {
-      search({ eventOrEventCategory: props.event });
+      console.log('onMounted');
+      console.log(savedSearchFormValue);
+      search(savedSearchFormValue);
     });
 
     return {
+      savedSearchFormValue,
       spikes: computed(() => spikesStore.spikes),
       search,
       clickItem: (val: ISpikeModel) => {

@@ -50,8 +50,6 @@ export default defineComponent({
     };
 
     onMounted(() => {
-      console.log('onMounted');
-      console.log(savedSearchFormValue);
       search(savedSearchFormValue);
     });
 

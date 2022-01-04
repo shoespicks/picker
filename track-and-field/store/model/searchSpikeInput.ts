@@ -47,7 +47,10 @@ export interface ISpikesSearchInput {
 }
 
 // 検索条件フォームの値をAPIの検索条件に変換
-export const createSearchInput = (formValue: ISpikesSearchFormValue) => {
+export const createSearchInput = (
+  formValue: ISpikesSearchFormValue,
+  overRideInput: Partial<ISpikesSearchInput> = {}
+) => {
   const input: ISpikesSearchInput = {
     content_type: 'spikeShoes',
     // キーワード
@@ -55,7 +58,7 @@ export const createSearchInput = (formValue: ISpikesSearchFormValue) => {
 
     // 種目
     'fields.events[in]':
-      formValue?.eventOrEventCategory?.events.join(',') || undefined,
+      formValue?.eventOrEventCategory?.eventCodes.join(',') || undefined,
 
     // メーカー
     'fields.brand[in]': formValue?.brands?.join(',') || undefined,
@@ -90,7 +93,9 @@ export const createSearchInput = (formValue: ISpikesSearchFormValue) => {
     order: convertOrderInput(formValue?.order),
 
     // 取得上限数
-    limit: formValue?.limit || DEFAULT_SPIKES_SEARCH_LIMIT
+    limit: formValue?.limit || DEFAULT_SPIKES_SEARCH_LIMIT,
+
+    ...overRideInput
   };
   return input;
 };

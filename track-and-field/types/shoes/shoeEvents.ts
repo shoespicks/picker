@@ -32,7 +32,7 @@ export type EventsAndEventCategoriesCode = EventCode | EventCategoryCode;
 export interface IEventItem {
   id: EventsAndEventCategoriesCode;
   label: string;
-  events: EventCode[];
+  eventCodes: EventCode[];
 }
 
 export const shoeEvents: {
@@ -41,97 +41,97 @@ export const shoeEvents: {
   '100m': {
     id: '100m',
     label: '100m',
-    events: ['100m']
+    eventCodes: ['100m']
   },
   '200m': {
     id: '200m',
     label: '200m',
-    events: ['200m']
+    eventCodes: ['200m']
   },
   '400m': {
     id: '400m',
     label: '400m',
-    events: ['400m']
+    eventCodes: ['400m']
   },
   '110mH': {
     id: '110mH',
     label: '110mH',
-    events: ['110mH']
+    eventCodes: ['110mH']
   },
   '400mH': {
     id: '400mH',
     label: '400mH',
-    events: ['400mH']
+    eventCodes: ['400mH']
   },
   '800m': {
     id: '800m',
     label: '800m',
-    events: ['800m']
+    eventCodes: ['800m']
   },
   '1500m': {
     id: '1500m',
     label: '1500m',
-    events: ['1500m']
+    eventCodes: ['1500m']
   },
   '3000m': {
     id: '3000m',
     label: '3000m',
-    events: ['3000m']
+    eventCodes: ['3000m']
   },
   '3000msc': {
     id: '3000msc',
     label: '3000msc',
-    events: ['3000msc']
+    eventCodes: ['3000msc']
   },
   '5000m': {
     id: '5000m',
     label: '5000m',
-    events: ['5000m']
+    eventCodes: ['5000m']
   },
   '10000m': {
     id: '10000m',
     label: '10000m',
-    events: ['10000m']
+    eventCodes: ['10000m']
   },
   highJump: {
     id: 'highJump',
     label: '走高跳',
-    events: ['highJump']
+    eventCodes: ['highJump']
   },
   longJump: {
     id: 'longJump',
     label: '走高跳',
-    events: ['longJump']
+    eventCodes: ['longJump']
   },
   poleVault: {
     id: 'poleVault',
     label: '棒高跳',
-    events: ['poleVault']
+    eventCodes: ['poleVault']
   },
   tripleJump: {
     id: 'tripleJump',
     label: '三段跳',
-    events: ['tripleJump']
+    eventCodes: ['tripleJump']
   },
   shotPut: {
     id: 'shotPut',
     label: '砲丸投',
-    events: ['shotPut']
+    eventCodes: ['shotPut']
   },
   discusThrow: {
     id: 'discusThrow',
     label: '円盤投',
-    events: ['discusThrow']
+    eventCodes: ['discusThrow']
   },
   hammerThrow: {
     id: 'hammerThrow',
     label: 'ハンマー投',
-    events: ['hammerThrow']
+    eventCodes: ['hammerThrow']
   },
   javelinThrow: {
     id: 'javelinThrow',
     label: 'やり投',
-    events: ['javelinThrow']
+    eventCodes: ['javelinThrow']
   }
 };
 
@@ -141,27 +141,27 @@ export const shoeEventCategories: {
   'shortDistance': {
     id: 'shortDistance',
     label: '短距離',
-    events: ['100m', '200m', '400m', '110mH', '400mH']
+    eventCodes: ['100m', '200m', '400m', '110mH', '400mH']
   },
   'middleDistance': {
     id: 'middleDistance',
     label: '中距離',
-    events: ['800m', '1500m']
+    eventCodes: ['800m', '1500m']
   },
   'longDistance': {
     id: 'longDistance',
     label: '長距離',
-    events: ['3000m', '5000m', '10000m', '3000msc']
+    eventCodes: ['3000m', '5000m', '10000m', '3000msc']
   },
   jumping: {
     id: 'jumping',
     label: '跳躍',
-    events: ['longJump', 'highJump', 'tripleJump', 'poleVault']
+    eventCodes: ['longJump', 'highJump', 'tripleJump', 'poleVault']
   },
   throwing: {
     id: 'throwing',
     label: '投てき',
-    events: ['shotPut', 'discusThrow', 'javelinThrow', 'hammerThrow']
+    eventCodes: ['shotPut', 'discusThrow', 'javelinThrow', 'hammerThrow']
   }
 };
 

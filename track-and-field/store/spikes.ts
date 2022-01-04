@@ -10,8 +10,7 @@ import {
 import { ISpikeModel, transrateSpikeEntityToModel } from '~/store/model/spike';
 
 import { ISpikeShoes, ISpikeShoesFields } from '~/types/generated/contentful';
-import { IEventItem } from '~/types/shoes/shoeEvents';
-import { shoeSearchOrders } from '~/types/shoes/shoeSearchOrder';
+import { EventCode } from '~/types/shoes/shoeEvents';
 
 @Module({
   name: 'spikes',
@@ -71,17 +70,20 @@ export default class Spikes extends VuexModule {
   }
 
   @Action
-  async getRankingByEventCategory(
-    eventCategory: IEventItem,
+  async getRankingByEventCodes(
+    eventItem: EventCode[] = [],
     count = 10
   ): Promise<ISpikeModel[]> {
     const entries: EntryCollection<ISpikeShoesFields> = await contentfulClient
       .getEntries(
-        createSearchInput({
-          eventOrEventCategory: eventCategory,
-          order: shoeSearchOrders.highscore,
-          limit: count
-        })
+        createSearchInput(
+          {
+            limit: count
+          },
+          {
+            'fields.events[in]': eventItem.join(',') || undefined
+          }
+        )
       )
       .catch(() => {
         throw new Error('Spikes#getBySlug() faild');

@@ -116,6 +116,16 @@
           <h3>長距離のおすすめ</h3>
           <SimpleSpikeList :spikes="longRankingSpikes"></SimpleSpikeList>
         </section>
+        <section v-if="highJumpRankingSpikes">
+          <h3>走幅跳・三段跳のおすすめ</h3>
+          <SimpleSpikeList
+            :spikes="longAndTripleJumpRankingSpikes"
+          ></SimpleSpikeList>
+        </section>
+        <section v-if="highJumpRankingSpikes">
+          <h3>走高跳のおすすめ</h3>
+          <SimpleSpikeList :spikes="highJumpRankingSpikes"></SimpleSpikeList>
+        </section>
       </Container>
     </section>
   </div>
@@ -154,19 +164,31 @@ export default defineComponent({
     const shortRankingSpikes = ref<ISpikeModel[]>();
     const middleRankingSpikes = ref<ISpikeModel[]>();
     const longRankingSpikes = ref<ISpikeModel[]>();
+    const longAndTripleJumpRankingSpikes = ref<ISpikeModel[]>();
+    const highJumpRankingSpikes = ref<ISpikeModel[]>();
 
     useFetch(async () => {
-      shortRankingSpikes.value = await spikesStore.getRankingByEventCategory(
-        shoeEventCategories.shortDistance
+      shortRankingSpikes.value = await spikesStore.getRankingByEventCodes(
+        shoeEventCategories.shortDistance.eventCodes
       );
 
-      middleRankingSpikes.value = await spikesStore.getRankingByEventCategory(
-        shoeEventCategories.middleDistance
+      middleRankingSpikes.value = await spikesStore.getRankingByEventCodes(
+        shoeEventCategories.middleDistance.eventCodes
       );
 
-      shortRankingSpikes.value = await spikesStore.getRankingByEventCategory(
-        shoeEventCategories.longDistance
+      longRankingSpikes.value = await spikesStore.getRankingByEventCodes(
+        shoeEventCategories.longDistance.eventCodes
       );
+
+      longAndTripleJumpRankingSpikes.value =
+        await spikesStore.getRankingByEventCodes([
+          ...shoeEvents.longJump.eventCodes,
+          ...shoeEvents.tripleJump.eventCodes
+        ]);
+
+      highJumpRankingSpikes.value = await spikesStore.getRankingByEventCodes([
+        ...shoeEvents.highJump.eventCodes
+      ]);
     });
 
     const featuresSearchValue = ref<{
@@ -183,6 +205,8 @@ export default defineComponent({
       shortRankingSpikes,
       middleRankingSpikes,
       longRankingSpikes,
+      longAndTripleJumpRankingSpikes,
+      highJumpRankingSpikes,
       featuresSearchValue,
       levelSearchValue,
       events: Object.values(shoeEvents),
@@ -203,7 +227,7 @@ export default defineComponent({
             ? [levelSearchValue.value.level?.id]
             : []
         });
-        router.push('/search/');
+        router.push('/search');
       }
     };
   }

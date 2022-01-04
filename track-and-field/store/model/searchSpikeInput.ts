@@ -3,7 +3,10 @@ import { ShoeBrandsCode } from '~/types/shoes/shoeBrands';
 import { IShoeColor } from '~/types/shoes/shoeColors';
 import { IEventItem } from '~/types/shoes/shoeEvents';
 import { ShoeLaceTypeCode } from '~/types/shoes/shoeLaceTypes';
-import { IShoeSearchOrder } from '~/types/shoes/shoeSearchOrder';
+import {
+  IShoeSearchOrder,
+  shoeSearchOrders
+} from '~/types/shoes/shoeSearchOrder';
 
 export const DEFAULT_SPIKES_SEARCH_LIMIT = 200;
 
@@ -110,10 +113,17 @@ function convertTrackTypeInput(
   }
 }
 
+/**
+ * 並び順を変換する
+ * スコアの高い順ソートは常に適用する
+ */
 function convertOrderInput(order?: IShoeSearchOrder): string | undefined {
-  if (!order) {
-    return undefined;
+  let orderInput = '';
+
+  if (order && order.id !== shoeSearchOrders.highscore.id) {
+    orderInput =
+      (order.isReverseSearch ? '-' : '') + `fields.${order.fieldId},`;
   }
 
-  return (order.isReverseSearch ? '-' : '') + `fields.${order.fieldId}`;
+  return orderInput + `-fields.${shoeSearchOrders.highscore.fieldId}`;
 }

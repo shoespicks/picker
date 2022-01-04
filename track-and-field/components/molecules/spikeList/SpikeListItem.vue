@@ -9,9 +9,8 @@
         <div class="molecules-spike-list-item-image-container">
           <v-card-title>
             <small class="spike-list-item-title-brand-name"
-              >{{ shoeBrands[spike.brand].nameEn }} 　<span>{{
-                spike.releaseYear
-              }}</span>
+              >{{ shoeBrands[spike.brand].nameEn
+              }}<span>{{ spike.releaseYear }}</span>
             </small>
             <h3>{{ spike.name }}</h3>
             <p>{{ spike.nameEn }}</p>

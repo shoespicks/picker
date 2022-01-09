@@ -17,7 +17,7 @@ import {
   useRouter
 } from '@nuxtjs/composition-api';
 import SpikeList from '~/components/molecules/spikeList/SpikeList.vue';
-import SearchSpikeForm from '~/components/organisms/search-spike/SearchSpikeForm.vue';
+import SearchSpikeForm from '~/components/organisms/spike-list/SearchSpikeForm.vue';
 import { spikesStore } from '~/store';
 import { ISpikesSearchFormValue } from '~/store/model/searchSpikeInput';
 import { ISpikeModel } from '~/store/model/spike';

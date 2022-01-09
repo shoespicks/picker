@@ -8,7 +8,7 @@
 
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api';
-import SearchSpike from '~/components/organisms/search-spike/SearchSpike.vue';
+import SearchSpike from '~/components/organisms/spike-list/SearchSpike.vue';
 
 export default defineComponent({
   components: { SearchSpike },

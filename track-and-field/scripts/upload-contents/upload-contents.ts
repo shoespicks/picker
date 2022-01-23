@@ -596,7 +596,7 @@ export class SpreadsheetUploader {
         'ja-JP': this._generateEventsField(row)
       },
       score: {
-        'ja-JP': parseInt(row?.score, 10) || undefined
+        'ja-JP': parseInt(row?.score, 10) ?? undefined
       },
       price: {
         'ja-JP': SpreadsheetUploader.parseYenToInt(row?.price)
@@ -605,15 +605,15 @@ export class SpreadsheetUploader {
         'ja-JP': row?.brand
       },
       lightnessScore: {
-        'ja-JP': parseFloat(row?.lightnessScore) || undefined
+        'ja-JP': parseFloat(row?.lightnessScore) ?? undefined
       },
-      widthScore: { 'ja-JP': parseFloat(row?.widthScore) || undefined },
+      widthScore: { 'ja-JP': parseFloat(row?.widthScore) ?? undefined },
       hardnessScore: {
-        'ja-JP': parseFloat(row?.hardnessScore) || undefined
+        'ja-JP': parseFloat(row?.hardnessScore) ?? undefined
       },
-      angleScore: { 'ja-JP': parseFloat(row?.angleScore) || undefined },
-      gripScore: { 'ja-JP': parseFloat(row?.gripScore) || undefined },
-      releaseYear: { 'ja-JP': parseInt(row?.release, 10) || undefined },
+      angleScore: { 'ja-JP': parseFloat(row?.angleScore) ?? undefined },
+      gripScore: { 'ja-JP': parseFloat(row?.gripScore) ?? undefined },
+      releaseYear: { 'ja-JP': parseInt(row?.release, 10) ?? undefined },
       level: { 'ja-JP': SpreadsheetUploader.getlevel(row.level) },
       series: {
         'ja-JP': row?.series
@@ -625,7 +625,7 @@ export class SpreadsheetUploader {
         'ja-JP': SpreadsheetUploader.getPinType(row?.pinType)
       },
       pinNumber: {
-        'ja-JP': parseInt(row?.pinNumber, 10) || undefined
+        'ja-JP': parseInt(row?.pinNumber, 10) ?? undefined
       },
       pinDetail: {
         'ja-JP': row?.pinDetail
@@ -640,13 +640,13 @@ export class SpreadsheetUploader {
         'ja-JP': SpreadsheetUploader.getShoeLaceType(row?.shoeLaceType)
       },
       minSize: {
-        'ja-JP': parseInt(row?.minSize, 10) || undefined
+        'ja-JP': parseInt(row?.minSize, 10) ?? undefined
       },
       maxSize: {
-        'ja-JP': parseInt(row?.maxSize, 10) || undefined
+        'ja-JP': parseInt(row?.maxSize, 10) ?? undefined
       },
       weight: {
-        'ja-JP': parseInt(row?.weight, 10) || undefined
+        'ja-JP': parseInt(row?.weight, 10) ?? undefined
       },
       accessories: {
         'ja-JP': row?.accessories

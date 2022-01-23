@@ -225,8 +225,8 @@ export default defineComponent({
         levelSearchValue.value.event &&
           spikesStore.updateSearchFormValue({
             events: [levelSearchValue.value.event],
-            level: levelSearchValue.value.level?.id
-              ? [levelSearchValue.value.level?.id]
+            level: levelSearchValue.value.level
+              ? [levelSearchValue.value.level]
               : []
           });
         router.push('/search');

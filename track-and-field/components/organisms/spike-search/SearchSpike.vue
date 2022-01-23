@@ -1,12 +1,12 @@
 <template>
   <div class="organisms-search-spike">
     <aside>
-      <SearchSpikeForm
-        v-model="formValue"
-        @search="search()"
-      ></SearchSpikeForm>
+      <SearchSpikeForm v-model="formValue" @search="search()"></SearchSpikeForm>
     </aside>
-    <SpikeList :spikes="spikes" @clickItem="clickItem($event)"></SpikeList>
+    <div>
+      <h2>スパイク検索結果</h2>
+      <SpikeList :spikes="spikes" @clickItem="clickItem($event)"></SpikeList>
+    </div>
   </div>
 </template>
 <script lang="ts">

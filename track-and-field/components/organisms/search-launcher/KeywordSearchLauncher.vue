@@ -27,7 +27,6 @@ export default defineComponent({
     const keyword = ref<string>('');
 
     const search = () => {
-      console.log(keyword.value);
       spikesStore.updateSearchFormValue({
         keyword: keyword.value
       });

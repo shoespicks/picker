@@ -33,13 +33,15 @@
       </label>
       <label @click="$event.preventDefault()">
         競技レベル
-        <CheckBoxes
+        <Select
           :value="getFormValue('level')"
           :items="levels"
           item-value="id"
-          item-label="label"
+          item-text="label"
+          placeholder="指定なし"
+          multiple
           @input="setFormValue('level', $event)"
-        ></CheckBoxes>
+        ></Select>
       </label>
       <label>
         発売年
@@ -191,24 +193,6 @@ export default defineComponent({
         newFormValue[key] = val;
         searchFormValue.value = newFormValue;
       }
-      // eventsInput: computed({
-      //   get: () => searchFormValue.value?.events,
-      //   set: (val?: IEventItem[]) => {
-      //     searchFormValue.value = {
-      //       ...searchFormValue.value,
-      //       events: val
-      //     };
-      //   }
-      // }),
-      // keywordInput: computed({
-      //   get: () => searchFormValue.value?.keyword,
-      //   set: (val?: string) => {
-      //     searchFormValue.value = {
-      //       ...searchFormValue.value,
-      //       keyword: val
-      //     };
-      //   }
-      // })
     };
   }
 });

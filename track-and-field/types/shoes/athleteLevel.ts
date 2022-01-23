@@ -15,7 +15,7 @@ export interface IAthleteLevel extends ISelectItem {
 export const athleteLevels: { [key in AthleteLevelCode]: IAthleteLevel } = {
   beginner: {
     id: 'beginner',
-    label: '初心者'
+    label: '初級者'
   },
   intermediate: {
     id: 'intermediate',

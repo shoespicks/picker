@@ -1,7 +1,6 @@
 <template>
   <div class="page-content">
     <v-breadcrumbs :items="breadcrumbs"></v-breadcrumbs>
-    <h2>スパイク検索結果</h2>
     <SearchSpike></SearchSpike>
   </div>
 </template>

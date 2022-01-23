@@ -1,4 +1,4 @@
-import { AthleteLevelCode } from '~/types/shoes/athleteLevel';
+import { IAthleteLevel } from '~/types/shoes/athleteLevel';
 import { ShoeBrandsCode } from '~/types/shoes/shoeBrands';
 import { IShoeColor } from '~/types/shoes/shoeColors';
 import { IEventItem } from '~/types/shoes/shoeEvents';
@@ -15,7 +15,7 @@ export interface ISpikesSearchFormValue {
   events?: IEventItem[];
   keyword?: string;
   brands?: ShoeBrandsCode[];
-  level?: AthleteLevelCode[];
+  level?: IAthleteLevel[];
   priceRange?: [number, number];
   pinRange?: [number, number];
   colors?: IShoeColor[];
@@ -67,7 +67,8 @@ export const createSearchInput = (
     'fields.brand[in]': formValue?.brands?.join(',') || undefined,
 
     // 競技レベル
-    'fields.level[in]': formValue?.level?.join(',') || undefined,
+    'fields.level[in]':
+      formValue?.level?.map((l) => l.id).join(',') || undefined,
 
     // 対応環境
     'fields.allWeatherOnly': convertTrackTypeInput(

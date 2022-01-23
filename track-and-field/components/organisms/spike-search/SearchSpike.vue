@@ -2,8 +2,8 @@
   <div class="organisms-search-spike">
     <aside>
       <SearchSpikeForm
-        :default-value="savedSearchFormValue"
-        @search="search($event)"
+        v-model="formValue"
+        @search="search()"
       ></SearchSpikeForm>
     </aside>
     <SpikeList :spikes="spikes" @clickItem="clickItem($event)"></SpikeList>
@@ -17,7 +17,7 @@ import {
   useRouter
 } from '@nuxtjs/composition-api';
 import SpikeList from '~/components/molecules/spikeList/SpikeList.vue';
-import SearchSpikeForm from '~/components/organisms/spike-list/SearchSpikeForm.vue';
+import SearchSpikeForm from '~/components/organisms/spike-search/SearchSpikeForm.vue';
 import { spikesStore } from '~/store';
 import { ISpikesSearchFormValue } from '~/store/model/searchSpikeInput';
 import { ISpikeModel } from '~/store/model/spike';
@@ -28,33 +28,23 @@ export default defineComponent({
   setup() {
     const router = useRouter();
 
-    const savedSearchFormValue: ISpikesSearchFormValue = {
-      eventOrEventCategory: undefined,
-      keyword: undefined,
-      brands: [],
-      level: [],
-      priceRange: [0, 50000],
-      trackType: {
-        forAllWeatherTrack: false,
-        forDirtTrack: false
-      },
-      // TODO 直近3〜2年にする
-      releaseYears: [],
-      shoeLaceTypes: [],
-      colors: [],
-      ...spikesStore.searchFormValue
-    };
+    const formValue = computed({
+      get: () => spikesStore.searchFormValue,
+      set: (val: ISpikesSearchFormValue) => {
+        spikesStore.updateSearchFormValue(val);
+      }
+    });
 
-    const search = (searchFormValue: ISpikesSearchFormValue) => {
-      spikesStore.search(searchFormValue);
+    const search = () => {
+      spikesStore.search(formValue.value);
     };
 
     onMounted(() => {
-      search(savedSearchFormValue);
+      search();
     });
 
     return {
-      savedSearchFormValue,
+      formValue,
       spikes: computed(() => spikesStore.spikes),
       search,
       clickItem: (val: ISpikeModel) => {

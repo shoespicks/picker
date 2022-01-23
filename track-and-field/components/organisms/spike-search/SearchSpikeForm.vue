@@ -3,97 +3,122 @@
     <v-form @submit.prevent="search()">
       <label>
         種目
-        <SearchLauncher>
-          <template #activator="{ on, attrs }">
-            <Button
-              v-if="searchFormValue.eventOrEventCategory"
-              class="search-spike-form-evens-input"
-              color="#383838"
-              outlined
-              plain
-              v-bind="attrs"
-              v-on="on"
-              >{{
-                searchFormValue.eventOrEventCategory.label || '種目で絞り込み'
-              }}<v-icon right>mdi mdi-menu-down</v-icon></Button
-            >
-          </template>
-        </SearchLauncher>
+        <Select
+          :value="getFormValue('events')"
+          :items="events"
+          item-text="label"
+          placeholder="種目を選択"
+          multiple
+          @input="setFormValue('events', $event)"
+        ></Select>
       </label>
       <label>
         キーワード
-        <TextInput v-model="searchFormValue.keyword" dense outlined></TextInput>
+        <TextInput
+          :value="getFormValue('keyword')"
+          dense
+          outlined
+          @input="setFormValue('keyword', $event)"
+        ></TextInput>
       </label>
       <label @click="$event.preventDefault()">
         ブランド
         <CheckBoxes
-          v-model="searchFormValue.brands"
+          :value="getFormValue('brands')"
           :items="brands"
           item-value="id"
           item-label="name"
+          @input="setFormValue('brands', $event)"
         ></CheckBoxes>
       </label>
       <label @click="$event.preventDefault()">
         競技レベル
         <CheckBoxes
-          v-model="searchFormValue.level"
+          :value="getFormValue('level')"
           :items="levels"
           item-value="id"
           item-label="label"
+          @input="setFormValue('level', $event)"
         ></CheckBoxes>
       </label>
       <label>
         発売年
         <Select
-          v-model="searchFormValue.releaseYears"
-          :items="[2020, 2021]"
+          :value="getFormValue('releaseYears')"
+          :items="yearRange"
           multiple
           :height="40"
           item-value="id"
           item-text="label"
           placeholder="指定なし"
+          @input="setFormValue('releaseYears', $event)"
         ></Select>
+        <CheckBox
+          :value="getFormValue('lastModelOnly')"
+          label="最新モデルのみ"
+          @input="setFormValue('lastModelOnly', $event)"
+        ></CheckBox>
       </label>
       <label>
         対応環境
         <CheckBox
-          v-model="searchFormValue.trackType.forAllWeatherTrack"
+          :value="getFormValue('forAllWeatherTrack')"
           label="オールウェザー専用"
+          @input="setFormValue('forAllWeatherTrack', $event)"
         ></CheckBox>
         <CheckBox
-          v-model="searchFormValue.trackType.forDirtTrack"
+          :value="getFormValue('forDirtTrack')"
           label="土兼用"
+          @input="setFormValue('forDirtTrack', $event)"
         ></CheckBox>
       </label>
       <label>
-        価格
+        ピン本数
         <span class="search-form-item-price-range-view"
-          >¥ {{ searchFormValue.priceRange[0] }} 〜 ¥
-          {{ searchFormValue.priceRange[1] }}</span
+          >{{ getFormValue('pinRange')[0] }}本 〜
+          {{ getFormValue('pinRange')[1] }}本</span
         >
         <Slider
-          v-model="searchFormValue.priceRange"
+          :value="getFormValue('pinRange')"
+          :max="15"
+          :min="0"
+          hide-details
+          @input="setFormValue('pinRange', $event)"
+        ></Slider>
+      </label>
+
+      <label>
+        価格
+        <span class="search-form-item-price-range-view"
+          >¥ {{ getFormValue('priceRange')[0] }} 〜 ¥
+          {{ getFormValue('priceRange')[1] }}</span
+        >
+        <Slider
+          :value="getFormValue('priceRange')"
           :step="500"
           :max="50000"
           :min="0"
           hide-details
+          @input="setFormValue('priceRange', $event)"
         ></Slider>
       </label>
       <label @click="$event.preventDefault()">
         靴紐タイプ
         <CheckBoxes
-          v-model="searchFormValue.shoeLaceTypes"
+          :value="getFormValue('shoeLaceTypes')"
           :items="laceTypes"
           item-value="id"
           item-label="label"
+          @input="setFormValue('shoeLaceTypes', $event)"
         ></CheckBoxes>
       </label>
       <label>
         色
         <ColorVariationsPicker
-          v-model="searchFormValue.colors"
+          :value="getFormValue('colors')"
           multiple
           :items="colors"
+          @input="setFormValue('colors', $event)"
         ></ColorVariationsPicker>
       </label>
       <Button type="submit" full>検索</Button>
@@ -101,8 +126,7 @@
   </v-card>
 </template>
 <script lang="ts">
-import { defineComponent, PropType, ref } from '@nuxtjs/composition-api';
-import { cloneDeep } from 'lodash';
+import { computed, defineComponent, PropType } from '@nuxtjs/composition-api';
 import Button from '~/components/atoms/Button.vue';
 import CheckBox from '~/components/atoms/CheckBox.vue';
 import Select from '~/components/atoms/Select.vue';
@@ -110,11 +134,11 @@ import Slider from '~/components/atoms/Slider.vue';
 import TextInput from '~/components/atoms/TextInput.vue';
 import ColorVariationsPicker from '~/components/molecules/ColorVariationsPicker.vue';
 import CheckBoxes from '~/components/molecules/common/CheckBoxes.vue';
-import SearchLauncher from '~/components/organisms/SearchLauncher.vue';
 import { ISpikesSearchFormValue } from '~/store/model/searchSpikeInput';
 import { athleteLevels } from '~/types/shoes/athleteLevel';
 import { shoeBrands } from '~/types/shoes/shoeBrands';
 import { shoeColors } from '~/types/shoes/shoeColors';
+import { shoeEvents } from '~/types/shoes/shoeEvents';
 import { shoeLaceTypes } from '~/types/shoes/shoeLaceTypes';
 
 export default defineComponent({
@@ -125,27 +149,66 @@ export default defineComponent({
     CheckBoxes,
     Select,
     TextInput,
-    Button,
-    SearchLauncher
+    Button
   },
   props: {
-    defaultValue: {
+    value: {
       type: Object as PropType<ISpikesSearchFormValue>,
-      required: true
+      default: () => {}
     }
   },
   setup(props, context) {
-    const searchFormValue = ref<ISpikesSearchFormValue>(cloneDeep(props.defaultValue));
+    const todayYear = new Date().getFullYear();
+    const yearRange: number[] = [...Array(3)].map((n, i) => todayYear - i);
+    const searchFormValue = computed({
+      get: () => props.value,
+      set: (val: ISpikesSearchFormValue) => {
+        context.emit('input', val);
+      }
+    });
+
+    const getFormValue = computed(
+      () => (key: keyof ISpikesSearchFormValue) => searchFormValue.value[key]
+    );
 
     return {
-      searchFormValue,
+      yearRange,
+      events: Object.values(shoeEvents),
       brands: Object.values(shoeBrands),
       levels: Object.values(athleteLevels),
       colors: Object.values(shoeColors),
       laceTypes: Object.values(shoeLaceTypes),
       search: () => {
-        context.emit('search', searchFormValue.value);
+        context.emit('search');
+      },
+      searchFormValue,
+      getFormValue,
+      setFormValue: (key: keyof ISpikesSearchFormValue, val: any) => {
+        const newFormValue = {
+          ...searchFormValue.value
+        };
+
+        newFormValue[key] = val;
+        searchFormValue.value = newFormValue;
       }
+      // eventsInput: computed({
+      //   get: () => searchFormValue.value?.events,
+      //   set: (val?: IEventItem[]) => {
+      //     searchFormValue.value = {
+      //       ...searchFormValue.value,
+      //       events: val
+      //     };
+      //   }
+      // }),
+      // keywordInput: computed({
+      //   get: () => searchFormValue.value?.keyword,
+      //   set: (val?: string) => {
+      //     searchFormValue.value = {
+      //       ...searchFormValue.value,
+      //       keyword: val
+      //     };
+      //   }
+      // })
     };
   }
 });

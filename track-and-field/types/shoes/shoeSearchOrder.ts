@@ -40,7 +40,7 @@ export const shoeSearchOrders: {
     label: 'アシックス',
     labelAlias: 'とにかく軽い',
     fieldId: 'lightnessScore',
-    isReverseSearch: false
+    isReverseSearch: true
   },
   gripPower: {
     id: 'gripPower',

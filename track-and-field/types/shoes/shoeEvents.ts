@@ -100,7 +100,7 @@ export const shoeEvents: {
   },
   longJump: {
     id: 'longJump',
-    label: '走高跳',
+    label: '走幅跳',
     eventCodes: ['longJump']
   },
   poleVault: {

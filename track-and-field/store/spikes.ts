@@ -1,5 +1,4 @@
 import { Entry, EntryCollection } from 'contentful';
-import { cloneDeep } from 'lodash';
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators';
 import { contentfulClient } from '~/plugins/contentful';
 import {
@@ -19,14 +18,15 @@ import { EventCode } from '~/types/shoes/shoeEvents';
 })
 export default class Spikes extends VuexModule {
   private _spikes: ISpikeModel[] = [];
-  private _searchFormValue: ISpikesSearchFormValue = {};
+  private _searchFormValue: ISpikesSearchFormValue =
+    _createDefaultSearchFormValue();
 
   get spikes(): ISpikeModel[] {
     return this._spikes;
   }
 
   get searchFormValue(): ISpikesSearchFormValue {
-    return cloneDeep(this._searchFormValue);
+    return this._searchFormValue;
   }
 
   @Mutation private setSpikes(val: ISpikeModel[]) {
@@ -34,7 +34,7 @@ export default class Spikes extends VuexModule {
   }
 
   @Mutation private setSearchFormValue(val: ISpikesSearchFormValue) {
-    this._searchFormValue = cloneDeep(val);
+    this._searchFormValue = val;
   }
 
   @Action
@@ -99,6 +99,26 @@ export default class Spikes extends VuexModule {
 
   @Action
   public updateSearchFormValue(formValue: ISpikesSearchFormValue = {}) {
-    this.setSearchFormValue(formValue);
+    this.setSearchFormValue({
+      ..._createDefaultSearchFormValue(),
+      ...formValue
+    });
   }
+}
+
+function _createDefaultSearchFormValue(): ISpikesSearchFormValue {
+  return {
+    events: [],
+    keyword: undefined,
+    brands: [],
+    level: [],
+    priceRange: [0, 50000],
+    pinRange: [0, 15],
+    forAllWeatherTrack: false,
+    forDirtTrack: false,
+    releaseYears: [],
+    lastModelOnly: true,
+    shoeLaceTypes: [],
+    colors: []
+  };
 }

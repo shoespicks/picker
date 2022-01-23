@@ -214,19 +214,21 @@ export default defineComponent({
       searchOrders: Object.values(shoeSearchOrders),
       levels: Object.values(athleteLevels),
       searchByFeatures: () => {
-        spikesStore.updateSearchFormValue({
-          eventOrEventCategory: featuresSearchValue.value.eventCategory,
-          order: featuresSearchValue.value.features
-        });
+        featuresSearchValue.value.eventCategory &&
+          spikesStore.updateSearchFormValue({
+            events: [featuresSearchValue.value.eventCategory],
+            order: featuresSearchValue.value.features
+          });
         router.push('/search');
       },
       searchByLevel: () => {
-        spikesStore.updateSearchFormValue({
-          eventOrEventCategory: levelSearchValue.value.event,
-          level: levelSearchValue.value.level?.id
-            ? [levelSearchValue.value.level?.id]
-            : []
-        });
+        levelSearchValue.value.event &&
+          spikesStore.updateSearchFormValue({
+            events: [levelSearchValue.value.event],
+            level: levelSearchValue.value.level?.id
+              ? [levelSearchValue.value.level?.id]
+              : []
+          });
         router.push('/search');
       }
     };

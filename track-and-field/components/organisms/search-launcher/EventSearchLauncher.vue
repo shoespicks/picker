@@ -31,7 +31,11 @@
 import { defineComponent, ref, useRouter } from '@nuxtjs/composition-api';
 import Button from '~/components/atoms/Button.vue';
 import { spikesStore } from '~/store';
-import { IEventItem, shoeEventCategories } from '~/types/shoes/shoeEvents';
+import {
+  IEventItem,
+  shoeEventCategories,
+  shoeEventsAndEventCategories
+} from '~/types/shoes/shoeEvents';
 
 export default defineComponent({
   components: { Button },
@@ -48,9 +52,12 @@ export default defineComponent({
       eventCategories: Object.values(shoeEventCategories),
       dialog,
       search: (event: IEventItem) => {
-        spikesStore.updateSearchFormValue({
-          eventOrEventCategory: event
-        });
+        event &&
+          spikesStore.updateSearchFormValue({
+            events: event.eventCodes.map(
+              (code) => shoeEventsAndEventCategories[code]
+            )
+          });
         router.push('/search/');
         closeDialog();
       },

@@ -12,17 +12,17 @@ export const DEFAULT_SPIKES_SEARCH_LIMIT = 200;
 
 // 検索条件フォームにバインドするデータモデルのIF
 export interface ISpikesSearchFormValue {
-  eventOrEventCategory?: IEventItem;
+  events?: IEventItem[];
   keyword?: string;
   brands?: ShoeBrandsCode[];
   level?: AthleteLevelCode[];
   priceRange?: [number, number];
+  pinRange?: [number, number];
   colors?: IShoeColor[];
-  trackType?: {
-    forAllWeatherTrack?: boolean;
-    forDirtTrack?: boolean;
-  };
+  forAllWeatherTrack?: boolean;
+  forDirtTrack?: boolean;
   releaseYears?: number[];
+  lastModelOnly?: boolean;
   shoeLaceTypes?: ShoeLaceTypeCode[];
   order?: IShoeSearchOrder;
   limit?: number;
@@ -38,9 +38,12 @@ export interface ISpikesSearchInput {
   'fields.level[in]'?: string;
   'fields.colors[in]'?: string;
   'fields.allWeatherOnly'?: boolean;
+  'fields.pinNumber[gte]'?: number;
+  'fields.pinNumber[lte]'?: number;
   'fields.releaseYear[in]'?: string;
-  'fields.price[lte]'?: number;
+  'fields.newModels[exists]'?: boolean;
   'fields.price[gte]'?: number;
+  'fields.price[lte]'?: number;
   'fields.shoeLaceType[all]'?: string;
   limit?: number;
   order?: string;
@@ -58,7 +61,7 @@ export const createSearchInput = (
 
     // 種目
     'fields.events[in]':
-      formValue?.eventOrEventCategory?.eventCodes.join(',') || undefined,
+      formValue?.events?.flatMap((e) => e.eventCodes).join(',') || undefined,
 
     // メーカー
     'fields.brand[in]': formValue?.brands?.join(',') || undefined,
@@ -67,10 +70,22 @@ export const createSearchInput = (
     'fields.level[in]': formValue?.level?.join(',') || undefined,
 
     // 対応環境
-    'fields.allWeatherOnly': convertTrackTypeInput(formValue.trackType),
+    'fields.allWeatherOnly': convertTrackTypeInput(
+      formValue.forAllWeatherTrack,
+      formValue.forDirtTrack
+    ),
+
+    // ピン本数
+    'fields.pinNumber[gte]':
+      (formValue?.pinRange && formValue?.pinRange[0]) || undefined,
+    'fields.pinNumber[lte]':
+      (formValue?.pinRange && formValue?.pinRange[1]) || undefined,
 
     // 発売年
     'fields.releaseYear[in]': formValue?.releaseYears?.join(',') || undefined,
+
+    // 最新モデルのみ
+    'fields.newModels[exists]': formValue?.lastModelOnly ? false : undefined,
 
     // 価格
     'fields.price[gte]':
@@ -101,21 +116,14 @@ export const createSearchInput = (
 };
 
 function convertTrackTypeInput(
-  trackType:
-    | { forAllWeatherTrack?: boolean; forDirtTrack?: boolean }
-    | undefined
+  forAllWeatherTrack?: boolean,
+  forDirtTrack?: boolean
 ) {
-  if (!trackType) {
-    return undefined;
+  if (forAllWeatherTrack) {
+    return forDirtTrack ? undefined : true;
   }
 
-  if (trackType.forAllWeatherTrack) {
-    return trackType.forDirtTrack ? undefined : true;
-  }
-
-  if (!trackType.forAllWeatherTrack) {
-    return trackType.forDirtTrack ? false : undefined;
-  }
+  return forDirtTrack ? false : undefined;
 }
 
 /**

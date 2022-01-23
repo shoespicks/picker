@@ -15,43 +15,19 @@
         alt="shoespicks"
       />
     </NuxtLink>
-    <SearchLauncher>
-      <template #activator="{ on, attrs }">
-        <Button
-          icon
-          height="40"
-          width="40"
-          color="white"
-          v-bind="attrs"
-          v-on="on"
-        >
-          <v-icon size="20">fas fa-search</v-icon>
-        </Button>
-      </template>
-    </SearchLauncher>
+    <KeywordSearchLauncher></KeywordSearchLauncher>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api';
-import Button from '~/components/atoms/Button.vue';
-import SearchLauncher from '~/components/organisms/SearchLauncher.vue';
+import KeywordSearchLauncher from '~/components/organisms/search-launcher/KeywordSearchLauncher.vue';
 
 export default defineComponent({
-  components: { Button, SearchLauncher },
+  components: { KeywordSearchLauncher },
   setup() {}
 });
 </script>
 <style lang="scss" scoped>
-.molecules-search-launcher {
-  height: 40px;
-  width: 40px;
-  color: #ffffff;
-}
-
-.molecules-search-launcher {
-  right: -8px;
-}
-
 .header-logo {
   display: inline-flex;
   position: absolute;

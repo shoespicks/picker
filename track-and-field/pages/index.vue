@@ -215,7 +215,7 @@ export default defineComponent({
       levels: Object.values(athleteLevels),
       searchByFeatures: () => {
         featuresSearchValue.value.eventCategory &&
-          spikesStore.updateSearchFormValue({
+          spikesStore.updateSearchForm({
             events: [featuresSearchValue.value.eventCategory],
             order: featuresSearchValue.value.features
           });
@@ -223,7 +223,7 @@ export default defineComponent({
       },
       searchByLevel: () => {
         levelSearchValue.value.event &&
-          spikesStore.updateSearchFormValue({
+          spikesStore.updateSearchForm({
             events: [levelSearchValue.value.event],
             level: levelSearchValue.value.level
               ? [levelSearchValue.value.level]

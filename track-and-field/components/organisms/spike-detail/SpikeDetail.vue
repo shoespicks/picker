@@ -64,7 +64,7 @@
             </li>
           </ul>
           <section
-            v-if="spike.recommendItems"
+            v-if="spike.recommendItems && spike.recommendItems.length > 0"
             class="sidenav-recommend-items-section"
           >
             <h4>似ているスパイク</h4>

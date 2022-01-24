@@ -37,7 +37,7 @@ export const shoeSearchOrders: {
   },
   light: {
     id: 'light',
-    label: 'アシックス',
+    label: '軽い順',
     labelAlias: 'とにかく軽い',
     fieldId: 'lightnessScore',
     isReverseSearch: true

@@ -1,8 +1,10 @@
 <template>
-  <section class="organisms-spike-recommend-link">
+  <section
+    v-if="spike.recommendItems && spike.recommendItems.length > 0"
+    class="organisms-spike-recommend-link"
+  >
     <h3>このスパイクを見ている人にオススメ</h3>
     <SimpleSpikeList
-      v-if="spike.recommendItems"
       :spikes="spike.recommendItems"
     ></SimpleSpikeList>
   </section>

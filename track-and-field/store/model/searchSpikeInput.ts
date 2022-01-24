@@ -11,7 +11,7 @@ import {
 export const DEFAULT_SPIKES_SEARCH_LIMIT = 200;
 
 // 検索条件フォームにバインドするデータモデルのIF
-export interface ISpikesSearchFormValue {
+export interface ISpikesSearchFormInputs {
   events?: IEventItem[];
   keyword?: string;
   brands?: ShoeBrandsCode[];
@@ -28,8 +28,26 @@ export interface ISpikesSearchFormValue {
   limit?: number;
 }
 
+export function createDefaultSearchFormValue(): ISpikesSearchFormInputs {
+  return {
+    events: [],
+    keyword: undefined,
+    brands: [],
+    level: [],
+    priceRange: [0, 50000],
+    pinRange: [0, 15],
+    forAllWeatherTrack: false,
+    forDirtTrack: false,
+    releaseYears: [],
+    lastModelOnly: true,
+    shoeLaceTypes: [],
+    colors: [],
+    order: shoeSearchOrders.highscore
+  };
+}
+
 // APIに渡す検索条件のIF
-export interface ISpikesSearchInput {
+export interface ISpikesSearchParams {
   // eslint-disable-next-line camelcase
   content_type: 'spikeShoes';
   query?: string;
@@ -50,11 +68,11 @@ export interface ISpikesSearchInput {
 }
 
 // 検索条件フォームの値をAPIの検索条件に変換
-export const createSearchInput = (
-  formValue: ISpikesSearchFormValue,
-  overRideInput: Partial<ISpikesSearchInput> = {}
+export const createSearchParams = (
+  formValue: ISpikesSearchFormInputs,
+  overRideParams: Partial<ISpikesSearchParams> = {}
 ) => {
-  const input: ISpikesSearchInput = {
+  const input: ISpikesSearchParams = {
     content_type: 'spikeShoes',
     // キーワード
     query: formValue?.keyword || undefined,
@@ -111,7 +129,7 @@ export const createSearchInput = (
     // 取得上限数
     limit: formValue?.limit || DEFAULT_SPIKES_SEARCH_LIMIT,
 
-    ...overRideInput
+    ...overRideParams
   };
   return input;
 };

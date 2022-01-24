@@ -15,8 +15,4 @@ export default defineComponent({
   }
 });
 </script>
-<style lang="scss" scoped>
-.page-content {
-  padding: 24px 24px 64px;
-}
-</style>
+<style lang="scss" scoped></style>

@@ -53,7 +53,7 @@ export default defineComponent({
       dialog,
       search: (event: IEventItem) => {
         event &&
-          spikesStore.updateSearchFormValue({
+          spikesStore.updateSearchForm({
             events: event.eventCodes.map(
               (code) => shoeEventsAndEventCategories[code]
             )

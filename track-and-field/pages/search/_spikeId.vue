@@ -1,6 +1,6 @@
 <template>
   <div v-if="!!spike" class="page-content">
-    <Container :max-width="1244" padding="0 34px">
+    <Container padding="0 34px">
       <v-breadcrumbs :items="breadcrumbs"></v-breadcrumbs>
     </Container>
     <SpikeDetail :spike="spike"></SpikeDetail>

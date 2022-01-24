@@ -2,9 +2,10 @@ import { Entry, EntryCollection } from 'contentful';
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators';
 import { contentfulClient } from '~/plugins/contentful';
 import {
-  createSearchInput,
-  ISpikesSearchFormValue,
-  ISpikesSearchInput
+  createDefaultSearchFormValue,
+  createSearchParams,
+  ISpikesSearchFormInputs,
+  ISpikesSearchParams
 } from '~/store/model/searchSpikeInput';
 import { ISpikeModel, transrateSpikeEntityToModel } from '~/store/model/spike';
 
@@ -18,31 +19,31 @@ import { EventCode } from '~/types/shoes/shoeEvents';
 })
 export default class Spikes extends VuexModule {
   private _spikes: ISpikeModel[] = [];
-  private _searchFormValue: ISpikesSearchFormValue =
-    _createDefaultSearchFormValue();
+  private _searchFormInputs: ISpikesSearchFormInputs =
+    createDefaultSearchFormValue();
 
   get spikes(): ISpikeModel[] {
     return this._spikes;
   }
 
-  get searchFormValue(): ISpikesSearchFormValue {
-    return this._searchFormValue;
+  get searchFormInputs(): ISpikesSearchFormInputs {
+    return this._searchFormInputs;
   }
 
   @Mutation private setSpikes(val: ISpikeModel[]) {
     this._spikes = val;
   }
 
-  @Mutation private setSearchFormValue(val: ISpikesSearchFormValue) {
-    this._searchFormValue = val;
+  @Mutation private setSearchFormInputs(val: ISpikesSearchFormInputs) {
+    this._searchFormInputs = val;
   }
 
   @Action
-  public async search(formValue: ISpikesSearchFormValue = {}) {
+  public async search(formValue: ISpikesSearchFormInputs = {}) {
     await contentfulClient
-      .getEntries(createSearchInput(formValue))
+      .getEntries(createSearchParams(formValue))
       .then((items: any) => {
-        this.setSearchFormValue(formValue);
+        this.setSearchFormInputs(formValue);
         this.setSpikes(
           items.items.map((item: ISpikeShoes) =>
             transrateSpikeEntityToModel(item)
@@ -61,7 +62,7 @@ export default class Spikes extends VuexModule {
       .getEntries({
         content_type: 'spikeShoes',
         'fields.slug': slug
-      } as ISpikesSearchInput)
+      } as ISpikesSearchParams)
       .catch(() => {
         throw new Error('Spikes#getBySlug() faild');
       });
@@ -76,7 +77,7 @@ export default class Spikes extends VuexModule {
   ): Promise<ISpikeModel[]> {
     const entries: EntryCollection<ISpikeShoesFields> = await contentfulClient
       .getEntries(
-        createSearchInput(
+        createSearchParams(
           {
             limit: count
           },
@@ -97,28 +98,22 @@ export default class Spikes extends VuexModule {
     );
   }
 
+  // 新しい検索条件をセット
   @Action
-  public updateSearchFormValue(formValue: ISpikesSearchFormValue = {}) {
-    this.setSearchFormValue({
-      ..._createDefaultSearchFormValue(),
+  public updateSearchForm(formValue: Partial<ISpikesSearchFormInputs> = {}) {
+    this.setSearchFormInputs({
+      ...createDefaultSearchFormValue(),
       ...formValue
     });
   }
-}
 
-function _createDefaultSearchFormValue(): ISpikesSearchFormValue {
-  return {
-    events: [],
-    keyword: undefined,
-    brands: [],
-    level: [],
-    priceRange: [0, 50000],
-    pinRange: [0, 15],
-    forAllWeatherTrack: false,
-    forDirtTrack: false,
-    releaseYears: [],
-    lastModelOnly: true,
-    shoeLaceTypes: [],
-    colors: []
-  };
+  // 指定された項目のみ更新
+  @Action
+  public changeSearchFormValue(input: Partial<ISpikesSearchFormInputs>) {
+    input &&
+      this.setSearchFormInputs({
+        ...this.searchFormInputs,
+        ...input
+      });
+  }
 }

@@ -499,7 +499,13 @@ export class SpreadsheetUploader {
             updatedEntry.publish(),
             updatedArticleEntry.publish()
           ]);
+          return;
         }
+
+        await Promise.all([
+          updatedEntry.unpublish(),
+          updatedArticleEntry.unpublish()
+        ]);
       }
     );
 
@@ -850,7 +856,9 @@ export class SpreadsheetUploader {
     });
   }
 
-  private _generateEventsField(row: GoogleSpreadsheetRow): EventsAndEventCategoriesCode[] {
+  private _generateEventsField(
+    row: GoogleSpreadsheetRow
+  ): EventsAndEventCategoriesCode[] {
     return SPREADSHEET_EVENTS_NAMES.flatMap((eventName) => {
       if (row[eventName] === '⭕️' || row[eventName] === '◯') {
         switch (eventName) {
@@ -866,7 +874,9 @@ export class SpreadsheetUploader {
               shoeEventsAndEventCategories.shotPut.id
             ];
           default:
-            return shoeEventsAndEventCategories[eventName as EventCode]?.id || [];
+            return (
+              shoeEventsAndEventCategories[eventName as EventCode]?.id || []
+            );
         }
       }
 

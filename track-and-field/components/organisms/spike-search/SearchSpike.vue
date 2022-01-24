@@ -1,9 +1,10 @@
 <template>
   <div class="organisms-search-spike">
-    <aside>
+    <aside class="d-none d-md-flex">
       <SearchSpikeForm
         v-model="formValue"
         :show-search-button="false"
+        vertical
       ></SearchSpikeForm>
       <div class="fixed-search-button-container">
         <Button type="submit" full @click="search()">検索</Button>
@@ -11,6 +12,12 @@
     </aside>
     <div class="spike-list-container">
       <div class="spike-list-header">
+        <v-card class="d-flex d-md-none pa-6">
+          <SearchSpikeForm
+            v-model="formValue"
+            @search="search()"
+          ></SearchSpikeForm
+        ></v-card>
         <div
           class="
             spike-list-header-title
@@ -19,7 +26,7 @@
             justify-space-between
           "
         >
-          <h1>スパイク検索結果一覧</h1>
+          <h1 class="d-none d-sm-block">スパイク検索結果一覧</h1>
           <div class="d-flex align-center">
             <div style="width: 200px">
               <Select
@@ -90,8 +97,8 @@ export default defineComponent({
       clickItem: (val: ISpikeModel) => {
         router.push(`/search/${val.slug}`);
       },
-      changeOrder: (order: any) => {
-        spikesStore.changeSearchFormValue({order });
+      changeOrder: (order: IShoeSearchOrder) => {
+        spikesStore.changeSearchFormValue({ order });
         search();
       }
     };
@@ -136,6 +143,10 @@ export default defineComponent({
     background-color: #f9fafa;
 
     .spike-list-header {
+      > * + * {
+        margin-top: 16px;
+      }
+
       h1 {
         font-size: 1.25rem;
       }

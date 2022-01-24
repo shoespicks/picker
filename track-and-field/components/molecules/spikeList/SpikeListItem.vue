@@ -15,7 +15,7 @@
             <h3>{{ spike.name }}</h3>
             <p>{{ spike.nameEn }}</p>
           </v-card-title>
-          <v-img :src="selectedColor.imageUrls[0]"> </v-img>
+          <v-img :src="selectedColor.imageUrls[0]"></v-img>
           <ColorVariationsPicker
             v-if="selectedColor"
             v-model="selectedColor"
@@ -111,7 +111,7 @@ export default defineComponent({
   transition: transform 200ms ease;
 
   &:hover {
-    transform: scale(1.04);
+    transform: scale(1.01);
   }
 
   .molecules-spike-list-item-image-container {

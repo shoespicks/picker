@@ -8,13 +8,13 @@ export type ShoeBrandsCode =
   | 'newBalance'
   | 'nike';
 
-export interface IShoeBrandName extends ISelectItem {
+export interface IShoeBrand extends ISelectItem {
   id: ShoeBrandsCode;
   name: string;
   nameEn: string;
 }
 
-export const shoeBrands: { [key in ShoeBrandsCode]: IShoeBrandName } = {
+export const shoeBrands: { [key in ShoeBrandsCode]: IShoeBrand } = {
   adidas: {
     id: 'adidas',
     name: 'アディダス',

@@ -29,8 +29,8 @@
         </v-tab-item>
       </v-tabs-items>
       <template #sidenav>
-        <div class="sidenav-item">
-          <ul class="sidenav-buttons">
+        <div class="sidenav-item d-flex flex-column">
+          <ul class="sidenav-buttons flex-shrink-0">
             <li v-if="spike.amazonUrl">
               <Button
                 color="grey darken-2"
@@ -65,13 +65,15 @@
           </ul>
           <section
             v-if="spike.recommendItems && spike.recommendItems.length > 0"
-            class="sidenav-recommend-items-section"
+            class="sidenav-recommend-items-section flex-grow-1 d-flex flex-column"
           >
             <h4>似ているスパイク</h4>
-            <SimpleSpikeList
-              :spikes="spike.recommendItems"
-              vertical
-            ></SimpleSpikeList>
+            <div class="recommend-items-container flex-grow-1">
+              <SimpleSpikeList
+                :spikes="spike.recommendItems"
+                vertical
+              ></SimpleSpikeList>
+            </div>
           </section>
         </div>
       </template>
@@ -141,6 +143,8 @@ export default defineComponent({
 
   .sidenav-item {
     width: 200px;
+    height: calc(100vh - 200px);
+    overflow: hidden;
 
     > * + * {
       margin-top: 32px;
@@ -153,16 +157,16 @@ export default defineComponent({
     }
 
     > .sidenav-recommend-items-section {
+      overflow: hidden;
+
       h4 {
         + * {
           margin-top: 8px;
         }
       }
 
-      > ul {
-        > li {
-          margin-top: 8px;
-        }
+      .recommend-items-container {
+        overflow: auto;
       }
     }
   }

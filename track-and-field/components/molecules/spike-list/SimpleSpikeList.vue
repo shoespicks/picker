@@ -11,7 +11,6 @@
     >
       <router-link :to="`/search/${item.slug}`">
         <SimpleSpikeListItem
-          v-if="!vertical"
           :title="`${item.price.toLocaleString()}円（税込）`"
           :label="item.name"
           :caption="
@@ -23,12 +22,6 @@
           :image-width="180"
           vertical
           @click="clickItem(item)"
-        ></SimpleSpikeListItem>
-        <SimpleSpikeListItem
-          v-else
-          :label="item.name"
-          :image-url="item.colorVariations[0].imageUrls[0]"
-          :image-width="40"
         ></SimpleSpikeListItem>
       </router-link>
     </li>

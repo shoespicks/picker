@@ -36,7 +36,6 @@
       <v-col cols="7">
         <div class="data-view-container d-flex flex-column">
           <div class="data-view-strength flex-shrink-0">
-            <!--            <div class="strength-wrapper">-->
             <IconText
               v-if="spike.strength[0]"
               :icon="spike.strength[0].icon"
@@ -44,7 +43,6 @@
               :description="spike.strength[0].description"
               :icon-size="24"
             ></IconText>
-            <!--            </div>-->
           </div>
           <div class="data-view-rader flex-grow-1">
             <RadarChart
@@ -180,6 +178,7 @@ export default defineComponent({
       display: flex;
       align-items: center;
       justify-content: center;
+      max-height: 360px;
     }
   }
 

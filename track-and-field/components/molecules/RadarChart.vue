@@ -145,6 +145,8 @@ export default defineComponent({
 <style lang="scss" scoped>
 div {
   position: relative;
+  max-width: 100%;
+  max-height: 100%;
 
   > canvas {
     margin: -3rem -1.5rem;

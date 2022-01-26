@@ -91,8 +91,6 @@ export default defineComponent({
 
     // 動画より下にスクロールされたときにヘッダーが表示されるようにする
     const onHeroVideoIntersect = (entries: any) => {
-      console.log('aaad');
-      console.log(entries[0].intersectionRatio);
       visibleHeader.value = entries[0].intersectionRatio === 0;
     };
 

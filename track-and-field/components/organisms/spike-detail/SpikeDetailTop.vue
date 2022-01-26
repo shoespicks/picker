@@ -54,7 +54,7 @@
                 :icon="strength.icon"
                 :label="strength.label"
                 :description="strength.description"
-                :icon-size='24'
+                :icon-size="24"
               ></IconText>
             </li>
           </ul>
@@ -269,11 +269,12 @@ export default defineComponent({
     .spike-top-content-description-buy-actions {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
+      margin-left: -8px;
 
       > li {
-        + li {
-          margin-left: 8px;
-        }
+        margin-top: 8px;
+        margin-left: 8px;
       }
     }
   }

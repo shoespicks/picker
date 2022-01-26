@@ -5,6 +5,7 @@
       width: 100%;
       align-items: center;
       justify-content: space-between;
+      color: white;
     "
   >
     <v-spacer></v-spacer>
@@ -15,7 +16,10 @@
         alt="shoespicks"
       />
     </NuxtLink>
-    <KeywordSearchLauncher></KeywordSearchLauncher>
+    <KeywordSearchLauncher class="d-none d-sm-block"></KeywordSearchLauncher>
+    <NuxtLink to="/search">
+      <v-icon class="d-block d-sm-none" size="18" dark>fas fa-search</v-icon>
+    </NuxtLink>
   </div>
 </template>
 <script lang="ts">

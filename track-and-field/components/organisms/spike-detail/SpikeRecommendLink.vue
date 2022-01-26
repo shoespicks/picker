@@ -11,7 +11,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType } from '@nuxtjs/composition-api';
-import SimpleSpikeList from '~/components/molecules/spikeList/SimpleSpikeList.vue';
+import SimpleSpikeList from '~/components/molecules/spike-list/SimpleSpikeList.vue';
 import { ISpikeModel } from '~/store/model/spike';
 import { shoeBrands } from '~/types/shoes/shoeBrands';
 

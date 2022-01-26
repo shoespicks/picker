@@ -5,11 +5,7 @@
       :key="spike.id"
       class="molecules-spike-list-col"
       cols="12"
-      xs="12"
-      sm="12"
-      md="12"
       lg="6"
-      xl="4"
     >
       <SpikeListItem
         class="spike-list-item"
@@ -21,7 +17,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType } from '@nuxtjs/composition-api';
-import SpikeListItem from '~/components/molecules/spikeList/SpikeListItem.vue';
+import SpikeListItem from '~/components/molecules/spike-list/SpikeListItem.vue';
 import { ISpikeModel } from '~/store/model/spike';
 
 export default defineComponent({

@@ -86,7 +86,7 @@ import { defineComponent, PropType, ref } from '@nuxtjs/composition-api';
 import Button from '~/components/atoms/Button.vue';
 import Container from '~/components/atoms/Container.vue';
 import StickySidenavLayout from '~/components/molecules/layout/StickySidenavLayout.vue';
-import SimpleSpikeList from '~/components/molecules/spikeList/SimpleSpikeList.vue';
+import SimpleSpikeList from '~/components/molecules/spike-list/SimpleSpikeList.vue';
 import SpikeDetailTop from '~/components/organisms/spike-detail/SpikeDetailTop.vue';
 import SpikeRecommendLink from '~/components/organisms/spike-detail/SpikeRecommendLink.vue';
 import SpikeDetailIntroduction from '~/components/organisms/spike-detail/tab-content/SpikeDetailIntroduction.vue';

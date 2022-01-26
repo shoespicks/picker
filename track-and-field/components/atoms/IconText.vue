@@ -1,10 +1,16 @@
 <template>
-  <span class="atoms-icon-text">
-    <v-icon v-if="!right" :size="iconSize || size">{{ icon }}</v-icon>
-    <span :style="{ fontSize: size + 'px' }">
+  <span
+    class="atoms-icon-text d-inline-flex"
+    :class="{ 'align-center': !label || !description }"
+  >
+    <v-icon :size="iconSize || labelSize">{{ icon }}</v-icon>
+    <span v-if="label || description" class="text-container">
+      <span v-if="label">{{ label }}</span>
+      <small v-if="description">{{ description }}</small>
+    </span>
+    <span v-else :style="{ fontSize: labelSize + 'px' }">
       <slot></slot>
     </span>
-    <v-icon v-if="right" :size="iconSize || size">{{ icon }}</v-icon>
   </span>
 </template>
 <script lang="ts">
@@ -16,17 +22,26 @@ export default defineComponent({
       type: String,
       required: true
     },
-    // 数字か数字の文字列
-    size: {
-      type: [String, Number],
-      default: 16
+    label: {
+      type: String,
+      default: null
     },
-    // 数字か数字の文字列
+    description: {
+      type: String,
+      default: null
+    },
     iconSize: {
       type: [String, Number],
       default: null
     },
-    right: Boolean
+    labelSize: {
+      type: [String, Number],
+      default: 16
+    },
+    descriptionSize: {
+      type: [String, Number],
+      default: 12
+    }
   },
   setup() {
     const dialog = ref(false);
@@ -52,14 +67,31 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .atoms-icon-text {
-  display: inline-flex;
-  align-items: center;
+  align-items: flex-start;
 
   > * {
     display: inline-flex;
 
     + * {
-      margin-left: 0.3em;
+      margin-left: 0.5em;
+    }
+
+    + .text-container {
+      margin-left: 1em;
+    }
+  }
+
+  > .text-container {
+    display: inline-flex;
+    flex-direction: column;
+
+    > span {
+      font-weight: 500;
+
+      + small {
+        margin-top: 2px;
+        color: gray;
+      }
     }
   }
 }

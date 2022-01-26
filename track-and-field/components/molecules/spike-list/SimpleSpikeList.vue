@@ -36,7 +36,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType } from '@nuxtjs/composition-api';
-import SimpleSpikeListItem from '~/components/molecules/spikeList/SimpleSpikeListItem.vue';
+import SimpleSpikeListItem from '~/components/molecules/spike-list/SimpleSpikeListItem.vue';
 import { ISpikeModel } from '~/store/model/spike';
 import { shoeBrands } from '~/types/shoes/shoeBrands';
 

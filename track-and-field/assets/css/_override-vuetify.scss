@@ -30,4 +30,8 @@
   .v-window {
     overflow: visible;
   }
+
+  .v-card--link:focus:before {
+    opacity: 0;
+  }
 }

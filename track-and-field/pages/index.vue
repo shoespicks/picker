@@ -142,7 +142,7 @@ import Button from '~/components/atoms/Button.vue';
 import Container from '~/components/atoms/Container.vue';
 import NumberHeading from '~/components/atoms/NumberHeading.vue';
 import Select from '~/components/atoms/Select.vue';
-import SimpleSpikeList from '~/components/molecules/spikeList/SimpleSpikeList.vue';
+import SimpleSpikeList from '~/components/molecules/spike-list/SimpleSpikeList.vue';
 import { spikesStore } from '~/store';
 import { ISpikeModel } from '~/store/model/spike';
 import { athleteLevels, IAthleteLevel } from '~/types/shoes/athleteLevel';

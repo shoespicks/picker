@@ -58,7 +58,7 @@ import {
 } from '@nuxtjs/composition-api';
 import Button from '~/components/atoms/Button.vue';
 import Select from '~/components/atoms/Select.vue';
-import SpikeList from '~/components/molecules/spikeList/SpikeList.vue';
+import SpikeList from '~/components/molecules/spike-list/SpikeList.vue';
 import SearchSpikeForm from '~/components/organisms/spike-search/SearchSpikeForm.vue';
 import { spikesStore } from '~/store';
 import { ISpikesSearchFormInputs } from '~/store/model/searchSpikeInput';

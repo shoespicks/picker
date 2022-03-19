@@ -1,24 +1,6 @@
-// ISpikeShoesFieldsのeventsからコピー
-export type EventCode =
-  | '100m'
-  | '200m'
-  | '400m'
-  | '110mH'
-  | '400mH'
-  | '800m'
-  | '1500m'
-  | '3000m'
-  | '3000msc'
-  | '5000m'
-  | '10000m'
-  | 'highJump'
-  | 'longJump'
-  | 'poleVault'
-  | 'tripleJump'
-  | 'shotPut'
-  | 'discusThrow'
-  | 'hammerThrow'
-  | 'javelinThrow';
+import { ISpikeShoesFields } from '~/types/generated/contentful';
+
+export type EventCode = Exclude<ISpikeShoesFields['events'], undefined>[number];
 
 export type EventCategoryCode =
   | 'shortDistance'
@@ -30,9 +12,9 @@ export type EventCategoryCode =
 export type EventsAndEventCategoriesCode = EventCode | EventCategoryCode;
 
 export interface IEventItem {
-  id: EventsAndEventCategoriesCode;
-  label: string;
-  eventCodes: EventCode[];
+  readonly id: EventsAndEventCategoriesCode;
+  readonly label: string;
+  readonly eventCodes: EventCode[];
 }
 
 export const shoeEvents: {
@@ -138,17 +120,17 @@ export const shoeEvents: {
 export const shoeEventCategories: {
   [key in EventCategoryCode]: IEventItem;
 } = {
-  'shortDistance': {
+  shortDistance: {
     id: 'shortDistance',
     label: '短距離',
     eventCodes: ['100m', '200m', '400m', '110mH', '400mH']
   },
-  'middleDistance': {
+  middleDistance: {
     id: 'middleDistance',
     label: '中距離',
     eventCodes: ['800m', '1500m']
   },
-  'longDistance': {
+  longDistance: {
     id: 'longDistance',
     label: '長距離',
     eventCodes: ['3000m', '5000m', '10000m', '3000msc']
@@ -170,4 +152,4 @@ export const shoeEventsAndEventCategories: {
 } = {
   ...shoeEvents,
   ...shoeEventCategories
-};
+} as const;

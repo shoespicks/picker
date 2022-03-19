@@ -1,11 +1,11 @@
+import { ISpikeShoesFields } from '~/types/generated/contentful';
 import { ISelectItem } from '~/types/selectItem';
 
-// ISpikeShoesFieldsのbrandsからコピー
-export type ShoeLaceTypeCode = 'lace' | 'belt';
+export type ShoeLaceTypeCode = Exclude<ISpikeShoesFields['shoeLaceType'], undefined>[number];
 
 export interface IShoeLaceType extends ISelectItem {
-  id: ShoeLaceTypeCode;
-  label: string;
+  readonly id: ShoeLaceTypeCode;
+  readonly label: string;
 }
 
 export const shoeLaceTypes: { [key in ShoeLaceTypeCode]: IShoeLaceType } = {
@@ -17,4 +17,4 @@ export const shoeLaceTypes: { [key in ShoeLaceTypeCode]: IShoeLaceType } = {
     id: 'belt',
     label: 'ベルトあり'
   }
-};
+} as const;

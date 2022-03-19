@@ -1,5 +1,5 @@
 export interface ISelectItem {
-  id: string;
-  label?: string;
-  labelAlias?: string;
+  readonly id: string;
+  readonly label?: string;
+  readonly labelAlias?: string;
 }

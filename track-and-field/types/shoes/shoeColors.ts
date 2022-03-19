@@ -1,27 +1,14 @@
+import { ISpikeShoesFields } from '~/types/generated/contentful';
 import { ISelectItem } from '~/types/selectItem';
 
-// ISpikeShoesFieldsのcolorsからコピー
-export type shoeColorsCode =
-  | 'black'
-  | 'blue'
-  | 'gold'
-  | 'green'
-  | 'lightBlue'
-  | 'lightGreen'
-  | 'lightOrange'
-  | 'lightYellow'
-  | 'navy'
-  | 'orange'
-  | 'pink'
-  | 'red'
-  | 'silver'
-  | 'white'
-  | 'yellow'
-  | 'purple';
+export type shoeColorsCode = Exclude<
+  ISpikeShoesFields['colors'],
+  undefined
+>[number];
 
 export interface IShoeColor extends ISelectItem {
-  id: shoeColorsCode;
-  code: string;
+  readonly id: shoeColorsCode;
+  readonly code: string;
 }
 
 export const shoeColors: { [key in shoeColorsCode]: IShoeColor } = {
@@ -89,4 +76,4 @@ export const shoeColors: { [key in shoeColorsCode]: IShoeColor } = {
     id: 'purple',
     code: '#9754d7'
   }
-};
+} as const;

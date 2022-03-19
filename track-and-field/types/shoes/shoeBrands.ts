@@ -1,17 +1,12 @@
+import { ISpikeShoesFields } from '~/types/generated/contentful';
 import { ISelectItem } from '~/types/selectItem';
 
-// ISpikeShoesFieldsのbrandsからコピー
-export type ShoeBrandsCode =
-  | 'adidas'
-  | 'asics'
-  | 'mizuno'
-  | 'newBalance'
-  | 'nike';
+export type ShoeBrandsCode = Exclude<ISpikeShoesFields['brand'], undefined>;
 
 export interface IShoeBrand extends ISelectItem {
-  id: ShoeBrandsCode;
-  name: string;
-  nameEn: string;
+  readonly id: ShoeBrandsCode;
+  readonly name: string;
+  readonly nameEn: string;
 }
 
 export const shoeBrands: { [key in ShoeBrandsCode]: IShoeBrand } = {
@@ -40,4 +35,5 @@ export const shoeBrands: { [key in ShoeBrandsCode]: IShoeBrand } = {
     name: 'ナイキ',
     nameEn: 'Nike'
   }
-};
+} as const;
+

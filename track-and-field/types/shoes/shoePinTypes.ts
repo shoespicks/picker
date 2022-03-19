@@ -1,11 +1,11 @@
+import { ISpikeShoesFields } from '~/types/generated/contentful';
 import { ISelectItem } from '~/types/selectItem';
 
-// ISpikeShoesFieldsのpinTypeからコピー
-export type shoePinTypeCode = 'fixed' | 'removable';
+export type shoePinTypeCode =Exclude<ISpikeShoesFields['pinType'], undefined>[number];
 
 export interface IShoePinType extends ISelectItem {
-  id: shoePinTypeCode;
-  label: string;
+  readonly id: shoePinTypeCode;
+  readonly label: string;
 }
 
 export const shoePinType: { [key in shoePinTypeCode]: IShoePinType } = {
@@ -17,4 +17,4 @@ export const shoePinType: { [key in shoePinTypeCode]: IShoePinType } = {
     id: 'removable',
     label: '交換式'
   }
-};
+} as const;

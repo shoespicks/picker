@@ -1,7 +1,3 @@
-// AmplifyのデプロイWebhookURL
-export const AMPLIFY_UPLOAD_CONTENTS_WEBHOOK_URL_STAGING =
-  'https://webhooks.amplify.ap-northeast-1.amazonaws.com/prod/webhooks?id=65b9cc93-d75d-485f-9acb-53b85c9ea14e&token=PwKI0jMMMo0043zUocunPosDPDPUg21CSurKq4jQ34&operation=startbuild';
-
 // https://docs.google.com/spreadsheets/d/1C76UvztImMsTH1SlqnjetZOd9Je_1dQBUuF0yQHnJDE/edit#gid=532234525
 export type IconName =
   | 'hold-fit'

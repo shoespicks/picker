@@ -1,6 +1,8 @@
 import axios from 'axios';
-import { AMPLIFY_UPLOAD_CONTENTS_WEBHOOK_URL_STAGING } from '../upload-contents/constants';
 import { SpreadsheetUploader } from './upload-contents';
+
+const PICKER_AMPLIFY_DEPLOY_WEBHOOK_URL_STAGING =
+  process.env.PICKER_AMPLIFY_DEPLOY_WEBHOOK_URL_STAGING || '';
 
 // スプレッドシートの内容をContentfulのstaging
 const main = async () => {
@@ -10,7 +12,7 @@ const main = async () => {
   await uploader.uploadContents();
 
   // 最後に、stagingをデプロイする
-  await axios.post(AMPLIFY_UPLOAD_CONTENTS_WEBHOOK_URL_STAGING, {}).then(() => {
+  await axios.post(PICKER_AMPLIFY_DEPLOY_WEBHOOK_URL_STAGING, {}).then(() => {
     console.log('デプロイ開始♪');
   });
 };

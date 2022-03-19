@@ -6,7 +6,7 @@ import { GoogleSpreadsheet, GoogleSpreadsheetRow } from 'google-spreadsheet';
 import { drive_v3, google } from 'googleapis';
 import { isString } from 'lodash';
 import sharp from 'sharp';
-import { IconName, icons } from '../upload-contents/constants';
+import { IconName, icons } from '../upload-contents/icons';
 import {
   EventsAndEventCategoriesCode,
   EventCode,

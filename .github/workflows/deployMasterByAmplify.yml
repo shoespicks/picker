@@ -1,6 +1,8 @@
 # スプレッドシートの情報をContentfulにアップロード
 name: deployMasterByAmplify
 on: [workflow_dispatch]
+env:
+  PICKER_AMPLIFY_DEPLOY_WEBHOOK_URL_MASTER: ${{secrets.PICKER_AMPLIFY_DEPLOY_WEBHOOK_URL_MASTER}}
 jobs:
   build:
     runs-on: ubuntu-latest

@@ -64,7 +64,11 @@ export default {
   css: ['@fortawesome/fontawesome-free/css/all.css', '~/assets/css/main.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/contentful', '~/plugins/repository'],
+  plugins: [
+    '~/plugins/contentful',
+    '~/plugins/amplify',
+    '~/plugins/repository'
+  ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -154,8 +158,9 @@ export default {
     port: 3200
   },
   env: {
+    ENV: process.env.NODE_ENV,
     // NODE_ENVはamplyfyのデプロイ時に入る環境変数値
-    contentfulEnviroment:
+    CONTENTFUL_ENVIROMENT:
       process.env.NODE_ENV === 'prod' ? 'master' : 'staging',
     PICKER_CONTENTFUL_SPACE_ID: process.env.PICKER_CONTENTFUL_SPACE_ID,
     PICKER_CONTENTFUL_ACCESS_TOKEN: process.env.PICKER_CONTENTFUL_ACCESS_TOKEN

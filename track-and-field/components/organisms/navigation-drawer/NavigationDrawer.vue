@@ -25,11 +25,10 @@
 </template>
 <script lang="ts">
 import { computed, defineComponent } from '@nuxtjs/composition-api';
-import Button from '~/components/atoms/Button.vue';
 import LoginLauncher from '~/components/organisms/login/LoginLauncher.vue';
 
 export default defineComponent({
-  components: { LoginLauncher, Button },
+  components: { LoginLauncher },
   model: {
     prop: 'value',
     event: 'change'

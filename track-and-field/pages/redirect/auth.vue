@@ -4,10 +4,19 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from '@nuxtjs/composition-api';
+import { authStore } from '~/store';
 
 export default defineComponent({
   setup() {
-    onMounted(() => {});
+    onMounted(async () => {
+      console.log('1回目');
+      await authStore.fetchLoginUser();
+
+      setTimeout(async () => {
+        console.log('2回目');
+        await authStore.fetchLoginUser();
+      }, 5000);
+    });
   }
 });
 </script>

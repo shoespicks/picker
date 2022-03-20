@@ -9,7 +9,8 @@ import { Auth, Hub } from 'aws-amplify';
 export class AuthRepository {
   async loginWithGoogle() {
     return await Auth.federatedSignIn({
-      provider: CognitoHostedUIIdentityProvider.Google
+      provider: CognitoHostedUIIdentityProvider.Google,
+      customState: 'googleLogin'
     }).then((t: ICredentials) => {
       console.log('loginWithGoogle');
       console.log(t);

@@ -4,13 +4,10 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from '@nuxtjs/composition-api';
-import { authStore } from '~/store';
 
 export default defineComponent({
   setup() {
-    onMounted(() => {
-      authStore.listenAuth();
-    });
+    onMounted(() => {});
   }
 });
 </script>

@@ -14,12 +14,13 @@ config.rawError = true;
 let spikesStore: Spikes;
 let authStore: Auth;
 
-function initialiseStores(store: Store<any>): void {
+function initializeStores(store: Store<any>): void {
   spikesStore = getModule(Spikes, store);
   authStore = getModule(Auth, store);
+  authStore.listenAuth();
 }
 
 export { spikesStore, authStore };
 
-const initializer = (store: Store<any>) => initialiseStores(store);
+const initializer = (store: Store<any>) => initializeStores(store);
 export const plugins = [initializer];

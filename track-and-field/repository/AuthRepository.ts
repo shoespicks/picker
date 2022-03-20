@@ -1,34 +1,63 @@
-import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
-// eslint-disable-next-line import/named
-import { ICredentials } from '@aws-amplify/core';
+import {
+  CognitoHostedUIIdentityProvider,
+  CognitoUser
+} from '@aws-amplify/auth';
+import { HubCallback } from '@aws-amplify/core/lib/Hub';
+import { ICredentials } from '@aws-amplify/core/lib/types';
 import { Auth, Hub } from 'aws-amplify';
 
 export class AuthRepository {
   async loginWithGoogle() {
-    await Auth.federatedSignIn({
+    return await Auth.federatedSignIn({
       provider: CognitoHostedUIIdentityProvider.Google
     }).then((t: ICredentials) => {
-      console.log('ふええ');
+      console.log('loginWithGoogle');
       console.log(t);
+      return t;
     });
   }
 
-  async listenAuth() {
-    Hub.listen('auth', await this.aa);
+  async signIn(id: string, password: string) {
+    return await Auth.signIn({ username: id, password }).then(
+      (t: ICredentials) => {
+        console.log('signIn');
+        console.log(t);
+        return t;
+      }
+    );
   }
 
-  private async aa(data: any) {
-    switch (data.payload.event) {
-      case 'signIn': {
-        // サインインイベントをフック
-        const cognitoUser = await Auth.currentAuthenticatedUser();
-        console.log(cognitoUser);
-        console.log(`signed in ... ${cognitoUser.username}`);
-        Hub.remove('auth', this.aa);
-        return cognitoUser;
+  async signUp(
+    username: string,
+    password: string,
+    email: string
+  ): Promise<any> {
+    return await Auth.signUp({
+      username,
+      password,
+      attributes: {
+        email
       }
-      default:
-        break;
-    }
+    }).then((t) => {
+      console.log('signUp');
+      console.log(t);
+      return t;
+    });
+  }
+
+  async confirmSignUp(id: string, verificationCode: string): Promise<boolean> {
+    return await Auth.confirmSignUp(id, verificationCode).then((t) => {
+      console.log('confirmSignUp');
+      console.log(t);
+      return t === 'SUCCESS';
+    });
+  }
+
+  currentAuthenticatedUser(): Promise<CognitoUser> {
+    return Auth.currentAuthenticatedUser();
+  }
+
+  listenAuth(callback: HubCallback) {
+    Hub.listen('auth', callback, 'listenAuth');
   }
 }

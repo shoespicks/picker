@@ -20,6 +20,42 @@
         </v-card-title>
         <v-divider></v-divider>
         <div class="login-content">
+          新規
+          <v-form v-if="!isConfirming">
+            <div>
+              <TextInput v-model="id" placeholder="ユーザ名"></TextInput>
+              {{ id }}
+              <TextInput
+                v-model="email"
+                class="mt-6"
+                placeholder="メールアドレス"
+              ></TextInput>
+              {{ email }}
+              <TextInput
+                v-model="password"
+                class="mt-6"
+                placeholder="パスワード"
+              ></TextInput>
+              {{ password }}
+              <Button class="mt-6" @click="signIn()">
+                メールアドレスでログイン
+              </Button>
+              <Button class="mt-6" @click="signUp()"> 新規登録 </Button>
+            </div>
+          </v-form>
+          <v-form v-else>
+            <div>
+              <p>ユーザ名：{{ id }}</p>
+              <TextInput
+                v-model="verificationCode"
+                class="mt-6"
+                placeholder="検証コード"
+              ></TextInput>
+              <Button class="mt-6" @click="confirmSignUp()">
+                検証コードを確認
+              </Button>
+            </div>
+          </v-form>
           <div class="d-flex justify-center pa-4">
             <Button @click="loginWithGoogle()">
               <v-icon size="18" left>fab fa-google</v-icon>
@@ -34,12 +70,18 @@
 <script lang="ts">
 import { defineComponent, ref } from '@nuxtjs/composition-api';
 import Button from '~/components/atoms/Button.vue';
+import TextInput from '~/components/atoms/TextInput.vue';
 import { authStore } from '~/store';
 
 export default defineComponent({
-  components: { Button },
+  components: { TextInput, Button },
   setup(_, context) {
     const dialog = ref(false);
+    const isConfirming = ref(false);
+    const id = ref('');
+    const email = ref('');
+    const password = ref('');
+    const verificationCode = ref('');
 
     const closeDialog = () => {
       dialog.value = false;
@@ -47,10 +89,66 @@ export default defineComponent({
 
     return {
       dialog,
+      isConfirming,
+      id,
+      email,
+      password,
+      verificationCode,
       existActivatorSlots: !!context.slots?.activator,
       loginWithGoogle: async () => {
-        await authStore.loginWithGoogle();
-        closeDialog();
+        await authStore
+          .loginWithGoogle()
+          .then((t) => {
+            console.log(t);
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      },
+      signIn: async () => {
+        await authStore
+          .signIn({ id: id.value, password: password.value })
+          .then((t) => {
+            console.log(t);
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      },
+      signUp: async () => {
+        await authStore
+          .signUp({
+            id: id.value,
+            email: email.value,
+            password: password.value
+          })
+          .then((t) => {
+            if (!t) {
+              return;
+            }
+            isConfirming.value = true;
+            console.log(t);
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      },
+      confirmSignUp: async () => {
+        await authStore
+          .confirmSignUp({
+            id: id.value,
+            verificationCode: verificationCode.value
+          })
+          .then((t) => {
+            if (!t) {
+              return;
+            }
+
+            console.log(t);
+          })
+          .catch((e) => {
+            console.log(e);
+          });
       },
       closeDialog
     };

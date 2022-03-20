@@ -3,7 +3,7 @@
   "cognitoConfig": {
     "identityPoolName": "testAuthIdentityPool",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "pickerf684710b",
+    "resourceNameTruncated": "picker9395b33e",
     "userPoolName": "pickertrackandfield",
     "autoVerifiedAttributes": [
       "email"
@@ -25,15 +25,12 @@
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "pickerf684710b_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "picker9395b33e_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "f684710b",
+    "sharedId": "9395b33e",
     "resourceName": "pickertrackandfield",
     "authSelections": "identityPoolAndUserPool",
     "serviceName": "Cognito",
-    "usernameAttributes": [
-      "email"
-    ],
     "useDefault": "manual",
     "userPoolGroups": false,
     "userPoolGroupList": [],
@@ -41,27 +38,13 @@
     "thirdPartyAuth": false,
     "authProviders": [],
     "hostedUI": true,
-    "usernameCaseSensitive": false,
-    "useEnabledMfas": true,
-    "authRoleArn": {
-      "Fn::GetAtt": [
-        "AuthRole",
-        "Arn"
-      ]
-    },
-    "unauthRoleArn": {
-      "Fn::GetAtt": [
-        "UnauthRole",
-        "Arn"
-      ]
-    },
-    "breakCircularDependency": true,
-    "dependsOn": [],
-    "hostedUIDomainName": "d637r8mcfbwy",
+    "hostedUIDomainName": "mj19yzentik5",
     "authProvidersUserPool": [
       "Google"
     ],
     "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid profile\",\"AttributeMapping\":{\"username\":\"sub\"}}]",
-    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://stg.pick-er.com/track-and-field/redirect/auth\",\"http://localhost:3200/redirect/auth\"],\"LogoutURLs\":[\"https://stg.pick-er.com/track-and-field/redirect/auth\",\"http://localhost:3200/redirect/auth\"]}"
+    "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"https://stg.pick-er.com/track-and-field/redirect/auth\",\"http://localhost:3200/redirect/auth\"],\"LogoutURLs\":[\"https://stg.pick-er.com/track-and-field/redirect/auth\",\"http://localhost:3200/redirect/auth\"]}",
+    "usernameCaseSensitive": false,
+    "useEnabledMfas": true
   }
 }

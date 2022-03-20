@@ -10,11 +10,11 @@ export default defineComponent({
   setup() {
     onMounted(async () => {
       console.log('1回目');
-      await authStore.fetchLoginUser();
+      await authStore.fetchLoginUser().then();
 
-      setTimeout(async () => {
+      setTimeout(() => {
         console.log('2回目');
-        await authStore.fetchLoginUser();
+        authStore.fetchLoginUser().then();
       }, 5000);
     });
   }

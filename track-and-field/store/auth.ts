@@ -75,10 +75,15 @@ export default class Auth extends VuexModule {
 
   @Action
   fetchLoginUser() {
-    return $authRepository.currentAuthenticatedUser().then((user) => {
-      console.log(user);
-      return user;
-    });
+    return $authRepository
+      .currentAuthenticatedUser()
+      .then((user) => {
+        console.log(user);
+        return user;
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   }
 
   @Action

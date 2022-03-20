@@ -4,7 +4,6 @@
       <template #activator="{ on, attrs }">
         <slot name="activator" v-bind="{ on, attrs }"></slot>
       </template>
-
       <v-card>
         <v-card-title>
           種目絞り込み

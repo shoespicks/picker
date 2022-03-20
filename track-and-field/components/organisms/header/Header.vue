@@ -1,6 +1,6 @@
 <template>
   <v-app-bar :value="visible" app fixed :height="height" color="#000000" dense>
-    <HeaderContetnt></HeaderContetnt>
+    <HeaderContetnt @clickHumberger="clickHumberger($event)"></HeaderContetnt>
   </v-app-bar>
 </template>
 <script lang="ts">
@@ -13,7 +13,13 @@ export default defineComponent({
     visible: { type: Boolean, default: true },
     height: { type: Number, default: null }
   },
-  setup() {}
+  setup(_, context) {
+    return {
+      clickHumberger: (e: Event) => {
+        context.emit('clickHumberger', e);
+      }
+    };
+  }
 });
 </script>
 <style lang="scss" scoped></style>

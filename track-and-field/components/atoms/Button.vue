@@ -69,4 +69,8 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.v-btn {
+  text-transform: none;
+}
+</style>

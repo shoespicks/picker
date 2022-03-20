@@ -1,9 +1,10 @@
 <template>
   <v-app app>
-    <Header :visible="visibleHeader"></Header>
+    <Header :visible="visibleHeader" @clickHumberger="toggleDrawer()"></Header>
     <div v-if="!visibleHeader" class="fixed-header-content">
-      <HeaderContetnt></HeaderContetnt>
+      <HeaderContetnt @clickHumberger="toggleDrawer()"></HeaderContetnt>
     </div>
+    <NavigationDrawer v-model="drawerOpen"></NavigationDrawer>
     <div v-intersect="onHeroVideoIntersect" class="hero-video-container">
       <video
         class="hero-video"
@@ -51,9 +52,10 @@
                         width="100"
                         elevation="1"
                         rounded
-                        ><v-icon size="18" left>fas fa-search</v-icon
-                        >探す</Button
                       >
+                        <v-icon size="18" left>fas fa-search</v-icon>
+                        探す
+                      </Button>
                     </template>
                   </v-text-field>
                 </div>
@@ -73,6 +75,7 @@
 import { defineComponent, ref } from '@nuxtjs/composition-api';
 import Button from '~/components/atoms/Button.vue';
 import HeaderContetnt from '~/components/organisms/header/HeaderContetnt.vue';
+import NavigationDrawer from '~/components/organisms/navigation-drawer/NavigationDrawer.vue';
 import EventSearchLauncher from '~/components/organisms/search-launcher/EventSearchLauncher.vue';
 import Footer from '~/components/organisms/Footer.vue';
 import Header from '~/components/organisms/header/Header.vue';
@@ -80,6 +83,7 @@ import Header from '~/components/organisms/header/Header.vue';
 export default defineComponent({
   name: 'TopLayout',
   components: {
+    NavigationDrawer,
     HeaderContetnt,
     Button,
     EventSearchLauncher,
@@ -88,6 +92,7 @@ export default defineComponent({
   },
   setup() {
     const visibleHeader = ref(false);
+    const drawerOpen = ref(false);
 
     // 動画より下にスクロールされたときにヘッダーが表示されるようにする
     const onHeroVideoIntersect = (entries: any) => {
@@ -96,7 +101,11 @@ export default defineComponent({
 
     return {
       visibleHeader,
-      onHeroVideoIntersect
+      drawerOpen,
+      onHeroVideoIntersect,
+      toggleDrawer: () => {
+        drawerOpen.value = !drawerOpen.value;
+      }
     };
   }
 });

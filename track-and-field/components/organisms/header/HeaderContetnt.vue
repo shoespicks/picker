@@ -8,6 +8,16 @@
       color: white;
     "
   >
+    <Button
+      color="white"
+      height="40"
+      width="40"
+      icon
+      dark
+      @click="clickHumberger($event)"
+    >
+      <v-icon size="18" dark>fas fa-bars</v-icon>
+    </Button>
     <v-spacer></v-spacer>
     <NuxtLink class="header-logo" to="/">
       <img
@@ -18,17 +28,34 @@
     </NuxtLink>
     <KeywordSearchLauncher class="d-none d-sm-block"></KeywordSearchLauncher>
     <NuxtLink to="/search">
-      <v-icon class="d-block d-sm-none" size="18" dark>fas fa-search</v-icon>
+      <Button
+        class="d-block d-sm-none"
+        color="white"
+        height="40"
+        width="40"
+        icon
+        dark
+        small
+      >
+        <v-icon size="18" dark>fas fa-search</v-icon>
+      </Button>
     </NuxtLink>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from '@nuxtjs/composition-api';
+import Button from '~/components/atoms/Button.vue';
 import KeywordSearchLauncher from '~/components/organisms/search-launcher/KeywordSearchLauncher.vue';
 
 export default defineComponent({
-  components: { KeywordSearchLauncher },
-  setup() {}
+  components: { Button, KeywordSearchLauncher },
+  setup(_, context) {
+    return {
+      clickHumberger: (e: Event) => {
+        context.emit('clickHumberger', e);
+      }
+    };
+  }
 });
 </script>
 <style lang="scss" scoped>

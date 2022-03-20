@@ -3,10 +3,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api';
+import { defineComponent, onMounted } from '@nuxtjs/composition-api';
+import { authStore } from '~/store';
 
 export default defineComponent({
-  setup() {}
+  setup() {
+    onMounted(() => {
+      authStore.listenAuth();
+    });
+  }
 });
 </script>
 <style lang="scss" scoped></style>

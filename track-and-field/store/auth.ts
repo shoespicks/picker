@@ -29,6 +29,14 @@ export default class Auth extends VuexModule {
 
   @Action
   async loginWithGoogle() {
-    await $authRepository.loginWithGoogle()
+    await $authRepository.loginWithGoogle();
+  }
+
+  @Action
+  async listenAuth() {
+    await $authRepository.listenAuth().then((user) => {
+      console.log('届いたよ♪');
+      console.log(user);
+    });
   }
 }

@@ -5,14 +5,16 @@ import { Auth, Hub } from 'aws-amplify';
 
 export class AuthRepository {
   async loginWithGoogle() {
-    Hub.listen('auth', await this.aa);
-
     await Auth.federatedSignIn({
       provider: CognitoHostedUIIdentityProvider.Google
     }).then((t: ICredentials) => {
       console.log('ふええ');
       console.log(t);
     });
+  }
+
+  async listenAuth() {
+    Hub.listen('auth', await this.aa);
   }
 
   private async aa(data: any) {
@@ -23,7 +25,7 @@ export class AuthRepository {
         console.log(cognitoUser);
         console.log(`signed in ... ${cognitoUser.username}`);
         Hub.remove('auth', this.aa);
-        break;
+        return cognitoUser;
       }
       default:
         break;

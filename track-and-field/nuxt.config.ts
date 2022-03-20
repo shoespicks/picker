@@ -19,16 +19,32 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'データでカンタン比較 陸上選手のためのスパイク検索サイト' },
-      { hid: 'og:site_name', property: 'og:site_name', content: 'PICKER for Track and Field' },
+      {
+        hid: 'description',
+        name: 'description',
+        content: 'データでカンタン比較 陸上選手のためのスパイク検索サイト'
+      },
+      {
+        hid: 'og:site_name',
+        property: 'og:site_name',
+        content: 'PICKER for Track and Field'
+      },
       { hid: 'og:type', property: 'og:type', content: 'website' },
-      { hid: 'og:title', property: 'og:title', content: 'PICKER for Track and Field' },
+      {
+        hid: 'og:title',
+        property: 'og:title',
+        content: 'PICKER for Track and Field'
+      },
       {
         hid: 'og:description',
         property: 'og:description',
         content: 'データでカンタン比較 陸上選手のためのスパイク検索サイト'
       },
-      { hid: 'og:image', property: 'og:image', content: '/images/top/heroImage.jpg' },
+      {
+        hid: 'og:image',
+        property: 'og:image',
+        content: '/images/top/heroImage.jpg'
+      },
       { name: 'twitter:card', content: 'summary' }
     ],
     link: [
@@ -48,7 +64,7 @@ export default {
   css: ['@fortawesome/fontawesome-free/css/all.css', '~/assets/css/main.scss'],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ['~/plugins/contentful'],
+  plugins: ['~/plugins/contentful', '~/plugins/repository'],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,

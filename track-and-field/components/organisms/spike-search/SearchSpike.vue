@@ -16,8 +16,8 @@
           <SearchSpikeForm
             v-model="formValue"
             @search="search()"
-          ></SearchSpikeForm
-        ></v-card>
+          ></SearchSpikeForm>
+        </v-card>
         <div
           class="
             spike-list-header-title
@@ -54,7 +54,9 @@ import {
   computed,
   defineComponent,
   onMounted,
-  useRouter
+  ref,
+  useRouter,
+  watch
 } from '@nuxtjs/composition-api';
 import Button from '~/components/atoms/Button.vue';
 import Select from '~/components/atoms/Select.vue';
@@ -74,19 +76,31 @@ export default defineComponent({
   setup() {
     const router = useRouter();
 
-    const formValue = computed({
-      get: () => spikesStore.searchFormInputs,
-      set: (val: ISpikesSearchFormInputs) => {
-        spikesStore.updateSearchForm(val);
+    // const formValue = computed({
+    //   get: () => spikesStore.searchFormInputs,
+    //   set: (val: ISpikesSearchFormInputs) => {
+    //     spikesStore.search(val);
+    //   }
+    // });
+
+    const formValue = ref<ISpikesSearchFormInputs>(
+      spikesStore.searchFormInputs
+    );
+
+    watch(
+      () => spikesStore.searchFormInputs,
+      () => {
+        formValue.value = spikesStore.searchFormInputs;
       }
-    });
+    );
 
     const search = () => {
       spikesStore.search(formValue.value);
     };
 
     onMounted(() => {
-      search();
+      if (!spikesStore.searchLoading && spikesStore.spikes?.length === 0)
+        search();
     });
 
     return {
@@ -98,8 +112,7 @@ export default defineComponent({
         router.push(`/search/${val.slug}`);
       },
       changeOrder: (order: IShoeSearchOrder) => {
-        spikesStore.changeSearchFormValue({ order });
-        search();
+        spikesStore.changeOrder(order);
       }
     };
   }

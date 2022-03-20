@@ -41,7 +41,7 @@ export default defineComponent({
 
     useFetch(async () => {
       spike.value =
-        (await spikesStore.getBySlug(`${route.value.params.spikeId}`)) ||
+        (await spikesStore.findBySlug(`${route.value.params.spikeId}`)) ||
         undefined;
 
       spike.value?.name &&

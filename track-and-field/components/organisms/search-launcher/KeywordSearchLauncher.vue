@@ -27,7 +27,7 @@ export default defineComponent({
     const keyword = ref<string>('');
 
     const search = () => {
-      spikesStore.updateSearchForm({
+      spikesStore.search({
         keyword: keyword.value
       });
       router.push('/search');

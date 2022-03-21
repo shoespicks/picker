@@ -17,7 +17,6 @@ let authStore: Auth;
 function initializeStores(store: Store<any>): void {
   spikesStore = getModule(Spikes, store);
   authStore = getModule(Auth, store);
-  authStore.listenAuth();
 }
 
 export { spikesStore, authStore };

@@ -66,8 +66,8 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     '~/plugins/contentful',
-    '~/plugins/amplify',
-    '~/plugins/repository'
+    '~/plugins/repository',
+    { src: '~/plugins/amplify', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -132,7 +132,8 @@ export default {
   },
 
   router: {
-    base: '/track-and-field/'
+    base: '/track-and-field/',
+    middleware: []
   },
 
   generate: {

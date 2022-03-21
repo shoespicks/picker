@@ -58,6 +58,15 @@ export class AuthRepository {
   }
 
   listenAuth(callback: HubCallback) {
-    Hub.listen('auth', callback);
+    // Hub.listen('auth', callback);
+    Hub.listen('auth', ({ payload: { event, data } }) => {
+      if (event === 'signIn') {
+        Auth.currentAuthenticatedUser()
+          .then(user => {
+            console.log(user);
+          })
+          .catch(e => {console.log(e)});
+      }
+    });
   }
 }

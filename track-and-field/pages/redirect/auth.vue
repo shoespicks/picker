@@ -9,6 +9,8 @@ import { authStore } from '~/store';
 export default defineComponent({
   setup() {
     onMounted(async () => {
+      authStore.listenAuth();
+
       console.log('1回目');
       await authStore.fetchLoginUser().then();
 

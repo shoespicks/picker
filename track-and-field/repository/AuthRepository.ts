@@ -24,6 +24,24 @@ export class AuthRepository {
     });
   }
 
+  async loginWithLine() {
+    return await Auth.federatedSignIn({
+      provider: 'LINE'
+    }).then((t: any) => {
+      console.log('loginWithLine');
+
+      this.currentAuthenticatedUser()
+        .then((user) => {
+          console.log(user);
+          return user;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+      return t;
+    });
+  }
+
   async signIn(id: string, password: string) {
     return await Auth.signIn({ username: id, password }).then(
       (t: ICredentials) => {

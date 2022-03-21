@@ -61,6 +61,10 @@
               <v-icon size="18" left>fab fa-google</v-icon>
               Login with Google
             </Button>
+            <Button class="mt-4" @click="loginWithLine()">
+              <v-icon size="18" left>fab fa-line</v-icon>
+              Login with Line
+            </Button>
           </div>
         </div>
       </v-card>
@@ -100,6 +104,16 @@ export default defineComponent({
       loginWithGoogle: async () => {
         await authStore
           .loginWithGoogle()
+          .then((t) => {
+            console.log(t);
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      },
+      loginWithLine: async () => {
+        await authStore
+          .loginWithLine()
           .then((t) => {
             console.log(t);
           })

@@ -35,6 +35,11 @@ export default class Auth extends VuexModule {
   }
 
   @Action
+  async loginWithLine() {
+    return await $authRepository.loginWithLine();
+  }
+
+  @Action
   async signIn(input: ISignInInput) {
     if (!input?.id || !input?.password) {
       return null;

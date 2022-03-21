@@ -1,8 +1,7 @@
 import { Amplify } from 'aws-amplify';
 import awsConfig from '../aws-exports';
 
-// const isLocalhost: boolean = process.env.ENV === 'local';
-const isLocalhost: boolean = false;
+const isLocalhost: boolean = process.env.ENV === 'local';
 
 const [redirectSignIn, localRedirectSignIn] =
   awsConfig.oauth.redirectSignIn.split(',');

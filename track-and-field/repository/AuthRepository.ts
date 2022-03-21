@@ -54,6 +54,39 @@ export class AuthRepository {
   }
 
   currentAuthenticatedUser(): Promise<CognitoUser> {
+    Auth.currentUserCredentials()
+      .then((user) => {
+        console.log(user);
+        return user;
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    Auth.currentCredentials()
+      .then((user) => {
+        console.log(user);
+        return user;
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    Auth.currentUserPoolUser()
+      .then((user) => {
+        console.log(user);
+        return user;
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+    Auth.currentSession()
+      .then((user) => {
+        console.log(user);
+        return user;
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
     return Auth.currentAuthenticatedUser();
   }
 

@@ -12,7 +12,17 @@ export class AuthRepository {
       provider: CognitoHostedUIIdentityProvider.Google
     }).then((t: ICredentials) => {
       console.log('loginWithGoogle');
+
       console.log(t);
+      this.listenAuth();
+      this.currentAuthenticatedUser()
+        .then((user) => {
+          console.log(user);
+          return user;
+        })
+        .catch((e) => {
+          console.log(e);
+        });
       return t;
     });
   }
@@ -22,7 +32,6 @@ export class AuthRepository {
       (t: ICredentials) => {
         console.log('signIn');
         console.log(t);
-        return t;
       }
     );
   }
@@ -57,15 +66,18 @@ export class AuthRepository {
     return Auth.currentAuthenticatedUser();
   }
 
-  listenAuth(callback: HubCallback) {
+  listenAuth(callback?: HubCallback) {
     // Hub.listen('auth', callback);
     Hub.listen('auth', ({ payload: { event, data } }) => {
+      console.log(event);
       if (event === 'signIn') {
         Auth.currentAuthenticatedUser()
-          .then(user => {
+          .then((user) => {
             console.log(user);
           })
-          .catch(e => {console.log(e)});
+          .catch((e) => {
+            console.log(e);
+          });
       }
     });
   }

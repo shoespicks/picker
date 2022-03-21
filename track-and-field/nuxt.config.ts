@@ -67,7 +67,8 @@ export default {
   plugins: [
     '~/plugins/contentful',
     '~/plugins/repository',
-    { src: '~/plugins/amplify', mode: 'client' }
+    '~/plugins/amplify',
+    { src: '~/plugins/authInit', mode: 'client' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

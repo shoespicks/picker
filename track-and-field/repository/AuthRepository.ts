@@ -2,9 +2,8 @@ import {
   CognitoHostedUIIdentityProvider,
   CognitoUser
 } from '@aws-amplify/auth';
-import { HubCallback } from '@aws-amplify/core/lib/Hub';
 import { ICredentials } from '@aws-amplify/core/lib/types';
-import { Auth, Hub } from 'aws-amplify';
+import { Auth } from 'aws-amplify';
 
 export class AuthRepository {
   async loginWithGoogle() {
@@ -13,8 +12,6 @@ export class AuthRepository {
     }).then((t: ICredentials) => {
       console.log('loginWithGoogle');
 
-      console.log(t);
-      this.listenAuth();
       this.currentAuthenticatedUser()
         .then((user) => {
           console.log(user);
@@ -32,6 +29,7 @@ export class AuthRepository {
       (t: ICredentials) => {
         console.log('signIn');
         console.log(t);
+        return t;
       }
     );
   }
@@ -62,23 +60,11 @@ export class AuthRepository {
     });
   }
 
-  currentAuthenticatedUser(): Promise<CognitoUser> {
-    return Auth.currentAuthenticatedUser();
+  async signOut(): Promise<boolean> {
+    return await Auth.signOut().then(() => true);
   }
 
-  listenAuth(callback?: HubCallback) {
-    // Hub.listen('auth', callback);
-    Hub.listen('auth', ({ payload: { event, data } }) => {
-      console.log(event);
-      if (event === 'signIn') {
-        Auth.currentAuthenticatedUser()
-          .then((user) => {
-            console.log(user);
-          })
-          .catch((e) => {
-            console.log(e);
-          });
-      }
-    });
+  currentAuthenticatedUser(): Promise<CognitoUser> {
+    return Auth.currentAuthenticatedUser();
   }
 }

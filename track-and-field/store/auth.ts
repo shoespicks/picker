@@ -18,15 +18,15 @@ config.rawError = true;
   namespaced: true
 })
 export default class Auth extends VuexModule {
-  private _loginUser?: User;
-
-  get loginUser(): User | undefined {
-    return this._loginUser;
-  }
+  private _loginUser: User | null = null;
 
   @Mutation
-  private setLoginUser(val: User) {
+  private setLoginUser(val: any) {
     this._loginUser = val;
+  }
+
+  get loginUser(): any | undefined {
+    return this._loginUser;
   }
 
   @Action
@@ -39,7 +39,11 @@ export default class Auth extends VuexModule {
     if (!input?.id || !input?.password) {
       return null;
     }
-    return await $authRepository.signIn(input.id, input?.password);
+    return await $authRepository
+      .signIn(input.id, input?.password)
+      .then((user) => {
+        return user;
+      });
   }
 
   @Action
@@ -63,13 +67,12 @@ export default class Auth extends VuexModule {
 
     return await $authRepository
       .confirmSignUp(input.id, input.verificationCode)
-      .then(async (complete) => {
+      .then((complete) => {
         if (!complete) {
           return;
         }
-        const user = await this.fetchLoginUser();
-        console.log(user);
-        return user;
+
+        return this.fetchLoginUser();
       });
   }
 
@@ -78,31 +81,26 @@ export default class Auth extends VuexModule {
     return $authRepository
       .currentAuthenticatedUser()
       .then((user) => {
-        console.log(user);
-        return user;
+        if (!user) {
+          this.setLoginUser(null);
+          console.log(this.loginUser);
+          return;
+        }
+
+        this.setLoginUser({ ...user });
+        console.log(this.loginUser);
       })
       .catch((e) => {
+        this.setLoginUser(null);
+        console.log(this.loginUser);
         console.log(e);
       });
   }
 
   @Action
-  listenAuth(): void {
-    $authRepository.listenAuth(this.listenAuthCallback);
-  }
-
-  @Action
-  listenAuthCallback(data: HubCapsule): void {
-    switch (data?.payload?.event) {
-      case 'signIn':
-      case 'cognitoHostedUI':
-        this.fetchLoginUser().then(() => {
-          console.log('signed in のウォッチのやつ♪');
-        });
-        break;
-      default:
-        console.log(data);
-        break;
-    }
+  signOut() {
+    $authRepository.signOut().catch((e) => {
+      console.log(e);
+    });
   }
 }

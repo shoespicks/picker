@@ -1,6 +1,6 @@
 <template>
   <div class="molecules-login-launcher">
-    <v-dialog v-model="dialog" width="1000">
+    <v-dialog v-if="!isLoggedIn" v-model="dialog" width="1000">
       <template #activator="{ on, attrs }">
         <slot name="activator" v-bind="{ on, attrs }"></slot>
         <Button
@@ -65,10 +65,11 @@
         </div>
       </v-card>
     </v-dialog>
+    <Button v-else width="180" @click="signOut($event)">ログアウト</Button>
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from '@nuxtjs/composition-api';
+import { computed, defineComponent, ref } from '@nuxtjs/composition-api';
 import Button from '~/components/atoms/Button.vue';
 import TextInput from '~/components/atoms/TextInput.vue';
 import { authStore } from '~/store';
@@ -88,6 +89,7 @@ export default defineComponent({
     };
 
     return {
+      isLoggedIn: computed(() => !!authStore.loginUser),
       dialog,
       isConfirming,
       id,
@@ -149,6 +151,12 @@ export default defineComponent({
           .catch((e) => {
             console.log(e);
           });
+      },
+      signOut: (e: Event) => {
+        e.preventDefault();
+        e.stopPropagation();
+        authStore.signOut();
+        closeDialog();
       },
       closeDialog
     };

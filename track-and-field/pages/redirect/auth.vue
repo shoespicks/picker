@@ -9,14 +9,12 @@ import { authStore } from '~/store';
 export default defineComponent({
   setup() {
     onMounted(async () => {
-      authStore.listenAuth();
-
       console.log('1回目');
-      await authStore.fetchLoginUser().then();
+      await authStore.fetchLoginUser();
 
       setTimeout(() => {
         console.log('2回目');
-        authStore.fetchLoginUser().then();
+        authStore.fetchLoginUser();
       }, 10000);
     });
   }

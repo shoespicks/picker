@@ -15,7 +15,7 @@ export default defineComponent({
       setTimeout(() => {
         console.log('2回目');
         authStore.fetchLoginUser().then();
-      }, 5000);
+      }, 10000);
     });
   }
 });

@@ -87,6 +87,15 @@ export class AuthRepository {
         console.log(e);
       });
 
+    Auth.currentUserInfo()
+      .then((user) => {
+        console.log(user);
+        return user;
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+
     return Auth.currentAuthenticatedUser();
   }
 

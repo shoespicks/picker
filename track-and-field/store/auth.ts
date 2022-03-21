@@ -95,6 +95,7 @@ export default class Auth extends VuexModule {
   listenAuthCallback(data: HubCapsule): void {
     switch (data?.payload?.event) {
       case 'signIn':
+      case 'cognitoHostedUI':
         this.fetchLoginUser().then(() => {
           console.log('signed in のウォッチのやつ♪');
         });

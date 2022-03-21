@@ -26,8 +26,8 @@ export class AuthRepository {
 
   async loginWithLine() {
     return await Auth.federatedSignIn({
-      provider: 'LINE'
-    }).then((t: any) => {
+      provider: 'Piker-Line-Stg'
+    } as any).then((t: any) => {
       console.log('loginWithLine');
 
       this.currentAuthenticatedUser()

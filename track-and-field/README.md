@@ -1,13 +1,15 @@
 # Picker for Track and Field
 
 ## 初回のみ
+
 ```
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+git -C /usr/local/Homebrew/Library/Taps/homebrew/homebrew-core fetch --unshallow
 brew update
 brew install nvm
+curl -sL https://aws-amplify.github.io/amplify-cli/install | bash && $SHELL
 ```
 
-以下を~/.zshrcにコピペ
+以下を~/.zshrc にコピペ
 
 ```
 nvmrc() {
@@ -43,17 +45,37 @@ alias npm='nvmrc && npm'
 alias yarn='nvmrc && yarn'
 ```
 
-以下のファイルの中身をコピペし、~/.zshenvの中身に貼り付け
-（.zshenvファイルがなかった場合、ファイルごと置いてもOK）
+以下のファイルの中身をコピペし、~/.zshenv の中身に貼り付け
+（.zshenv ファイルがなかった場合、ファイルごと置いても OK）
 https://drive.google.com/file/d/1aAdBYKBp6PELols2RopVaJv74CY-FmFU/view?usp=sharing
 
 ## Build Setup
 
 ```bash
-cd shoespicks
+cd track-and-field
+
+# 初回
+$ nvm install
+
+# 2回目から
+$ nvm use
 
 # install dependencies
 $ npm install
+
+# amplify用のコードを取得
+amplify pull --appId d6z6pv6b0acga --envName staging
+
+# ↑の途中の選択肢
+? Choose your default editor: Visual Studio Code
+? Choose the type of app that you are building javascript
+Please tell us about your project
+? What javascript framework are you using vue
+? Source Directory Path:  .
+? Distribution Directory Path: dist
+? Build Command:  npm run-script build
+? Start Command: npm run-script serve
+? Do you plan on modifying this backend? Yes
 
 # serve with hot reload at localhost:3000
 $ npm run dev

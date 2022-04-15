@@ -149,7 +149,8 @@ import { athleteLevels, IAthleteLevel } from '~/types/shoes/athleteLevel';
 import {
   IEventItem,
   shoeEventCategories,
-  shoeEvents
+  shoeEvents,
+  //competitiveness
 } from '~/types/shoes/shoeEvents';
 import {
   IShoeSearchOrder,
@@ -212,7 +213,11 @@ export default defineComponent({
       events: Object.values(shoeEvents),
       eventCategories: Object.values(shoeEventCategories),
       searchOrders: Object.values(shoeSearchOrders),
+      
+      //ゆーきここ直してみている
       levels: Object.values(athleteLevels),
+      //levels: Object.values(competitiveness),
+
       searchByFeatures: () => {
         featuresSearchValue.value.eventCategory &&
           spikesStore.search({

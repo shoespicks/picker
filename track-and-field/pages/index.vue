@@ -73,7 +73,7 @@
             <v-col cols="12" md="6">
               <div class="d-flex align-center flex-wrap">
                 <div class="flex-grow-1" style="width: 200px">
-                  <Select
+                  <Select 
                     v-model="levelSearchValue.level"
                     :items="levels"
                     :height="40"
@@ -97,6 +97,15 @@
                 ><v-icon size="18" left>fas fa-search</v-icon>探す</Button
               >
             </v-col>
+          </v-row>
+          <v-row>
+            <p v-if="levelSearchValue.event">
+              参考記録 <br>
+              初心者：{{(competitiveness[levelSearchValue.event.id]).beginner}} <br>
+              中級者：{{(competitiveness[levelSearchValue.event.id]).intermediate}} <br>
+              上級者：{{(competitiveness[levelSearchValue.event.id]).advanced}}<br>
+              エキスパート：{{(competitiveness[levelSearchValue.event.id]).professional}}
+            </p>
           </v-row>
         </div>
       </Container>
@@ -150,7 +159,8 @@ import {
   IEventItem,
   shoeEventCategories,
   shoeEvents,
-  //competitiveness
+  competitiveness,
+  ICompetitivenessItem
 } from '~/types/shoes/shoeEvents';
 import {
   IShoeSearchOrder,
@@ -217,6 +227,7 @@ export default defineComponent({
       //ゆーきここ直してみている
       levels: Object.values(athleteLevels),
       //levels: Object.values(competitiveness),
+      competitiveness,
 
       searchByFeatures: () => {
         featuresSearchValue.value.eventCategory &&

@@ -1,11 +1,12 @@
 import { ReactElement } from 'react';
+import { TAFTopTemplate } from 'features/track-and-field/top/TAFTopTemplate';
 import DefaultLayout from 'layout/default';
 import { NextPageWithLayout } from 'pages/_app';
 
 const Home: NextPageWithLayout = () => {
   return (
     <>
-      <p>index</p>
+      <TAFTopTemplate></TAFTopTemplate>
     </>
   );
 };

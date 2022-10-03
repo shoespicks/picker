@@ -2,7 +2,9 @@ import React, { type FC } from 'react';
 import Link from 'next/link';
 import { css } from '@emotion/css';
 import Image from 'next/future/image';
-import { Container } from 'component/atoms/container';
+import { Container } from 'component/atoms/Container';
+import { $colors } from 'shared/constants/styles/colors';
+import { $headerHeight } from 'shared/constants/styles/size';
 
 export const Header: FC = () => (
   <header className={styles.header}>
@@ -10,7 +12,7 @@ export const Header: FC = () => (
       <div className={styles.headerContent}>
         <Link href="/">
           <a>
-            <Image src="/images/logo/picker-text.svg" width={108} height={18} alt="picker" />
+            <Image src="/picker.svg" width={108} height={18} alt="picker" />
           </a>
         </Link>
       </div>
@@ -22,11 +24,12 @@ const styles = {
   header: css`
     position: sticky;
     top: 0;
+    z-index: 100;
     display: flex;
     align-items: center;
     width: 100%;
-    height: 50px;
-    background-color: black;
+    height: ${$headerHeight};
+    background-color: ${$colors.black};
   `,
   headerContent: css`
     display: flex;

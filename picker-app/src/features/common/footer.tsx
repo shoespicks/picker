@@ -32,7 +32,7 @@ export const Footer: FC = () => (
 const styles = {
   footer: css`
     width: 100%;
-    background-color: ${$colors.black};
+    background-color: ${$colors.main};
   `,
   footerContent: css`
     width: 100%;

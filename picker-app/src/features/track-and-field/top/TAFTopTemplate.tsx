@@ -2,15 +2,19 @@ import React, { type FC } from 'react';
 import { Container } from 'component/atoms/Container';
 import { Spacer } from 'component/atoms/Spacer';
 import { TAFTopHero } from 'features/track-and-field/top/TAFTopHero';
+import { TAFTopSearchLauncher } from 'features/track-and-field/top/TAFTopSearchLauncher';
+import { $spacing } from 'shared/constants/styles/spacing';
 
 export const TAFTopTemplate: FC = () => (
   <>
-    <Spacer size="24px" axis="vertical"></Spacer>
+    <Spacer size={$spacing.lg}></Spacer>
     <Container>
       <TAFTopHero></TAFTopHero>
     </Container>
+    <Spacer size={$spacing.xl}></Spacer>
     <Container>
-      <p>Template</p>
+      <TAFTopSearchLauncher></TAFTopSearchLauncher>
     </Container>
+    <Spacer size="176px"></Spacer>
   </>
 );

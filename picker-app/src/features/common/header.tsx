@@ -24,12 +24,12 @@ const styles = {
   header: css`
     position: sticky;
     top: 0;
-    z-index: 100;
+    z-index: 1;
     display: flex;
     align-items: center;
     width: 100%;
     height: ${$headerHeight};
-    background-color: ${$colors.black};
+    background-color: ${$colors.main};
   `,
   headerContent: css`
     display: flex;

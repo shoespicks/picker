@@ -7,7 +7,7 @@ type Props = {
   axis?: 'vertical' | 'horizontal';
 };
 
-export const Spacer: FC<PropsWithChildren<Props>> = ({ size, axis }) => {
+export const Spacer: FC<PropsWithChildren<Props>> = ({ size, axis = 'vertical' }) => {
   const width = axis === 'vertical' ? '100%' : size;
   const height = axis === 'horizontal' ? '100%' : size;
 

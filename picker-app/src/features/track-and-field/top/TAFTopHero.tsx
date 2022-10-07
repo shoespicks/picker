@@ -66,4 +66,10 @@ const styles = {
       width: 25%;
     }
   `,
+  searchWindow: css`
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    padding: 16px 32px;
+  `,
 };

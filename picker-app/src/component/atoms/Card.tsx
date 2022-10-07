@@ -1,13 +1,14 @@
 import React, { type FC, PropsWithChildren } from 'react';
 import { css, cx } from '@emotion/css';
 import { $colors } from 'shared/constants/styles/colors';
-import { Size, SizePx } from 'shared/types/style-props';
+import { Size } from 'shared/types/style-props';
 
 type Props = {
   width?: Size;
   maxWidth?: Size;
   height?: Size;
-  borderWidth?: SizePx;
+  borderWidthPx?: number;
+  paddingPx?: number;
   className?: string;
 };
 
@@ -16,7 +17,8 @@ export const Card: FC<PropsWithChildren<Props>> = ({
   width = '100%',
   maxWidth,
   height,
-  borderWidth = '1px',
+  borderWidthPx = 1,
+  paddingPx,
   className,
 }) => (
   <div
@@ -25,8 +27,9 @@ export const Card: FC<PropsWithChildren<Props>> = ({
         width: ${width};
         max-width: ${maxWidth};
         height: ${height};
-        background-color: ${$colors.white};
-        border: ${borderWidth} solid black;
+        padding: ${paddingPx}px;
+        background-color: ${$colors.background};
+        border: ${borderWidthPx}px solid black;
         border-radius: 8px;
       `,
       className

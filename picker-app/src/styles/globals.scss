@@ -1,4 +1,4 @@
-@use "./reset";
+@use './reset';
 
 html,
 body {
@@ -9,7 +9,6 @@ body {
 }
 
 a {
-  color: inherit;
   text-decoration: none;
+  color: inherit;
 }
-

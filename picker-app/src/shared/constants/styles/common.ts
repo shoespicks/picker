@@ -1,6 +1,6 @@
 import { css } from '@emotion/css';
 import { $colors } from 'shared/constants/styles/colors';
-import { Size } from 'shared/types/style-props';
+import { Size } from 'shared/constants/styles/size';
 
 export const $common = {
   truncate: css`

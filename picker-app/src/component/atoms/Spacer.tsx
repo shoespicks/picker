@@ -1,6 +1,6 @@
 import React, { type FC, PropsWithChildren } from 'react';
 import { css } from '@emotion/css';
-import { Size } from 'shared/types/style-props';
+import { Size } from 'shared/constants/styles/size';
 
 type Props = {
   size?: Size;

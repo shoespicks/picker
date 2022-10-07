@@ -1,4 +1,4 @@
-import { Size, SizeCode } from 'shared/types/style-props';
+import { Size, SizeCode } from 'shared/constants/styles/size';
 
 export const $spacing: { [key in SizeCode]: Size } = {
   xs: '4px',

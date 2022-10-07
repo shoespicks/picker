@@ -37,7 +37,7 @@ export const TAFTopSearchLauncher: FC = () => {
       <Section>
         <H3>フリーワードで探す: WIP</H3>
         <Spacer size={$spacing.md}></Spacer>
-        <InputButton buttonIcon={faSearch}></InputButton>
+        <InputButton buttonColor="primary" buttonIcon={faSearch}></InputButton>
       </Section>
       <Spacer size={$spacing['2xl']}></Spacer>
       <Section>

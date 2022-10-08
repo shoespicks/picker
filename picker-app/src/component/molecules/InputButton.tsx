@@ -1,5 +1,6 @@
 import React, { type FC, PropsWithChildren } from 'react';
 import { css, cx } from '@emotion/css';
+import { Theme, useTheme } from '@emotion/react';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { Button, ButtonColor } from 'component/atoms/Button';
 import { Input } from 'component/atoms/input/Input';
@@ -15,6 +16,7 @@ type Props = {
 
 export const InputButton: FC<PropsWithChildren<Props>> = ({ buttonColor, buttonIcon, buttonLabel, buttonWidth }) => {
   const iconOnly = !!buttonIcon && !buttonLabel;
+  const styles = getStyles(useTheme());
 
   return (
     <div className={styles.InputButtonContainer}>
@@ -30,14 +32,14 @@ export const InputButton: FC<PropsWithChildren<Props>> = ({ buttonColor, buttonI
   );
 };
 
-const styles = {
+const getStyles = (theme: Theme) => ({
   InputButtonContainer: cx(
     css`
       display: flex;
       align-items: center;
       border-radius: ${$inputBorderRadius};
     `,
-    setSolidShadow()
+    setSolidShadow(theme.border)
   ),
   Input: css`
     flex: 1 1 auto;
@@ -50,4 +52,4 @@ const styles = {
     border-left: 0;
     border-radius: 0 ${$inputBorderRadius} ${$inputBorderRadius} 0;
   `,
-};
+});

@@ -1,6 +1,6 @@
 import React, { type FC, PropsWithChildren } from 'react';
 import { css, cx } from '@emotion/css';
-import { $colors } from 'shared/constants/styles/colors';
+import { useTheme } from '@emotion/react';
 import { Size } from 'shared/constants/styles/size';
 
 type Props = {
@@ -20,21 +20,24 @@ export const Card: FC<PropsWithChildren<Props>> = ({
   borderWidthPx = 1,
   paddingPx,
   className,
-}) => (
-  <div
-    className={cx(
-      css`
-        width: ${width};
-        max-width: ${maxWidth};
-        height: ${height};
-        padding: ${paddingPx}px;
-        background-color: ${$colors.background};
-        border: ${borderWidthPx}px solid black;
-        border-radius: 8px;
-      `,
-      className
-    )}
-  >
-    {children}
-  </div>
-);
+}) => {
+  const theme = useTheme();
+  return (
+    <div
+      className={cx(
+        css`
+          width: ${width};
+          max-width: ${maxWidth};
+          height: ${height};
+          padding: ${paddingPx}px;
+          background-color: ${theme.background};
+          border: ${borderWidthPx}px solid black;
+          border-radius: 8px;
+        `,
+        className
+      )}
+    >
+      {children}
+    </div>
+  );
+};

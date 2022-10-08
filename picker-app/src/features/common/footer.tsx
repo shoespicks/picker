@@ -1,38 +1,43 @@
 import React, { type FC } from 'react';
 import Link from 'next/link';
 import { css } from '@emotion/css';
+import { Theme, useTheme } from '@emotion/react';
 import Image from 'next/future/image';
 import { Container } from 'component/atoms/Container';
 import { Spacer } from 'component/atoms/Spacer';
-import { $colors } from 'shared/constants/styles/colors';
 import { mediaGreaterThan } from 'shared/constants/styles/media-query';
 
-export const Footer: FC = () => (
-  <footer className={styles.footer}>
-    <Container>
-      <div className={styles.footerContent}>
-        <div>
-          <Link href="/">
-            <a className={styles.footerLogoFrame}>
-              <Image src="/picker.svg" fill alt="picker" />
-            </a>
-          </Link>
-        </div>
-        <Spacer size={'16px'} axis={'vertical'}></Spacer>
-        <div className={styles.footerSignature}>
-          <span className={styles.footerSignatureFrame}>
-            <Image src="/einja.svg" fill alt="picker" />
-          </span>
-        </div>
-      </div>
-    </Container>
-  </footer>
-);
+export const Footer: FC = () => {
+  const theme = useTheme();
+  const styles = getStyles(theme);
 
-const styles = {
+  return (
+    <footer className={styles.footer}>
+      <Container>
+        <div className={styles.footerContent}>
+          <div>
+            <Link href="/">
+              <a className={styles.footerLogoFrame}>
+                <Image src="/picker.svg" fill alt="picker" />
+              </a>
+            </Link>
+          </div>
+          <Spacer size={'16px'} axis={'vertical'}></Spacer>
+          <div className={styles.footerSignature}>
+            <span className={styles.footerSignatureFrame}>
+              <Image src="/einja.svg" fill alt="picker" />
+            </span>
+          </div>
+        </div>
+      </Container>
+    </footer>
+  );
+};
+
+const getStyles = (theme: Theme) => ({
   footer: css`
     width: 100%;
-    background-color: ${$colors.main};
+    background-color: ${theme.main};
   `,
   footerContent: css`
     width: 100%;
@@ -60,4 +65,4 @@ const styles = {
     width: 71px;
     height: 19px;
   `,
-};
+});

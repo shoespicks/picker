@@ -1,13 +1,13 @@
 import { css } from '@emotion/css';
-import { $colors, $typographyColors } from 'shared/constants/styles/colors';
+import { Theme } from '@emotion/react';
 
-export const $animation = {
+export const $behavior = {
   /**
    * ホバー時に黒背景が横から流れるアニメーション
    */
-  hoverSwipe: css`
+  hoverSwipe: (theme: Theme) => css`
     position: relative;
-    transition: color ease-in 200ms;
+    transition: color ease-in 100ms;
 
     &::after {
       position: absolute;
@@ -17,14 +17,14 @@ export const $animation = {
       width: 100%;
       height: 100%;
       content: '';
-      background-color: ${$colors.main};
+      background-color: ${theme.main};
       transition: transform ease-in-out 200ms;
       transform: scale(0, 1);
       transform-origin: left top;
     }
 
     &:hover {
-      color: ${$typographyColors.inverse};
+      color: ${theme.textInverse};
 
       &::after {
         transform: scale(1, 1);
@@ -34,10 +34,10 @@ export const $animation = {
 
     &:active {
       &:hover {
-        color: ${$typographyColors.default};
+        color: ${theme.textDefault};
 
         &::after {
-          background-color: ${$colors.background};
+          background-color: ${theme.background};
         }
       }
     }

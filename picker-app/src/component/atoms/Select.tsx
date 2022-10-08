@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { css } from '@emotion/css';
+import { css, cx } from '@emotion/css';
+import { Theme, useTheme } from '@emotion/react';
 import { faCirclePlus, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { Listbox as HeadlessSelect } from '@headlessui/react';
 import { Animation } from 'component/atoms/Animation';
 import { Icon } from 'component/atoms/Icon';
-import { $animation } from 'shared/constants/styles/animation';
-import { $colors, $typographyColors } from 'shared/constants/styles/colors';
+import { $behavior } from 'shared/constants/styles/behavior';
 import { $common, setSolidShadow } from 'shared/constants/styles/common';
 import { $spacing } from 'shared/constants/styles/spacing';
 
@@ -19,6 +19,8 @@ const people = [
 
 export const Select = () => {
   const [selected, setSelected] = useState(people[0]);
+  const theme = useTheme();
+  const styles = getStyles(theme);
 
   return (
     <HeadlessSelect value={selected} onChange={setSelected}>
@@ -36,7 +38,7 @@ export const Select = () => {
                     <Icon
                       icon={faCircleCheck}
                       className={css`
-                        color: ${selected ? $colors.main : $typographyColors.low};
+                        color: ${theme[selected ? 'main' : 'textLow']};
                         transition: color ease-in 200ms;
                       `}
                     />
@@ -52,30 +54,29 @@ export const Select = () => {
   );
 };
 
-const styles = {
+const getStyles = (theme: Theme) => ({
   selectContainer: css`
     position: relative;
   `,
-  selectTrigger: css`
-    display: inline-flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    height: 48px;
-    padding: 0 ${$spacing.md};
-    cursor: pointer;
-    border: 1px solid ${$colors.main};
-    border-radius: 2px;
+  selectTrigger: cx(
+    $behavior.hoverSwipe(theme),
+    css`
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 48px;
+      padding: 0 ${$spacing.md};
+      cursor: pointer;
+      border: 1px solid ${theme.border};
+      border-radius: 2px;
 
-    ${setSolidShadow()}
-    ${$animation.hoverSwipe}
-
-    transition: border-radius ease-in 200ms, transform ease-in-out 200ms;
-
-    &[data-headlessui-state='open'] {
-      border-radius: 2px 2px 0 0;
-    }
-  `,
+      &[data-headlessui-state='open'] {
+        border-radius: 2px 2px 0 0;
+      }
+    `,
+    setSolidShadow(theme.border)
+  ),
   selectTriggerText: css`
     ${$common.truncate}
   `,
@@ -83,11 +84,11 @@ const styles = {
     position: absolute;
     width: 100%;
     max-height: 400px;
-    background-color: ${$colors.background};
-    border: 1px solid ${$colors.main};
+    background-color: ${theme.background};
+    border: 1px solid ${theme.border};
     border-radius: 0 0 2px 2px;
 
-    ${setSolidShadow()}
+    ${setSolidShadow(theme.border)}
   `,
   selectOption: css`
     display: flex;
@@ -97,11 +98,11 @@ const styles = {
     cursor: pointer;
 
     & + & {
-      border-top: 1px solid ${$colors.lowDivider};
+      border-top: 1px solid ${theme.lowBorder};
     }
 
     &:hover {
-      background-color: ${$colors.backgroundHover};
+      background-color: ${theme.backgroundHover};
     }
 
     * + * {
@@ -111,4 +112,4 @@ const styles = {
   selectOptionLabel: css`
     ${$common.truncate}
   `,
-};
+});

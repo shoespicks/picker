@@ -3,8 +3,7 @@ import { css, cx } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { Icon } from 'component/atoms/Icon';
-import { $animation } from 'shared/constants/styles/animation';
-import { $colors } from 'shared/constants/styles/colors';
+import { $behavior } from 'shared/constants/styles/behavior';
 import { setSolidShadow } from 'shared/constants/styles/common';
 import { $inputDefaultHeight, Size } from 'shared/constants/styles/size';
 import { $spacing } from 'shared/constants/styles/spacing';
@@ -43,7 +42,7 @@ export const Button: FC<Props> = ({ color = 'default', icon, label, width, class
 const styles = {
   button: (theme: Theme) =>
     cx(
-      $animation.hoverSwipe,
+      $behavior.hoverSwipe(theme),
       css`
         display: inline-flex;
         align-items: center;
@@ -52,7 +51,7 @@ const styles = {
         padding: 0 ${$spacing.md};
         line-height: 1;
         cursor: pointer;
-        border: 1px solid ${$colors.main};
+        border: 1px solid ${theme.border};
         border-radius: 2px;
 
         > * {
@@ -67,6 +66,6 @@ const styles = {
           background-color: ${theme.primary};
         }
       `,
-      setSolidShadow()
+      setSolidShadow(theme.border)
     ),
 };

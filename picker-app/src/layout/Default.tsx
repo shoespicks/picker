@@ -1,17 +1,17 @@
-import { ReactElement } from 'react';
+import { PropsWithChildren } from 'react';
 import { css } from '@emotion/css';
-import { ThemeProvider } from '@emotion/react';
+import { Theme, ThemeProvider } from '@emotion/react';
 import { Footer } from 'features/common/footer';
 import { Header } from 'features/common/header';
-import { trackAndFieldTheme } from 'shared/constants/styles/colors';
+import { homeTheme } from 'shared/constants/styles/colors';
 
-type LayoutProps = Required<{
-  readonly children: ReactElement;
-}>;
+type Props = {
+  theme?: Theme;
+};
 
-const DefaultLayout = ({ children }: LayoutProps) => {
+const DefaultLayout = ({ children, theme = homeTheme }: PropsWithChildren<Props>) => {
   return (
-    <ThemeProvider theme={trackAndFieldTheme}>
+    <ThemeProvider theme={theme}>
       <div className={styles.mainContainer}>
         <Header />
         <main>{children}</main>

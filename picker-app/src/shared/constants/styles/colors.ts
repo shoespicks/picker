@@ -17,7 +17,7 @@ const $pallete = {
  */
 const themeBase = {
   main: $pallete.black,
-  primary: $pallete.white,
+  primary: $pallete.black,
   background: $pallete.white,
   backgroundHover: $pallete.blackClear,
   border: $pallete.black,
@@ -37,6 +37,8 @@ declare module '@emotion/react' {
     main: string; // interfaceは差分なしで拡張できないのでやむなく追加
   }
 }
+
+export const homeTheme: Theme = themeBase;
 
 export const trackAndFieldTheme: Theme = {
   ...themeBase,

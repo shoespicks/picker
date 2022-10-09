@@ -1,4 +1,4 @@
-import React, { type FC, PropsWithChildren } from 'react';
+import React, { type FC, MouseEventHandler, PropsWithChildren } from 'react';
 import { css, cx } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
@@ -12,9 +12,16 @@ type Props = {
   buttonIcon?: IconDefinition;
   buttonLabel?: string;
   buttonWidth?: Size;
+  onClick?: MouseEventHandler;
 };
 
-export const InputButton: FC<PropsWithChildren<Props>> = ({ buttonColor, buttonIcon, buttonLabel, buttonWidth }) => {
+export const InputButton: FC<PropsWithChildren<Props>> = ({
+  buttonColor,
+  buttonIcon,
+  buttonLabel,
+  buttonWidth,
+  onClick,
+}) => {
   const iconOnly = !!buttonIcon && !buttonLabel;
   const styles = getStyles(useTheme());
 
@@ -27,6 +34,7 @@ export const InputButton: FC<PropsWithChildren<Props>> = ({ buttonColor, buttonI
         label={buttonLabel}
         width={iconOnly ? $inputDefaultHeight : buttonWidth}
         className={styles.Button}
+        onClick={onClick}
       />
     </div>
   );

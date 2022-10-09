@@ -1,4 +1,5 @@
 import React, { type FC } from 'react';
+import { useRouter } from 'next/router';
 import { css } from '@emotion/css';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { A } from 'component/atoms/A';
@@ -9,11 +10,17 @@ import { Select } from 'component/atoms/Select';
 import { Spacer } from 'component/atoms/Spacer';
 import { H3 } from 'component/atoms/Typography';
 import { InputButton } from 'component/molecules/InputButton';
+import { TAF_SEACH_PAGE_PATH } from 'shared/constants/routing-path';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 export const TAFTopSearchLauncher: FC = () => {
+  const router = useRouter();
+  const keywordSearch = () => {
+    router.push(TAF_SEACH_PAGE_PATH).then();
+  };
+
   return (
-    <Card className={styles.searchLauncher} paddingPx={16}>
+    <Card className={styles.searchLauncher} padding={$spacing.md}>
       <Section>
         <H3>おすすめキーワード: WIP</H3>
         <Divider
@@ -37,7 +44,7 @@ export const TAFTopSearchLauncher: FC = () => {
       <Section>
         <H3>フリーワードで探す: WIP</H3>
         <Spacer size={$spacing.md}></Spacer>
-        <InputButton buttonColor="primary" buttonIcon={faSearch}></InputButton>
+        <InputButton buttonColor="primary" buttonIcon={faSearch} onClick={keywordSearch}></InputButton>
       </Section>
       <Spacer size={$spacing['2xl']}></Spacer>
       <Section>

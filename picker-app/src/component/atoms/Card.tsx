@@ -2,13 +2,16 @@ import React, { type FC, PropsWithChildren } from 'react';
 import { css, cx } from '@emotion/css';
 import { useTheme } from '@emotion/react';
 import { Size } from 'shared/constants/styles/size';
+import { $spacing } from 'shared/constants/styles/spacing';
 
 type Props = {
   width?: Size;
   maxWidth?: Size;
   height?: Size;
   borderWidthPx?: number;
-  paddingPx?: number;
+  padding?: Size;
+  headerElement?: JSX.Element;
+  footerElement?: JSX.Element;
   className?: string;
 };
 
@@ -18,7 +21,9 @@ export const Card: FC<PropsWithChildren<Props>> = ({
   maxWidth,
   height,
   borderWidthPx = 1,
-  paddingPx,
+  padding,
+  headerElement,
+  footerElement,
   className,
 }) => {
   const theme = useTheme();
@@ -29,7 +34,6 @@ export const Card: FC<PropsWithChildren<Props>> = ({
           width: ${width};
           max-width: ${maxWidth};
           height: ${height};
-          padding: ${paddingPx}px;
           background-color: ${theme.background};
           border: ${borderWidthPx}px solid black;
           border-radius: 8px;
@@ -37,7 +41,35 @@ export const Card: FC<PropsWithChildren<Props>> = ({
         className
       )}
     >
-      {children}
+      {headerElement && (
+        <div
+          className={css`
+            padding: ${$spacing.sm} ${$spacing.md};
+            border-bottom: 1px solid ${theme.border};
+          `}
+        >
+          {headerElement}
+        </div>
+      )}
+      <div
+        className={cx(
+          css`
+            width: 100%;
+            height: 100%;
+            padding: ${padding};
+          `
+        )}
+      >
+        {children}
+      </div>
+      <div
+        className={css`
+          padding: ${$spacing.sm} ${$spacing.md};
+          border-top: 1px solid ${theme.border};
+        `}
+      >
+        {footerElement}
+      </div>
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import React, { ComponentPropsWithoutRef, type FC } from 'react';
+import React, { ComponentPropsWithoutRef, type FC, MouseEventHandler } from 'react';
 import { css, cx } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
@@ -16,9 +16,10 @@ type Props = ComponentPropsWithoutRef<'button'> & {
   label?: string;
   width?: Size;
   className?: string;
+  onClick?: MouseEventHandler;
 };
 
-export const Button: FC<Props> = ({ color = 'default', icon, label, width, className, ...buttonProps }) => {
+export const Button: FC<Props> = ({ color = 'default', icon, label, width, className, onClick, ...buttonProps }) => {
   const theme: Theme = useTheme();
 
   return (
@@ -31,6 +32,7 @@ export const Button: FC<Props> = ({ color = 'default', icon, label, width, class
           width: ${width};
         `
       )}
+      onClick={onClick}
       data-color={color}
     >
       {!!icon && <Icon icon={icon} />}

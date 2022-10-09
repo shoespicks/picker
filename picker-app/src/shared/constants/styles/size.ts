@@ -8,3 +8,5 @@ export const $headerHeight: Size = '50px';
 export const $inputDefaultHeight: Size = '48px';
 
 export const $inputBorderRadius: Size = '2px';
+
+export const $sideColumnWidth = 'calc(50px + 16vw)';

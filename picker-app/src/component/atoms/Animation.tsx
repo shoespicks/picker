@@ -1,11 +1,10 @@
-import React, { type FC, Fragment, PropsWithChildren } from 'react';
+import React, { ElementType, type FC, Fragment, PropsWithChildren } from 'react';
 import { Transition } from '@headlessui/react';
-import { ReactTag } from '@headlessui/react/dist/types';
 import { $transitions, TransitionName } from 'shared/constants/styles/transition';
 
 type Props = {
   name: TransitionName;
-  as?: ReactTag;
+  as?: ElementType;
   className?: string;
 };
 

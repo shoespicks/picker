@@ -6,6 +6,9 @@ const stylelintConfig = {
       customSyntax: '@stylelint/postcss-css-in-js',
     },
   ],
+  rules: {
+    'value-keyword-case': null,
+  },
   ignoreFiles: ['**/node_modules/**'],
 };
 

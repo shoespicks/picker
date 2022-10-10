@@ -40,7 +40,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(function Input(
         )}
         {...inputProps}
       ></input>
-      <p>{errorMessage}</p>
+      {errorMessage && <p>{errorMessage}</p>}
     </>
   );
 });

@@ -11,7 +11,10 @@
     "lint:css": "stylelint ./src/**/*.{css,js,jsx,ts,tsx}",
     "fix:css": "stylelint ./src/**/*.{css,js,jsx,ts,tsx} --fix",
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json}'",
-    "codegen": "graphql-codegen --config src/graphql/codegen.ts"
+    "codegen": "yarn codegen:contentful && yarn codegen:nexus && yarn codegen:graphql",
+    "codegen:contentful": "cd ../product-types && yarn codegen",
+    "codegen:nexus": "ts-node --compiler-options '{\"module\":\"CommonJS\"}' --transpile-only src/graphql/nexus-schema.ts",
+    "codegen:graphql": "graphql-codegen --config src/graphql/codegen.ts"
   },
   "dependencies": {
     "@emotion/css": "^11.10.0",
@@ -31,6 +34,7 @@
     "graphql": "^16.6.0",
     "micro": "^9.4.1",
     "next": "12.3.1",
+    "nexus": "^1.3.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.37.0",
@@ -45,10 +49,10 @@
     "@graphql-codegen/typescript-resolvers": "^2.7.3",
     "@stylelint/postcss-css-in-js": "^0.38.0",
     "@types/glob": "^8.0.0",
-    "@types/node": "18.7.23",
     "@types/react": "18.0.21",
     "@types/react-dom": "18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.38.1",
+    "contentful": "^9.2.5",
     "eslint": "8.24.0",
     "eslint-config-next": "12.3.1",
     "eslint-config-prettier": "^8.5.0",

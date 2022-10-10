@@ -1,6 +1,10 @@
 query Spikes($input: SpikesInput!) {
-    spikes(input: $input) {
-        id
-        name
+    spikes(input: $input){
+        ...Spike
     }
+}
+
+fragment Spike on SpikeBase {
+    id
+    name
 }

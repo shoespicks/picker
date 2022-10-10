@@ -8,6 +8,7 @@ const $pallete = {
   blackClear: '#0000000a',
   gray1: '#EBEBEB',
   gray2: '#DDDDDD',
+  gray3: '#B9B9B9',
   white: '#ffffff',
   blue: '#D2FAFF',
 };
@@ -25,7 +26,8 @@ const themeBase = {
 
   // ここから文字色
   textDefault: $pallete.black,
-  textLow: $pallete.gray1,
+  textDisable: $pallete.gray1,
+  textLow: $pallete.gray3,
   textInverse: $pallete.white,
 };
 

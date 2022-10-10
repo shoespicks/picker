@@ -1,4 +1,4 @@
-import React, { type FC } from 'react';
+import React, { type FC, useState } from 'react';
 import { useRouter } from 'next/router';
 import { css } from '@emotion/css';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -13,11 +13,22 @@ import { InputButton } from 'component/molecules/InputButton';
 import { TAF_SEACH_PAGE_PATH } from 'shared/constants/routing-path';
 import { $spacing } from 'shared/constants/styles/spacing';
 
+type People = { id: number; name: string; unavailable: boolean };
+const people: People[] = [
+  { id: 1, name: 'Durward Reynolds', unavailable: false },
+  { id: 2, name: 'Kenton Towne', unavailable: false },
+  { id: 3, name: 'Therese Wunsch', unavailable: false },
+  { id: 4, name: 'Benedict Kessler', unavailable: true },
+  { id: 5, name: 'Katelyn Rohan', unavailable: false },
+];
+
 export const TAFTopSearchLauncher: FC = () => {
   const router = useRouter();
   const keywordSearch = () => {
     router.push(TAF_SEACH_PAGE_PATH).then();
   };
+
+  const [selectedPeople, setSelectedPeople] = useState(people[0]);
 
   return (
     <Card className={styles.searchLauncher} padding={$spacing.md}>
@@ -50,7 +61,13 @@ export const TAFTopSearchLauncher: FC = () => {
       <Section>
         <H3>種目から探す: WIP</H3>
         <Spacer size={$spacing.md}></Spacer>
-        <Select></Select>
+        <Select<People>
+          value={selectedPeople}
+          options={people}
+          idKey="id"
+          labelKey="name"
+          onChange={setSelectedPeople}
+        ></Select>
       </Section>
     </Card>
   );

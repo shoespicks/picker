@@ -1,23 +1,22 @@
 import React, { type FC } from 'react';
-import { css, cx } from '@emotion/css';
+import { css } from '@emotion/css';
 import { TAFSearchResultCard } from 'features/track-and-field/search/searchResults/TAFSearchResultCard';
-import { useSpikesQuery } from 'graphql/generated/codegen-client';
+import { SpikesQuery } from 'graphql/generated/codegen-client';
 import { mediaGreaterThan } from 'shared/constants/styles/media-query';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 type Props = {
-  className?: string;
+  data?: SpikesQuery;
 };
 
-export const TAFSearchResultList: FC<Props> = ({ className }) => {
-  const { data } = useSpikesQuery({ input: { keyword: '' } });
-  console.log(data);
+export const TAFSearchResultList: FC<Props> = ({ data }) => {
+  const list = data?.spikes || Array.from({ length: 10 });
 
   return (
-    <ul className={cx(styles.root, className)}>
-      {Array.from({ length: 11 }).map((value, index) => (
+    <ul className={styles.root}>
+      {list.map((value, index) => (
         <li key={index}>
-          <TAFSearchResultCard />
+          <TAFSearchResultCard value={value} />
         </li>
       ))}
     </ul>

@@ -25,5 +25,9 @@ const styles = {
         margin-top: ${$spacing.xs};
       }
     }
+
+    fieldset + fieldset {
+      margin-top: ${$spacing.md};
+    }
   `,
 };

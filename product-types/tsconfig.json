@@ -17,10 +17,7 @@
     "incremental": true,
     "sourceMap": true,
     "typeRoots": ["types", "node_modules/@types"],
-    "paths": {
-      "product-types/*": ["../product-types/*"]
-    }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["**/*.ts"],
   "exclude": ["node_modules"]
 }

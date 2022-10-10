@@ -1,21 +1,9 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
 const codegen: CodegenConfig = {
-  schema: './src/graphql/schemas/*.graphqls',
+  schema: './src/graphql/generated/nexus/schema.graphqls',
   documents: './src/graphql/client/*.graphql',
   generates: {
-    './src/graphql/generated/codegen-server.ts': {
-      config: {
-        useIndexSignature: true,
-        immutableTypes: true,
-        enumsAsConst: true,
-        skipTypename: true,
-      },
-      plugins: ['typescript', 'typescript-resolvers'],
-      hooks: {
-        afterAllFileWrite: 'prettier --write',
-      },
-    },
     './src/graphql/generated/codegen-client.ts': {
       config: {
         useIndexSignature: true,

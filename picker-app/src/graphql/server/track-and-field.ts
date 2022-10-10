@@ -1,5 +1,6 @@
 import { enumType, extendType, inputObjectType, interfaceType, nonNull, objectType } from 'nexus';
 import { shoeEvents } from '../../../../product-types/types/track-and-field/shoeEvents';
+import { spikesLoader } from '../../server/loader/track-and-field/spikeLoader';
 
 export const events = enumType({
   name: 'TAFEvents',
@@ -38,13 +39,9 @@ export const SpikeQuery = extendType({
   definition(t) {
     t.nonNull.list.field('spikes', {
       type: nonNull('SpikeBase'),
-      args: { input: SpikesInput },
+      args: { input: nonNull(SpikesInput) },
       resolve(_, args) {
-        console.log('aaaaaaaauaaaaauaa');
-        return [
-          { id: '1', name: '黒のインクス' + args.input?.keyword + args.input?.events },
-          { id: '2', name: '黒のディスト' + args.input?.keyword + args.input?.events },
-        ];
+        return spikesLoader(args);
       },
     });
   },

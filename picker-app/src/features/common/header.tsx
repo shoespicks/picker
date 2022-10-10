@@ -5,6 +5,7 @@ import { Theme, useTheme } from '@emotion/react';
 import Image from 'next/future/image';
 import { Container } from 'component/atoms/Container';
 import { $headerHeight } from 'shared/constants/styles/size';
+import { HeaderNavigation } from './HeaderNavigation';
 
 export const Header: FC = () => {
   const theme = useTheme();
@@ -13,12 +14,15 @@ export const Header: FC = () => {
   return (
     <header className={styles.header}>
       <Container>
-        <div className={styles.headerContent}>
+        <div className={styles.headerContent}>          
           <Link href="/">
             <a>
               <Image src="/picker.svg" width={108} height={18} alt="picker" />
             </a>
           </Link>
+          <HeaderNavigation>
+            <div>BBB</div>
+          </HeaderNavigation>
         </div>
       </Container>
     </header>

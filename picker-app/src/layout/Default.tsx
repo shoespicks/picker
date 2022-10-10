@@ -2,18 +2,18 @@ import { PropsWithChildren } from 'react';
 import { css } from '@emotion/css';
 import { Theme, ThemeProvider } from '@emotion/react';
 import { Footer } from 'features/common/footer';
-import { Header } from 'features/common/header';
 import { homeTheme } from 'shared/constants/styles/colors';
 
 type Props = {
   theme?: Theme;
+  headerElement?: JSX.Element;
 };
 
-const DefaultLayout = ({ children, theme = homeTheme }: PropsWithChildren<Props>) => {
+const DefaultLayout = ({ children, theme = homeTheme, headerElement }: PropsWithChildren<Props>) => {
   return (
     <ThemeProvider theme={theme}>
       <div className={styles.mainContainer}>
-        <Header />
+        {headerElement}
         <main>{children}</main>
       </div>
       <Footer />

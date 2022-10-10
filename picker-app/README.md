@@ -29,10 +29,10 @@ volta install yarn
 cd picker-app
 
 # install dependencies
-$ yarn install
+yarn install
 
 # 下記を実行後、localhost:3000にアクセスすると画面を確認できる
-$ yarn dev
+yarn dev
 ```
 
 ## vscode セットアップ
@@ -40,5 +40,6 @@ $ yarn dev
 - ESLint
 - Prettier
 - stylelint
+- vscode-styled-components
 
 の VSCode 拡張機能を検索して入れる

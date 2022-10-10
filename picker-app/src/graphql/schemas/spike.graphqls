@@ -1,0 +1,12 @@
+input SpikesInput {
+    keyword: String
+}
+
+type SpikeBase {
+    id: ID!
+    name: String!
+}
+
+type Query {
+    spikes(input: SpikesInput!): [SpikeBase!]!
+}

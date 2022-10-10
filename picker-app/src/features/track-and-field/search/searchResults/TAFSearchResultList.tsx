@@ -1,6 +1,7 @@
 import React, { type FC } from 'react';
 import { css, cx } from '@emotion/css';
 import { TAFSearchResultCard } from 'features/track-and-field/search/searchResults/TAFSearchResultCard';
+import { useSpikesQuery } from 'graphql/generated/codegen-client';
 import { mediaGreaterThan } from 'shared/constants/styles/media-query';
 import { $spacing } from 'shared/constants/styles/spacing';
 
@@ -9,6 +10,9 @@ type Props = {
 };
 
 export const TAFSearchResultList: FC<Props> = ({ className }) => {
+  const { data } = useSpikesQuery({ input: { keyword: '' } });
+  console.log(data);
+
   return (
     <ul className={cx(styles.root, className)}>
       {Array.from({ length: 11 }).map((value, index) => (

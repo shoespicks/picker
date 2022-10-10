@@ -1,2 +1,4 @@
 next.config.js
 .stylelintrc.js
+
+src/graphql/generated

@@ -1,0 +1,6 @@
+query Spikes($input: SpikesInput!) {
+    spikes(input: $input) {
+        id
+        name
+    }
+}

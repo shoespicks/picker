@@ -21,7 +21,17 @@ export const Header: FC = () => {
             </a>
           </Link>
           <HeaderNavigation>
-            <div>BBB</div>
+            <label htmlFor="keyword">キーワード検索</label>
+            <input type="text" id='keyword' name='keyword' />
+            <hr />
+            <p className={styles.serviceTitle}>PICKER</p>
+            <ul>
+              <li className={styles.serviceType}>＞陸上</li>
+              <li className={styles.serviceType}>＞プロテイン</li>
+              <li className={styles.serviceType}>＞テニス</li>
+              <li className={styles.serviceType}>＞野球</li>
+            </ul>
+
           </HeaderNavigation>
         </div>
       </Container>
@@ -44,6 +54,16 @@ const getStyles = (theme: Theme) => ({
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
+  `,
+  serviceTitle: css`
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 24px;
+  `,
+  serviceType: css`
+    background-color: ${theme.main};
+    color: ${theme.textInverse};
     width: 100%;
   `,
 });

@@ -21,6 +21,8 @@
     "paths": {
       "picker-types/*": ["../picker-types/*"],
       "server/*": ["server/*"],
+      "features/*": ["features/*"],
+      "components/*": ["components/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

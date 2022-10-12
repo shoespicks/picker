@@ -5,6 +5,12 @@
   "repository": "https://github.com/shoespicks/picker.git",
   "license": "MIT",
   "private": true,
+  "scripts": {
+    "i": "yarn install",
+    "dev": "PICKER_ENV='local' && yarn codegen && yarn workspace picker-app dev",
+    "export": "yarn codegen && yarn workspace picker-app export",
+    "codegen": "yarn workspace picker-types codegen && yarn workspace picker-app codegen"
+  },
   "devDependencies": {
     "@stylelint/postcss-css-in-js": "^0.38.0",
     "@typescript-eslint/eslint-plugin": "^5.38.1",

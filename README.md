@@ -31,8 +31,6 @@ https://drive.google.com/file/d/1aAdBYKBp6PELols2RopVaJv74CY-FmFU/view?usp=shari
 ## ローカル環境実行
 
 ```bash
-cd picker-app
-
 # install dependencies
 yarn install
 

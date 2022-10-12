@@ -9,16 +9,7 @@
   "devDependencies": {
     "contentful-management": "^10.15.1",
     "contentful-typescript-codegen": "^3.2.3",
-    "@typescript-eslint/eslint-plugin": "^5.40.0",
-    "@typescript-eslint/parser": "^5.40.0",
-    "eslint": "^8.25.0",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-import-resolver-typescript": "^3.5.1",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-import-access": "^1.0.1",
-    "eslint-plugin-unused-imports": "^2.0.0",
     "dotenv": "^16.0.3",
-    "prettier": "^2.7.1",
     "typescript": "^4.8.4"
   },
   "dependencies": {}

@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const Drawer: FC<PropsWithChildren<Props>> = ({ buttonElement, children }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => {
     setIsOpen(false);

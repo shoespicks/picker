@@ -18,7 +18,7 @@ export const $behavior = {
       height: 100%;
       content: '';
       background-color: ${theme.main};
-      transition: transform ease-in-out 200ms;
+      transition: transform ease-in-out 200ms, background-color ease-in 100ms;
       transform: scale(0, 1);
       transform-origin: left top;
     }

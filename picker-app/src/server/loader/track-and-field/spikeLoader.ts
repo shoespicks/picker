@@ -1,10 +1,10 @@
 import { Entry } from 'contentful';
-import { NexusGenArgTypes, NexusGenInputs, NexusGenRootTypes } from 'graphql/generated/nexus/types';
-import { ISpikeShoesFields } from '../../../../../product-types/generated/contentful';
-import { ISpikesSearchParams, spikes } from '../../repository/track-and-field/contentfulRepository';
+import { ISpikeShoesFields } from 'picker-types/generated/contentful';
+import { NexusGenInputs, NexusGenRootTypes } from 'graphql/generated/nexus/types';
+import { ISpikesSearchParams, spikesEntries } from 'server/repository/track-and-field/contentfulRepository';
 
-export const spikesLoader = (args: NexusGenArgTypes['Query']['spikes']): Promise<NexusGenRootTypes['SpikeBase'][]> => {
-  return spikes(createSearchParams(args.input)).then(entries => {
+export const spikesLoader = (input: NexusGenInputs['SpikesInput']): Promise<NexusGenRootTypes['SpikeBase'][]> => {
+  return spikesEntries(createSearchParams(input)).then(entries => {
     return entries.items.map(item => translateSpikeEntryToSpikeBase(item));
   });
 };

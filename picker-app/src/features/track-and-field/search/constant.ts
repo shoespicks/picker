@@ -1,4 +1,4 @@
-import { IEventItem } from '../../../../../product-types/types/track-and-field/shoeEvents';
+import { IEventItem } from 'picker-types/types/track-and-field/shoeEvents';
 
 export type SearchFormInput = {
   keyword?: string;

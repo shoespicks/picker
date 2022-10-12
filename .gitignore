@@ -1,5 +1,7 @@
 # IDE / Editor
 .idea
 
+node_modules
 .gitconfig
 
+.env.local

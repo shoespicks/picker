@@ -1,6 +1,7 @@
 import React, { type FC } from 'react';
 import { css, cx } from '@emotion/css';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { IEventItem, shoeEvents } from 'picker-types/types/track-and-field/shoeEvents';
 import { useForm } from 'react-hook-form';
 import { Button } from 'component/atoms/Button';
 import { Card } from 'component/atoms/Card';
@@ -11,7 +12,6 @@ import { SelectControl } from 'component/atoms/Select';
 import { H4 } from 'component/atoms/Typography';
 import { SearchFormInput } from 'features/track-and-field/search/constant';
 import { $spacing } from 'shared/constants/styles/spacing';
-import { IEventItem, shoeEvents } from '../../../../../product-types/types/track-and-field/shoeEvents';
 
 const searchFormInputDefaultValues: SearchFormInput = {
   keyword: '',

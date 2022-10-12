@@ -1,9 +1,12 @@
+import path from 'path';
 import { createClient, EntryCollection } from 'contentful';
 import { config } from 'dotenv';
-import { ISpikeShoesFields } from '../../../../../product-types/generated/contentful';
+import { ISpikeShoesFields } from 'picker-types/generated/contentful';
 
 (!process.env.PICKER_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN || !process.env.PICKER_CONTENTFUL_SPACE_ID) &&
-  config({ path: '.env.local' });
+  config({ path: path.resolve(process.cwd(), '../.env.local') });
+
+console.log('loadingContentfulRepository');
 
 const contentfulClient = createClient({
   space: process.env.PICKER_CONTENTFUL_SPACE_ID || '',
@@ -31,6 +34,6 @@ export interface ISpikesSearchParams {
   order?: string;
 }
 
-export const spikes = (params: ISpikesSearchParams): Promise<EntryCollection<ISpikeShoesFields>> => {
+export const spikesEntries = (params: ISpikesSearchParams): Promise<EntryCollection<ISpikeShoesFields>> => {
   return contentfulClient.getEntries<ISpikeShoesFields>(params).then();
 };

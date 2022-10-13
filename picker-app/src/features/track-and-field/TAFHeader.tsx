@@ -1,14 +1,25 @@
-import React, { type FC } from 'react';
+import React, { PropsWithChildren, type FC } from 'react';
 import { css } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import { Header } from 'features/common/header';
 import { $headerHeight } from 'shared/constants/styles/size';
 
-export const TAFHeader: FC = () => {
+export const TAFHeader: FC<PropsWithChildren> = () => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
-  return <Header />;
+  return (
+    <Header>
+      TAFユニークはここ
+      <ul>
+        <li>＞検索</li>
+        <li>＞比較</li>
+        <li>＞チャート</li>
+        <li>＞ユーザーランキング</li>
+        <li>＞記事一覧</li>
+      </ul>
+    </Header>
+    );
 };
 
 const getStyles = (theme: Theme) => ({

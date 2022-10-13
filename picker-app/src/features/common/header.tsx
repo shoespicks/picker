@@ -1,4 +1,4 @@
-import React, { type FC } from 'react';
+import React, { PropsWithChildren, type FC } from 'react';
 import Link from 'next/link';
 import { css } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
@@ -7,7 +7,7 @@ import { Container } from 'component/atoms/Container';
 import { $headerHeight } from 'shared/constants/styles/size';
 import { HeaderNavigation } from './HeaderNavigation';
 
-export const Header: FC = () => {
+export const Header: FC<PropsWithChildren> = ({ children }) => {
   const theme = useTheme();
   const styles = getStyles(theme);
 
@@ -21,15 +21,20 @@ export const Header: FC = () => {
             </a>
           </Link>
           <HeaderNavigation>
+            { children }
+            <hr />
+            <button>ログイン</button>
+            <button>無料会員登録</button>
+            <hr />
             <label htmlFor="keyword">キーワード検索</label>
             <input type="text" id='keyword' name='keyword' />
             <hr />
             <p className={styles.serviceTitle}>PICKER</p>
-            <ul>
-              <li className={styles.serviceType}>＞陸上</li>
-              <li className={styles.serviceType}>＞プロテイン</li>
-              <li className={styles.serviceType}>＞テニス</li>
-              <li className={styles.serviceType}>＞野球</li>
+            <ul className={styles.serviceType}>
+              <li>＞陸上</li>
+              <li>＞プロテイン</li>
+              <li>＞テニス</li>
+              <li>＞野球</li>
             </ul>
 
           </HeaderNavigation>
@@ -62,8 +67,10 @@ const getStyles = (theme: Theme) => ({
     line-height: 24px;
   `,
   serviceType: css`
-    background-color: ${theme.main};
-    color: ${theme.textInverse};
-    width: 100%;
+    li{
+      background-color: ${theme.main};
+      color: ${theme.textInverse};
+      width: 100%;
+    }
   `,
 });

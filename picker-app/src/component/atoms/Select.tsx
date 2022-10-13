@@ -2,19 +2,20 @@ import React, { Key } from 'react';
 import { css, cx } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import { faCirclePlus, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
-import { Listbox as HeadlessSelect } from '@headlessui/react';
-import { DeepMap, FieldError, FieldValues, useController, UseControllerProps } from 'react-hook-form';
+import { Listbox } from '@headlessui/react';
+import { FieldValues, useController, UseControllerProps } from 'react-hook-form';
 import { Animation } from 'component/atoms/Animation';
 import { Icon } from 'component/atoms/Icon';
+import { compareByKey, createValueLabel, getValueBykey, isValueEmpty } from 'component/utils/utils';
 import { $behavior } from 'shared/constants/styles/behavior';
 import { $common, setSolidShadow } from 'shared/constants/styles/common';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 type Props<T> = {
-  value: T;
+  value: T | T[];
   options: T[];
-  idKey: keyof T;
-  labelKey: keyof T;
+  idKey?: keyof T;
+  labelKey?: keyof T;
   placeholder?: string;
   errorMessage?: string;
   refName?: string;
@@ -26,29 +27,40 @@ export function Select<T>({
   options,
   idKey,
   labelKey,
-  errorMessage,
   placeholder = '選択してください',
+  errorMessage,
+  refName,
   ...selectProps
 }: Props<T>) {
   const theme = useTheme();
   const styles = getStyles(theme);
 
   return (
-    <>
-      <HeadlessSelect value={value} {...selectProps}>
+    <div>
+      <Listbox
+        refName={refName}
+        multiple={Array.isArray(value)}
+        value={value}
+        {...selectProps}
+        by={compareByKey<T>(idKey)}
+      >
         <div className={styles.selectContainer}>
-          <HeadlessSelect.Button className={styles.selectTrigger}>
-            {value ? (
-              <span className={styles.selectTriggerText}>{value[labelKey] as string}</span>
+          <Listbox.Button className={styles.selectTrigger}>
+            {isValueEmpty(value) ? (
+              <span className={styles.selectTriggerText}>{createValueLabel(value, labelKey)}</span>
             ) : (
               <span className={styles.selectTriggerPlaceholder}>{placeholder}</span>
             )}
             <Icon icon={faCirclePlus} />
-          </HeadlessSelect.Button>
+          </Listbox.Button>
           <Animation name="fade">
-            <HeadlessSelect.Options className={styles.selectOptions}>
-              {options.map(option => (
-                <HeadlessSelect.Option key={option[idKey] as Key} className={styles.selectOption} value={option}>
+            <Listbox.Options className={styles.selectOptions}>
+              {options.map((option, index) => (
+                <Listbox.Option
+                  key={(idKey && (option[idKey] as Key)) ?? index}
+                  className={styles.selectOption}
+                  value={option}
+                >
                   {({ selected }) => (
                     <>
                       <Icon
@@ -58,18 +70,30 @@ export function Select<T>({
                           transition: color ease-in 200ms;
                         `}
                       />
-                      <span className={styles.selectOptionLabel}>{option[labelKey] as string}</span>
+                      <span className={styles.selectOptionLabel}>{getValueBykey(option, labelKey)}</span>
                     </>
                   )}
-                </HeadlessSelect.Option>
+                </Listbox.Option>
               ))}
-            </HeadlessSelect.Options>
+            </Listbox.Options>
           </Animation>
         </div>
-      </HeadlessSelect>
+      </Listbox>
       {errorMessage && <p>{errorMessage}</p>}
-    </>
+    </div>
   );
+}
+export function SelectControl<T, FormInputDef extends FieldValues>(
+  props: Omit<Props<T>, 'value'> & UseControllerProps<FormInputDef>
+) {
+  const { name, control } = props;
+
+  const {
+    field: { ref, ...fieldProps },
+    fieldState: { error },
+  } = useController<FormInputDef>({ name, control });
+
+  return <Select<T> refName={ref.name} control={control} {...fieldProps} {...props} errorMessage={error?.message} />;
 }
 
 const getStyles = (theme: Theme) => ({
@@ -106,7 +130,7 @@ const getStyles = (theme: Theme) => ({
   selectOptions: cx(
     css`
       position: absolute;
-      z-index: 100;
+      z-index: 10;
       width: 100%;
       max-height: 400px;
       overflow-y: auto;
@@ -139,21 +163,3 @@ const getStyles = (theme: Theme) => ({
     ${$common.truncate}
   `,
 });
-
-export function SelectControl<T extends FieldValues, R>(props: Omit<Props<R>, 'value'> & UseControllerProps<T>) {
-  const { name, control } = props;
-
-  const {
-    field: { ref, ...fieldProps },
-    formState: { errors },
-  } = useController<T>({ name, control });
-
-  return (
-    <Select
-      refName={ref.name}
-      {...fieldProps}
-      {...props}
-      errorMessage={errors[name] && `${(errors[name] as DeepMap<FieldValues, FieldError>).message}`}
-    />
-  );
-}

@@ -26,7 +26,7 @@ const styles = {
       }
     }
 
-    fieldset + fieldset {
+    * + [role='label'] {
       margin-top: ${$spacing.md};
     }
   `,

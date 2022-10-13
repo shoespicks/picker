@@ -10,7 +10,8 @@ const $pallete = {
   gray2: '#DDDDDD',
   gray3: '#B9B9B9',
   white: '#ffffff',
-  blue: '#D2FAFF',
+  blue: '#0671dc',
+  lightBlue: '#D2FAFF',
 };
 
 /**
@@ -23,6 +24,7 @@ const themeBase = {
   backgroundHover: $pallete.blackClear,
   border: $pallete.black,
   lowBorder: $pallete.gray2,
+  focusOutline: $pallete.blue,
 
   // ここから文字色
   textDefault: $pallete.black,
@@ -44,5 +46,5 @@ export const homeTheme: Theme = themeBase;
 
 export const trackAndFieldTheme: Theme = {
   ...themeBase,
-  primary: $pallete.blue,
+  primary: $pallete.lightBlue,
 };

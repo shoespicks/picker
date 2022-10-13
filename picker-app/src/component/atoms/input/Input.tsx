@@ -1,7 +1,7 @@
 import React, { ComponentPropsWithoutRef, forwardRef } from 'react';
 import { css, cx } from '@emotion/css';
 import { useTheme } from '@emotion/react';
-import { DeepMap, FieldError, FieldValues, useController, UseControllerProps } from 'react-hook-form';
+import { FieldValues, useController, UseControllerProps } from 'react-hook-form';
 import { setSolidShadow } from 'shared/constants/styles/common';
 import { $inputDefaultHeight, Size } from 'shared/constants/styles/size';
 
@@ -49,14 +49,8 @@ export const InputControl = <T extends FieldValues>(props: Props & UseController
   const { name, control } = props;
   const {
     field: { ...fieldProps },
-    formState: { errors },
+    fieldState: { error },
   } = useController<T>({ name, control });
 
-  return (
-    <Input
-      {...fieldProps}
-      {...props}
-      errorMessage={errors[name] && `${(errors[name] as DeepMap<FieldValues, FieldError>).message}`}
-    />
-  );
+  return <Input {...fieldProps} {...props} errorMessage={error?.message} />;
 };

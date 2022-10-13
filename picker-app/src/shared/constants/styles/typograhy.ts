@@ -30,6 +30,7 @@ export const aStyle = css`
 `;
 
 export const labelStyle = css`
+  display: inline-block;
   font-size: 14px;
   font-weight: bold;
 `;

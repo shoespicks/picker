@@ -15,7 +15,7 @@ import {
   shoeEventsAndEventCategories,
 } from 'picker-types/types/track-and-field/shoeEvents';
 import { shoeLaceTypes } from 'picker-types/types/track-and-field/shoeLaceTypes';
-import { shoePinType } from 'picker-types/types/track-and-field/shoePinTypes';
+import { shoePinTypes } from 'picker-types/types/track-and-field/shoePinTypes';
 import { IShoeStrength } from 'picker-types/types/track-and-field/shoeStrength';
 import sharp from 'sharp';
 import { IconName, icons } from './icons';
@@ -816,11 +816,11 @@ export class SpreadsheetUploader {
   static getPinType(shoeLaceTypeText: string): string[] | undefined {
     switch (shoeLaceTypeText) {
       case 'fixed':
-        return [shoePinType.fixed.id];
+        return [shoePinTypes.fixed.id];
       case 'removable':
-        return [shoePinType.removable.id];
+        return [shoePinTypes.removable.id];
       case 'both':
-        return [shoePinType.fixed.id, shoePinType.removable.id];
+        return [shoePinTypes.fixed.id, shoePinTypes.removable.id];
       default:
         return undefined;
     }

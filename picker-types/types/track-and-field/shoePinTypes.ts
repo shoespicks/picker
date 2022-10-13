@@ -7,7 +7,7 @@ export interface IShoePinType {
   readonly label: string;
 }
 
-export const shoePinType: { [key in shoePinTypeCode]: IShoePinType } = {
+export const shoePinTypes: { [key in shoePinTypeCode]: IShoePinType } = {
   fixed: {
     id: 'fixed',
     label: '固定式',

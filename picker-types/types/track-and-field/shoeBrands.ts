@@ -4,34 +4,34 @@ export type ShoeBrandsCode = Exclude<ISpikeShoesFields['brand'], undefined>;
 
 export interface IShoeBrand {
   readonly id: ShoeBrandsCode;
-  readonly name: string;
-  readonly nameEn: string;
+  readonly label: string;
+  readonly labelEn: string;
 }
 
 export const shoeBrands: { [key in ShoeBrandsCode]: IShoeBrand } = {
   adidas: {
     id: 'adidas',
-    name: 'アディダス',
-    nameEn: 'Adidas',
+    label: 'アディダス',
+    labelEn: 'Adidas',
   },
   asics: {
     id: 'asics',
-    name: 'アシックス',
-    nameEn: 'Asics',
+    label: 'アシックス',
+    labelEn: 'Asics',
   },
   mizuno: {
     id: 'mizuno',
-    name: 'ミズノ',
-    nameEn: 'Mizuno',
+    label: 'ミズノ',
+    labelEn: 'Mizuno',
   },
   newBalance: {
     id: 'newBalance',
-    name: 'ニューバランス',
-    nameEn: 'New Balance',
+    label: 'ニューバランス',
+    labelEn: 'New Balance',
   },
   nike: {
     id: 'nike',
-    name: 'ナイキ',
-    nameEn: 'Nike',
+    label: 'ナイキ',
+    labelEn: 'Nike',
   },
 } as const;

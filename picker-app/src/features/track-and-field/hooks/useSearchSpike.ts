@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { defaultSearchFormInputValue, SearchFormInput } from 'features/track-and-field/search/constant';
+import { SearchFormInput } from 'features/track-and-field/constants/search';
 import { SpikesQueryVariables, useSpikesQuery } from 'graphql/generated/codegen-client';
 
-export const useSearchSpike = (defaultCondition: SearchFormInput = defaultSearchFormInputValue) => {
+export const useSearchSpike = (defaultCondition: SearchFormInput) => {
   const [searchCondition, setSearchCondition] = useState<SearchFormInput>(defaultCondition);
 
   const search = (input: SearchFormInput) => {
@@ -16,7 +16,7 @@ const convertInputToQueryVariables = (input: SearchFormInput): SpikesQueryVariab
   return {
     input: {
       keyword: input.keyword,
-      events: input.events?.id && [input.events.id],
+      events: input.events?.length ? input.events?.map(e => e.id) : undefined,
     },
   };
 };

@@ -25,7 +25,7 @@ export const Footer: FC = () => {
           <Spacer size={'16px'} axis={'vertical'}></Spacer>
           <div className={styles.footerSignature}>
             <span className={styles.footerSignatureFrame}>
-              <Image src="/einja.svg" fill alt="picker" />
+              <Image src="/einja.svg" fill sizes="width: 100%" alt="picker" />
             </span>
           </div>
         </div>

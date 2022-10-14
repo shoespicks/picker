@@ -10,13 +10,12 @@ export const TAFHeader: FC<PropsWithChildren> = () => {
 
   return (
     <Header>
-      TAFユニークはここ
-      <ul>
-        <li>＞検索</li>
-        <li>＞比較</li>
-        <li>＞チャート</li>
-        <li>＞ユーザーランキング</li>
-        <li>＞記事一覧</li>
+      <ul className={styles.serviceMenu}>
+        <li>検索</li>
+        <li>比較</li>
+        <li>チャート</li>
+        <li>ユーザーランキング</li>
+        <li>記事一覧</li>
       </ul>
     </Header>
   );
@@ -33,10 +32,22 @@ const getStyles = (theme: Theme) => ({
     height: ${$headerHeight};
     background-color: ${theme.main};
   `,
-  headerContent: css`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
+  serviceMenu: css`
+    margin-top: 32px;
+
+    li {
+      margin: 12px 0;
+      font-size: 16px;
+      font-weight: 400;
+
+      :hover {
+        margin-left: 12px;
+      }
+    }
+
+    li::before {
+      margin-right: 12px;
+      content: '＞';
+    }
   `,
 });

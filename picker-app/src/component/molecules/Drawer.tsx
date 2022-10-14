@@ -29,7 +29,6 @@ export const Drawer: FC<PropsWithChildren<Props>> = ({ buttonElement, children }
 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className={styles.humbergerArea} onClose={closeModal}>
-          ここは中４
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -42,9 +41,7 @@ export const Drawer: FC<PropsWithChildren<Props>> = ({ buttonElement, children }
             <div className="fixed inset-0 bg-black bg-opacity-25" />
           </Transition.Child>
           <div className="fixed inset-0 overflow-y-auto">
-            ここは中３
             <div className="flex min-h-full items-center justify-center p-4 text-center">
-              ここは中２
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
@@ -55,8 +52,6 @@ export const Drawer: FC<PropsWithChildren<Props>> = ({ buttonElement, children }
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  ここは中
-                  <Dialog.Title as="h3">×</Dialog.Title>
                   <div className="mt-4">
                     <button type="button" onClick={closeModal}>
                       ＞＜（ここに2本線）
@@ -78,7 +73,8 @@ const getStyles = (theme: Theme) => ({
     position: absolute;
     top: 0;
     right: 0;
-    width: calc(375px - 24px * 2);
+    z-index: 999;
+    width: 375px;
     height: 100%;
     padding: 24px;
     color: ${theme.textInverse};

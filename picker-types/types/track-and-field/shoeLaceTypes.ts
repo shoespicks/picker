@@ -1,4 +1,4 @@
-import { ISpikeShoesFields } from 'generated/contentful';
+import { ISpikeShoesFields } from 'picker-types/generated/contentful';
 
 export type ShoeLaceTypeCode = Exclude<ISpikeShoesFields['shoeLaceType'], undefined>[number];
 

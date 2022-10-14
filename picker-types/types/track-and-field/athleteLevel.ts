@@ -1,4 +1,4 @@
-import { ISpikeShoesFields } from 'generated/contentful';
+import { ISpikeShoesFields } from 'picker-types/generated/contentful';
 
 export type AthleteLevelCode = Exclude<ISpikeShoesFields['level'], undefined>;
 

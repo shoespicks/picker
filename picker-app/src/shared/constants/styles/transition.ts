@@ -1,7 +1,17 @@
 import { css } from '@emotion/css';
-import { TransitionClasses } from '@headlessui/react';
 
 export type TransitionName = 'fade';
+
+//import { TransitionClasses } from '@headlessui/react'; がなぜか読み込めない
+export interface TransitionClasses {
+  enter?: string;
+  enterFrom?: string;
+  enterTo?: string;
+  entered?: string;
+  leave?: string;
+  leaveFrom?: string;
+  leaveTo?: string;
+}
 
 export const $transitions: { [name in TransitionName]: TransitionClasses } = {
   fade: {

@@ -7,6 +7,7 @@ const nextConfig = {
   },
   images: {
     domains: ['d1hmrym1m561hp.cloudfront.net'],
+    unoptimized: true, // true入れないとビルドできないけど外したい next/imageのImageタグの設定
   },
 };
 

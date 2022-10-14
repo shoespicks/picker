@@ -23,6 +23,7 @@
       "server/*": ["server/*"],
       "features/*": ["features/*"],
       "components/*": ["components/*"],
+      "graphql/*": ["graphql/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

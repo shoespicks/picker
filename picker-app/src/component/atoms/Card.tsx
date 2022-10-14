@@ -1,6 +1,6 @@
-import React, { type FC, PropsWithChildren } from 'react';
+import React, { type FC, MouseEventHandler, PropsWithChildren } from 'react';
 import { css, cx } from '@emotion/css';
-import { useTheme } from '@emotion/react';
+import { Theme, useTheme } from '@emotion/react';
 import { Size } from 'shared/constants/styles/size';
 import { $spacing } from 'shared/constants/styles/spacing';
 
@@ -10,9 +10,11 @@ type Props = {
   height?: Size;
   borderWidthPx?: number;
   padding?: Size;
+  clickable?: boolean;
   headerElement?: JSX.Element;
   footerElement?: JSX.Element;
   className?: string;
+  onClick?: MouseEventHandler;
 };
 
 export const Card: FC<PropsWithChildren<Props>> = ({
@@ -22,11 +24,15 @@ export const Card: FC<PropsWithChildren<Props>> = ({
   height,
   borderWidthPx = 1,
   padding,
+  clickable,
   headerElement,
   footerElement,
   className,
+  onClick,
 }) => {
   const theme = useTheme();
+  const styles = getStyles(theme);
+
   return (
     <div
       className={cx(
@@ -38,8 +44,10 @@ export const Card: FC<PropsWithChildren<Props>> = ({
           border: ${borderWidthPx}px solid black;
           border-radius: 8px;
         `,
+        clickable && styles.hostClickable,
         className
       )}
+      onClick={onClick}
     >
       {headerElement && (
         <div
@@ -75,3 +83,13 @@ export const Card: FC<PropsWithChildren<Props>> = ({
     </div>
   );
 };
+
+const getStyles = (theme: Theme) => ({
+  hostClickable: css`
+    cursor: pointer;
+
+    &:hover {
+      background-color: ${theme.backgroundHover};
+    }
+  `,
+});

@@ -1,8 +1,10 @@
+const bffBaseUrl = process.env.NEXT_PUBLIC_PICKER_BFF_BASE_URL || 'http://localhost:3000';
+
 export const useFetchData = <TData, TVariables>(
   query: string,
   options?: RequestInit['headers']
 ): ((variables?: TVariables) => Promise<TData>) => {
-  const url = 'http://localhost:3000/api/graphql';
+  const url = `${bffBaseUrl}/api/graphql`;
 
   return async (variables?: TVariables) => {
     const res = await fetch(url, {

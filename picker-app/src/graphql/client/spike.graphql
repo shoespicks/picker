@@ -4,7 +4,35 @@ query Spikes($input: SpikesInput!) {
     }
 }
 
+query Spike($input: SpikeInput!) {
+    spike(input: $input){
+        ...Spike
+    }
+}
+
 fragment SpikeBase on SpikeBase {
+    id,
+    name,
+    nameEn,
+    allWeatherOnly,
+    angleScore,
+    brand,
+    events {
+        ...ITAFShoeEvents
+    },
+    gripScore,
+    hardnessScore,
+    colorImages {
+        ...ITAFShoeImages
+    }
+    lightnessScore,
+    price,
+    score,
+    weight,
+    widthScore,
+}
+
+fragment Spike on Spike {
     id,
     name,
     nameEn,
@@ -31,8 +59,6 @@ fragment ITAFShoeImages on ITAFShoeColorImages {
     colorCode,
     imageUrls
 }
-
-
 
 fragment ITAFShoeEvents on ITAFShoeEvents {
     id,

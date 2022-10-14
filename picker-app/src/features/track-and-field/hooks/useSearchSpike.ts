@@ -29,10 +29,10 @@ const convertInputToQueryVariables = (input: SearchFormInput): SpikesQueryVariab
           : input.shoeEnviroments.some(e => e.id === 'allweatherOnly'),
       shoeLaceType: map(input.shoeLaceType, 'id'),
       shoeColor: map(input.shoeColor, 'id'),
-      priceRangeMin: input.priceRange ? input.priceRange[0] : 0,
-      priceRangeMax: input.priceRange ? input.priceRange[1] : 50000,
-      pinCountRangeMin: input.pinCountRange ? input.pinCountRange[0] : 0,
-      pinCountRangeMax: input.pinCountRange ? input.pinCountRange[1] : 15,
+      priceRangeMin: input?.priceRange?.[0],
+      priceRangeMax: input?.priceRange?.[1],
+      pinCountRangeMin: input?.pinCountRange?.[0],
+      pinCountRangeMax: input?.pinCountRange?.[1],
     },
   };
 };

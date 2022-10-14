@@ -10,7 +10,7 @@ import { Select } from 'component/atoms/Select';
 import { Spacer } from 'component/atoms/Spacer';
 import { H3 } from 'component/atoms/Typography';
 import { InputButton } from 'component/molecules/InputButton';
-import { TAF_SEACH_PAGE_PATH } from 'features/track-and-field/constants/routing-path';
+import { TAF_SEARCH_PAGE_PATH } from 'features/track-and-field/constants/routing-path';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 type People = { id: number; name: string; unavailable: boolean };
@@ -25,7 +25,7 @@ const people: People[] = [
 export const TAFTopSearchLauncher: FC = () => {
   const router = useRouter();
   const keywordSearch = () => {
-    router.push(TAF_SEACH_PAGE_PATH).then();
+    router.push(TAF_SEARCH_PAGE_PATH).then();
   };
 
   const [selectedPeople, setSelectedPeople] = useState(people[0]);

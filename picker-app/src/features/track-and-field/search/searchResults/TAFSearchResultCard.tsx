@@ -19,17 +19,21 @@ import { $spacing } from 'shared/constants/styles/spacing';
 type Props = {
   value: SpikeBaseFragment;
   className?: string;
+  onClick?(value: SpikeBaseFragment): void;
 };
 
-export const TAFSearchResultCard: FC<Props> = ({ value, className }) => {
+export const TAFSearchResultCard: FC<Props> = ({ value, className, onClick }) => {
   const { brand, name, events, colorImages } = value;
   const [color, setColor] = useState<ItafShoeColorImages>(colorImages[0]);
 
   const styles = getStyles(useTheme());
+  const handleClick = () => {
+    onClick && onClick(value);
+  };
 
   return (
     <>
-      <Card padding={$spacing.md} className={cx(styles.host, className)}>
+      <Card padding={$spacing.md} className={cx(styles.host, className)} clickable onClick={handleClick}>
         <div>
           <span className={cx($common.truncate, styles.brandName)}>{brand}</span>
           <Spacer size={$spacing.xs}></Spacer>

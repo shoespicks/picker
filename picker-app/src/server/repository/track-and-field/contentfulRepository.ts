@@ -37,12 +37,27 @@ export interface ISpikesSearchParams {
   order?: string;
 }
 
+export interface ISpikeSearchParams {
+  // eslint-disable-next-line camelcase
+  content_type: 'spikeShoes';
+  'fields.slug': string;
+}
+
 export const spikesEntries = (input: NexusGenInputs['SpikesInput']): Promise<NexusGenRootTypes['SpikeBase'][]> => {
   return contentfulClient.getEntries<ISpikeShoesFields>(createSearchParams(input)).then(entries => {
-    console.log('サクナたん');
-    console.log(entries);
     return entries.items.map(item => translateSpikeEntryToSpikeBase(item));
   });
+};
+
+export const spikeEntryBySlug = (slug: string): Promise<NexusGenRootTypes['SpikeBase'][]> => {
+  return contentfulClient
+    .getEntries<ISpikeShoesFields>({
+      content_type: 'spikeShoes',
+      'fields.slug': slug,
+    })
+    .then(entries => {
+      return entries.items.map(item => translateSpikeEntryToSpike(item));
+    });
 };
 
 // 検索条件フォームの値をAPIの検索条件に変換
@@ -61,10 +76,10 @@ export const createSearchParams = (
     'fields.level[in]': formValue?.athleteLevel?.join(',') || undefined,
     'fields.allWeatherOnly': formValue.allWeatherOnly,
     'fields.shoeLaceType[all]': formValue?.shoeLaceType?.join(',') || undefined,
-    'fields.price[gte]': formValue.priceRangeMin,
-    'fields.price[lte]': formValue.priceRangeMax,
-    'fields.pinNumber[gte]': formValue.pinCountRangeMin,
-    'fields.pinNumber[lte]': formValue.pinCountRangeMax,
+    'fields.price[gte]': formValue?.priceRangeMin || undefined,
+    'fields.price[lte]': formValue?.priceRangeMax || undefined,
+    'fields.pinNumber[gte]': formValue?.pinCountRangeMin || undefined,
+    'fields.pinNumber[lte]': formValue?.pinCountRangeMax || undefined,
     'fields.colors[in]': formValue?.shoeColor?.join(',') || undefined,
 
     ...overRideParams,
@@ -89,6 +104,12 @@ export const translateSpikeEntryToSpikeBase = (entry: Entry<ISpikeShoesFields>):
     gripScore: entry.fields.gripScore,
     hardnessScore: entry.fields.hardnessScore,
     colorImages: getImages(entry) || [],
+  };
+};
+
+export const translateSpikeEntryToSpike = (entry: Entry<ISpikeShoesFields>): NexusGenRootTypes['SpikeBase'] => {
+  return {
+    ...translateSpikeEntryToSpikeBase(entry),
   };
 };
 

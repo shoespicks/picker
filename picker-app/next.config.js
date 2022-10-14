@@ -10,7 +10,6 @@ const nextConfig = {
   },
 };
 
-process.env.PICKER_ENVIROMENT === 'local' &&
-  require('dotenv').config({ path: path.join(process.cwd(), '../.env.local') });
+process.env.PICKER_ENV === 'local' && require('dotenv').config({ path: path.join(process.cwd(), '../.env.local') });
 
 module.exports = nextConfig;

@@ -14,29 +14,30 @@ export const Header: FC<PropsWithChildren> = ({ children }) => {
   return (
     <header className={styles.header}>
       <Container>
-        <div className={styles.headerContent}>          
+        <div className={styles.headerContent}>
           <Link href="/">
             <a>
               <Image src="/picker.svg" width={108} height={18} alt="picker" />
             </a>
           </Link>
           <HeaderNavigation>
-            { children }
-            <hr />
-            <button>ログイン</button>
-            <button>無料会員登録</button>
-            <hr />
-            <label htmlFor="keyword">キーワード検索</label>
-            <input type="text" id='keyword' name='keyword' />
-            <hr />
-            <p className={styles.serviceTitle}>PICKER</p>
-            <ul className={styles.serviceType}>
-              <li>＞陸上</li>
-              <li>＞プロテイン</li>
-              <li>＞テニス</li>
-              <li>＞野球</li>
-            </ul>
-
+            <div className={styles.humbergerArea}>
+              {children}
+              <hr />
+              <button>ログイン</button>
+              <button>無料会員登録</button>
+              <hr />
+              <label htmlFor="keyword">キーワード検索</label>
+              <input type="text" id="keyword" name="keyword" />
+              <hr />
+              <p className={styles.serviceTitle}>PICKER</p>
+              <ul className={styles.serviceType}>
+                <li>陸上</li>
+                <li>プロテイン</li>
+                <li>テニス</li>
+                <li>野球</li>
+              </ul>
+            </div>
           </HeaderNavigation>
         </div>
       </Container>
@@ -61,16 +62,30 @@ const getStyles = (theme: Theme) => ({
     justify-content: space-between;
     width: 100%;
   `,
+  humbergerArea: css`
+    color: ${theme.textInverse};
+    background-color: ${theme.main};
+  `,
   serviceTitle: css`
-    font-weight: 700;
+    margin-bottom: 24px;
     font-size: 24px;
-    line-height: 24px;
+    font-weight: 700;
   `,
   serviceType: css`
-    li{
-      background-color: ${theme.main};
-      color: ${theme.textInverse};
+    li {
       width: 100%;
+      margin: 10px 0;
+      font-size: 14px;
+      font-weight: 400;
+
+      :hover {
+        margin-left: 12px;
+      }
+    }
+
+    li::before {
+      margin-right: 12px;
+      content: '＞';
     }
   `,
 });

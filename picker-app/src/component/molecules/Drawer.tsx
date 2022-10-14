@@ -28,7 +28,8 @@ export const Drawer: FC<PropsWithChildren<Props>> = ({ buttonElement, children }
       </div>
 
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
+        <Dialog as="div" className={styles.humbergerArea} onClose={closeModal}>
+          ここは中４
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -40,9 +41,10 @@ export const Drawer: FC<PropsWithChildren<Props>> = ({ buttonElement, children }
           >
             <div className="fixed inset-0 bg-black bg-opacity-25" />
           </Transition.Child>
-
           <div className="fixed inset-0 overflow-y-auto">
+            ここは中３
             <div className="flex min-h-full items-center justify-center p-4 text-center">
+              ここは中２
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
@@ -53,23 +55,11 @@ export const Drawer: FC<PropsWithChildren<Props>> = ({ buttonElement, children }
                 leaveTo="opacity-0 scale-95"
               >
                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-
-                  <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
-                    ×
-                  </Dialog.Title>
-                  <div className="mt-2">
-                    <p className="text-sm text-gray-500">
-                    ××
-                    </p>
-                  </div>
-
+                  ここは中
+                  <Dialog.Title as="h3">×</Dialog.Title>
                   <div className="mt-4">
-                    <button
-                      type="button"
-                      className="inline-flex justify-center rounded-md border border-transparent bg-blue-100 px-4 py-2 text-sm font-medium text-blue-900 hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2"
-                      onClick={closeModal}
-                      >
-                      SHOES PICKS
+                    <button type="button" onClick={closeModal}>
+                      ＞＜（ここに2本線）
                     </button>
                   </div>
                   {children}
@@ -84,11 +74,13 @@ export const Drawer: FC<PropsWithChildren<Props>> = ({ buttonElement, children }
 };
 
 const getStyles = (theme: Theme) => ({
-  drawerTrigger: css`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
+  humbergerArea: css`
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: calc(375px - 24px * 2);
+    height: 100%;
+    padding: 24px;
     color: ${theme.textInverse};
     background-color: ${theme.main};
   `,

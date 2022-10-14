@@ -11,8 +11,9 @@ export const HeaderNavigation: FC<PropsWithChildren> = ({ children }) => {
   return (
     <Drawer
       buttonElement={
-        <button type="button" className={styles.drawerTrigger}>
-          Open dialog
+        <button type="button">
+          <div className={styles.line}></div>
+          <div className={styles.line}></div>
         </button>
       }
     >
@@ -32,18 +33,9 @@ const getStyles = (theme: Theme) => ({
     height: ${$headerHeight};
     background-color: ${theme.main};
   `,
-  headerContent: css`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-  `,
-  drawerTrigger: css`
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    color: ${theme.textInverse};
-    background-color: ${theme.main};
+  line: css`
+    width: 64px;
+    height: 1px;
+    background-color: ${theme.textInverse};
   `,
 });

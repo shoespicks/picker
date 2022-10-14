@@ -19,7 +19,7 @@ export const TAFHeader: FC<PropsWithChildren> = () => {
         <li>＞記事一覧</li>
       </ul>
     </Header>
-    );
+  );
 };
 
 const getStyles = (theme: Theme) => ({

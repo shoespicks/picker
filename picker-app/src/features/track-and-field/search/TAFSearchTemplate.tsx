@@ -26,7 +26,7 @@ export const TAFSearchTemplate: FC<Props> = ({ data, defaultValues, onSubmit }) 
         `}
       >
         <MultiColumn leftColumnElement={<TAFSearchForm defaultValues={defaultValues} onSubmit={onSubmit} />}>
-          <TAFSearchResultList data={data} />
+          <TAFSearchResultList results={data?.spikes} />
         </MultiColumn>
       </Container>
       <Spacer size="176px"></Spacer>

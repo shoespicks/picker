@@ -7,7 +7,7 @@ import { IShoeLaceType, shoeLaceTypes } from 'picker-types/types/track-and-field
 import { NumberRange } from 'shared/constants/input';
 import { FormHasOptionKey, FormOptions } from 'shared/hooks/useFormBase';
 
-export type IYears = { id: number; label: string };
+export type IYears = { id: string; label: string };
 
 const thisYear = new Date().getFullYear();
 
@@ -16,7 +16,7 @@ export const years = Array.from({ length: 4 }).map((_, i) => {
 });
 
 export const yearSearchOptions: IYears[] = years.map(y => ({
-  id: y,
+  id: y.toString(),
   label: `${y}年`,
 }));
 

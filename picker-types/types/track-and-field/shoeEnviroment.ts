@@ -8,7 +8,7 @@ export interface IShoeEnvirloment {
 export const shoeEnviroments: { [key in ShoeEnvirlomentCode]: IShoeEnvirloment } = {
   allweatherOnly: {
     id: 'allweatherOnly',
-    label: 'オールウェザー専用',
+    label: '全天候専用',
   },
   soil: {
     id: 'soil',

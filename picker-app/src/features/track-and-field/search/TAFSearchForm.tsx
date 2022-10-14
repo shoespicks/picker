@@ -1,4 +1,4 @@
-import React, { type FC, useState } from 'react';
+import React, { type FC } from 'react';
 import { css, cx } from '@emotion/css';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { IAthleteLevel } from 'picker-types/types/track-and-field/athleteLevel';
@@ -47,8 +47,6 @@ export const TAFSearchForm: FC<Props> = ({
   const submit = handleSubmit(data => {
     onSubmit && onSubmit(data);
   });
-
-  const [slideValue, setSlideValue] = useState<[number, number]>([0, 50000]);
 
   return (
     <Form onSubmit={submit}>

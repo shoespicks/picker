@@ -9,6 +9,7 @@ const $pallete = {
   gray1: '#EBEBEB',
   gray2: '#DDDDDD',
   gray3: '#B9B9B9',
+  gray4: '#666666',
   white: '#ffffff',
   blue: '#0671dc',
   lightBlue: '#D2FAFF',
@@ -30,6 +31,7 @@ const themeBase = {
   textDefault: $pallete.black,
   textDisable: $pallete.gray1,
   textLow: $pallete.gray3,
+  textGray: $pallete.gray4,
   textInverse: $pallete.white,
 };
 

@@ -1,7 +1,10 @@
 import path from 'path';
-import { createClient, EntryCollection } from 'contentful';
+import { createClient, Entry } from 'contentful';
 import { config } from 'dotenv';
 import { ISpikeShoesFields } from 'picker-types/generated/contentful';
+import { shoeColors } from 'picker-types/types/track-and-field/shoeColors';
+import { shoeEvents } from 'picker-types/types/track-and-field/shoeEvents';
+import { NexusGenInputs, NexusGenRootTypes } from 'graphql/generated/nexus/types';
 
 (!process.env.PICKER_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN || !process.env.PICKER_CONTENTFUL_SPACE_ID) &&
   config({ path: path.resolve(process.cwd(), '../.env.local') });
@@ -22,7 +25,7 @@ export interface ISpikesSearchParams {
   'fields.brand[in]'?: string;
   'fields.level[in]'?: string;
   'fields.colors[in]'?: string;
-  'fields.allWeatherOnly'?: boolean;
+  'fields.allWeatherOnly'?: boolean | null;
   'fields.pinNumber[gte]'?: number;
   'fields.pinNumber[lte]'?: number;
   'fields.releaseYear[in]'?: string;
@@ -34,6 +37,78 @@ export interface ISpikesSearchParams {
   order?: string;
 }
 
-export const spikesEntries = (params: ISpikesSearchParams): Promise<EntryCollection<ISpikeShoesFields>> => {
-  return contentfulClient.getEntries<ISpikeShoesFields>(params).then();
+export const spikesEntries = (input: NexusGenInputs['SpikesInput']): Promise<NexusGenRootTypes['SpikeBase'][]> => {
+  return contentfulClient.getEntries<ISpikeShoesFields>(createSearchParams(input)).then(entries => {
+    console.log('サクナたん');
+    console.log(entries);
+    return entries.items.map(item => translateSpikeEntryToSpikeBase(item));
+  });
+};
+
+// 検索条件フォームの値をAPIの検索条件に変換
+export const createSearchParams = (
+  formValue: NexusGenInputs['SpikesInput'],
+  overRideParams: Partial<ISpikesSearchParams> = {}
+) => {
+  const input: ISpikesSearchParams = {
+    content_type: 'spikeShoes',
+    'fields.events[in]': formValue?.events?.join(',') || undefined,
+    'fields.brand[in]': formValue?.brands?.join(',') || undefined,
+    'fields.releaseYear[in]': formValue?.years?.join(',') || undefined,
+    'fields.newModels[exists]':
+      formValue?.latestOnly === undefined || formValue.latestOnly === null ? undefined : formValue.latestOnly,
+    query: formValue?.keyword || undefined,
+    'fields.level[in]': formValue?.athleteLevel?.join(',') || undefined,
+    'fields.allWeatherOnly': formValue.allWeatherOnly,
+    'fields.shoeLaceType[all]': formValue?.shoeLaceType?.join(',') || undefined,
+    'fields.price[gte]': formValue.priceRangeMin,
+    'fields.price[lte]': formValue.priceRangeMax,
+    'fields.pinNumber[gte]': formValue.pinCountRangeMin,
+    'fields.pinNumber[lte]': formValue.pinCountRangeMax,
+    'fields.colors[in]': formValue?.shoeColor?.join(',') || undefined,
+
+    ...overRideParams,
+  };
+  return input;
+};
+
+export const translateSpikeEntryToSpikeBase = (entry: Entry<ISpikeShoesFields>): NexusGenRootTypes['SpikeBase'] => {
+  return {
+    id: entry.fields.slug,
+    name: entry.fields.name,
+    nameEn: entry.fields.nameEn,
+    brand: entry.fields.brand,
+    events: getEvents(entry.fields.events),
+    price: entry.fields.price,
+    score: entry.fields.score,
+    weight: entry.fields.weight,
+    allWeatherOnly: entry.fields.allWeatherOnly,
+    lightnessScore: entry.fields.lightnessScore, // Int!
+    widthScore: entry.fields.widthScore,
+    angleScore: entry.fields.angleScore,
+    gripScore: entry.fields.gripScore,
+    hardnessScore: entry.fields.hardnessScore,
+    colorImages: getImages(entry) || [],
+  };
+};
+
+const getEvents = (events: ISpikeShoesFields['events']): NexusGenRootTypes['ITAFShoeEvents'][] | undefined => {
+  return events?.map(e => ({
+    id: e,
+    label: shoeEvents[e].label,
+  }));
+};
+
+const getImages = (entity: Entry<ISpikeShoesFields>): NexusGenRootTypes['ITAFShoeColorImages'][] | undefined => {
+  return entity.fields?.colors?.map((color, index) => {
+    const colorVariationImageKey: keyof ISpikeShoesFields = `colorVariationImage${
+      index + 1
+    }` as keyof ISpikeShoesFields;
+
+    return {
+      colorId: color,
+      colorCode: shoeColors[color]?.code,
+      imageUrls: entity.fields[colorVariationImageKey] as string[],
+    };
+  });
 };

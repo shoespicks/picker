@@ -1,10 +1,40 @@
 query Spikes($input: SpikesInput!) {
     spikes(input: $input){
-        ...Spike
+        ...SpikeBase
     }
 }
 
-fragment Spike on SpikeBase {
-    id
-    name
+fragment SpikeBase on SpikeBase {
+    id,
+    name,
+    nameEn,
+    allWeatherOnly,
+    angleScore,
+    brand,
+    events {
+        ...ITAFShoeEvents
+    },
+    gripScore,
+    hardnessScore,
+    colorImages {
+        ...ITAFShoeImages
+    }
+    lightnessScore,
+    price,
+    score,
+    weight,
+    widthScore,
+}
+
+fragment ITAFShoeImages on ITAFShoeColorImages {
+    colorId,
+    colorCode,
+    imageUrls
+}
+
+
+
+fragment ITAFShoeEvents on ITAFShoeEvents {
+    id,
+    label
 }

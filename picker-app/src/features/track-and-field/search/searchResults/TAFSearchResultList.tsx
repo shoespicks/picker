@@ -1,25 +1,30 @@
 import React, { type FC } from 'react';
 import { css } from '@emotion/css';
 import { TAFSearchResultCard } from 'features/track-and-field/search/searchResults/TAFSearchResultCard';
-import { SpikesQuery } from 'graphql/generated/codegen-client';
+import { SpikeBase } from 'graphql/generated/codegen-client';
+import { $common } from 'shared/constants/styles/common';
 import { mediaGreaterThan } from 'shared/constants/styles/media-query';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 type Props = {
-  data?: SpikesQuery;
+  results?: readonly SpikeBase[];
 };
 
-export const TAFSearchResultList: FC<Props> = ({ data }) => {
-  const list = data?.spikes || Array.from({ length: 10 });
-
+export const TAFSearchResultList: FC<Props> = ({ results }) => {
   return (
-    <ul className={styles.root}>
-      {list.map((value, index) => (
-        <li key={index}>
-          <TAFSearchResultCard value={value} />
-        </li>
-      ))}
-    </ul>
+    <>
+      {results ? (
+        <ul className={styles.root}>
+          {results.map((value, index) => (
+            <li key={index} className={$common.truncate}>
+              <TAFSearchResultCard value={value} />
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <div>loading</div>
+      )}
+    </>
   );
 };
 

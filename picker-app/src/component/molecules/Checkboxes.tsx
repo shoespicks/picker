@@ -7,7 +7,7 @@ import { $spacing } from 'shared/constants/styles/spacing';
 
 type Props<T> = {
   value: T[];
-  options: T[];
+  options: readonly T[];
   idKey?: keyof T;
   labelKey?: keyof T;
   inline?: boolean;

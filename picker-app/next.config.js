@@ -5,6 +5,9 @@ const nextConfig = {
   experimental: {
     externalDir: true,
   },
+  images: {
+    domains: ['d1hmrym1m561hp.cloudfront.net'],
+  },
 };
 
 process.env.PICKER_ENVIROMENT === 'local' &&

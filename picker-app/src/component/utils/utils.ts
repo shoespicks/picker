@@ -3,6 +3,9 @@ export function compareByKey<T>(idKey?: keyof T): (a: T, b: T) => boolean {
 }
 
 export function selectedByKey<T>(value: T, selectedValues: T[], idKey?: keyof T): boolean {
+  if (!selectedValues) {
+    return false;
+  }
   return selectedValues.some(s => compareByKey(idKey)(value, s));
 }
 

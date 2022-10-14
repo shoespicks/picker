@@ -9,7 +9,6 @@ const codegen: CodegenConfig = {
         useIndexSignature: true,
         immutableTypes: true,
         enumsAsConst: true,
-        skipTypename: true,
         fetcher: {
           func: 'graphql/custom-fetcher#useFetchData',
           isReactHook: true,

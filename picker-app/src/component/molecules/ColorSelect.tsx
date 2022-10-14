@@ -5,7 +5,7 @@ import { Checkboxes } from 'component/molecules/Checkboxes';
 
 type Props<T> = {
   value: T[];
-  options: T[];
+  options: readonly T[];
   idKey?: keyof T;
   colorKey: keyof T;
   inline?: boolean;

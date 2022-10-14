@@ -62,14 +62,16 @@ export const Card: FC<PropsWithChildren<Props>> = ({
       >
         {children}
       </div>
-      <div
-        className={css`
-          padding: ${$spacing.sm} ${$spacing.md};
-          border-top: 1px solid ${theme.border};
-        `}
-      >
-        {footerElement}
-      </div>
+      {footerElement && (
+        <div
+          className={css`
+            padding: ${$spacing.sm} ${$spacing.md};
+            border-top: 1px solid ${theme.border};
+          `}
+        >
+          {footerElement}
+        </div>
+      )}
     </div>
   );
 };

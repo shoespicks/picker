@@ -1,19 +1,19 @@
 import React, { PropsWithChildren, type FC } from 'react';
 import Link from 'next/link';
+import router from 'next/router';
 import { css } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/future/image';
 import { Container } from 'components/atoms/Container';
-import { $headerHeight } from 'shared/constants/styles/size';
-import { HeaderNavigation } from './HeaderNavigation';
 import { Section } from 'components/atoms/Section';
 import { Spacer } from 'components/atoms/Spacer';
 import { H3 } from 'components/atoms/Typography';
 import { InputButton } from 'components/molecules/InputButton';
-import { $spacing } from 'shared/constants/styles/spacing';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { TAF_SEARCH_PAGE_PATH } from 'features/track-and-field/constants/routing-path';
-import router from 'next/router';
+import { $headerHeight } from 'shared/constants/styles/size';
+import { $spacing } from 'shared/constants/styles/spacing';
+import { HeaderNavigation } from './HeaderNavigation';
 
 export const Header: FC<PropsWithChildren> = ({ children }) => {
   const theme = useTheme();

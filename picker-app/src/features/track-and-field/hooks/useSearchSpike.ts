@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { map } from 'lodash-es';
 import { shoeEnviroments } from 'picker-types/types/track-and-field/shoeEnviroment';
 import { SearchFormInput } from 'features/track-and-field/constants/search';
-import { SpikesQueryVariables, useSpikesQuery } from 'graphql/generated/codegen-client';
+import { SpikesQueryVariables, useSpikesQuery } from '../../../graphql/generated/codegen-client';
 
 export const useSearchSpike = (defaultCondition: SearchFormInput) => {
   const [searchCondition, setSearchCondition] = useState<SearchFormInput>(defaultCondition);

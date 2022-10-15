@@ -3,6 +3,7 @@ import { css } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import { Header } from 'features/common/header';
 import { $headerHeight } from 'shared/constants/styles/size';
+import Link from 'next/link';
 
 export const TAFHeader: FC<PropsWithChildren> = () => {
   const theme = useTheme();
@@ -11,11 +12,31 @@ export const TAFHeader: FC<PropsWithChildren> = () => {
   return (
     <Header>
       <ul className={styles.serviceMenu}>
-        <li>検索</li>
-        <li>比較</li>
-        <li>チャート</li>
-        <li>ユーザーランキング</li>
-        <li>記事一覧</li>
+        <Link href="/track-and-field#1">
+          <a>
+            <li>検索</li>
+          </a>
+        </Link>
+        <Link href="/track-and-field#2">
+          <a>
+            <li>比較</li>
+          </a>
+        </Link>
+        <Link href="/track-and-field#3">
+          <a>
+            <li>チャート</li>
+          </a>
+        </Link>
+        <Link href="/track-and-field#4">
+          <a>
+            <li>ユーザーランキング</li>
+          </a>
+        </Link>
+        <Link href="/track-and-field#5">
+          <a>
+            <li>記事一覧</li>
+          </a>
+        </Link>
       </ul>
     </Header>
   );
@@ -42,6 +63,7 @@ const getStyles = (theme: Theme) => ({
 
       :hover {
         margin-left: 12px;
+        transition: all 0.4s;
       }
     }
 

@@ -6,10 +6,21 @@ import Image from 'next/future/image';
 import { Container } from 'components/atoms/Container';
 import { $headerHeight } from 'shared/constants/styles/size';
 import { HeaderNavigation } from './HeaderNavigation';
+import { Section } from 'components/atoms/Section';
+import { Spacer } from 'components/atoms/Spacer';
+import { H3 } from 'components/atoms/Typography';
+import { InputButton } from 'components/molecules/InputButton';
+import { $spacing } from 'shared/constants/styles/spacing';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { TAF_SEARCH_PAGE_PATH } from 'features/track-and-field/constants/routing-path';
+import router from 'next/router';
 
 export const Header: FC<PropsWithChildren> = ({ children }) => {
   const theme = useTheme();
   const styles = getStyles(theme);
+  const keywordSearch = () => {
+    router.push(TAF_SEARCH_PAGE_PATH).then();
+  };
 
   return (
     <header className={styles.header}>
@@ -27,15 +38,34 @@ export const Header: FC<PropsWithChildren> = ({ children }) => {
               <button>ログイン</button>
               <button>無料会員登録</button>
               <hr />
-              <label htmlFor="keyword">キーワード検索</label>
-              <input type="text" id="keyword" name="keyword" />
-              <hr />
+              <Section>
+                <H3>キーワード検索</H3>
+                <Spacer size={$spacing.md}></Spacer>
+                <InputButton buttonColor="primary" buttonIcon={faSearch} onClick={keywordSearch}></InputButton>
+              </Section>
+              <hr className={styles.line} />
               <p className={styles.serviceTitle}>PICKER</p>
               <ul className={styles.serviceType}>
-                <li>陸上</li>
-                <li>プロテイン</li>
-                <li>テニス</li>
-                <li>野球</li>
+                <Link href="/track-and-field#6">
+                  <a>
+                    <li>陸上</li>
+                  </a>
+                </Link>
+                <Link href="/track-and-field#7">
+                  <a>
+                    <li>プロテイン</li>
+                  </a>
+                </Link>
+                <Link href="/track-and-field#8">
+                  <a>
+                    <li>テニス</li>
+                  </a>
+                </Link>
+                <Link href="/track-and-field#9">
+                  <a>
+                    <li>野球</li>
+                  </a>
+                </Link>
               </ul>
             </div>
           </HeaderNavigation>
@@ -66,8 +96,14 @@ const getStyles = (theme: Theme) => ({
     color: ${theme.textInverse};
     background-color: ${theme.main};
   `,
+  line: css`
+    width: 100%;
+    height: 1px;
+    margin-top: 24px;
+    background-color: ${theme.textInverse};
+  `,
   serviceTitle: css`
-    margin-bottom: 24px;
+    margin: 24px 0;
     font-size: 24px;
     font-weight: 700;
   `,
@@ -80,6 +116,7 @@ const getStyles = (theme: Theme) => ({
 
       :hover {
         margin-left: 12px;
+        transition: all 0.4s;
       }
     }
 

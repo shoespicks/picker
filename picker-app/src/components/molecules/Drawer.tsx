@@ -29,26 +29,36 @@ export const Drawer: FC<PropsWithChildren<Props>> = ({ buttonElement, children }
       <div onClick={openModal}>{buttonElement}</div>
 
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className={styles.humbergerArea} onClose={closeModal}>
-          <Transition.Child as={Fragment}>
-            <Dialog.Panel>
-              <button type="button">
-                <div className={styles.active} onClick={closeModal}>
-                  <span></span>
-                  <span></span>
-                </div>
-              </button>
-              {children}
-            </Dialog.Panel>
-          </Transition.Child>
-        </Dialog>
+        <div className={styles.hamburgerBackground}>
+          <Dialog as="div" className={styles.hamburgerArea} onClose={closeModal}>
+            <Transition.Child as={Fragment}>
+              <Dialog.Panel>
+                <button type="button">
+                  <div className={styles.active} onClick={closeModal}>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </button>
+                {children}
+              </Dialog.Panel>
+            </Transition.Child>
+          </Dialog>
+        </div>
       </Transition>
     </>
   );
 };
 
 const getStyles = (theme: Theme) => ({
-  humbergerArea: css`
+  hamburgerBackground: css`
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: ${theme.hambergerHover};
+  `,
+  hamburgerArea: css`
     position: absolute;
     top: 0;
     right: 0;

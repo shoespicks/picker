@@ -32,7 +32,7 @@ export const Header: FC<PropsWithChildren> = ({ children }) => {
             </a>
           </Link>
           <HeaderNavigation>
-            <div className={styles.humbergerArea}>
+            <div className={styles.hamburgerArea}>
               {children}
 
               <Section>
@@ -89,7 +89,7 @@ const getStyles = (theme: Theme) => ({
     justify-content: space-between;
     width: 100%;
   `,
-  humbergerArea: css`
+  hamburgerArea: css`
     color: ${theme.textInverse};
     background-color: ${theme.main};
   `,

@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "yarn codegen && next dev",
-    "build": "yarn codegen && next build && next export",
-    "build2": "yarn codegen && next build",
+    "build": "yarn codegen && next build",
     "export": "yarn codegen && next build && next export",
     "start": "yarn codegen && next start",
     "lint": "next lint",

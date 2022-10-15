@@ -36,14 +36,7 @@ export const Card: FC<PropsWithChildren<Props>> = ({
   return (
     <div
       className={cx(
-        css`
-          width: ${width};
-          max-width: ${maxWidth};
-          height: ${height};
-          background-color: ${theme.background};
-          border: ${borderWidthPx}px solid black;
-          border-radius: 8px;
-        `,
+        styles.cardConteiner(width, maxWidth, height, borderWidthPx),
         clickable && styles.hostClickable,
         className
       )}
@@ -85,6 +78,14 @@ export const Card: FC<PropsWithChildren<Props>> = ({
 };
 
 const getStyles = (theme: Theme) => ({
+  cardConteiner: (width?: Size, maxWidth?: Size, height?: Size, borderWidthPx?: number) => css`
+    width: ${width};
+    max-width: ${maxWidth};
+    height: ${height};
+    background-color: ${theme.background};
+    border: ${borderWidthPx}px solid black;
+    border-radius: 8px;
+  `,
   hostClickable: css`
     cursor: pointer;
 

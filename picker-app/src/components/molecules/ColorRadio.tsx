@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { MouseEvent, MouseEventHandler } from 'react';
 import { ColorToken } from 'components/atoms/ColorToken';
 import { RadioSelect } from 'components/molecules/RadioSelect';
 
@@ -11,6 +11,10 @@ type Props<T> = {
 };
 
 export function ColorSelect<T>({ value, options, idKey, colorKey, onChange }: Props<T>) {
+  const onOptionClickHandler: MouseEventHandler = function a(e: MouseEvent) {
+    e.stopPropagation();
+  };
+
   return (
     <RadioSelect
       value={value}
@@ -21,6 +25,7 @@ export function ColorSelect<T>({ value, options, idKey, colorKey, onChange }: Pr
         <ColorToken size="16px" checked={checked} color={label}></ColorToken>
       )}
       onChange={onChange}
+      onOptionClick={onOptionClickHandler}
       inline
     />
   );

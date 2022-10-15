@@ -1,4 +1,4 @@
-import React, { Key } from 'react';
+import { Key, MouseEventHandler } from 'react';
 import { css, cx } from '@emotion/css';
 import { RadioGroup } from '@headlessui/react';
 import { getValueBykey } from 'components/utils/utils';
@@ -13,13 +13,29 @@ type Props<T> = {
   className?: string;
   custom?: (checked: boolean, label?: string) => JSX.Element;
   onChange?(value: T): void;
+  onOptionClick?: MouseEventHandler;
 };
 
-export function RadioSelect<T>({ value, options, idKey, labelKey, inline, custom, className, onChange }: Props<T>) {
+export function RadioSelect<T>({
+  value,
+  options,
+  idKey,
+  labelKey,
+  inline,
+  custom,
+  className,
+  onChange,
+  onOptionClick,
+}: Props<T>) {
   return (
     <RadioGroup className={cx(styles.radios(inline), className)} value={value} onChange={onChange}>
       {options.map((o, index) => (
-        <RadioGroup.Option key={idKey ? (o[idKey] as Key) : index} value={o} className={styles.option}>
+        <RadioGroup.Option
+          key={idKey ? (o[idKey] as Key) : index}
+          value={o}
+          className={styles.option}
+          onClick={onOptionClick}
+        >
           {({ active, checked }) =>
             custom ? (
               custom(checked, getValueBykey(o, labelKey))

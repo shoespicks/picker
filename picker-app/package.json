@@ -3,15 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "export": "next build && next export",
+    "dev": "yarn codegen && next dev",
+    "export": "yarn codegen && next build && next export",
     "start": "next start",
     "lint": "next lint",
     "fix": "yarn lint --fix",
     "lint:css": "stylelint ./src/**/*.{css,js,jsx,ts,tsx}",
     "fix:css": "stylelint ./src/**/*.{css,js,jsx,ts,tsx} --fix",
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json}'",
-    "codegen": "yarn codegen:nexus && yarn codegen:graphql",
+    "codegen": "yarn workspace picker-types codegen && yarn codegen:nexus && yarn codegen:graphql",
     "codegen:nexus": "ts-node -r tsconfig-paths/register --compiler-options '{\"module\":\"CommonJS\"}' --transpile-only src/graphql/nexus-schema.ts",
     "codegen:graphql": "graphql-codegen --config src/graphql/codegen.ts"
   },

@@ -7,8 +7,8 @@
   "private": true,
   "scripts": {
     "i": "yarn install",
-    "dev": "PICKER_ENV='local' && yarn codegen && yarn workspace picker-app dev",
-    "export": "yarn codegen && yarn workspace picker-app export",
+    "dev": "PICKER_ENV='local' && yarn workspace picker-app dev",
+    "export": "yarn workspace picker-app export",
     "codegen": "yarn workspace picker-types codegen && yarn workspace picker-app codegen"
   },
   "devDependencies": {

@@ -4,10 +4,8 @@ import { Theme, useTheme } from '@emotion/react';
 import { Drawer } from 'components/molecules/Drawer';
 
 export const HeaderNavigation: FC<PropsWithChildren> = ({ children }) => {
-  const theme = useTheme();
-  const styles = getStyles(theme);
-
   const [isOpen, setIsOpen] = useState(false);
+
   const closeModal = () => {
     setIsOpen(false);
     let elements = document.getElementsByClassName(styles.openbtn2);
@@ -19,6 +17,9 @@ export const HeaderNavigation: FC<PropsWithChildren> = ({ children }) => {
     let elements = document.getElementsByClassName(styles.openbtn2);
     elements[0].classList.add(styles.active);
   };
+
+  const theme = useTheme();
+  const styles = getStyles(theme);
 
   return (
     <Drawer
@@ -38,13 +39,11 @@ export const HeaderNavigation: FC<PropsWithChildren> = ({ children }) => {
 
 const getStyles = (theme: Theme) => ({
   openbtn2: css`
-    position: relative; /* ボタン内側の基点となるためrelativeを指定 */
+    position: relative;
     width: 50px;
     height: 50px;
     cursor: pointer;
     background: #fff;
-
-    /* ボタン内側 */
 
     span {
       position: absolute;
@@ -52,7 +51,7 @@ const getStyles = (theme: Theme) => ({
       display: inline-block;
       height: 2px;
       background-color: #666;
-      transition: all 0.4s; /* アニメーションの設定 */
+      transition: all 0.4s;
     }
 
     span:nth-of-type(1) {
@@ -66,7 +65,20 @@ const getStyles = (theme: Theme) => ({
     }
   `,
   active: css`
-    /* activeクラスが付与されると線が回転して×に */
+    position: relative;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    background: #fff;
+
+    span {
+      position: absolute;
+      left: 13px;
+      display: inline-block;
+      height: 2px;
+      background-color: #666;
+      transition: all 0.4s;
+    }
 
     span:nth-of-type(1) {
       top: 20px;

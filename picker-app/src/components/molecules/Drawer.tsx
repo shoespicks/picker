@@ -33,39 +33,22 @@ export const Drawer: FC<PropsWithChildren<Props>> = ({ buttonElement, children }
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
+            enterFrom="opacity-0 scale-95"
+            enterTo="opacity-100 scale-100"
             leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
+            leaveFrom="opacity-100 scale-100"
+            leaveTo="opacity-0 scale-95"
           >
-            <div />
+            <Dialog.Panel>
+              <button type="button">
+                <div className={styles.active} onClick={closeModal}>
+                  <span></span>
+                  <span></span>
+                </div>
+              </button>
+              {children}
+            </Dialog.Panel>
           </Transition.Child>
-          <div>
-            <div>
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
-                <Dialog.Panel>
-                  <div>
-                    <button type="button" onClick={closeModal}>
-                      <div className={styles.active} onClick={closeModal}>
-                        <span></span>
-                        <span></span>
-                      </div>
-                    </button>
-                  </div>
-                  {children}
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
         </Dialog>
       </Transition>
     </>
@@ -85,13 +68,11 @@ const getStyles = (theme: Theme) => ({
     background-color: ${theme.main};
   `,
   openbtn2: css`
-    position: relative; /* ボタン内側の基点となるためrelativeを指定 */
+    position: relative;
     width: 50px;
     height: 50px;
     cursor: pointer;
     background: #fff;
-
-    /* ボタン内側 */
 
     span {
       position: absolute;
@@ -99,7 +80,7 @@ const getStyles = (theme: Theme) => ({
       display: inline-block;
       height: 2px;
       background-color: #666;
-      transition: all 0.4s; /* アニメーションの設定 */
+      transition: all 0.4s;
     }
 
     span:nth-of-type(1) {
@@ -113,7 +94,7 @@ const getStyles = (theme: Theme) => ({
     }
   `,
   active: css`
-    position: relative; /* ボタン内側の基点となるためrelativeを指定 */
+    position: relative;
     width: 50px;
     height: 50px;
     cursor: pointer;
@@ -125,10 +106,8 @@ const getStyles = (theme: Theme) => ({
       display: inline-block;
       height: 2px;
       background-color: #666;
-      transition: all 0.4s; /* アニメーションの設定 */
+      transition: all 0.4s;
     }
-
-    /* activeクラスが付与されると線が回転して×に */
 
     span:nth-of-type(1) {
       top: 20px;

@@ -1,13 +1,11 @@
-const bffBaseUrl = process.env.NEXT_PUBLIC_PICKER_BFF_BASE_URL || 'http://localhost:3000';
+import { BFF_GRAPHQL_ENDPOINT } from 'shared/constants/endpoints';
 
 export const useFetchData = <TData, TVariables>(
   query: string,
   options?: RequestInit['headers']
 ): ((variables?: TVariables) => Promise<TData>) => {
-  const url = `${bffBaseUrl}/api/graphql`;
-
   return async (variables?: TVariables) => {
-    const res = await fetch(url, {
+    const res = await fetch(BFF_GRAPHQL_ENDPOINT, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

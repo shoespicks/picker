@@ -16,7 +16,7 @@ export const Footer: FC = () => {
       <Container>
         <div className={styles.footerContent}>
           <div>
-            <Link href="/">
+            <Link href="/track-and-field">
               <a className={styles.footerLogoFrame}>
                 <Image src="/picker.svg" fill alt="picker" />
               </a>

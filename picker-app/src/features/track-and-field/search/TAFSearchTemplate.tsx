@@ -16,7 +16,7 @@ type Props = {
   onSubmit?(input: SearchFormInput): void;
 };
 
-export const TAFSearchTemplate: FC<Props> = ({ data, defaultValues, onSubmit }) => {
+export const TAFSearchTemplate: FC<Props> = ({ data, defaultValues, isLoading, onSubmit }) => {
   return (
     <>
       <Container
@@ -25,8 +25,10 @@ export const TAFSearchTemplate: FC<Props> = ({ data, defaultValues, onSubmit }) 
           padding-top: ${$spacing.lg};
         `}
       >
-        <MultiColumn leftColumnElement={<TAFSearchForm defaultValues={defaultValues} onSubmit={onSubmit} />}>
-          <TAFSearchResultList results={data?.spikes} />
+        <MultiColumn
+          leftColumnElement={<TAFSearchForm defaultValues={defaultValues} isLoading={isLoading} onSubmit={onSubmit} />}
+        >
+          <TAFSearchResultList results={data?.spikes} isLoading={isLoading} />
         </MultiColumn>
       </Container>
       <Spacer size="176px"></Spacer>

@@ -1,6 +1,7 @@
 import React, { type FC } from 'react';
 import { useRouter } from 'next/router';
 import { css } from '@emotion/css';
+import { Spinner } from 'components/atoms/Spinner';
 import { TAF_SEARCH_PAGE_PATH } from 'features/track-and-field/constants/routing-path';
 import { TAFSearchResultCard } from 'features/track-and-field/search/searchResults/TAFSearchResultCard';
 import { SpikeBase, SpikeBaseFragment } from 'graphql/generated/codegen-client';
@@ -10,9 +11,10 @@ import { $spacing } from 'shared/constants/styles/spacing';
 
 type Props = {
   results?: readonly SpikeBase[];
+  isLoading?: boolean;
 };
 
-export const TAFSearchResultList: FC<Props> = ({ results }) => {
+export const TAFSearchResultList: FC<Props> = ({ results, isLoading }) => {
   const router = useRouter();
 
   const handleClick = (value: SpikeBaseFragment) => {
@@ -21,7 +23,7 @@ export const TAFSearchResultList: FC<Props> = ({ results }) => {
 
   return (
     <>
-      {results ? (
+      {results && !isLoading ? (
         <ul className={styles.root}>
           {results.map((value, index) => (
             <li key={index} className={$common.truncate}>
@@ -30,7 +32,7 @@ export const TAFSearchResultList: FC<Props> = ({ results }) => {
           ))}
         </ul>
       ) : (
-        <div>loading</div>
+        <Spinner />
       )}
     </>
   );

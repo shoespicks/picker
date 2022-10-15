@@ -6,7 +6,7 @@
     "dev": "yarn codegen && next dev",
     "build": "yarn codegen && next build",
     "export": "yarn codegen && next build && next export",
-    "start": "next start",
+    "start": "yarn codegen && next start",
     "lint": "next lint",
     "fix": "yarn lint --fix",
     "lint:css": "stylelint ./src/**/*.{css,js,jsx,ts,tsx}",

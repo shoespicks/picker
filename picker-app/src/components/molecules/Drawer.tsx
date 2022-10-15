@@ -30,15 +30,7 @@ export const Drawer: FC<PropsWithChildren<Props>> = ({ buttonElement, children }
 
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className={styles.humbergerArea} onClose={closeModal}>
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0 scale-95"
-            enterTo="opacity-100 scale-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100 scale-100"
-            leaveTo="opacity-0 scale-95"
-          >
+          <Transition.Child as={Fragment}>
             <Dialog.Panel>
               <button type="button">
                 <div className={styles.active} onClick={closeModal}>

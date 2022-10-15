@@ -38,6 +38,9 @@ export const TAFHeader: FC<PropsWithChildren> = () => {
           </a>
         </Link>
       </ul>
+      <hr />
+      <button>ログイン</button>
+      <button>無料会員登録</button>
     </Header>
   );
 };

@@ -34,9 +34,7 @@ export const Header: FC<PropsWithChildren> = ({ children }) => {
           <HeaderNavigation>
             <div className={styles.humbergerArea}>
               {children}
-              <hr />
-              <button>ログイン</button>
-              <button>無料会員登録</button>
+
               <hr />
               <Section>
                 <H3>キーワード検索</H3>

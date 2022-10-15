@@ -1,7 +1,7 @@
 import React, { PropsWithChildren, type FC } from 'react';
 import { css } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
-import { Drawer } from 'component/molecules/Drawer';
+import { Drawer } from 'components/molecules/Drawer';
 
 export const HeaderNavigation: FC<PropsWithChildren> = ({ children }) => {
   const theme = useTheme();

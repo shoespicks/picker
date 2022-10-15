@@ -7,18 +7,18 @@ import { IShoeColor } from 'picker-types/types/track-and-field/shoeColors';
 import { IShoeEnvirloment } from 'picker-types/types/track-and-field/shoeEnviroment';
 import { IEventItem } from 'picker-types/types/track-and-field/shoeEvents';
 import { IShoeLaceType } from 'picker-types/types/track-and-field/shoeLaceTypes';
-import { Button } from 'component/atoms/Button';
-import { Card } from 'component/atoms/Card';
-import { CheckboxControl } from 'component/atoms/Checkbox';
-import { Form } from 'component/atoms/Form';
-import { InputControl } from 'component/atoms/input/Input';
-import { Label } from 'component/atoms/Label';
-import { RangeSliderControl } from 'component/atoms/RangeSlider';
-import { SelectControl } from 'component/atoms/Select';
-import { Spacer } from 'component/atoms/Spacer';
-import { H4 } from 'component/atoms/Typography';
-import { CheckboxesControl } from 'component/molecules/Checkboxes';
-import { ColorSelectControl } from 'component/molecules/ColorSelect';
+import { Button } from 'components/atoms/Button';
+import { Card } from 'components/atoms/Card';
+import { CheckboxControl } from 'components/atoms/Checkbox';
+import { Form } from 'components/atoms/Form';
+import { InputControl } from 'components/atoms/input/Input';
+import { Label } from 'components/atoms/Label';
+import { RangeSliderControl } from 'components/atoms/RangeSlider';
+import { SelectControl } from 'components/atoms/Select';
+import { Spacer } from 'components/atoms/Spacer';
+import { H4 } from 'components/atoms/Typography';
+import { CheckboxesControl } from 'components/molecules/Checkboxes';
+import { ColorSelectControl } from 'components/molecules/ColorSelect';
 import {
   IYears,
   SearchFormInput,

@@ -1,7 +1,7 @@
 import React, { type FC } from 'react';
 import { css } from '@emotion/css';
-import { Container } from 'component/atoms/Container';
-import { Spacer } from 'component/atoms/Spacer';
+import { Container } from 'components/atoms/Container';
+import { Spacer } from 'components/atoms/Spacer';
 import { Spike } from 'graphql/generated/codegen-client';
 import { $spacing } from 'shared/constants/styles/spacing';
 

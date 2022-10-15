@@ -1,8 +1,8 @@
 import React, { Key } from 'react';
 import { css } from '@emotion/css';
 import { FieldValues, useController, UseControllerProps } from 'react-hook-form';
-import { Checkbox } from 'component/atoms/Checkbox';
-import { compareByKey, getValueBykey, selectedByKey } from 'component/utils/utils';
+import { Checkbox } from 'components/atoms/Checkbox';
+import { compareByKey, getValueBykey, selectedByKey } from 'components/utils/utils';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 type Props<T> = {

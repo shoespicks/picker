@@ -1,6 +1,6 @@
 import React, { type FC } from 'react';
 import { css } from '@emotion/css';
-import { Card } from 'component/atoms/Card';
+import { Card } from 'components/atoms/Card';
 import { TAFTopTitleCard } from 'features/track-and-field/top/TAFTopTitleCard';
 import { mediaGreaterThan } from 'shared/constants/styles/media-query';
 

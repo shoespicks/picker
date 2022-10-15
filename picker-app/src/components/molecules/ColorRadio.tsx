@@ -1,6 +1,6 @@
 import React from 'react';
-import { ColorToken } from 'component/atoms/ColorToken';
-import { RadioSelect } from 'component/molecules/RadioSelect';
+import { ColorToken } from 'components/atoms/ColorToken';
+import { RadioSelect } from 'components/molecules/RadioSelect';
 
 type Props<T> = {
   value: T;

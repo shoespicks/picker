@@ -4,7 +4,7 @@ import { Theme, useTheme } from '@emotion/react';
 import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import * as CheckboxPrimitive from '@radix-ui/react-checkbox';
 import { FieldValues, useController, UseControllerProps } from 'react-hook-form';
-import { Icon } from 'component/atoms/Icon';
+import { Icon } from 'components/atoms/Icon';
 import { $common } from 'shared/constants/styles/common';
 import { $spacing } from 'shared/constants/styles/spacing';
 

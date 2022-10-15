@@ -1,9 +1,9 @@
 import React, { type FC } from 'react';
 import { css } from '@emotion/css';
 import Image from 'next/future/image';
-import { AspectRatio } from 'component/atoms/AspectRatio';
-import { Card } from 'component/atoms/Card';
-import { Spacer } from 'component/atoms/Spacer';
+import { AspectRatio } from 'components/atoms/AspectRatio';
+import { Card } from 'components/atoms/Card';
+import { Spacer } from 'components/atoms/Spacer';
 import { mediaGreaterThan } from 'shared/constants/styles/media-query';
 
 type Props = {

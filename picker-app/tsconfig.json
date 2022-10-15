@@ -24,6 +24,9 @@
       "features/*": ["features/*"],
       "components/*": ["components/*"],
       "graphql/*": ["graphql/*"],
+      "layout/*": ["layout/*"],
+      "pages/*": ["pages/*"],
+      "shared/*": ["shared/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

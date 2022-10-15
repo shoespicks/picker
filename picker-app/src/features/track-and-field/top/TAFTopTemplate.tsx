@@ -1,6 +1,6 @@
 import React, { type FC } from 'react';
-import { Container } from 'component/atoms/Container';
-import { Spacer } from 'component/atoms/Spacer';
+import { Container } from 'components/atoms/Container';
+import { Spacer } from 'components/atoms/Spacer';
 import { TAFTopHero } from 'features/track-and-field/top/TAFTopHero';
 import { TAFTopSearchLauncher } from 'features/track-and-field/top/TAFTopSearchLauncher';
 import { $spacing } from 'shared/constants/styles/spacing';

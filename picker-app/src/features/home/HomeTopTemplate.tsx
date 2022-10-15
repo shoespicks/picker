@@ -1,5 +1,5 @@
 import React, { type FC } from 'react';
-import { Spinner } from 'component/atoms/Spinner';
+import { Spinner } from 'components/atoms/Spinner';
 
 export const HomeTopTemplate: FC = () => (
   <>

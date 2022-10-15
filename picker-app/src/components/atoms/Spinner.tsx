@@ -2,7 +2,7 @@ import React, { type FC } from 'react';
 import { css, cx } from '@emotion/css';
 import { useTheme } from '@emotion/react';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-import { Icon } from 'component/atoms/Icon';
+import { Icon } from 'components/atoms/Icon';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 type Props = {

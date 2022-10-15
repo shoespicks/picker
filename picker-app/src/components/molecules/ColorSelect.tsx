@@ -1,7 +1,7 @@
 import React from 'react';
 import { FieldValues, useController, UseControllerProps } from 'react-hook-form';
-import { ColorToken } from 'component/atoms/ColorToken';
-import { Checkboxes } from 'component/molecules/Checkboxes';
+import { ColorToken } from 'components/atoms/ColorToken';
+import { Checkboxes } from 'components/molecules/Checkboxes';
 
 type Props<T> = {
   value: T[];

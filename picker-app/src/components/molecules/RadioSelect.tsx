@@ -1,7 +1,7 @@
 import React, { Key } from 'react';
 import { css, cx } from '@emotion/css';
 import { RadioGroup } from '@headlessui/react';
-import { getValueBykey } from 'component/utils/utils';
+import { getValueBykey } from 'components/utils/utils';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 type Props<T> = {

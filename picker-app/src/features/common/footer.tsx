@@ -3,8 +3,8 @@ import Link from 'next/link';
 import { css } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import Image from 'next/future/image';
-import { Container } from 'component/atoms/Container';
-import { Spacer } from 'component/atoms/Spacer';
+import { Container } from 'components/atoms/Container';
+import { Spacer } from 'components/atoms/Spacer';
 import { mediaGreaterThan } from 'shared/constants/styles/media-query';
 
 export const Footer: FC = () => {

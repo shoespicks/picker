@@ -1,8 +1,8 @@
 import React, { type FC } from 'react';
 import { css } from '@emotion/css';
-import { Container } from 'component/atoms/Container';
-import { Spacer } from 'component/atoms/Spacer';
-import { MultiColumn } from 'component/layout/MultiColumn';
+import { Container } from 'components/atoms/Container';
+import { Spacer } from 'components/atoms/Spacer';
+import { MultiColumn } from 'components/layout/MultiColumn';
 import { SearchFormInput } from 'features/track-and-field/constants/search';
 import { TAFSearchResultList } from 'features/track-and-field/search/searchResults/TAFSearchResultList';
 import { TAFSearchForm } from 'features/track-and-field/search/TAFSearchForm';

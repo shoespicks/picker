@@ -2,7 +2,7 @@ import React, { ComponentPropsWithoutRef, type FC, MouseEventHandler } from 'rea
 import { css, cx } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { Icon } from 'component/atoms/Icon';
+import { Icon } from 'components/atoms/Icon';
 import { $behavior } from 'shared/constants/styles/behavior';
 import { setSolidShadow } from 'shared/constants/styles/common';
 import { $inputDefaultHeight, Size } from 'shared/constants/styles/size';

@@ -2,8 +2,8 @@ import React, { type FC, MouseEventHandler, PropsWithChildren } from 'react';
 import { css, cx } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-import { Button, ButtonColor } from 'component/atoms/Button';
-import { Input } from 'component/atoms/input/Input';
+import { Button, ButtonColor } from 'components/atoms/Button';
+import { Input } from 'components/atoms/input/Input';
 import { setSolidShadow } from 'shared/constants/styles/common';
 import { $inputBorderRadius, $inputDefaultHeight, Size } from 'shared/constants/styles/size';
 

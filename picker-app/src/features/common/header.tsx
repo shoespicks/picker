@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { css } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import Image from 'next/future/image';
-import { Container } from 'component/atoms/Container';
+import { Container } from 'components/atoms/Container';
 import { $headerHeight } from 'shared/constants/styles/size';
 import { HeaderNavigation } from './HeaderNavigation';
 

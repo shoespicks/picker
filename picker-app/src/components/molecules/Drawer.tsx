@@ -12,13 +12,13 @@ export const Drawer: FC<PropsWithChildren<Props>> = ({ buttonElement, children }
 
   const closeModal = () => {
     setIsOpen(false);
-    let elements = document.getElementsByClassName(styles.openbtn2);
+    const elements = document.getElementsByClassName(styles.openbtn2);
     elements[0].classList.remove(styles.active);
   };
 
   const openModal = () => {
     setIsOpen(true);
-    let elements = document.getElementsByClassName(styles.openbtn2);
+    const elements = document.getElementsByClassName(styles.openbtn2);
     elements[0].classList.add(styles.active);
   };
   const theme = useTheme();

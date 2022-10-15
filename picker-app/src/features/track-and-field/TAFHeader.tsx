@@ -4,6 +4,7 @@ import { css } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import { Header } from 'features/common/header';
 import { $headerHeight } from 'shared/constants/styles/size';
+import { SignButtons } from 'components/molecules/SignButtons';
 
 export const TAFHeader: FC<PropsWithChildren> = () => {
   const theme = useTheme();
@@ -12,35 +13,34 @@ export const TAFHeader: FC<PropsWithChildren> = () => {
   return (
     <Header>
       <ul className={styles.serviceMenu}>
-        <Link href="/track-and-field#1">
-          <a>
-            <li>検索</li>
-          </a>
-        </Link>
-        <Link href="/track-and-field#2">
-          <a>
-            <li>比較</li>
-          </a>
-        </Link>
-        <Link href="/track-and-field#3">
-          <a>
-            <li>チャート</li>
-          </a>
-        </Link>
-        <Link href="/track-and-field#4">
-          <a>
-            <li>ユーザーランキング</li>
-          </a>
-        </Link>
-        <Link href="/track-and-field#5">
-          <a>
-            <li>記事一覧</li>
-          </a>
-        </Link>
+        <li>
+          <Link href="/track-and-field#1">
+            <a>検索</a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/track-and-field#2">
+            <a>比較</a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/track-and-field#3">
+            <a>チャート</a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/track-and-field#4">
+            <a>ユーザーランキング</a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/track-and-field#5">
+            <a>記事一覧</a>
+          </Link>
+        </li>
       </ul>
-      <hr />
-      <button>ログイン</button>
-      <button>無料会員登録</button>
+
+      <SignButtons></SignButtons>
     </Header>
   );
 };
@@ -60,7 +60,10 @@ const getStyles = (theme: Theme) => ({
     margin-top: 32px;
 
     li {
-      margin: 12px 0;
+      margin: 24px 0;
+    }
+
+    a {
       font-size: 16px;
       font-weight: 400;
 
@@ -68,11 +71,11 @@ const getStyles = (theme: Theme) => ({
         margin-left: 12px;
         transition: all 0.4s;
       }
-    }
 
-    li::before {
-      margin-right: 12px;
-      content: '＞';
+      ::before {
+        margin-right: 12px;
+        content: '＞';
+      }
     }
   `,
 });

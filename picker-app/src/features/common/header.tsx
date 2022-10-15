@@ -35,7 +35,6 @@ export const Header: FC<PropsWithChildren> = ({ children }) => {
             <div className={styles.humbergerArea}>
               {children}
 
-              <hr />
               <Section>
                 <H3>キーワード検索</H3>
                 <Spacer size={$spacing.md}></Spacer>
@@ -44,26 +43,26 @@ export const Header: FC<PropsWithChildren> = ({ children }) => {
               <hr className={styles.line} />
               <p className={styles.serviceTitle}>PICKER</p>
               <ul className={styles.serviceType}>
-                <Link href="/track-and-field#6">
-                  <a>
-                    <li>陸上</li>
-                  </a>
-                </Link>
-                <Link href="/track-and-field#7">
-                  <a>
-                    <li>プロテイン</li>
-                  </a>
-                </Link>
-                <Link href="/track-and-field#8">
-                  <a>
-                    <li>テニス</li>
-                  </a>
-                </Link>
-                <Link href="/track-and-field#9">
-                  <a>
-                    <li>野球</li>
-                  </a>
-                </Link>
+                <li>
+                  <Link href="/track-and-field#6">
+                    <a>陸上</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/track-and-field#7">
+                    <a>プロテイン</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/track-and-field#8">
+                    <a>テニス</a>
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/track-and-field#9">
+                    <a>野球</a>
+                  </Link>
+                </li>
               </ul>
             </div>
           </HeaderNavigation>
@@ -107,8 +106,10 @@ const getStyles = (theme: Theme) => ({
   `,
   serviceType: css`
     li {
-      width: 100%;
-      margin: 10px 0;
+      margin: 20px 0;
+    }
+
+    a {
       font-size: 14px;
       font-weight: 400;
 
@@ -116,11 +117,11 @@ const getStyles = (theme: Theme) => ({
         margin-left: 12px;
         transition: all 0.4s;
       }
-    }
 
-    li::before {
-      margin-right: 12px;
-      content: '＞';
+      ::before {
+        margin-right: 12px;
+        content: '＞';
+      }
     }
   `,
 });

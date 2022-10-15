@@ -1,4 +1,4 @@
-import React, { type FC } from 'react';
+import { FC } from 'react';
 import { useRouter } from 'next/router';
 import { css } from '@emotion/css';
 import { Spinner } from 'components/atoms/Spinner';

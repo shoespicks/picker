@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, useState, type FC } from 'react';
+import React, { PropsWithChildren, type FC } from 'react';
 import { css } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import { Drawer } from 'components/molecules/Drawer';

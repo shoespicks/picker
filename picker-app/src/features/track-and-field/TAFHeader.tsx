@@ -2,9 +2,9 @@ import React, { PropsWithChildren, type FC } from 'react';
 import Link from 'next/link';
 import { css } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
+import { SignButtons } from 'components/molecules/SignButtons';
 import { Header } from 'features/common/header';
 import { $headerHeight } from 'shared/constants/styles/size';
-import { SignButtons } from 'components/molecules/SignButtons';
 
 export const TAFHeader: FC<PropsWithChildren> = () => {
   const theme = useTheme();

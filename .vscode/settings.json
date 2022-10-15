@@ -1,6 +1,5 @@
 {
-  "eslint.workingDirectories": ["."],
-  "editor.formatOnSave": true,
+  "eslint.workingDirectories": [{ "mode": "auto" }],
   "prettier.bracketSameLine": false,
   "prettier.configPath": "./.prettierrc",
   "prettier.prettierPath": "./node_modules/prettier",
@@ -17,5 +16,7 @@
   "stylelint.customSyntax": "@stylelint/postcss-css-in-js",
   "stylelint.validate": ["css", "less", "postcss", "scss", "postcss-css-in-js", "typescriptreact", "javascriptreact"],
   "stylelint.snippet": ["css", "less", "postcss", "tsx", "postcss-css-in-js", "typescriptreact", "javascriptreact"],
-  "eslint.run": "onType"
+  "eslint.run": "onType",
+  "eslint.alwaysShowStatus": true,
+  "eslint.format.enable": true
 }

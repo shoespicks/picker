@@ -1,20 +1,18 @@
 import { FC, Fragment, PropsWithChildren, useState } from 'react';
-import { css } from '@emotion/css';
+import { css, cx } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import { Dialog, Transition } from '@headlessui/react';
 
 type Props = {
   buttonElement?: JSX.Element;
-  
-  value?: boolean;
 };
 
-export const Drawer: FC<PropsWithChildren<Props>> = ({ buttonElement, children, value }) => {
+export const Drawer: FC<PropsWithChildren<Props>> = ({ buttonElement, children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const closeModal = () => {
     setIsOpen(false);
-    // value = false;
+    
     // const elements = document.getElementsByClassName(styles.openbtn2);
     // elements[0].classList.remove(styles.active);
     
@@ -22,7 +20,7 @@ export const Drawer: FC<PropsWithChildren<Props>> = ({ buttonElement, children, 
 
   const openModal = () => {
     setIsOpen(true);
-    // value = true;
+    
     // const elements = document.getElementsByClassName(styles.openbtn2);
     // elements[0].classList.add(styles.active);
   };
@@ -39,7 +37,7 @@ export const Drawer: FC<PropsWithChildren<Props>> = ({ buttonElement, children, 
             <Transition.Child as={Fragment}>
               <Dialog.Panel className={styles.hamburgerMenuArea}>
                 <button type="button" className={styles.hamburgerIconArea}>
-                  <div className={styles.hambergerIcon(value)} onClick={closeModal}>
+                  <div className={cx(styles.hambergerIcon,isOpen?styles.hambergerIconClose:styles.hambergerIconOpen)} onClick={closeModal}>
                     <span></span>
                     <span></span>
                   </div>
@@ -85,37 +83,50 @@ const getStyles = (theme: Theme) => ({
     height: 100%;
     padding: 0 24px;
   `,
-  hambergerIcon: (value?: boolean) =>
+  hambergerIcon:
+  css`
+  position: relative;
+  width: 64px;
+  height: 50px;
+  cursor: pointer;
+  
+
+  span {
+    position: absolute;
+    display: inline-block;
+    height: 1px;
+    background-color: ${theme.background};
+    transition: all 0.4s;
+  }
+  `,
+
+  hambergerIconOpen:
     css`
-    position: relative;
-    width: 64px;
-    height: 50px;
-    cursor: pointer;
-    
-
-    span {
-      position: absolute;
-      display: inline-block;
-      height: 1px;
-      background-color: ${theme.background};
-      transition: all 0.4s;
-    }
-
     span:nth-of-type(1) {
-      top: ${value ? 22 : 20}px;
-      left: ${value ? 0 : 16}px;
-      width: ${value ? 97.7 : 100}%;
-      transform: translateY(${value ? 0 : 6}px) rotate(${value ? 0 : -20}deg);
+      top:  22px;
+      width:  97.7%;
     }
 
     span:nth-of-type(2) {
-      top: ${value ? 29 : 32}px;
-      left: ${value ? 0 : 16}px;
-      width: ${value ? 97.7 : 100}%;
-      transform: translateY(${value ? 0 : -6}px) rotate(${value ? 0 : 20}deg);
+      top:  29px;
+      width:  97.7%;
     }
-      
-      
+    `,
+  hambergerIconClose:
+    css`
+    span:nth-of-type(1) {
+      top: 20px;
+      left:  16px;
+      width:  100%;
+      transform: translateY(6px) rotate(-20deg);
+    }
+
+    span:nth-of-type(2) {
+      top:  32px;
+      left: 16px;
+      width: 100%;
+      transform: translateY(-6px) rotate(20deg);
+    }
     `,
 
   // openbtn2: css`

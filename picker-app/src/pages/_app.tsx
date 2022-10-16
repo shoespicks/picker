@@ -6,6 +6,7 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import { QueryClient } from '@tanstack/query-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { QueryClientProvider } from '@tanstack/react-query';
+import { DefaultSeo } from 'next-seo';
 config.autoAddCss = false;
 
 export type NextPageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<P, IP> & {
@@ -21,9 +22,36 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   const queryClient = new QueryClient();
 
   return getLayout(
-    <QueryClientProvider client={queryClient}>
-      <Component {...pageProps} />
-    </QueryClientProvider>
+    <>
+      <DefaultSeo
+        defaultTitle="デフォルトのタイトル"
+        description="デフォルトの説明"
+        openGraph={{
+          type: 'website',
+          title: 'デフォルトのタイトル',
+          description: 'デフォルトの説明',
+          site_name: 'サイトの名前',
+          url: 'サイトのURL',
+          images: [
+            {
+              url: 'https://www.example.ie/og-image-01.jpg',
+              width: 800,
+              height: 600,
+              alt: 'Og Image Alt',
+              type: 'image/jpeg',
+            },
+          ],
+        }}
+        twitter={{
+          handle: '@handle',
+          site: '@site',
+          cardType: 'summary_large_image',
+        }}
+      />
+      <QueryClientProvider client={queryClient}>
+        <Component {...pageProps} />
+      </QueryClientProvider>
+    </>
   );
 };
 

@@ -1,5 +1,6 @@
 import { ReactElement } from 'react';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, InferGetStaticPropsType } from 'next';
+import { NextSeo } from 'next-seo';
 import { TAF_SEARCH_PAGE_PATH } from 'features/track-and-field/constants/routing-path';
 import { TAFSpikeTemplate } from 'features/track-and-field/spike/TAFSpikeTemplate';
 import { Spike } from 'graphql/generated/codegen-client';
@@ -14,6 +15,20 @@ type Props = InferGetStaticPropsType<typeof getStaticProps> & {
 const TAFSpikePage: NextPageWithLayout<Props> = props => {
   return (
     <>
+      <NextSeo
+        title={props.spike.name}
+        description="ページの説明"
+        openGraph={{
+          url: 'ページのURL',
+          title: 'ページのタイトル',
+          description: 'ページの説明',
+          images: [
+            {
+              url: props.spike.colorImages[0].imageUrls[0],
+            },
+          ],
+        }}
+      />
       <TAFSpikeTemplate spike={props.spike}></TAFSpikeTemplate>
     </>
   );

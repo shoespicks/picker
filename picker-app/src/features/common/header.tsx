@@ -81,6 +81,7 @@ const getStyles = (theme: Theme) => ({
     align-items: center;
     width: 100%;
     height: ${$headerHeight};
+    height: 80px;
     background-color: ${theme.main};
   `,
   headerContent: css`

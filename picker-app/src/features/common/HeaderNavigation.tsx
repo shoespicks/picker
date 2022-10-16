@@ -26,28 +26,27 @@ export const HeaderNavigation: FC<PropsWithChildren> = ({ children }) => {
 const getStyles = (theme: Theme) => ({
   openbtn2: css`
     position: relative;
-    width: 50px;
+    width: 64px;
     height: 50px;
     cursor: pointer;
-    background: #fff;
+    
 
     span {
       position: absolute;
-      left: 13px;
       display: inline-block;
-      height: 2px;
-      background-color: #666;
+      height: 1px;
+      background-color: ${theme.background};
       transition: all 0.4s;
     }
 
     span:nth-of-type(1) {
       top: 22px;
-      width: 50%;
+      width: 100%;
     }
 
     span:nth-of-type(2) {
       top: 29px;
-      width: 50%;
+      width: 100%;
     }
   `,
   active: css`

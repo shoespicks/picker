@@ -14,7 +14,7 @@ export const Drawer: FC<PropsWithChildren<Props>> = ({ buttonElement, children, 
 
   const closeModal = () => {
     setIsOpen(false);
-    value = false;
+    // value = false;
     // const elements = document.getElementsByClassName(styles.openbtn2);
     // elements[0].classList.remove(styles.active);
     
@@ -22,7 +22,7 @@ export const Drawer: FC<PropsWithChildren<Props>> = ({ buttonElement, children, 
 
   const openModal = () => {
     setIsOpen(true);
-    value = true;
+    // value = true;
     // const elements = document.getElementsByClassName(styles.openbtn2);
     // elements[0].classList.add(styles.active);
   };
@@ -38,7 +38,7 @@ export const Drawer: FC<PropsWithChildren<Props>> = ({ buttonElement, children, 
           <Dialog as="div" className={styles.hamburgerArea} onClose={closeModal}>
             <Transition.Child as={Fragment}>
               <Dialog.Panel className={styles.hamburgerMenuArea}>
-                <button type="button">
+                <button type="button" className={styles.hamburgerIconArea}>
                   <div className={styles.hambergerIcon(value)} onClick={closeModal}>
                     <span></span>
                     <span></span>
@@ -55,6 +55,14 @@ export const Drawer: FC<PropsWithChildren<Props>> = ({ buttonElement, children, 
 };
 
 const getStyles = (theme: Theme) => ({
+  hamburgerIconArea: css`
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    width: 100%;
+    height: 80px;
+    padding: 0 6px;
+  `,
   hamburgerBackground: css`
     position: absolute;
     top: 0;
@@ -75,96 +83,95 @@ const getStyles = (theme: Theme) => ({
   `,
   hamburgerMenuArea: css`
     height: 100%;
-    padding: 24px;
+    padding: 0 24px;
   `,
   hambergerIcon: (value?: boolean) =>
     css`
     position: relative;
-    width: 50px;
+    width: 64px;
     height: 50px;
     cursor: pointer;
-    background: #fff;
+    
 
     span {
       position: absolute;
-      left: 13px;
       display: inline-block;
-      height: 2px;
-      background-color: #666;
+      height: 1px;
+      background-color: ${theme.background};
       transition: all 0.4s;
     }
 
     span:nth-of-type(1) {
       top: ${value ? 22 : 20}px;
       left: ${value ? 0 : 16}px;
-      width: ${value ? 50 : 35}%;
-      transform: translateY(${value ? 0 : 6}px) rotate(${value ? 0 : -45}deg);
+      width: ${value ? 97.7 : 100}%;
+      transform: translateY(${value ? 0 : 6}px) rotate(${value ? 0 : -20}deg);
     }
 
     span:nth-of-type(2) {
       top: ${value ? 29 : 32}px;
       left: ${value ? 0 : 16}px;
-      width: ${value ? 50 : 35}%;
-      transform: translateY(${value ? 0 : -6}px) rotate(${value ? 0 : 45}deg);
+      width: ${value ? 97.7 : 100}%;
+      transform: translateY(${value ? 0 : -6}px) rotate(${value ? 0 : 20}deg);
     }
       
       
     `,
 
-  openbtn2: css`
-    position: relative;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    background: #fff;
+  // openbtn2: css`
+  //   position: relative;
+  //   width: 50px;
+  //   height: 50px;
+  //   cursor: pointer;
+  //   background: #fff;
 
-    span {
-      position: absolute;
-      left: 13px;
-      display: inline-block;
-      height: 2px;
-      background-color: #666;
-      transition: all 0.4s;
-    }
+  //   span {
+  //     position: absolute;
+  //     left: 13px;
+  //     display: inline-block;
+  //     height: 2px;
+  //     background-color: #666;
+  //     transition: all 0.4s;
+  //   }
 
-    span:nth-of-type(1) {
-      top: 22px;
-      width: 50%;
-    }
+  //   span:nth-of-type(1) {
+  //     top: 22px;
+  //     width: 50%;
+  //   }
 
-    span:nth-of-type(2) {
-      top: 29px;
-      width: 50%;
-    }
-  `,
-  active: css`
-    position: relative;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-    background: #fff;
+  //   span:nth-of-type(2) {
+  //     top: 29px;
+  //     width: 50%;
+  //   }
+  // `,
+  // active: css`
+  //   position: relative;
+  //   width: 50px;
+  //   height: 50px;
+  //   cursor: pointer;
+  //   background: #fff;
 
-    span {
-      position: absolute;
-      left: 13px;
-      display: inline-block;
-      height: 2px;
-      background-color: #666;
-      transition: all 0.4s;
-    }
+  //   span {
+  //     position: absolute;
+  //     left: 13px;
+  //     display: inline-block;
+  //     height: 2px;
+  //     background-color: #666;
+  //     transition: all 0.4s;
+  //   }
 
-    span:nth-of-type(1) {
-      top: 20px;
-      left: 16px;
-      width: 35%;
-      transform: translateY(6px) rotate(-45deg);
-    }
+  //   span:nth-of-type(1) {
+  //     top: 20px;
+  //     left: 16px;
+  //     width: 35%;
+  //     transform: translateY(6px) rotate(-45deg);
+  //   }
 
-    span:nth-of-type(2) {
-      top: 32px;
-      left: 16px;
-      width: 35%;
-      transform: translateY(-6px) rotate(45deg);
-    }
-  `,
+  //   span:nth-of-type(2) {
+  //     top: 32px;
+  //     left: 16px;
+  //     width: 35%;
+  //     transform: translateY(-6px) rotate(45deg);
+  //   }
+  // `,
 });

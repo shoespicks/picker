@@ -46,4 +46,29 @@ export const $behavior = {
       z-index: 1;
     }
   `,
+
+  /**
+   * ホバー時に黒背景が横から流れるアニメーション
+   */
+  overlayHover: (theme: Theme) => css`
+    position: relative;
+
+    ::after {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      pointer-events: none;
+      content: '';
+      background-color: transparent;
+      transition: background-color ease-in 150ms;
+    }
+
+    &:hover {
+      ::after {
+        background-color: ${theme.backgroundHover};
+      }
+    }
+  `,
 };

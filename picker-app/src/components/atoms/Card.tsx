@@ -1,6 +1,7 @@
 import React, { type FC, MouseEventHandler, PropsWithChildren } from 'react';
 import { css, cx } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
+import { $behavior } from 'shared/constants/styles/behavior';
 import { Size } from 'shared/constants/styles/size';
 import { $spacing } from 'shared/constants/styles/spacing';
 
@@ -86,11 +87,10 @@ const getStyles = (theme: Theme) => ({
     border: ${borderWidthPx}px solid black;
     border-radius: 8px;
   `,
-  hostClickable: css`
-    cursor: pointer;
-
-    &:hover {
-      background-color: ${theme.backgroundHover};
-    }
-  `,
+  hostClickable: cx(
+    css`
+      cursor: pointer;
+    `,
+    $behavior.overlayHover(theme)
+  ),
 });

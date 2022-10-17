@@ -16,7 +16,7 @@ export const Divider: FC<Props> = ({ orientation = 'horizontal', color, classNam
       orientation={orientation}
       className={cx(
         css`
-          background-color: ${color === 'inverse' ? theme.textInverse : theme.main};
+          background-color: ${color === 'inverse' ? theme.textInverse : theme.border};
 
           &[data-orientation='horizontal'] {
             width: 100%;

@@ -5,7 +5,7 @@ import { Theme } from '@emotion/react';
  */
 const $pallete = {
   black: '#000000',
-  blackClear: '#0000000a',
+  blackClear: '#00000008',
   blackClearDark: '#00000066',
   whiteClear: '#FFFFFF40',
   gray1: '#EBEBEB',

@@ -1,15 +1,6 @@
 import { FC } from 'react';
-import {
-  Chart as ChartJS,
-  ChartData,
-  ChartOptions,
-  Filler,
-  Legend,
-  LineElement,
-  PointElement,
-  RadialLinearScale,
-  Tooltip,
-} from 'chart.js';
+import { ChartData, ChartOptions } from 'chart.js';
+import 'chart.js/auto';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Radar as RCRadar } from 'react-chartjs-2';
 
@@ -19,8 +10,6 @@ type Props = {
   small?: boolean;
   className?: string;
 };
-
-ChartJS.register(RadialLinearScale, PointElement, LineElement, Filler, Tooltip, Legend);
 
 export const Radar: FC<Props> = ({
   data = [0, 0, 0, 0, 0],

@@ -12,6 +12,7 @@ type Props = {
   buttonIcon?: IconDefinition;
   buttonLabel?: string;
   buttonWidth?: Size;
+  placeholder?: string;
   onClick?: MouseEventHandler;
 };
 
@@ -20,6 +21,7 @@ export const InputButton: FC<PropsWithChildren<Props>> = ({
   buttonIcon,
   buttonLabel,
   buttonWidth,
+  placeholder,
   onClick,
 }) => {
   const iconOnly = !!buttonIcon && !buttonLabel;
@@ -27,7 +29,7 @@ export const InputButton: FC<PropsWithChildren<Props>> = ({
 
   return (
     <div className={styles.InputButtonContainer}>
-      <Input className={styles.Input} />
+      <Input placeholder={placeholder} className={styles.Input} />
       <Button
         color={buttonColor}
         icon={buttonIcon}

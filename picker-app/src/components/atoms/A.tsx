@@ -6,11 +6,12 @@ import { aStyle } from 'shared/constants/styles/typograhy';
 
 type TypographyProps = {
   href: string | UrlObject;
+  underline?: boolean;
   className?: string;
 };
 
-export const A: FC<PropsWithChildren<TypographyProps>> = ({ children, href, className }) => (
+export const A: FC<PropsWithChildren<TypographyProps>> = ({ children, href, underline, className }) => (
   <Link href={href}>
-    <a className={cx(aStyle, className)}>{children}</a>
+    <a className={cx(aStyle(underline), className)}>{children}</a>
   </Link>
 );

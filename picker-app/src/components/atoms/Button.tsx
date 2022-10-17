@@ -9,24 +9,36 @@ import { $inputDefaultHeight, Size } from 'shared/constants/styles/size';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 export type ButtonColor = 'primary' | 'default';
+export type ButtonIconPosition = 'left' | 'right' | 'leftInline' | 'rightInline';
 
 type Props = ComponentPropsWithoutRef<'button'> & {
   color?: ButtonColor;
   icon?: IconDefinition;
   label?: string;
   width?: Size;
+  fontSize?: Size;
+  iconPosition?: ButtonIconPosition;
   className?: string;
   onClick?: MouseEventHandler;
 };
 
-export const Button: FC<Props> = ({ color = 'default', icon, label, width, className, onClick, ...buttonProps }) => {
-  const theme: Theme = useTheme();
-
+export const Button: FC<Props> = ({
+  color = 'default',
+  icon,
+  label,
+  width,
+  iconPosition = 'rightInline',
+  fontSize,
+  className,
+  onClick,
+  ...buttonProps
+}) => {
+  const styles = getStyles(useTheme());
   return (
     <button
       {...buttonProps}
       className={cx(
-        styles.button(theme),
+        styles.button(iconPosition, fontSize),
         className,
         css`
           width: ${width};
@@ -41,18 +53,22 @@ export const Button: FC<Props> = ({ color = 'default', icon, label, width, class
   );
 };
 
-const styles = {
-  button: (theme: Theme) =>
+const getStyles = (theme: Theme) => ({
+  button: (iconPosition: ButtonIconPosition, fontSize: Size = '16px') =>
     cx(
       $behavior.hoverSwipe(theme),
       css`
         display: inline-flex;
+        flex-direction: ${iconPosition === 'left' || iconPosition === 'leftInline' ? 'row' : 'row-reverse'};
         align-items: center;
-        justify-content: center;
+        justify-content: ${iconPosition === 'left' || iconPosition === 'right' ? 'space-between' : 'center'};
         height: ${$inputDefaultHeight};
         padding: 0 ${$spacing.md};
+        font-size: ${fontSize};
         line-height: 1;
+        color: ${theme.textDefault};
         cursor: pointer;
+        background-color: ${theme.background};
         border: 1px solid ${theme.border};
         border-radius: 2px;
 
@@ -64,10 +80,14 @@ const styles = {
           }
         }
 
+        > span {
+          font-weight: 700;
+        }
+
         &[data-color='primary'] {
           background-color: ${theme.primary};
         }
       `,
       setSolidShadow(theme.border)
     ),
-};
+});

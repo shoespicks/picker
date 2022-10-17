@@ -1,188 +1,64 @@
-import { FC, Fragment, PropsWithChildren, useState } from 'react';
-import { css, cx } from '@emotion/css';
+import React, { FC, PropsWithChildren } from 'react';
+import { css } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
-import { Dialog, Transition } from '@headlessui/react';
+import { Dialog } from '@headlessui/react';
+import { Animation, AnimationChild } from 'components/atoms/Animation';
+import { useDialog } from 'components/hooks/useDialog';
 
 type Props = {
-  buttonElement?: JSX.Element;
+  isOpen?: boolean;
+  triggerElement?: JSX.Element;
+  closeModal?: () => void;
+  isOpenChange?: (isOpen: boolean) => void;
 };
 
-export const Drawer: FC<PropsWithChildren<Props>> = ({ buttonElement, children }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const closeModal = () => {
-    setIsOpen(false);
-    
-    // const elements = document.getElementsByClassName(styles.openbtn2);
-    // elements[0].classList.remove(styles.active);
-    
-  };
-
-  const openModal = () => {
-    setIsOpen(true);
-    
-    // const elements = document.getElementsByClassName(styles.openbtn2);
-    // elements[0].classList.add(styles.active);
-  };
-  const theme = useTheme();
-  const styles = getStyles(theme);
+export const Drawer: FC<PropsWithChildren<Props>> = ({ isOpen, triggerElement, isOpenChange, children }) => {
+  const { open, close } = useDialog(isOpenChange);
+  const styles = getStyles(useTheme());
 
   return (
     <>
-      <div onClick={openModal}>{buttonElement}</div>
-
-      <Transition appear show={isOpen} as={Fragment}>
-        <div className={styles.hamburgerBackground}>
-          <Dialog as="div" className={styles.hamburgerArea} onClose={closeModal}>
-            <Transition.Child as={Fragment}>
-              <Dialog.Panel className={styles.hamburgerMenuArea}>
-                <button type="button" className={styles.hamburgerIconArea}>
-                  <div className={cx(styles.hambergerIcon,isOpen?styles.hambergerIconClose:styles.hambergerIconOpen)} onClick={closeModal}>
-                    <span></span>
-                    <span></span>
-                  </div>
-                </button>
-                {children}
-              </Dialog.Panel>
-            </Transition.Child>
-          </Dialog>
-        </div>
-      </Transition>
+      <div onClick={open}>{triggerElement}</div>
+      <Animation show={isOpen}>
+        <Dialog as="div" className={styles.drawer} onClose={close}>
+          <div className={styles.drawerBackground} onClick={close}></div>
+          <AnimationChild name="slideIn" appear>
+            <Dialog.Panel className={styles.dialogPanel}>{children}</Dialog.Panel>
+          </AnimationChild>
+        </Dialog>
+      </Animation>
     </>
   );
 };
 
 const getStyles = (theme: Theme) => ({
-  hamburgerIconArea: css`
-    display: flex;
-    align-items: center;
-    justify-content: right;
-    width: 100%;
-    height: 80px;
-    padding: 0 6px;
+  drawer: css`
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
   `,
-  hamburgerBackground: css`
+  drawerBackground: css`
     position: absolute;
     top: 0;
     right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1001;
     width: 100vw;
     height: 100vh;
-    background-color: ${theme.hambergerHover};
+    background-color: ${theme.backdrop};
   `,
-  hamburgerArea: css`
+  dialogPanel: css`
     position: absolute;
-    top: 0;
     right: 0;
-    z-index: 999;
-    width: 375px;
+    z-index: 2000;
+    width: 20vw;
+    min-width: 360px;
     height: 100%;
-    color: ${theme.textInverse};
     background-color: ${theme.main};
+    box-shadow: ${theme.shadowLeft};
   `,
-  hamburgerMenuArea: css`
-    height: 100%;
-    padding: 0 24px;
-  `,
-  hambergerIcon:
-  css`
-  position: relative;
-  width: 64px;
-  height: 50px;
-  cursor: pointer;
-  
-
-  span {
-    position: absolute;
-    display: inline-block;
-    height: 1px;
-    background-color: ${theme.background};
-    transition: all 0.4s;
-  }
-  `,
-
-  hambergerIconOpen:
-    css`
-    span:nth-of-type(1) {
-      top:  22px;
-      width:  97.7%;
-    }
-
-    span:nth-of-type(2) {
-      top:  29px;
-      width:  97.7%;
-    }
-    `,
-  hambergerIconClose:
-    css`
-    span:nth-of-type(1) {
-      top: 20px;
-      left:  16px;
-      width:  100%;
-      transform: translateY(6px) rotate(-20deg);
-    }
-
-    span:nth-of-type(2) {
-      top:  32px;
-      left: 16px;
-      width: 100%;
-      transform: translateY(-6px) rotate(20deg);
-    }
-    `,
-
-  // openbtn2: css`
-  //   position: relative;
-  //   width: 50px;
-  //   height: 50px;
-  //   cursor: pointer;
-  //   background: #fff;
-
-  //   span {
-  //     position: absolute;
-  //     left: 13px;
-  //     display: inline-block;
-  //     height: 2px;
-  //     background-color: #666;
-  //     transition: all 0.4s;
-  //   }
-
-  //   span:nth-of-type(1) {
-  //     top: 22px;
-  //     width: 50%;
-  //   }
-
-  //   span:nth-of-type(2) {
-  //     top: 29px;
-  //     width: 50%;
-  //   }
-  // `,
-  // active: css`
-  //   position: relative;
-  //   width: 50px;
-  //   height: 50px;
-  //   cursor: pointer;
-  //   background: #fff;
-
-  //   span {
-  //     position: absolute;
-  //     left: 13px;
-  //     display: inline-block;
-  //     height: 2px;
-  //     background-color: #666;
-  //     transition: all 0.4s;
-  //   }
-
-  //   span:nth-of-type(1) {
-  //     top: 20px;
-  //     left: 16px;
-  //     width: 35%;
-  //     transform: translateY(6px) rotate(-45deg);
-  //   }
-
-  //   span:nth-of-type(2) {
-  //     top: 32px;
-  //     left: 16px;
-  //     width: 35%;
-  //     transform: translateY(-6px) rotate(45deg);
-  //   }
-  // `,
 });

@@ -1,7 +1,6 @@
 import React, { type FC, useState } from 'react';
 import { useRouter } from 'next/router';
 import { css } from '@emotion/css';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import { A } from 'components/atoms/A';
 import { Card } from 'components/atoms/Card';
 import { Divider } from 'components/atoms/Divider';
@@ -9,8 +8,8 @@ import { Section } from 'components/atoms/Section';
 import { Select } from 'components/atoms/Select';
 import { Spacer } from 'components/atoms/Spacer';
 import { H3 } from 'components/atoms/Typography';
-import { InputButton } from 'components/molecules/InputButton';
-import { TAF_SEARCH_PAGE_PATH } from 'features/track-and-field/constants/routing-path';
+import { TAFKeywordSearchRauncher } from 'features/track-and-field/common/TAFKeywordSearchRauncher';
+import { TAF_SEARCH_PAGE_PATH } from 'features/track-and-field/constants/routing';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 type People = { id: number; name: string; unavailable: boolean };
@@ -41,13 +40,19 @@ export const TAFTopSearchLauncher: FC = () => {
         ></Divider>
         <ul className={styles.linkContainer}>
           <li className={styles.link}>
-            <A href="/">とにかく軽い</A>
+            <A href="/" underline>
+              とにかく軽い
+            </A>
           </li>
           <li className={styles.link}>
-            <A href="/">とにかく軽い</A>
+            <A href="/" underline>
+              とにかく軽い
+            </A>
           </li>{' '}
           <li className={styles.link}>
-            <A href="/">とにかく軽い</A>
+            <A href="/" underline>
+              とにかく軽い
+            </A>
           </li>{' '}
         </ul>
       </Section>
@@ -55,7 +60,7 @@ export const TAFTopSearchLauncher: FC = () => {
       <Section>
         <H3>フリーワードで探す: WIP</H3>
         <Spacer size={$spacing.md}></Spacer>
-        <InputButton buttonColor="primary" buttonIcon={faSearch} onClick={keywordSearch}></InputButton>
+        <TAFKeywordSearchRauncher />
       </Section>
       <Spacer size={$spacing['2xl']}></Spacer>
       <Section>

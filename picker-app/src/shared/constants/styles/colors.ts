@@ -6,14 +6,19 @@ import { Theme } from '@emotion/react';
 const $pallete = {
   black: '#000000',
   blackClear: '#0000000a',
+  blackClearDark: '#00000066',
+  whiteClear: '#FFFFFF40',
   gray1: '#EBEBEB',
   gray2: '#DDDDDD',
   gray3: '#B9B9B9',
   gray4: '#666666',
-  gray4Clear: '#666666aa',
   white: '#ffffff',
   blue: '#0671dc',
   lightBlue: '#D2FAFF',
+};
+
+const $shadowPallete = {
+  left: '-8px 0 16px #00000055',
 };
 
 /**
@@ -24,7 +29,8 @@ const themeBase = {
   primary: $pallete.black,
   background: $pallete.white,
   backgroundHover: $pallete.blackClear,
-  hambergerHover: $pallete.gray4Clear,
+  inverseHover: $pallete.whiteClear,
+  backdrop: $pallete.blackClearDark,
   border: $pallete.black,
   lowBorder: $pallete.gray2,
   focusOutline: $pallete.blue,
@@ -35,6 +41,8 @@ const themeBase = {
   textLow: $pallete.gray3,
   textGray: $pallete.gray4,
   textInverse: $pallete.white,
+
+  shadowLeft: $shadowPallete.left,
 };
 
 type PickerTheme = typeof themeBase;

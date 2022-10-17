@@ -34,6 +34,10 @@ export const Input = forwardRef<HTMLInputElement, Props>(function Input(
             background-color: ${theme.background};
             border: 1px solid ${theme.border};
             border-radius: 2px;
+
+            ::placeholder {
+              color: ${theme.textLow};
+            }
           `,
           setSolidShadow(theme.border),
           className

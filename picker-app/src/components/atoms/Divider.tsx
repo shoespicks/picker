@@ -3,15 +3,20 @@ import { css, cx } from '@emotion/css';
 import { useTheme } from '@emotion/react';
 import * as Separator from '@radix-ui/react-separator';
 
-export const Divider: FC<Separator.SeparatorProps> = ({ orientation = 'horizontal', className }) => {
+type DividerColor = 'default' | 'inverse';
+
+type Props = Separator.SeparatorProps & {
+  color?: DividerColor;
+};
+
+export const Divider: FC<Props> = ({ orientation = 'horizontal', color, className, ...dividerProps }) => {
   const theme = useTheme();
   return (
     <Separator.Root
       orientation={orientation}
       className={cx(
-        className,
         css`
-          background-color: ${theme.main};
+          background-color: ${color === 'inverse' ? theme.textInverse : theme.main};
 
           &[data-orientation='horizontal'] {
             width: 100%;
@@ -22,8 +27,10 @@ export const Divider: FC<Separator.SeparatorProps> = ({ orientation = 'horizonta
             width: 1px;
             height: 100%;
           }
-        `
+        `,
+        className
       )}
+      {...dividerProps}
     ></Separator.Root>
   );
 };

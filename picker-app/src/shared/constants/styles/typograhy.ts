@@ -25,8 +25,8 @@ export const h5Style = css`
   font-weight: bold;
 `;
 
-export const aStyle = css`
-  text-decoration: underline;
+export const aStyle = (underline?: boolean) => css`
+  text-decoration: ${underline ? 'underline' : 'none'};
 `;
 
 export const labelStyle = css`

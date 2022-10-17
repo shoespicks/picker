@@ -4,7 +4,7 @@ import { css } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import { SignButtons } from 'components/molecules/SignButtons';
 import { Header } from 'features/common/header';
-import { $headerHeight } from 'shared/constants/styles/size';
+import { $headerSize } from 'shared/constants/styles/size';
 
 export const TAFHeader: FC<PropsWithChildren> = () => {
   const theme = useTheme();
@@ -39,7 +39,6 @@ export const TAFHeader: FC<PropsWithChildren> = () => {
           </Link>
         </li>
       </ul>
-
       <SignButtons></SignButtons>
     </Header>
   );
@@ -53,7 +52,7 @@ const getStyles = (theme: Theme) => ({
     display: flex;
     align-items: center;
     width: 100%;
-    height: ${$headerHeight};
+    height: ${$headerSize};
     background-color: ${theme.main};
   `,
   serviceMenu: css`

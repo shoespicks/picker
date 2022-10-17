@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useRouter } from 'next/router';
 import { css } from '@emotion/css';
 import { Spinner } from 'components/atoms/Spinner';
-import { TAF_SEARCH_PAGE_PATH } from 'features/track-and-field/constants/routing-path';
+import { TAF_SEARCH_PAGE_PATH } from 'features/track-and-field/constants/routing';
 import { TAFSearchResultCard } from 'features/track-and-field/search/searchResults/TAFSearchResultCard';
 import { SpikeBase, SpikeBaseFragment } from 'graphql/generated/codegen-client';
 import { $common } from 'shared/constants/styles/common';

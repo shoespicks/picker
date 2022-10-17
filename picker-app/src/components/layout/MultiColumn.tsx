@@ -1,7 +1,7 @@
 import { ElementType, type FC, PropsWithChildren } from 'react';
 import { css, cx } from '@emotion/css';
 import { mediaGreaterThan } from 'shared/constants/styles/media-query';
-import { $headerHeight, $sideColumnWidth, Size } from 'shared/constants/styles/size';
+import { $headerSize, $sideColumnWidth, Size } from 'shared/constants/styles/size';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 type Props = {
@@ -66,7 +66,7 @@ const styles = {
   sideColumn: css`
     display: block;
   `,
-  stickyContainer: (top: Size = $headerHeight) => css`
+  stickyContainer: (top: Size = $headerSize) => css`
     position: sticky;
     top: ${top};
   `,

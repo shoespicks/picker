@@ -3,7 +3,7 @@ import { css } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import * as Slider from '@radix-ui/react-slider';
 import { FieldValues, useController, UseControllerProps } from 'react-hook-form';
-import { NumberRange } from 'shared/constants/input';
+import { NumberRange } from 'shared/constants/type';
 
 type Props = {
   value?: NumberRange;

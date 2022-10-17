@@ -4,7 +4,7 @@ import { IShoeColor, shoeColors } from 'picker-types/types/track-and-field/shoeC
 import { IShoeEnvirloment, shoeEnviroments } from 'picker-types/types/track-and-field/shoeEnviroment';
 import { IEventItem, shoeEvents } from 'picker-types/types/track-and-field/shoeEvents';
 import { IShoeLaceType, shoeLaceTypes } from 'picker-types/types/track-and-field/shoeLaceTypes';
-import { NumberRange } from 'shared/constants/input';
+import { NumberRange } from 'shared/constants/type';
 import { FormHasOptionKey, FormOptions } from 'shared/hooks/useFormBase';
 
 export type IYears = { id: string; label: string };

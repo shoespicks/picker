@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import { NextSeo } from 'next-seo';
-import { TAF_SEARCH_PAGE_PATH } from 'features/track-and-field/constants/routing-path';
+import { TAF_SEARCH_PAGE_PATH } from 'features/track-and-field/constants/routing';
 import { TAFSpikeTemplate } from 'features/track-and-field/spike/TAFSpikeTemplate';
 import { Spike } from 'graphql/generated/codegen-client';
 import TAFLayout from 'layout/TrackAndField';

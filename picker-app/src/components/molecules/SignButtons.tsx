@@ -1,63 +1,48 @@
 import React, { FC } from 'react';
-import Link from 'next/link';
 import { css } from '@emotion/css';
-import { Theme, useTheme } from '@emotion/react';
+import { faChevronCircleRight } from '@fortawesome/free-solid-svg-icons';
+import { A } from 'components/atoms/A';
+import { Button } from 'components/atoms/Button';
+import { $spacing } from 'shared/constants/styles/spacing';
 
 export const SignButtons: FC = () => {
-  const theme = useTheme();
-  const styles = getStyles(theme);
+  const styles = getStyles();
 
   return (
-    <div className={styles.buttons}>
-      <Link href="/track-and-field#11">
-        <a>
-          <button className={styles.signButton}>ログイン</button>
-        </a>
-      </Link>
-      <Link href="/track-and-field#12">
-        <a>
-          <button className={styles.signButton}>無料会員登録</button>
-        </a>
-      </Link>
-    </div>
+    <ul className={styles.buttons}>
+      <li>
+        <A href="/track-and-field#11">
+          <Button
+            label="ログイン"
+            icon={faChevronCircleRight}
+            iconPosition="right"
+            width="100%"
+            fontSize="14px"
+          ></Button>
+        </A>
+      </li>
+      <li>
+        <A href="/track-and-field#12">
+          <Button
+            label="無料会員登録"
+            icon={faChevronCircleRight}
+            iconPosition="right"
+            width="100%"
+            fontSize="14px"
+          ></Button>
+        </A>
+      </li>
+    </ul>
   );
 };
 
-const getStyles = (theme: Theme) => ({
+const getStyles = () => ({
   buttons: css`
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-top: 40px;
-    margin-bottom: 105px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: ${$spacing.sm};
   `,
-  signButton: css`
-    display: flex;
-    justify-content: space-between;
-    width: 160px;
-    padding: 15px 12px;
+  button: css`
     font-size: 14px;
-    font-weight: bold;
-    color: #000;
-    background: #fff;
-    border-radius: 2px;
-
-    ::after {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 20px;
-      height: 20px;
-      font-size: 8px;
-      font-weight: bold;
-      color: #fff;
-      content: '＞';
-      background: #000;
-      border-radius: 50%;
-    }
-
-    :hover {
-      box-shadow: 5px 5px 0 #666;
-    }
   `,
 });

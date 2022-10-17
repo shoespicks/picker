@@ -60,6 +60,7 @@ const getStyles = (theme: Theme) => ({
       css`
         display: inline-flex;
         flex-direction: ${iconPosition === 'left' || iconPosition === 'leftInline' ? 'row' : 'row-reverse'};
+        gap: ${$spacing.sm};
         align-items: center;
         justify-content: ${iconPosition === 'left' || iconPosition === 'right' ? 'space-between' : 'center'};
         height: ${$inputDefaultHeight};
@@ -74,10 +75,6 @@ const getStyles = (theme: Theme) => ({
 
         > * {
           z-index: 1;
-
-          + * {
-            margin-left: ${$spacing.sm};
-          }
         }
 
         > span {

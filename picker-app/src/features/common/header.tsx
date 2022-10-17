@@ -26,7 +26,7 @@ export const Header: FC<PropsWithChildren> = ({ children }) => {
             <Image src="/picker.svg" width={108} height={18} alt="picker" />
           </A>
           <HeaderNavigation>
-            <div className={styles.hamburgerArea}>
+            <div className={styles.navigationContent}>
               <Section>{children}</Section>
               <Section>
                 <Section>
@@ -65,12 +65,12 @@ const getStyles = (theme: Theme) => ({
     justify-content: space-between;
     width: 100%;
   `,
-  hamburgerArea: css`
+  navigationContent: css`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     height: 100%;
-    padding: 0 ${$spacing.lg};
+    padding: 0 ${$spacing.lg} ${$spacing.lg};
     overflow: auto;
     color: ${theme.textInverse};
     background-color: ${theme.main};

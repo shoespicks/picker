@@ -10,7 +10,7 @@ import { Card } from 'components/atoms/Card';
 import { Divider } from 'components/atoms/Divider';
 import { IconText } from 'components/atoms/IconText';
 import { Spacer } from 'components/atoms/Spacer';
-import { H5 } from 'components/atoms/Typography';
+import { H5, Small, Strong } from 'components/atoms/Typography';
 import { ColorSelect } from 'components/molecules/ColorRadio';
 import { ItafShoeColorImages, SpikeBaseFragment } from 'graphql/generated/codegen-client';
 import { $common } from 'shared/constants/styles/common';
@@ -35,12 +35,24 @@ export const TAFSearchResultCard: FC<Props> = ({ value, className, onClick }) =>
     <>
       <Card padding={$spacing.md} className={cx(styles.host, className)} clickable onClick={handleClick}>
         <div>
-          <span className={cx($common.truncate, styles.brandName)}>{brand}</span>
+          <Small
+            color="dark"
+            loud
+            upperCase
+            truncate
+            className={css`
+              display: block;
+            `}
+          >
+            {brand}
+          </Small>
           <Spacer size={$spacing.xs}></Spacer>
-          <H5 className={$common.truncate}>{name}</H5>
+          <H5 truncate>{name}</H5>
           {events?.length && (
             <div className={cx($common.truncate, styles.events)}>
-              <span>{events.map(e => e.label).join(', ')}</span>
+              <Small color="dark" loud upperCase truncate>
+                {events.map(e => e.label).join(', ')}
+              </Small>
             </div>
           )}
         </div>
@@ -80,13 +92,7 @@ export const TAFSearchResultCard: FC<Props> = ({ value, className, onClick }) =>
                 justify-content: space-between;
               `}
             >
-              <span
-                className={css`
-                  font-weight: bold;
-                `}
-              >
-                ¥{value.price}
-              </span>
+              <Strong loud>¥{value.price}</Strong>
               <div
                 className={css`
                   display: inline-flex;
@@ -96,39 +102,41 @@ export const TAFSearchResultCard: FC<Props> = ({ value, className, onClick }) =>
                   font-size: 14px;
                 `}
               >
-                <IconText icon={faWeightScale} size="sm" text={value.weight + 'g'}></IconText>
+                <IconText icon={faWeightScale} size="sm" text={value.weight + 'g'} fontSize="12px"></IconText>
                 <Divider orientation="vertical"></Divider>
-                <span>{value.allWeatherOnly ? shoeEnviroments.allweatherOnly.label : shoeEnviroments.soil.label}</span>
+                <Small>
+                  {value.allWeatherOnly ? shoeEnviroments.allweatherOnly.label : shoeEnviroments.soil.label}
+                </Small>
               </div>
             </div>
             <Spacer size={$spacing.sm}></Spacer>
-            <ul>
-              <li className={styles.paramaterScore}>
-                <span>軽さ</span>
+            <ul className={styles.paramaterScores}>
+              <li>
+                <Small>軽さ</Small>
                 <div className={styles.paramaterScoreBarContainer}>
                   <BarRating value={value.lightnessScore ?? 0}></BarRating>
                 </div>
               </li>
-              <li className={styles.paramaterScore}>
-                <span>広さ</span>
+              <li>
+                <Small>広さ</Small>
                 <div className={styles.paramaterScoreBarContainer}>
                   <BarRating value={value.widthScore ?? 0}></BarRating>
                 </div>
               </li>
-              <li className={styles.paramaterScore}>
-                <span>反り</span>
+              <li>
+                <Small>反り</Small>
                 <div className={styles.paramaterScoreBarContainer}>
                   <BarRating value={value.angleScore ?? 0}></BarRating>
                 </div>
               </li>
-              <li className={styles.paramaterScore}>
-                <span>グリップ力</span>
+              <li>
+                <Small>グリップ力</Small>
                 <div className={styles.paramaterScoreBarContainer}>
                   <BarRating value={value.gripScore ?? 0}></BarRating>
                 </div>
               </li>
-              <li className={styles.paramaterScore}>
-                <span>反発性</span>
+              <li>
+                <Small>反発性</Small>
                 <div className={styles.paramaterScoreBarContainer}>
                   <BarRating value={value.hardnessScore ?? 0}></BarRating>
                 </div>
@@ -145,23 +153,22 @@ const getStyles = (theme: Theme) => ({
   host: css`
     display: block;
   `,
-  brandName: css`
-    display: block;
-    font-size: 12px;
-    font-weight: 500;
-    color: ${theme.textGray};
-    text-transform: uppercase;
-  `,
   events: css`
     display: block;
     font-size: 12px;
-    color: ${theme.textGray};
+    color: ${theme.textDark};
     text-transform: uppercase;
   `,
-  paramaterScore: css`
-    display: grid;
-    grid-template-columns: 90px 1fr;
-    grid-gap: ${$spacing.md};
+  paramaterScores: css`
+    > li {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      grid-gap: ${$spacing.md};
+
+      + li {
+        margin-top: ${$spacing.xs};
+      }
+    }
   `,
   paramaterScoreBarContainer: css`
     display: flex;

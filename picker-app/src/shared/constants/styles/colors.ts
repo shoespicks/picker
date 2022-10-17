@@ -21,6 +21,18 @@ const $shadowPallete = {
   left: '-8px 0 16px #00000055',
 };
 
+const typographyColors = ['default', 'dark', 'low', 'disable', 'inverse'] as const;
+// export type TypographyColors = 'default' | 'dark' | 'low' | 'disable' | 'inverse';
+export type TypographyColors = typeof typographyColors[number];
+
+const themeBaseTypographyColors: { [key in TypographyColors]: string } = {
+  default: $pallete.black,
+  dark: $pallete.gray4,
+  low: $pallete.gray3,
+  disable: $pallete.gray1,
+  inverse: $pallete.white,
+};
+
 /**
  * 色や色の用途が増えたら追加する
  */
@@ -35,12 +47,14 @@ const themeBase = {
   lowBorder: $pallete.gray2,
   focusOutline: $pallete.blue,
 
-  // ここから文字色
-  textDefault: $pallete.black,
-  textDisable: $pallete.gray1,
-  textLow: $pallete.gray3,
-  textGray: $pallete.gray4,
-  textInverse: $pallete.white,
+  text: themeBaseTypographyColors,
+
+  // ↑のtextの色の書き方に寄せてこっちは消す
+  textDefault: themeBaseTypographyColors.default,
+  textDark: themeBaseTypographyColors.dark,
+  textLow: themeBaseTypographyColors.low,
+  textDisable: themeBaseTypographyColors.disable,
+  textInverse: themeBaseTypographyColors.inverse,
 
   shadowLeft: $shadowPallete.left,
 };

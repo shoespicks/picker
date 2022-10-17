@@ -3,14 +3,17 @@ import { css } from '@emotion/css';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
 import { Icon } from 'components/atoms/Icon';
+import { Span } from 'components/atoms/Typography';
+import { Size } from 'shared/constants/styles/size';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 type Props = FontAwesomeIconProps & {
   icon: IconDefinition;
   text: string;
+  fontSize?: Size;
 };
 
-export const IconText: FC<PropsWithChildren<Props>> = ({ text, ...iconProps }) => (
+export const IconText: FC<PropsWithChildren<Props>> = ({ text, fontSize, ...iconProps }) => (
   <span
     className={css`
       display: inline-flex;
@@ -19,6 +22,6 @@ export const IconText: FC<PropsWithChildren<Props>> = ({ text, ...iconProps }) =
     `}
   >
     <Icon {...iconProps}></Icon>
-    <span>{text}</span>
+    <Span fontSize={fontSize}>{text}</Span>
   </span>
 );

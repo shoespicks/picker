@@ -19,8 +19,8 @@ export const SpikeInput = inputObjectType({
 export const SpikeQuery = extendType({
   type: 'Query',
   definition(t) {
-    t.nonNull.list.field('spike', {
-      type: nonNull(Spike),
+    t.field('spike', {
+      type: Spike,
       args: { input: nonNull(SpikeInput) },
       resolve(_, args) {
         return spikeLoader(args.input);

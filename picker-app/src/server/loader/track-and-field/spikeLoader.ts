@@ -7,8 +7,6 @@ export const spikesLoader = (input: NexusGenInputs['SpikesInput']): Promise<Nexu
   });
 };
 
-export const spikeLoader = (input: NexusGenInputs['SpikeInput']): Promise<NexusGenRootTypes['SpikeBase'][]> => {
-  return spikeEntryBySlug(input.id).then(e => {
-    return e;
-  });
+export const spikeLoader = (input: NexusGenInputs['SpikeInput']): Promise<NexusGenRootTypes['Spike']> => {
+  return spikeEntryBySlug(input.id);
 };

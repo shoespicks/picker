@@ -44,14 +44,18 @@ export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsC
   }
 
   // getStaticPropsはバックエンドで動作するので、バックエンドのコードをそのまま呼ぶ
-  const data = await spikeLoader({ id: params.id.toString() });
+  const spike = await spikeLoader({ id: params.id.toString() });
+
+  if (!spike) {
+    throw 'スパイクが存在しません';
+  }
 
   console.log('getStaticProps');
-  console.log(data[0]);
+  console.log(spike);
 
   return {
     props: {
-      spike: data[0],
+      spike,
     },
   };
 };

@@ -49,15 +49,12 @@ export const spikesEntries = (input: NexusGenInputs['SpikesInput']): Promise<Nex
   });
 };
 
-export const spikeEntryBySlug = (slug: string): Promise<NexusGenRootTypes['SpikeBase'][]> => {
-  return contentfulClient
-    .getEntries<ISpikeShoesFields>({
-      content_type: 'spikeShoes',
-      'fields.slug': slug,
-    })
-    .then(entries => {
-      return entries.items.map(item => translateSpikeEntryToSpike(item));
-    });
+export const spikeEntryBySlug = async (slug: string): Promise<NexusGenRootTypes['Spike']> => {
+  const entries = await contentfulClient.getEntries<ISpikeShoesFields>({
+    content_type: 'spikeShoes',
+    'fields.slug': slug,
+  });
+  return entries.items.map(item => translateSpikeEntryToSpike(item))?.[0];
 };
 
 // 検索条件フォームの値をAPIの検索条件に変換

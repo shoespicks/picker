@@ -12,7 +12,7 @@ import { IconText } from 'components/atoms/IconText';
 import { Spacer } from 'components/atoms/Spacer';
 import { H5, Small, Strong } from 'components/atoms/Typography';
 import { ColorRadio } from 'components/molecules/ColorRadio';
-import { ItafShoeColorImages, SpikeBaseFragment } from 'graphql/generated/codegen-client';
+import { ColorImagesFragment, SpikeBaseFragment } from 'graphql/generated/codegen-client';
 import { $common } from 'shared/constants/styles/common';
 import { $spacing } from 'shared/constants/styles/spacing';
 
@@ -24,7 +24,7 @@ type Props = {
 
 export const TAFSearchResultCard: FC<Props> = ({ value, className, onClick }) => {
   const { brand, name, events, colorImages } = value;
-  const [color, setColor] = useState<ItafShoeColorImages>(colorImages[0]);
+  const [color, setColor] = useState<ColorImagesFragment>(colorImages[0]);
 
   const styles = getStyles(useTheme());
   const handleClick = () => {
@@ -74,7 +74,7 @@ export const TAFSearchResultCard: FC<Props> = ({ value, className, onClick }) =>
             <AspectRatio ratio={1}>
               <Image src={color.imageUrls[0]} layout="fill" objectFit="contain" alt="" />
             </AspectRatio>
-            <ColorRadio<ItafShoeColorImages>
+            <ColorRadio<ColorImagesFragment>
               value={color}
               options={colorImages ?? []}
               idKey="colorId"

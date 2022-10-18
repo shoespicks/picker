@@ -18,12 +18,12 @@ fragment SpikeBase on SpikeBase {
     angleScore,
     brand,
     events {
-        ...ITAFShoeEvents
+        ...TAFShoeEvents
     },
     gripScore,
     hardnessScore,
     colorImages {
-        ...ITAFShoeImages
+        ...ColorImages
     }
     lightnessScore,
     price,
@@ -40,12 +40,12 @@ fragment Spike on Spike {
     angleScore,
     brand,
     events {
-        ...ITAFShoeEvents
+        ...TAFShoeEvents
     },
     gripScore,
     hardnessScore,
     colorImages {
-        ...ITAFShoeImages
+        ...ColorImages
     }
     lightnessScore,
     price,
@@ -54,13 +54,13 @@ fragment Spike on Spike {
     widthScore,
 }
 
-fragment ITAFShoeImages on ITAFShoeColorImages {
+fragment ColorImages on ColorImages {
     colorId,
     colorCode,
     imageUrls
 }
 
-fragment ITAFShoeEvents on ITAFShoeEvents {
+fragment TAFShoeEvents on TAFShoeEvents {
     id,
     label
 }

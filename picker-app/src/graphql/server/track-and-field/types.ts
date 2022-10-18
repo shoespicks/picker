@@ -1,9 +1,9 @@
 import { enumType, interfaceType, nonNull, objectType } from 'nexus';
 import { athleteLevels } from 'picker-types/types/track-and-field/athleteLevel';
 import { shoeBrands } from 'picker-types/types/track-and-field/shoeBrands';
-import { shoeColors } from 'picker-types/types/track-and-field/shoeColors';
 import { shoeEvents } from 'picker-types/types/track-and-field/shoeEvents';
 import { shoeLaceTypes } from 'picker-types/types/track-and-field/shoeLaceTypes';
+import { ColorImages } from 'graphql/server/common';
 
 export const ISpikeBase = interfaceType({
   name: 'ISpikeBase',
@@ -15,7 +15,7 @@ export const ISpikeBase = interfaceType({
       type: TAFBrands,
     });
     t.list.field('events', {
-      type: nonNull(ITAFShoeEvents),
+      type: nonNull(TAFShoeEvents),
     });
     t.int('score');
     t.int('price');
@@ -27,24 +27,13 @@ export const ISpikeBase = interfaceType({
     t.float('gripScore');
     t.float('hardnessScore');
     t.nonNull.list.field('colorImages', {
-      type: nonNull(ITAFShoeColorImages),
+      type: nonNull(ColorImages),
     });
   },
 });
 
-export const ITAFShoeColorImages = objectType({
-  name: 'ITAFShoeColorImages',
-  definition(t) {
-    t.nonNull.field('colorId', {
-      type: nonNull(TAFShoeColor),
-    });
-    t.nonNull.string('colorCode');
-    t.nonNull.list.nonNull.string('imageUrls');
-  },
-});
-
-export const ITAFShoeEvents = objectType({
-  name: 'ITAFShoeEvents',
+export const TAFShoeEvents = objectType({
+  name: 'TAFShoeEvents',
   definition(t) {
     t.nonNull.field('id', {
       type: nonNull(TAFEvents),
@@ -71,9 +60,4 @@ export const TAFAthleteLevel = enumType({
 export const TAFShoeLaceType = enumType({
   name: 'TAFShoeLaceType',
   members: Object.keys(shoeLaceTypes),
-});
-
-export const TAFShoeColor = enumType({
-  name: 'TAFShoeColor',
-  members: Object.keys(shoeColors),
 });

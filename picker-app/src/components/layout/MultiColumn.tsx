@@ -1,7 +1,7 @@
 import { ElementType, type FC, PropsWithChildren } from 'react';
 import { css, cx } from '@emotion/css';
-import { mediaGreaterThan } from 'shared/constants/styles/media-query';
-import { $headerSize, $sideColumnWidth, Size } from 'shared/constants/styles/size';
+import { BreakpointCode, mediaGreaterThan } from 'shared/constants/styles/media-query';
+import { $sideColumnWidth } from 'shared/constants/styles/size';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 type Props = {
@@ -9,8 +9,8 @@ type Props = {
   leftColumnElement?: JSX.Element;
   rightColumnElement?: JSX.Element;
   sideColumnWidth?: string;
-  sticky?: boolean;
-  stickyTop?: Size;
+  stickyTop?: string;
+  breakPoint?: BreakpointCode;
 };
 
 export const MultiColumn: FC<PropsWithChildren<Props>> = ({
@@ -18,8 +18,8 @@ export const MultiColumn: FC<PropsWithChildren<Props>> = ({
   leftColumnElement,
   rightColumnElement,
   sideColumnWidth = $sideColumnWidth,
-  sticky,
   stickyTop,
+  breakPoint = 'md',
   children,
 }) => {
   return (
@@ -27,46 +27,44 @@ export const MultiColumn: FC<PropsWithChildren<Props>> = ({
       className={cx(
         styles.multiColumn,
         css`
-          grid-template-columns: ${leftColumnElement ? sideColumnWidth : undefined} 1fr ${rightColumnElement
-              ? sideColumnWidth
-              : undefined};
+          grid-template-columns: 1fr;
+          ${mediaGreaterThan(breakPoint)} {
+            grid-template-columns: ${leftColumnElement ? sideColumnWidth : undefined} 1fr ${rightColumnElement
+                ? sideColumnWidth
+                : undefined};
+          }
         `
       )}
     >
-      {leftColumnElement && columnContent(leftColumnElement, sticky, stickyTop)}
+      {leftColumnElement && columnContent(leftColumnElement, stickyTop)}
 
       <CustomTag
         className={css`
-          width: 100%;
+          min-width: 100%;
         `}
       >
         {children}
       </CustomTag>
 
-      {rightColumnElement && columnContent(rightColumnElement, sticky, stickyTop)}
+      {rightColumnElement && columnContent(rightColumnElement, stickyTop)}
     </div>
   );
 };
 
-const columnContent = (element: JSX.Element, stickey?: boolean, stickyTop?: Size) => (
-  <aside className={styles.sideColumn}>
-    {stickey ? <div className={styles.stickyContainer(stickyTop)}>{element}</div> : element}
-  </aside>
+const columnContent = (element: JSX.Element, stickyTop?: string) => (
+  <aside>{stickyTop ? <div className={styles.stickyContainer(stickyTop)}>{element}</div> : element}</aside>
 );
 
 const styles = {
   multiColumn: css`
     display: grid;
-    column-gap: ${$spacing.md};
+    gap: ${$spacing.md};
 
     ${mediaGreaterThan('xl')} {
-      column-gap: ${$spacing.lg};
+      gap: ${$spacing.lg};
     }
   `,
-  sideColumn: css`
-    display: block;
-  `,
-  stickyContainer: (top: Size = $headerSize) => css`
+  stickyContainer: (top?: string) => css`
     position: sticky;
     top: ${top};
   `,

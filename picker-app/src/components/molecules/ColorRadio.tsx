@@ -7,10 +7,11 @@ type Props<T> = {
   options: readonly T[];
   idKey?: keyof T;
   colorKey: keyof T;
+  large?: boolean;
   onChange?(value: T): void;
 };
 
-export function ColorSelect<T>({ value, options, idKey, colorKey, onChange }: Props<T>) {
+export function ColorRadio<T>({ value, options, idKey, colorKey, large, onChange }: Props<T>) {
   const onOptionClickHandler: MouseEventHandler = function a(e: MouseEvent) {
     e.stopPropagation();
   };
@@ -22,7 +23,7 @@ export function ColorSelect<T>({ value, options, idKey, colorKey, onChange }: Pr
       idKey={idKey}
       labelKey={colorKey}
       custom={(checked: boolean, label?: string) => (
-        <ColorToken size="16px" checked={checked} color={label}></ColorToken>
+        <ColorToken size={large ? '24px' : '16px'} checked={checked} color={label}></ColorToken>
       )}
       onChange={onChange}
       onOptionClick={onOptionClickHandler}

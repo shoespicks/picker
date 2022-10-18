@@ -1,4 +1,6 @@
-export const breakpoints = {
+import { css } from '@emotion/css';
+
+export const breakpoints: { [key in BreakpointCode]: number } = {
   sm: 640,
   md: 768,
   lg: 1024,
@@ -6,4 +8,19 @@ export const breakpoints = {
   '2xl': 1536,
 } as const;
 
-export const mediaGreaterThan = (key: keyof typeof breakpoints) => `@media (min-width: ${breakpoints[key]}px)`;
+export type BreakpointCode = 'sm' | 'md' | 'lg' | 'xl' | '2xl';
+
+export const mediaGreaterThan = (key: BreakpointCode) => `@media (min-width: ${breakpoints[key]}px)`;
+export const mediaLessThan = (key: BreakpointCode) => `@media (max-width: ${breakpoints[key]}px)`;
+
+export const hideOverBreakPointStyle = (breakPoint: BreakpointCode) => css`
+  ${mediaGreaterThan(breakPoint)} {
+    display: none;
+  }
+`;
+
+export const visibleOverBreakPointStyle = (breakPoint: BreakpointCode) => css`
+  ${mediaLessThan(breakPoint)} {
+    display: none;
+  }
+`;

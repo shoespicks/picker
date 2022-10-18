@@ -3,13 +3,14 @@ import { css, cx } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { Icon } from 'components/atoms/Icon';
+import { Span } from 'components/atoms/Typography';
 import { $behavior } from 'shared/constants/styles/behavior';
 import { setSolidShadow } from 'shared/constants/styles/common';
 import { $inputDefaultHeight, Size } from 'shared/constants/styles/size';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 export type ButtonColor = 'primary' | 'default';
-export type ButtonIconPosition = 'left' | 'right' | 'leftInline' | 'rightInline';
+export type ButtonIconPosition = 'left' | 'right' | 'leftInline' | 'rightInline' | 'leftAbsolute' | 'rightAbsolute';
 
 type Props = ComponentPropsWithoutRef<'button'> & {
   color?: ButtonColor;
@@ -47,8 +48,8 @@ export const Button: FC<Props> = ({
       onClick={onClick}
       data-color={color}
     >
-      {!!icon && <Icon icon={icon} />}
-      {!!label && <span>{label}</span>}
+      {!!icon && <Icon icon={icon} className={styles.icon(iconPosition)} />}
+      {!!label && <Span semiBold>{label}</Span>}
     </button>
   );
 };
@@ -59,7 +60,7 @@ const getStyles = (theme: Theme) => ({
       $behavior.hoverSwipe(theme),
       css`
         display: inline-flex;
-        flex-direction: ${iconPosition === 'left' || iconPosition === 'leftInline' ? 'row' : 'row-reverse'};
+        flex-direction: ${iconPosition === 'right' || iconPosition === 'rightInline' ? 'row-reverse' : 'row'};
         gap: ${$spacing.sm};
         align-items: center;
         justify-content: ${iconPosition === 'left' || iconPosition === 'right' ? 'space-between' : 'center'};
@@ -77,14 +78,25 @@ const getStyles = (theme: Theme) => ({
           z-index: 1;
         }
 
-        > span {
-          font-weight: 700;
-        }
-
         &[data-color='primary'] {
           background-color: ${theme.primary};
         }
       `,
       setSolidShadow(theme.border)
     ),
+  icon: (iconPosition: ButtonIconPosition) =>
+    cx({
+      [css`
+        position: absolute;
+        top: 50%;
+        right: ${$spacing.md};
+        transform: translateY(-50%);
+      `]: iconPosition === 'rightAbsolute',
+      [css`
+        position: absolute;
+        top: 50%;
+        left: ${$spacing.md};
+        transform: translateY(-50%);
+      `]: iconPosition === 'leftAbsolute',
+    }),
 });

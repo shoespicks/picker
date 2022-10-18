@@ -1,9 +1,13 @@
 import React, { type FC } from 'react';
 import { css } from '@emotion/css';
 import { Container } from 'components/atoms/Container';
-import { Radar } from 'components/atoms/Radar';
 import { Spacer } from 'components/atoms/Spacer';
+import { MultiColumn } from 'components/layout/MultiColumn';
+import { TAFSpikeActionBar } from 'features/track-and-field/spike/TAFSpikeActionBar';
+import { TAFSpikeDetail } from 'features/track-and-field/spike/TAFSpikeDetail';
+import { TAFSpikeOverview } from 'features/track-and-field/spike/TAFSpikeOverview';
 import { Spike } from 'graphql/generated/codegen-client';
+import { $headerSize } from 'shared/constants/styles/size';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 type Props = {
@@ -19,13 +23,14 @@ export const TAFSpikeTemplate: FC<Props> = ({ spike }) => {
           padding-top: ${$spacing.lg};
         `}
       >
-        <p>spikeWorks!</p>
-        <p>{spike.id}</p>
-        <p>{spike.name}</p>
-        <p>{spike.events?.join(',')}</p>
-        <p>{spike.brand}</p>
-        <p>{spike.allWeatherOnly}</p>
-        <Radar data={[4, 3, 2, 4, 5]}></Radar>
+        <MultiColumn
+          rightColumnElement={<TAFSpikeActionBar spike={spike}></TAFSpikeActionBar>}
+          sideColumnWidth="calc(100px + 16vw)"
+          stickyTop={`calc(${$headerSize} + ${$spacing.lg})`}
+        >
+          <TAFSpikeOverview spike={spike}></TAFSpikeOverview>
+          <TAFSpikeDetail spike={spike}></TAFSpikeDetail>
+        </MultiColumn>
       </Container>
       <Spacer size="176px"></Spacer>
     </>

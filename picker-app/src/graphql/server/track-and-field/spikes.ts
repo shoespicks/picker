@@ -4,7 +4,6 @@ import {
   TAFAthleteLevel,
   TAFBrands,
   TAFEvents,
-  TAFShoeColor,
   TAFShoeLaceType,
 } from 'graphql/server/track-and-field/types';
 import { spikesLoader } from 'server/loader/track-and-field/spikeLoader';
@@ -39,9 +38,7 @@ export const SpikesInput = inputObjectType({
     t.list.field('shoeLaceType', {
       type: nonNull(TAFShoeLaceType),
     });
-    t.list.field('shoeColor', {
-      type: nonNull(TAFShoeColor),
-    });
+    t.list.string('shoeColor');
     t.int('priceRangeMin');
     t.int('priceRangeMax');
     t.int('pinCountRangeMin');

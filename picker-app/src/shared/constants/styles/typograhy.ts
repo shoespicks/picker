@@ -1,8 +1,13 @@
 import { css } from '@emotion/css';
+import { mediaGreaterThan } from 'shared/constants/styles/media-query';
 
 export const h1Style = css`
-  font-size: 32px;
+  font-size: 20px;
   font-weight: 700;
+
+  ${mediaGreaterThan('sm')} {
+    font-size: 32px;
+  }
 `;
 
 export const h2Style = css`
@@ -32,7 +37,7 @@ export const aStyle = (underline?: boolean) => css`
 export const labelStyle = css`
   display: inline-block;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 500;
 `;
 
 export const smallStyle = css`
@@ -56,11 +61,17 @@ export const textUppercaseStyle = css`
   text-transform: uppercase;
 `;
 
+export const semiBoldStyle = css`
+  font-weight: 500;
+`;
+
 export const boldStyle = css`
   font-weight: 700;
 `;
 
+export const loudFontfamily = `'Roboto Condensed', 'Noto Sans JP', sans-serif`;
+
 export const textLoudStyle = css`
-  font-family: 'Roboto Condensed', 'Noto Sans JP', sans-serif;
-  letter-spacing: 0.05em;
+  font-family: ${loudFontfamily};
+  letter-spacing: 0.02em;
 `;

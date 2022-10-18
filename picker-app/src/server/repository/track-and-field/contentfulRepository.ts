@@ -113,14 +113,14 @@ export const translateSpikeEntryToSpike = (entry: Entry<ISpikeShoesFields>): Nex
   };
 };
 
-const getEvents = (events: ISpikeShoesFields['events']): NexusGenRootTypes['ITAFShoeEvents'][] | undefined => {
+const getEvents = (events: ISpikeShoesFields['events']): NexusGenRootTypes['TAFShoeEvents'][] | undefined => {
   return events?.map(e => ({
     id: e,
     label: shoeEvents[e].label,
   }));
 };
 
-const getImages = (entity: Entry<ISpikeShoesFields>): NexusGenRootTypes['ITAFShoeColorImages'][] | undefined => {
+const getImages = (entity: Entry<ISpikeShoesFields>): NexusGenRootTypes['ColorImages'][] | undefined => {
   return entity.fields?.colors?.map((color, index) => {
     const colorVariationImageKey: keyof ISpikeShoesFields = `colorVariationImage${
       index + 1

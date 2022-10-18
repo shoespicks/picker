@@ -12,6 +12,7 @@ import {
   h4Style,
   h5Style,
   pStyle,
+  semiBoldStyle,
   smallStyle,
   spanStyle,
   strongStyle,
@@ -24,6 +25,7 @@ type TypographyProps = {
   color?: TypographyColors;
   upperCase?: boolean;
   loud?: boolean;
+  semiBold?: boolean;
   bold?: boolean;
   truncate?: boolean;
   className?: string;
@@ -45,11 +47,12 @@ export const setTypographyStyle =
       props.baseClassName,
       { [textUppercaseStyle]: props?.upperCase },
       { [textLoudStyle]: props?.loud },
+      { [semiBoldStyle]: props?.semiBold },
       { [boldStyle]: props?.bold },
       { [$common.truncate]: props?.truncate },
       css`
         font-size: ${props?.fontSize};
-        color: ${textColorTheme[props.color ?? 'default']};
+        color: ${props?.color && textColorTheme[props.color]};
       `,
       props.className
     );

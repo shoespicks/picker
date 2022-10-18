@@ -11,7 +11,7 @@ import { Divider } from 'components/atoms/Divider';
 import { IconText } from 'components/atoms/IconText';
 import { Spacer } from 'components/atoms/Spacer';
 import { H5, Small, Strong } from 'components/atoms/Typography';
-import { ColorSelect } from 'components/molecules/ColorRadio';
+import { ColorRadio } from 'components/molecules/ColorRadio';
 import { ItafShoeColorImages, SpikeBaseFragment } from 'graphql/generated/codegen-client';
 import { $common } from 'shared/constants/styles/common';
 import { $spacing } from 'shared/constants/styles/spacing';
@@ -74,13 +74,13 @@ export const TAFSearchResultCard: FC<Props> = ({ value, className, onClick }) =>
             <AspectRatio ratio={1}>
               <Image src={color.imageUrls[0]} layout="fill" objectFit="contain" alt="" />
             </AspectRatio>
-            <ColorSelect<ItafShoeColorImages>
+            <ColorRadio<ItafShoeColorImages>
               value={color}
               options={colorImages ?? []}
               idKey="colorId"
               colorKey="colorCode"
               onChange={setColor}
-            ></ColorSelect>
+            ></ColorRadio>
           </div>
           <div>
             <div
@@ -92,7 +92,7 @@ export const TAFSearchResultCard: FC<Props> = ({ value, className, onClick }) =>
                 justify-content: space-between;
               `}
             >
-              <Strong loud>¥{value.price}</Strong>
+              <Strong loud>¥{value.price?.toLocaleString()}</Strong>
               <div
                 className={css`
                   display: inline-flex;
@@ -162,7 +162,7 @@ const getStyles = (theme: Theme) => ({
   paramaterScores: css`
     > li {
       display: grid;
-      grid-template-columns: 90px 1fr;
+      grid-template-columns: 56px 1fr;
       grid-gap: ${$spacing.md};
 
       + li {

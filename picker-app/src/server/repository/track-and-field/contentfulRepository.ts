@@ -1,7 +1,7 @@
 import path from 'path';
 import { createClient, Entry } from 'contentful';
 import { config } from 'dotenv';
-import { ISpikeShoesFields } from 'picker-types/generated/contentful';
+import { ISpikeArticlesFields, ISpikeShoesFields } from 'picker-types/generated/contentful';
 import { shoeColors } from 'picker-types/types/track-and-field/shoeColors';
 import { shoeEvents } from 'picker-types/types/track-and-field/shoeEvents';
 import { NexusGenInputs, NexusGenRootTypes } from 'graphql/generated/nexus/types';
@@ -37,32 +37,30 @@ export interface ISpikesSearchParams {
   order?: string;
 }
 
-export interface ISpikeSearchParams {
+export interface ISpikeFindParams {
   // eslint-disable-next-line camelcase
   content_type: 'spikeShoes';
   'fields.slug': string;
 }
 
 export const spikesEntries = (input: NexusGenInputs['SpikesInput']): Promise<NexusGenRootTypes['SpikeBase'][]> => {
-  return contentfulClient.getEntries<ISpikeShoesFields>(createSearchParams(input)).then(entries => {
+  return contentfulClient.getEntries<ISpikeShoesFields>(createSpikesSearchParams(input)).then(entries => {
     return entries.items.map(item => translateSpikeEntryToSpikeBase(item));
   });
 };
 
 export const spikeEntryBySlug = async (slug: string): Promise<NexusGenRootTypes['Spike']> => {
-  const entries = await contentfulClient.getEntries<ISpikeShoesFields>({
-    content_type: 'spikeShoes',
-    'fields.slug': slug,
-  });
-  return entries.items.map(item => translateSpikeEntryToSpike(item))?.[0];
+  const entries = await contentfulClient.getEntries<ISpikeShoesFields>(createSpikeFindParams(slug));
+
+  return translateSpikeEntryToSpike(entries.items[0]);
 };
 
 // 検索条件フォームの値をAPIの検索条件に変換
-export const createSearchParams = (
+const createSpikesSearchParams = (
   formValue: NexusGenInputs['SpikesInput'],
   overRideParams: Partial<ISpikesSearchParams> = {}
-) => {
-  const input: ISpikesSearchParams = {
+): ISpikesSearchParams => {
+  return {
     content_type: 'spikeShoes',
     'fields.events[in]': formValue?.events?.join(',') || undefined,
     'fields.brand[in]': formValue?.brands?.join(',') || undefined,
@@ -78,13 +76,16 @@ export const createSearchParams = (
     'fields.pinNumber[gte]': formValue?.pinCountRangeMin || undefined,
     'fields.pinNumber[lte]': formValue?.pinCountRangeMax || undefined,
     'fields.colors[in]': formValue?.shoeColor?.join(',') || undefined,
-
     ...overRideParams,
   };
-  return input;
 };
 
-export const translateSpikeEntryToSpikeBase = (entry: Entry<ISpikeShoesFields>): NexusGenRootTypes['SpikeBase'] => {
+const createSpikeFindParams = (slug: string): ISpikeFindParams => ({
+  content_type: 'spikeShoes',
+  'fields.slug': slug,
+});
+
+const translateSpikeEntryToSpikeBase = (entry: Entry<ISpikeShoesFields>): NexusGenRootTypes['SpikeBase'] => {
   return {
     id: entry.fields.slug,
     name: entry.fields.name,
@@ -95,7 +96,7 @@ export const translateSpikeEntryToSpikeBase = (entry: Entry<ISpikeShoesFields>):
     score: entry.fields.score,
     weight: entry.fields.weight,
     allWeatherOnly: entry.fields.allWeatherOnly,
-    lightnessScore: entry.fields.lightnessScore, // Int!
+    lightnessScore: entry.fields.lightnessScore,
     widthScore: entry.fields.widthScore,
     angleScore: entry.fields.angleScore,
     gripScore: entry.fields.gripScore,
@@ -104,9 +105,39 @@ export const translateSpikeEntryToSpikeBase = (entry: Entry<ISpikeShoesFields>):
   };
 };
 
-export const translateSpikeEntryToSpike = (entry: Entry<ISpikeShoesFields>): NexusGenRootTypes['SpikeBase'] => {
+const translateSpikeEntryToSpike = (entry: Entry<ISpikeShoesFields>): NexusGenRootTypes['Spike'] => {
+  return (
+    entry && {
+      ...translateSpikeEntryToSpikeBase(entry),
+      amazonUrl: entry.fields.spikeArticle?.fields.amazonUrl,
+      brandPageUrl: entry.fields.spikeArticle?.fields.brandPageUrl,
+      rakutenUrl: entry.fields.spikeArticle?.fields.rakutenUrl,
+      strength: getStrength(entry?.fields?.spikeArticle?.fields.strength),
+      keyFeature: getKeyFeatures(entry?.fields?.spikeArticle?.fields),
+      newModels: entry.fields.newModels?.flatMap(n => (n?.fields && translateSpikeEntryToSpikeBase(n)) ?? []),
+      recommendItems: entry.fields.recommendItems?.flatMap(r => (r?.fields && translateSpikeEntryToSpikeBase(r)) ?? []),
+      recommendedFor: entry.fields.spikeArticle?.fields.recommendedFor,
+      detailSpec: getDetailSpec(entry),
+    }
+  );
+};
+
+const getDetailSpec = (entry: Entry<ISpikeShoesFields>): NexusGenRootTypes['SpikeDetailSpec'] => {
   return {
-    ...translateSpikeEntryToSpikeBase(entry),
+    allWeatherOnly: entry.fields.allWeatherOnly,
+    athleteLevel: entry.fields.level,
+    events: getEvents(entry.fields.events),
+    madeIn: entry.fields.madeIn,
+    name: entry.fields.name,
+    pinDetail: entry.fields.pinDetail,
+    price: entry.fields.price,
+    releaseYear: entry.fields.releaseYear,
+    shoeLaceType: entry.fields.shoeLaceType,
+    minSize: entry.fields.minSize,
+    maxSize: entry.fields.maxSize,
+    soleMaterial: entry.fields.soleMaterial,
+    upperMaterial: entry.fields.upperMaterial,
+    weight: entry.fields.weight,
   };
 };
 
@@ -129,4 +160,33 @@ const getImages = (entity: Entry<ISpikeShoesFields>): NexusGenRootTypes['ColorIm
       imageUrls: entity.fields[colorVariationImageKey] as string[],
     };
   });
+};
+
+const getKeyFeatures = (fields?: ISpikeArticlesFields): NexusGenRootTypes['KeyFeature'][] | undefined => {
+  if (!fields) {
+    return undefined;
+  }
+
+  const keyFeatures: NexusGenRootTypes['KeyFeature'][] = [];
+
+  for (let i = 1; i < 5; i++) {
+    if (fields[`keyFeatureTitle${i}` as keyof ISpikeArticlesFields]) {
+      keyFeatures.push({
+        id: i.toString(),
+        title: (fields[`keyFeatureTitle${i}` as keyof ISpikeArticlesFields] as string) || '',
+        imageUrls: (fields[`keyFeatureImageUrls${i}` as keyof ISpikeArticlesFields] as string[]) || [],
+        description: (fields[`keyFeatureDescription${i}` as keyof ISpikeArticlesFields] as string)?.trim() || '',
+      });
+    }
+  }
+
+  return keyFeatures;
+};
+
+const getStrength = (strength: Record<string, any> | undefined): NexusGenRootTypes['Strength'][] => {
+  return strength?.map((s: { [key: string]: string }) => ({
+    icon: s?.icon,
+    label: s?.label,
+    description: s?.description,
+  }));
 };

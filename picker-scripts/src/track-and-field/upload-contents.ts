@@ -18,7 +18,6 @@ import { shoeLaceTypes } from 'picker-types/types/track-and-field/shoeLaceTypes'
 import { shoePinTypes } from 'picker-types/types/track-and-field/shoePinTypes';
 import { IShoeStrength } from 'picker-types/types/track-and-field/shoeStrength';
 import sharp from 'sharp';
-import { IconName, icons } from './icons';
 
 // https://docs.google.com/spreadsheets/d/1C76UvztImMsTH1SlqnjetZOd9Je_1dQBUuF0yQHnJDE/edit#gid=1513641547
 export const SPREADSHEET_KEY = '1C76UvztImMsTH1SlqnjetZOd9Je_1dQBUuF0yQHnJDE';
@@ -737,7 +736,7 @@ export class SpreadsheetUploader {
     return [...Array(SPREADSHEET_STRENGTH_COUNT)].flatMap((_, i) =>
       articleRow[`strengthTitle${i + 1}`]
         ? {
-            icon: SpreadsheetUploader._getIconClass(articleRow[`strengthIcon${i + 1}`]),
+            icon: articleRow[`strengthIcon${i + 1}`],
             label: articleRow[`strengthTitle${i + 1}`],
             description: articleRow[`strengthDescription${i + 1}`],
           }
@@ -824,14 +823,6 @@ export class SpreadsheetUploader {
       default:
         return undefined;
     }
-  }
-
-  static _getIconClass(iconName: string): string {
-    if (!iconName) {
-      return '';
-    }
-
-    return icons[iconName as IconName] || '';
   }
 
   static _reduceImageSize(driveFileBuffer: Buffer) {

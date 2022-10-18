@@ -1,6 +1,7 @@
 import React, { type FC } from 'react';
 import { css } from '@emotion/css';
 import { faChevronCircleRight } from '@fortawesome/free-solid-svg-icons';
+import { A } from 'components/atoms/A';
 import { Button } from 'components/atoms/Button';
 import { Card } from 'components/atoms/Card';
 import { Spacer } from 'components/atoms/Spacer';
@@ -34,33 +35,51 @@ export const TAFSpikeActionBar: FC<Props> = ({ spike }) => {
           <Span fontSize="24px" loud bold>
             ¥{spike.price.toLocaleString()}
           </Span>
-          <Span bold>（税込）</Span>
+          <Span semiBold>（税込）</Span>
         </div>
       )}
-      <Spacer size={$spacing.md} />
-      <Button
-        label="Amazonで購入"
-        icon={faChevronCircleRight}
-        color="primary"
-        width="100%"
-        iconPosition="rightAbsolute"
-      />
-      <Spacer size={$spacing.md} />
-      <Button
-        label="楽天で購入"
-        icon={faChevronCircleRight}
-        color="primary"
-        width="100%"
-        iconPosition="rightAbsolute"
-      />
-      <Spacer size={$spacing.md} />
-      <Button
-        label="公式サイトで購入"
-        icon={faChevronCircleRight}
-        color="primary"
-        width="100%"
-        iconPosition="rightAbsolute"
-      />
+      {spike.amazonUrl && (
+        <>
+          <Spacer size={$spacing.md} />
+          <A href={spike.amazonUrl}>
+            <Button
+              label="Amazonで購入"
+              icon={faChevronCircleRight}
+              color="primary"
+              width="100%"
+              iconPosition="rightAbsolute"
+            />
+          </A>
+        </>
+      )}
+      {spike.rakutenUrl && (
+        <>
+          <Spacer size={$spacing.md} />
+          <A href={spike.rakutenUrl}>
+            <Button
+              label="楽天で購入"
+              icon={faChevronCircleRight}
+              color="primary"
+              width="100%"
+              iconPosition="rightAbsolute"
+            />
+          </A>
+        </>
+      )}
+      {spike.brandPageUrl && (
+        <>
+          <Spacer size={$spacing.md} />
+          <A href={spike.brandPageUrl}>
+            <Button
+              label="公式サイトで購入"
+              icon={faChevronCircleRight}
+              color="primary"
+              width="100%"
+              iconPosition="rightAbsolute"
+            />
+          </A>
+        </>
+      )}
     </Card>
   );
 };

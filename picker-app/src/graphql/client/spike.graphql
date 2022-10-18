@@ -11,56 +11,109 @@ query Spike($input: SpikeInput!) {
 }
 
 fragment SpikeBase on SpikeBase {
-    id,
-    name,
-    nameEn,
-    allWeatherOnly,
-    angleScore,
-    brand,
+    id
+    name
+    nameEn
+    allWeatherOnly
+    angleScore
+    brand
     events {
         ...TAFShoeEvents
-    },
-    gripScore,
-    hardnessScore,
+    }
+    gripScore
+    hardnessScore
     colorImages {
         ...ColorImages
     }
-    lightnessScore,
-    price,
-    score,
-    weight,
-    widthScore,
+    lightnessScore
+    price
+    score
+    weight
+    widthScore
 }
 
 fragment Spike on Spike {
-    id,
-    name,
-    nameEn,
-    allWeatherOnly,
-    angleScore,
-    brand,
+    id
+    name
+    nameEn
+    allWeatherOnly
+    angleScore
+    brand
     events {
         ...TAFShoeEvents
-    },
-    gripScore,
-    hardnessScore,
+    }
+    gripScore
+    hardnessScore
     colorImages {
         ...ColorImages
     }
-    lightnessScore,
-    price,
-    score,
-    weight,
-    widthScore,
+    lightnessScore
+    price
+    score
+    weight
+    widthScore
+
+    amazonUrl
+    brandPageUrl
+    detailSpec {
+        ...SpikeDetailSpec
+    }
+    keyFeature {
+        ...KeyFeature
+    }
+    newModels {
+        ...SpikeBase
+    }
+    rakutenUrl
+    recommendItems {
+        ...SpikeBase
+    }
+    recommendedFor
+    strength {
+        ...Strength
+    }
 }
 
+fragment SpikeDetailSpec on SpikeDetailSpec {
+    allWeatherOnly
+    athleteLevel
+    events {
+        ...TAFShoeEvents
+    }
+    madeIn
+    maxSize
+    minSize
+    name
+    pinDetail
+    price
+    releaseYear
+    shoeLaceType
+    soleMaterial
+    upperMaterial
+    weight
+}
+
+
 fragment ColorImages on ColorImages {
-    colorId,
-    colorCode,
+    colorId
+    colorCode
     imageUrls
 }
 
 fragment TAFShoeEvents on TAFShoeEvents {
-    id,
+    id
+    label
+}
+
+fragment KeyFeature on KeyFeature {
+    id
+    title
+    imageUrls
+    description
+}
+
+fragment Strength on Strength {
+    description
+    icon
     label
 }

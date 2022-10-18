@@ -26,7 +26,7 @@
       "graphql/*": ["graphql/*"],
       "layout/*": ["layout/*"],
       "pages/*": ["pages/*"],
-      "shared/*": ["shared/*"],
+      "shared/*": ["shared/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

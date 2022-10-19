@@ -47,6 +47,7 @@ const getStyles = (theme: Theme) => ({
       :hover {
         margin-left: ${$spacing.md};
         background-color: ${theme.inverseHover};
+        transition: all 0.4s;
       }
     }
   `,

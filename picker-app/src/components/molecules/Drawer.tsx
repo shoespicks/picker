@@ -4,6 +4,7 @@ import { Theme, useTheme } from '@emotion/react';
 import { Dialog } from '@headlessui/react';
 import { Animation, AnimationChild } from 'components/atoms/Animation';
 import { useDialog } from 'components/hooks/useDialog';
+import { breakpoints, mediaGreaterThan } from 'shared/constants/styles/media-query';
 
 type Props = {
   isOpen?: boolean;
@@ -61,9 +62,9 @@ const getStyles = (theme: Theme) => ({
     background-color: ${theme.main};
     box-shadow: ${theme.shadowLeft};
 
-    @media screen and (min-width: 1440px) {
-      width: calc(20vw + ((100vw - 1440px) / 2));
-      padding-right: calc((100vw - 1440px) / 2);
+    ${mediaGreaterThan('2xl')} {
+      width: calc(20vw + ((100vw - ${breakpoints['2xl']}px) / 2));
+      padding-right: calc((100vw - ${breakpoints['2xl']}px) / 2);
     }
   `,
 });

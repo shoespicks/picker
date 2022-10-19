@@ -3,7 +3,7 @@ export type SizePx = `${number}px`;
 
 export declare type SizeCode = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
-export const $headerSize: Size = '80px';
+export const $headerSize: Size = '60px';
 
 export const $inputDefaultHeight: Size = '48px';
 

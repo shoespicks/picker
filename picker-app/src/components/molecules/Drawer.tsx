@@ -56,9 +56,14 @@ const getStyles = (theme: Theme) => ({
     right: 0;
     z-index: 2000;
     width: 20vw;
-    min-width: 360px;
+    min-width: 375px;
     height: 100%;
     background-color: ${theme.main};
     box-shadow: ${theme.shadowLeft};
+
+    @media screen and (min-width: 1440px) {
+      width: calc(20vw + ((100vw - 1440px) / 2));
+      padding-right: calc((100vw - 1440px) / 2);
+    }
   `,
 });

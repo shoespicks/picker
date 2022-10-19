@@ -23,7 +23,7 @@ export const Header: FC<PropsWithChildren> = ({ children }) => {
       <Container>
         <div className={styles.headerContent}>
           <A href="/track-and-field">
-            <Image src="/picker.svg" width={108} height={18} alt="picker" />
+            <Image src="/picker.svg" width={96} height={16} alt="picker" />
           </A>
           <HeaderNavigation>
             <div className={styles.navigationContent}>

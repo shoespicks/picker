@@ -59,7 +59,7 @@ fragment Spike on Spike {
         ...SpikeDetailSpec
     }
     keyFeature {
-        ...KeyFeature
+        ...AricleItem
     }
     newModels {
         ...SpikeBase
@@ -77,12 +77,9 @@ fragment Spike on Spike {
 fragment SpikeDetailSpec on SpikeDetailSpec {
     allWeatherOnly
     athleteLevel
-    events {
-        ...TAFShoeEvents
-    }
+    events
     madeIn
-    maxSize
-    minSize
+    size
     name
     pinDetail
     price
@@ -105,7 +102,7 @@ fragment TAFShoeEvents on TAFShoeEvents {
     label
 }
 
-fragment KeyFeature on KeyFeature {
+fragment AricleItem on AricleItem {
     id
     title
     imageUrls

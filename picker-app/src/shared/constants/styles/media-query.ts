@@ -5,7 +5,7 @@ export const breakpoints: { [key in BreakpointCode]: number } = {
   md: 768,
   lg: 1024,
   xl: 1280,
-  '2xl': 1536,
+  '2xl': 1440,
 } as const;
 
 export type BreakpointCode = 'sm' | 'md' | 'lg' | 'xl' | '2xl';

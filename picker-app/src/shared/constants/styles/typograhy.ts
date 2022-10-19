@@ -53,6 +53,11 @@ export const pStyle = css`
   font-size: 16px;
 `;
 
+export const preStyle = css`
+  font-size: 16px;
+  white-space: pre-line;
+`;
+
 export const spanStyle = css`
   font-size: 14px;
 `;

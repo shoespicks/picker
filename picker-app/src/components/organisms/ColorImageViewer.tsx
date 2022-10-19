@@ -31,7 +31,6 @@ export const ColorImageViewer: FC<Props> = ({ colorImages }) => {
 
   const culcImageIndex = useCallback(
     debounce(() => {
-      console.log('culcImageIndex');
       setSelectedImageIndex(
         (imagesRef?.current?.scrollLeft &&
           imagesRef?.current?.clientWidth &&
@@ -43,19 +42,14 @@ export const ColorImageViewer: FC<Props> = ({ colorImages }) => {
   );
 
   useEffect(() => {
-    console.log('useEffect');
-
     imagesRef?.current?.addEventListener('scroll', culcImageIndex);
 
     return () => {
-      console.log('useEffectEnd');
       imagesRef?.current?.removeEventListener('scroll', culcImageIndex);
     };
   }, [culcImageIndex, imagesRef]);
 
   const scrollToIndex = (index: number) => {
-    console.log('scrollToIndex');
-
     if (index === selectedImageIndex) {
       return;
     }
@@ -88,6 +82,10 @@ export const ColorImageViewer: FC<Props> = ({ colorImages }) => {
             </li>
           ))}
         </ul>
+        <div className={styles.imagesOverlay}>
+          <div onClick={scrollToPrev}></div>
+          <div onClick={scrollToNext}></div>
+        </div>
       </AspectRatio>
       <div className={styles.imageIndicator}>
         <span className={styles.imageIndicatorArrow} onClick={scrollToPrev}>
@@ -124,10 +122,16 @@ const getStyles = (theme: Theme) => ({
     display: flex;
     width: 100%;
     height: 100%;
-    overflow: auto;
+    overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
 
     > li {
       scroll-snap-align: start;
@@ -138,8 +142,20 @@ const getStyles = (theme: Theme) => ({
       height: 100%;
     }
   `,
+
+  imagesOverlay: css`
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    cursor: pointer;
+  `,
   imageIndicator: css`
     display: flex;
+    flex: 0 0 auto;
     align-items: center;
     justify-content: space-between;
     height: 64px;
@@ -151,6 +167,7 @@ const getStyles = (theme: Theme) => ({
     align-items: center;
     justify-content: center;
     width: 100%;
+    padding: ${$spacing.md};
   `,
   imageIndicatorItem: (selected: boolean) =>
     css`
@@ -173,11 +190,12 @@ const getStyles = (theme: Theme) => ({
     `,
   imageIndicatorArrow: css`
     display: inline-flex;
-    flex: 0 0 auto;
+    flex: 1 1 auto;
     align-items: center;
     justify-content: center;
     width: 64px;
     height: 64px;
+    padding: 0 ${$spacing.md};
     cursor: pointer;
     border-radius: 2px;
 

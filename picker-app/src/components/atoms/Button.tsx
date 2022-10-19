@@ -69,6 +69,7 @@ const getStyles = (theme: Theme) => ({
         font-size: ${fontSize};
         line-height: 1;
         color: ${theme.textDefault};
+        text-align: center;
         cursor: pointer;
         background-color: ${theme.background};
         border: 1px solid ${theme.border};

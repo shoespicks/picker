@@ -11,17 +11,17 @@ type Props = {
 };
 export const TAFTopTitleCard: FC<Props> = ({ className }) => (
   <Card className={className} borderWidthPx={2}>
-    <AspectRatio.Root ratio={2}>
+    <AspectRatio ratio={2}>
       <div className={styles.titleContent}>
-        <AspectRatio.Root ratio={6.2}>
+        <AspectRatio ratio={6.2}>
           <span className={styles.titleLogoFrame}>
             <Image src="/picker-black.svg" fill alt="picker" />
           </span>
-        </AspectRatio.Root>
+        </AspectRatio>
         <Spacer size="8px"></Spacer>
         <span className={styles.titleSubText}>for Track and Field</span>
       </div>
-    </AspectRatio.Root>
+    </AspectRatio>
   </Card>
 );
 

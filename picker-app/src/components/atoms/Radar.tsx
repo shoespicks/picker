@@ -1,10 +1,11 @@
-import { FC } from 'react';
+import React, { FC } from 'react';
 import { Theme, useTheme } from '@emotion/react';
 import { ChartData, ChartOptions } from 'chart.js';
 import 'chart.js/auto';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Radar as RCRadar } from 'react-chartjs-2';
 import { loudFontfamily } from 'shared/constants/styles/typograhy';
+import { AspectRatio } from './AspectRatio';
 
 type Props = {
   data: number[];
@@ -21,7 +22,7 @@ export const Radar: FC<Props> = ({ data, labels, small }) => {
       {
         data,
         fill: true,
-        backgroundColor: theme.backdrop,
+        backgroundColor: '#66666633',
         borderColor: theme.border,
         pointBackgroundColor: theme.background,
         pointBorderColor: theme.border,
@@ -31,7 +32,11 @@ export const Radar: FC<Props> = ({ data, labels, small }) => {
     ],
   };
 
-  return <RCRadar options={getChartOptions(theme, small)} data={chartData} plugins={[ChartDataLabels]} />;
+  return (
+    <AspectRatio ratio={1}>
+      <RCRadar options={getChartOptions(theme, small)} data={chartData} plugins={[ChartDataLabels]} />
+    </AspectRatio>
+  );
 };
 
 const getChartOptions = (theme: Theme, small?: boolean): ChartOptions<'radar'> => ({
@@ -42,6 +47,9 @@ const getChartOptions = (theme: Theme, small?: boolean): ChartOptions<'radar'> =
       hoverRadius: small ? 14 : 18,
       borderWidth: 2,
       hoverBorderWidth: 3,
+    },
+    line: {
+      borderWidth: 2,
     },
   },
   layout: {

@@ -1,11 +1,12 @@
 import { ElementType, type FC, PropsWithChildren } from 'react';
 import { css, cx } from '@emotion/css';
+import { mediaGreaterThan } from 'shared/constants/styles/media-query';
 import { Size } from 'shared/constants/styles/size';
+import { $spacing } from 'shared/constants/styles/spacing';
 
 type Props = {
   as?: ElementType;
   maxWidth?: Size;
-  sidePadding?: Size;
   className?: string;
 };
 
@@ -13,7 +14,6 @@ export const Container: FC<PropsWithChildren<Props>> = ({
   children,
   as: CustomTag = 'div',
   maxWidth = '1440px',
-  sidePadding = '16px',
   className,
 }) => (
   <CustomTag
@@ -21,10 +21,15 @@ export const Container: FC<PropsWithChildren<Props>> = ({
       css`
         width: 100%;
         max-width: ${maxWidth};
-        padding-right: ${sidePadding};
-        padding-left: ${sidePadding};
+        padding-right: ${$spacing.md};
+        padding-left: ${$spacing.md};
         margin-right: auto;
         margin-left: auto;
+
+        ${mediaGreaterThan('md')} {
+          padding-right: ${$spacing.lg};
+          padding-left: ${$spacing.lg};
+        }
       `,
       className
     )}

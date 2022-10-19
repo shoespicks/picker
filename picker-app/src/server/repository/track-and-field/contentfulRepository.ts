@@ -3,7 +3,9 @@ import { createClient, Entry } from 'contentful';
 import { config } from 'dotenv';
 import { ISpikeArticlesFields, ISpikeShoesFields } from 'picker-types/generated/contentful';
 import { shoeColors } from 'picker-types/types/track-and-field/shoeColors';
+import { shoeEnviroments } from 'picker-types/types/track-and-field/shoeEnviroment';
 import { shoeEvents } from 'picker-types/types/track-and-field/shoeEvents';
+import { shoeLaceTypes } from 'picker-types/types/track-and-field/shoeLaceTypes';
 import { NexusGenInputs, NexusGenRootTypes } from 'graphql/generated/nexus/types';
 
 (!process.env.PICKER_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN || !process.env.PICKER_CONTENTFUL_SPACE_ID) &&
@@ -65,8 +67,7 @@ const createSpikesSearchParams = (
     'fields.events[in]': formValue?.events?.join(',') || undefined,
     'fields.brand[in]': formValue?.brands?.join(',') || undefined,
     'fields.releaseYear[in]': formValue?.years?.join(',') || undefined,
-    'fields.newModels[exists]':
-      formValue?.latestOnly === undefined || formValue.latestOnly === null ? undefined : formValue.latestOnly,
+    'fields.newModels[exists]': formValue?.latestOnly === true ? true : undefined,
     query: formValue?.keyword || undefined,
     'fields.level[in]': formValue?.athleteLevel?.join(',') || undefined,
     'fields.allWeatherOnly': formValue.allWeatherOnly,
@@ -109,14 +110,15 @@ const translateSpikeEntryToSpike = (entry: Entry<ISpikeShoesFields>): NexusGenRo
   return (
     entry && {
       ...translateSpikeEntryToSpikeBase(entry),
-      amazonUrl: entry.fields.spikeArticle?.fields.amazonUrl,
-      brandPageUrl: entry.fields.spikeArticle?.fields.brandPageUrl,
-      rakutenUrl: entry.fields.spikeArticle?.fields.rakutenUrl,
-      strength: getStrength(entry?.fields?.spikeArticle?.fields.strength),
+      amazonUrl: entry.fields.spikeArticle?.fields.amazonUrl || null,
+      brandPageUrl: entry.fields.spikeArticle?.fields.brandPageUrl || null,
+      rakutenUrl: entry.fields.spikeArticle?.fields.rakutenUrl || null,
+      strength: getStrength(entry?.fields?.spikeArticle?.fields.strength) || null,
       keyFeature: getKeyFeatures(entry?.fields?.spikeArticle?.fields),
-      newModels: entry.fields.newModels?.flatMap(n => (n?.fields && translateSpikeEntryToSpikeBase(n)) ?? []),
-      recommendItems: entry.fields.recommendItems?.flatMap(r => (r?.fields && translateSpikeEntryToSpikeBase(r)) ?? []),
-      recommendedFor: entry.fields.spikeArticle?.fields.recommendedFor,
+      newModels: entry.fields?.newModels?.flatMap(n => (n?.fields && translateSpikeEntryToSpikeBase(n)) || []) || null,
+      recommendItems:
+        entry.fields?.recommendItems?.flatMap(r => (r?.fields && translateSpikeEntryToSpikeBase(r)) || []) || null,
+      recommendedFor: entry.fields?.spikeArticle?.fields?.recommendedFor || null,
       detailSpec: getDetailSpec(entry),
     }
   );
@@ -124,28 +126,31 @@ const translateSpikeEntryToSpike = (entry: Entry<ISpikeShoesFields>): NexusGenRo
 
 const getDetailSpec = (entry: Entry<ISpikeShoesFields>): NexusGenRootTypes['SpikeDetailSpec'] => {
   return {
-    allWeatherOnly: entry.fields.allWeatherOnly,
-    athleteLevel: entry.fields.level,
-    events: getEvents(entry.fields.events),
-    madeIn: entry.fields.madeIn,
+    allWeatherOnly: entry.fields.allWeatherOnly ? shoeEnviroments.allweatherOnly.label : shoeEnviroments.soil.label,
+    athleteLevel: entry.fields?.level || null,
+    events: entry.fields.events?.map(e => shoeEvents[e].label).join(', ') || null,
+    madeIn: entry.fields.madeIn || null,
     name: entry.fields.name,
-    pinDetail: entry.fields.pinDetail,
-    price: entry.fields.price,
-    releaseYear: entry.fields.releaseYear,
-    shoeLaceType: entry.fields.shoeLaceType,
-    minSize: entry.fields.minSize,
-    maxSize: entry.fields.maxSize,
-    soleMaterial: entry.fields.soleMaterial,
-    upperMaterial: entry.fields.upperMaterial,
-    weight: entry.fields.weight,
+    pinDetail: entry.fields.pinDetail || null,
+    price: (entry.fields?.price && `${entry.fields.price.toLocaleString()}（税込み）`) || null,
+    releaseYear: (entry.fields.releaseYear && `${entry.fields.releaseYear}年`) || null,
+    shoeLaceType: entry.fields.shoeLaceType?.map(t => shoeLaceTypes[t].label).join(', ') || null,
+    size:
+      ((entry.fields?.minSize || entry.fields.maxSize) && `${entry.fields?.minSize} 〜 ${entry.fields?.maxSize}`) ||
+      null,
+    soleMaterial: entry.fields?.soleMaterial || null,
+    upperMaterial: entry.fields?.upperMaterial || null,
+    weight: (entry.fields.weight && `${entry.fields.weight}g （26.0cm片足）`) || null,
   };
 };
 
-const getEvents = (events: ISpikeShoesFields['events']): NexusGenRootTypes['TAFShoeEvents'][] | undefined => {
-  return events?.map(e => ({
-    id: e,
-    label: shoeEvents[e].label,
-  }));
+const getEvents = (events: ISpikeShoesFields['events']): NexusGenRootTypes['TAFShoeEvents'][] | null => {
+  return (
+    events?.map(e => ({
+      id: e,
+      label: shoeEvents[e].label,
+    })) ?? null
+  );
 };
 
 const getImages = (entity: Entry<ISpikeShoesFields>): NexusGenRootTypes['ColorImages'][] | undefined => {
@@ -162,12 +167,12 @@ const getImages = (entity: Entry<ISpikeShoesFields>): NexusGenRootTypes['ColorIm
   });
 };
 
-const getKeyFeatures = (fields?: ISpikeArticlesFields): NexusGenRootTypes['KeyFeature'][] | undefined => {
+const getKeyFeatures = (fields?: ISpikeArticlesFields): NexusGenRootTypes['AricleItem'][] | null => {
   if (!fields) {
-    return undefined;
+    return null;
   }
 
-  const keyFeatures: NexusGenRootTypes['KeyFeature'][] = [];
+  const keyFeatures: NexusGenRootTypes['AricleItem'][] = [];
 
   for (let i = 1; i < 5; i++) {
     if (fields[`keyFeatureTitle${i}` as keyof ISpikeArticlesFields]) {

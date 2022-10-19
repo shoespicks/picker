@@ -18,8 +18,8 @@ export const Strength = objectType({
   },
 });
 
-export const KeyFeature = objectType({
-  name: 'KeyFeature',
+export const AricleItem = objectType({
+  name: 'AricleItem',
   definition(t) {
     t.nonNull.id('id');
     t.string('title');

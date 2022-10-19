@@ -10,6 +10,7 @@ type Props = {
 };
 
 const DefaultLayout = ({ children, theme = homeTheme, headerElement }: PropsWithChildren<Props>) => {
+  const styles = getStyles(theme);
   return (
     <ThemeProvider theme={theme}>
       <div className={styles.mainContainer}>
@@ -21,11 +22,12 @@ const DefaultLayout = ({ children, theme = homeTheme, headerElement }: PropsWith
   );
 };
 
-const styles = {
+const getStyles = (theme: Theme) => ({
   mainContainer: css`
     width: 100%;
     min-height: 100vh;
+    color: ${theme.text['default']};
   `,
-};
+});
 
 export default DefaultLayout;

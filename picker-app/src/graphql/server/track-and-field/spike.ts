@@ -1,31 +1,24 @@
 import { extendType, inputObjectType, interfaceType, nonNull, objectType } from 'nexus';
-import { KeyFeature, Strength, TAFAthleteLevel, TAFShoeEvents, TAFShoeLaceType } from 'graphql/server';
+import { AricleItem, Strength } from 'graphql/server';
 import { ISpikeBase } from 'graphql/server/track-and-field/types';
 import { spikeLoader } from 'server/loader/track-and-field/spikeLoader';
 
 export const SpikeDetailSpec = objectType({
   name: 'SpikeDetailSpec',
   definition(t) {
-    t.nonNull.string('name');
-    t.int('price');
-    t.int('weight');
-    t.list.field('events', {
-      type: nonNull(TAFShoeEvents),
-    });
-    t.boolean('allWeatherOnly');
+    t.string('name');
+    t.string('price');
+    t.string('weight');
+    t.string('events');
+    t.string('allWeatherOnly');
     t.string('pinDetail');
-    t.int('releaseYear');
+    t.string('releaseYear');
     t.string('madeIn');
-    t.list.field('shoeLaceType', {
-      type: nonNull(TAFShoeLaceType),
-    });
+    t.string('shoeLaceType');
     t.string('upperMaterial');
     t.string('soleMaterial');
-    t.int('minSize');
-    t.int('maxSize');
-    t.field('athleteLevel', {
-      type: TAFAthleteLevel,
-    });
+    t.string('size');
+    t.string('athleteLevel');
   },
 });
 
@@ -39,7 +32,7 @@ export const ISpikeDetail = interfaceType({
       type: nonNull(Strength),
     });
     t.list.field('keyFeature', {
-      type: nonNull(KeyFeature),
+      type: nonNull(AricleItem),
     });
     t.string('recommendedFor');
     t.field('detailSpec', {

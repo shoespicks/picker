@@ -11,6 +11,7 @@ import {
   h3Style,
   h4Style,
   h5Style,
+  preStyle,
   pStyle,
   semiBoldStyle,
   smallStyle,
@@ -86,6 +87,11 @@ export const H5: FC<PropsWithChildren<TypographyProps>> = ({ children, ...props 
 export const P: FC<PropsWithChildren<TypographyProps>> = ({ children, ...props }) => {
   const { setTypographyStyle } = useTypography();
   return <p className={setTypographyStyle({ baseClassName: pStyle, ...props })}>{children}</p>;
+};
+
+export const Pre: FC<PropsWithChildren<TypographyProps>> = ({ children, ...props }) => {
+  const { setTypographyStyle } = useTypography();
+  return <pre className={setTypographyStyle({ baseClassName: preStyle, ...props })}>{children}</pre>;
 };
 
 export const Small: FC<PropsWithChildren<TypographyProps>> = ({ children, ...props }) => {

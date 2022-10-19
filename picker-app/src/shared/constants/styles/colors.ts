@@ -5,6 +5,7 @@ import { Theme } from '@emotion/react';
  */
 const $pallete = {
   black: '#000000',
+  brack2: '#222222',
   blackClear: '#0000000A',
   blackClearDark: '#6666668C',
   whiteClear: '#FFFFFF40',
@@ -26,7 +27,7 @@ const typographyColors = ['default', 'dark', 'low', 'disable', 'inverse'] as con
 export type TypographyColors = typeof typographyColors[number];
 
 const themeBaseTypographyColors: { [key in TypographyColors]: string } = {
-  default: $pallete.black,
+  default: $pallete.brack2,
   dark: $pallete.gray4,
   low: $pallete.gray3,
   disable: $pallete.gray1,

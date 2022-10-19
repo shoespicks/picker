@@ -58,11 +58,7 @@ const columnContent = (element: JSX.Element, stickyTop?: string) => (
 const styles = {
   multiColumn: css`
     display: grid;
-    gap: ${$spacing.md};
-
-    ${mediaGreaterThan('xl')} {
-      gap: ${$spacing.lg};
-    }
+    gap: ${$spacing.lg};
   `,
   stickyContainer: (top?: string) => css`
     position: sticky;

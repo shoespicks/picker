@@ -13,12 +13,12 @@ export interface TransitionClasses {
   leaveTo?: string;
 }
 
-const $easeInOutQuint = 'cubic-bezier(0.83, 0, 0.17, 1)';
+export const $easeInOutQuint = 'cubic-bezier(0.83, 0, 0.17, 1)';
 
 export const $transitions: { [name in TransitionName]: TransitionClasses } = {
   fade: {
     leave: css`
-      transition: opacity ease-in 100ms;
+      transition: opacity 100ms ${$easeInOutQuint};
     `,
     leaveFrom: css`
       opacity: 1;
@@ -27,7 +27,7 @@ export const $transitions: { [name in TransitionName]: TransitionClasses } = {
       opacity: 0;
     `,
     enter: css`
-      transition: opacity ease-in 100ms;
+      transition: opacity 100ms ${$easeInOutQuint};
     `,
     enterTo: css`
       opacity: 1;
@@ -35,7 +35,7 @@ export const $transitions: { [name in TransitionName]: TransitionClasses } = {
   },
   slideIn: {
     leave: css`
-      transition: transform ease-in 200ms;
+      transition: transform 200ms ${$easeInOutQuint};
     `,
     leaveFrom: css`
       transform: translateX(0);
@@ -44,7 +44,7 @@ export const $transitions: { [name in TransitionName]: TransitionClasses } = {
       transform: translateX(100%);
     `,
     enter: css`
-      transition: transform ease-in 200ms;
+      transition: transform 200ms ${$easeInOutQuint};
     `,
     enterFrom: css`
       transform: translateX(100%);

@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { css, cx } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import { $headerSize } from 'shared/constants/styles/size';
+import { $easeInOutQuint } from 'shared/constants/styles/transition';
 
 type Props = {
   isOpen?: boolean;
@@ -40,7 +41,7 @@ const getStyles = (theme: Theme) => ({
       height: 2px;
       content: '';
       background-color: ${theme.textInverse};
-      transition: transform 400ms ease-in, top 400ms ease-in;
+      transition: transform 400ms ${$easeInOutQuint}, top 400ms ${$easeInOutQuint};
     }
 
     &::before {

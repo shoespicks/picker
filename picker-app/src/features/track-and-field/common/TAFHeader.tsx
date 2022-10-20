@@ -8,14 +8,9 @@ import { SignButtons } from 'components/molecules/SignButtons';
 import { Header } from 'features/common/header';
 import { $headerSize } from 'shared/constants/styles/size';
 import { $spacing } from 'shared/constants/styles/spacing';
-import { Link } from 'shared/constants/type';
 import { routing } from '../constants/routing';
 
-type Props = {
-  links: Link[];
-};
-
-export const TAFHeader: FC<Props> = () => {
+export const TAFHeader: FC = () => {
   const theme = useTheme();
   const styles = getStyles(theme);
 

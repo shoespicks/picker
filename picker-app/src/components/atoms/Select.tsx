@@ -51,8 +51,9 @@ export function Select<T>({
       >
         <div className={styles.selectContainer}>
           <Listbox.Button
-            as="div"
+            as="span"
             className={css`
+              display: inline-flex;
               width: ${width};
             `}
           >

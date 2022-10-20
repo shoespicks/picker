@@ -23,8 +23,16 @@ export const $behavior = {
       transform-origin: left top;
     }
 
+    > * {
+      transition: color ease-in 100ms;
+    }
+
     &:hover {
       color: ${theme.textInverse};
+
+      > * {
+        color: ${theme.textInverse};
+      }
 
       &::after {
         transform: scale(1, 1);

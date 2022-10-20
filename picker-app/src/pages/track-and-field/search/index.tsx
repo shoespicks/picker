@@ -11,7 +11,8 @@ const CSRTAFSearchTemplate = dynamic(
 );
 
 const TAFSearchPage: NextPageWithLayout = () => {
-  const { data, currentSearchCondition, isLoading, search } = useSearchSpike(searchFormInputDefaultValues);
+  const { data, currentSearchCondition, searchOrder, setSearchOrder, isLoading, search } =
+    useSearchSpike(searchFormInputDefaultValues);
 
   const onSubmit = (input: SearchFormInput) => {
     console.log(input);
@@ -23,6 +24,8 @@ const TAFSearchPage: NextPageWithLayout = () => {
       <CSRTAFSearchTemplate
         data={data}
         currentSearchCondition={currentSearchCondition}
+        searchOrder={searchOrder}
+        setSearchOrder={setSearchOrder}
         isLoading={isLoading}
         onSubmit={onSubmit}
       ></CSRTAFSearchTemplate>

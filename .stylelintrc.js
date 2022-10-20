@@ -9,6 +9,8 @@ const stylelintConfig = {
   rules: {
     'value-keyword-case': null,
     'property-no-unknown': null,
+    'function-name-case': null,
+    'function-no-unknown': null,
   },
   ignoreFiles: ['**/node_modules/**'],
 };

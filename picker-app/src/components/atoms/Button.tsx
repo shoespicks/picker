@@ -5,6 +5,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 import { Icon } from 'components/atoms/Icon';
 import { Span } from 'components/atoms/Typography';
 import { $behavior } from 'shared/constants/styles/behavior';
+import { TypographyColors } from 'shared/constants/styles/colors';
 import { setSolidShadow } from 'shared/constants/styles/common';
 import { $inputDefaultHeight, Size } from 'shared/constants/styles/size';
 import { $spacing } from 'shared/constants/styles/spacing';
@@ -17,8 +18,10 @@ type Props = ComponentPropsWithoutRef<'button'> & {
   icon?: IconDefinition;
   label?: string;
   width?: Size;
+  height?: Size;
   fontSize?: Size;
   iconPosition?: ButtonIconPosition;
+  labelColor?: TypographyColors;
   className?: string;
   onClick?: MouseEventHandler;
 };
@@ -29,8 +32,10 @@ export const Button: FC<PropsWithChildren<Props>> = ({
   icon,
   label,
   width,
+  height,
   iconPosition = 'rightInline',
   fontSize,
+  labelColor = 'default',
   className,
   onClick,
   ...buttonProps
@@ -40,7 +45,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
     <button
       {...buttonProps}
       className={cx(
-        styles.button(iconPosition, fontSize),
+        styles.button(iconPosition, fontSize, height),
         className,
         css`
           width: ${width};
@@ -50,14 +55,18 @@ export const Button: FC<PropsWithChildren<Props>> = ({
       data-color={color}
     >
       {!!icon && <Icon icon={icon} className={styles.icon(iconPosition)} />}
-      {!!label && <Span semiBold>{label}</Span>}
+      {!!label && (
+        <Span color={labelColor} semiBold>
+          {label}
+        </Span>
+      )}
       {children}
     </button>
   );
 };
 
 const getStyles = (theme: Theme) => ({
-  button: (iconPosition: ButtonIconPosition, fontSize: Size = '16px') =>
+  button: (iconPosition: ButtonIconPosition, fontSize: Size = '16px', height: Size = $inputDefaultHeight) =>
     cx(
       $behavior.hoverSwipe(theme),
       css`
@@ -66,7 +75,7 @@ const getStyles = (theme: Theme) => ({
         gap: ${$spacing.sm};
         align-items: center;
         justify-content: ${iconPosition === 'left' || iconPosition === 'right' ? 'space-between' : 'center'};
-        height: ${$inputDefaultHeight};
+        height: ${height};
         padding: 0 ${$spacing.md};
         font-size: ${fontSize};
         line-height: 1;

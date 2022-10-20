@@ -9,7 +9,7 @@ export function selectedByKey<T>(value: T, selectedValues: T[], idKey?: keyof T)
   return selectedValues.some(s => compareByKey(idKey)(value, s));
 }
 
-export function isValueEmpty<T>(value: T | T[]): boolean {
+export function isValueExist<T>(value: T | T[]): boolean {
   return Array.isArray(value) ? !!value?.length : !!value;
 }
 

@@ -3,6 +3,7 @@ import { athleteLevels } from 'picker-types/types/track-and-field/athleteLevel';
 import { shoeBrands } from 'picker-types/types/track-and-field/shoeBrands';
 import { shoeEvents } from 'picker-types/types/track-and-field/shoeEvents';
 import { shoeLaceTypes } from 'picker-types/types/track-and-field/shoeLaceTypes';
+import { shoeSearchOrders } from 'picker-types/types/track-and-field/shoeSearchOrder';
 import { ColorImages } from 'graphql/server/common';
 
 export const ISpikeBase = interfaceType({
@@ -60,4 +61,9 @@ export const TAFAthleteLevel = enumType({
 export const TAFShoeLaceType = enumType({
   name: 'TAFShoeLaceType',
   members: Object.keys(shoeLaceTypes),
+});
+
+export const TAFShoeOrder = enumType({
+  name: 'TAFShoeOrder',
+  members: Object.keys(shoeSearchOrders),
 });

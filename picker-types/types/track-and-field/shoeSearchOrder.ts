@@ -27,6 +27,13 @@ export interface IShoeSearchOrder {
 export const shoeSearchOrders: {
   [key in ShoeSearchOrderCode]: IShoeSearchOrder;
 } = {
+  highscore: {
+    id: 'highscore',
+    label: '人気順',
+    labelAlias: 'おすすめ（人気）',
+    fieldId: 'score',
+    isReverseSearch: true,
+  },
   hard: {
     id: 'hard',
     label: '反発力順',
@@ -88,13 +95,6 @@ export const shoeSearchOrders: {
     label: '価格の高い順',
     labelAlias: '価格の高い',
     fieldId: 'price',
-    isReverseSearch: true,
-  },
-  highscore: {
-    id: 'highscore',
-    label: 'おすすめ（人気）',
-    labelAlias: '人気な（おすすめ）',
-    fieldId: 'score',
     isReverseSearch: true,
   },
 } as const;

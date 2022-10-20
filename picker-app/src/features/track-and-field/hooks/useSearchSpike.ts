@@ -1,24 +1,29 @@
 import { useState } from 'react';
 import { map } from 'lodash-es';
 import { shoeEnviroments } from 'picker-types/types/track-and-field/shoeEnviroment';
+import { IShoeSearchOrder, shoeSearchOrders } from 'picker-types/types/track-and-field/shoeSearchOrder';
 import { SearchFormInput } from 'features/track-and-field/constants/search';
 import { SpikesQueryVariables, useSpikesQuery } from 'graphql/generated/codegen-client';
 
 export const useSearchSpike = (defaultCondition: SearchFormInput) => {
   const [searchCondition, setSearchCondition] = useState<SearchFormInput>(defaultCondition);
+  const [searchOrder, setSearchOrder] = useState<IShoeSearchOrder>(shoeSearchOrders.highscore);
 
   const search = (input: SearchFormInput) => {
     setSearchCondition(input);
   };
 
   return {
-    search,
     currentSearchCondition: searchCondition,
-    ...useSpikesQuery(convertInputToQueryVariables(searchCondition)),
+    searchOrder,
+    setSearchOrder,
+    search,
+    ...useSpikesQuery(convertInputToQueryVariables(searchCondition, searchOrder)),
   };
 };
 
-const convertInputToQueryVariables = (input: SearchFormInput): SpikesQueryVariables => {
+const convertInputToQueryVariables = (input: SearchFormInput, searchOrder?: IShoeSearchOrder): SpikesQueryVariables => {
+  console.log('convertInputToQueryVariables');
   return {
     input: {
       events: map(input.events, 'id'),
@@ -37,6 +42,7 @@ const convertInputToQueryVariables = (input: SearchFormInput): SpikesQueryVariab
       priceRangeMax: input?.priceRange?.[1],
       pinCountRangeMin: input?.pinCountRange?.[0],
       pinCountRangeMax: input?.pinCountRange?.[1],
+      order: searchOrder?.id,
     },
   };
 };

@@ -5,10 +5,11 @@ import { faCirclePlus, faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 import { Listbox } from '@headlessui/react';
 import { FieldValues, useController, UseControllerProps } from 'react-hook-form';
 import { Animation } from 'components/atoms/Animation';
+import { Button } from 'components/atoms/Button';
 import { Icon } from 'components/atoms/Icon';
-import { compareByKey, createValueLabel, getValueBykey, isValueEmpty } from 'components/utils/utils';
-import { $behavior } from 'shared/constants/styles/behavior';
+import { compareByKey, createValueLabel, getValueBykey, isValueExist } from 'components/utils/utils';
 import { $common, setSolidShadow } from 'shared/constants/styles/common';
+import { Size } from 'shared/constants/styles/size';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 type Props<T> = {
@@ -19,6 +20,8 @@ type Props<T> = {
   placeholder?: string;
   errorMessage?: string;
   refName?: string;
+  triggerContent?: JSX.Element;
+  width?: Size;
   onChange?(value: T): void;
 };
 
@@ -30,6 +33,8 @@ export function Select<T>({
   placeholder = '選択してください',
   errorMessage,
   refName,
+  triggerContent,
+  width = '100%',
   ...selectProps
 }: Props<T>) {
   const theme = useTheme();
@@ -45,13 +50,23 @@ export function Select<T>({
         by={compareByKey<T>(idKey)}
       >
         <div className={styles.selectContainer}>
-          <Listbox.Button className={styles.selectTrigger}>
-            {isValueEmpty(value) ? (
-              <span className={styles.selectTriggerText}>{createValueLabel(value, labelKey)}</span>
+          <Listbox.Button
+            as="div"
+            className={css`
+              width: ${width};
+            `}
+          >
+            {triggerContent ? (
+              triggerContent
             ) : (
-              <span className={styles.selectTriggerPlaceholder}>{placeholder}</span>
+              <Button
+                icon={faCirclePlus}
+                label={isValueExist(value) ? createValueLabel(value, labelKey) : placeholder}
+                iconPosition={'right'}
+                width="100%"
+                labelColor={isValueExist(value) ? 'default' : 'low'}
+              ></Button>
             )}
-            <Icon icon={faCirclePlus} />
           </Listbox.Button>
           <Animation name="fade">
             <Listbox.Options className={styles.selectOptions}>
@@ -99,33 +114,6 @@ export function SelectControl<T, FormInputDef extends FieldValues>(
 const getStyles = (theme: Theme) => ({
   selectContainer: css`
     position: relative;
-  `,
-  selectTrigger: cx(
-    $behavior.hoverSwipe(theme),
-    css`
-      display: inline-flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      height: 48px;
-      padding: 0 ${$spacing.md};
-      cursor: pointer;
-      border: 1px solid ${theme.border};
-      border-radius: 2px;
-
-      &[data-headlessui-state='open'] {
-        border-radius: 2px 2px 0 0;
-      }
-    `,
-    setSolidShadow(theme.border)
-  ),
-  selectTriggerText: css`
-    ${$common.truncate}
-  `,
-  selectTriggerPlaceholder: css`
-    ${$common.truncate}
-
-    color: ${theme.textLow}
   `,
   selectOptions: cx(
     css`

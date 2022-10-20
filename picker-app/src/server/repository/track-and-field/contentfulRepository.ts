@@ -6,6 +6,7 @@ import { shoeColors } from 'picker-types/types/track-and-field/shoeColors';
 import { shoeEnviroments } from 'picker-types/types/track-and-field/shoeEnviroment';
 import { shoeEvents } from 'picker-types/types/track-and-field/shoeEvents';
 import { shoeLaceTypes } from 'picker-types/types/track-and-field/shoeLaceTypes';
+import { ShoeSearchOrderCode, shoeSearchOrders } from 'picker-types/types/track-and-field/shoeSearchOrder';
 import { NexusGenInputs, NexusGenRootTypes } from 'graphql/generated/nexus/types';
 
 (!process.env.PICKER_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN || !process.env.PICKER_CONTENTFUL_SPACE_ID) &&
@@ -77,6 +78,7 @@ const createSpikesSearchParams = (
     'fields.pinNumber[gte]': formValue?.pinCountRangeMin || undefined,
     'fields.pinNumber[lte]': formValue?.pinCountRangeMax || undefined,
     'fields.colors[in]': formValue?.shoeColor?.join(',') || undefined,
+    order: getOrderInput(formValue.order || undefined),
     ...overRideParams,
   };
 };
@@ -194,4 +196,20 @@ const getStrength = (strength: Record<string, any> | undefined): NexusGenRootTyp
     label: s?.label,
     description: s?.description,
   }));
+};
+
+/**
+ * 並び順を変換する
+ * スコアの高い順ソートは常に適用する
+ */
+const getOrderInput = (order: ShoeSearchOrderCode = 'highscore'): string | undefined => {
+  let orderInput = '';
+
+  if (order !== shoeSearchOrders.highscore.id) {
+    const orderObj = shoeSearchOrders[order];
+
+    orderInput = (orderObj.isReverseSearch ? '-' : '') + `fields.${orderObj.fieldId},`;
+  }
+
+  return orderInput + `-fields.${shoeSearchOrders.highscore.fieldId}`;
 };

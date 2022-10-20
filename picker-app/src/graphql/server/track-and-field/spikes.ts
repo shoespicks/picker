@@ -5,6 +5,7 @@ import {
   TAFBrands,
   TAFEvents,
   TAFShoeLaceType,
+  TAFShoeOrder,
 } from 'graphql/server/track-and-field/types';
 import { spikesLoader } from 'server/loader/track-and-field/spikeLoader';
 
@@ -43,6 +44,9 @@ export const SpikesInput = inputObjectType({
     t.int('priceRangeMax');
     t.int('pinCountRangeMin');
     t.int('pinCountRangeMax');
+    t.field('order', {
+      type: TAFShoeOrder,
+    });
   },
 });
 

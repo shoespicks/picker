@@ -57,19 +57,21 @@ const getStyles = (theme: Theme) => ({
     display: flex;
     padding: 1px;
     touch-action: none;
+    cursor: pointer;
     user-select: none;
     background: ${theme.background};
     border: 1px solid ${theme.border};
     border-radius: 8px;
-    cursor: pointer;
 
     &[data-orientation='vertical'] {
       width: 4px;
+      margin-right: 2px;
     }
 
     &[data-orientation='horizontal'] {
       flex-direction: column;
       height: 4px;
+      margin-top: 2px;
     }
   `,
   thumb: css`

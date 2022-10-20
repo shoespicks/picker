@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren } from 'react';
+import { FC, PropsWithChildren } from 'react';
 import { css } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import { Dialog } from '@headlessui/react';

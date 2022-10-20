@@ -22,7 +22,7 @@ export const TAFHeader: FC<Props> = () => {
   return (
     <Header>
       <ul className={styles.links}>
-        {routing.map(l =>(
+        {routing.map(l => (
           <li key={l.label}>
             <A href={l.href}>
               <Icon icon={faChevronRight}></Icon>
@@ -50,24 +50,24 @@ const getStyles = (theme: Theme) => ({
   links: css`
     margin: ${$spacing.lg} 0 ${$spacing.lg} -${$spacing.md};
 
-  a {
-    display: flex;
-    align-items: center;
-    padding: ${$spacing.sm} ${$spacing.md};
-    font-size: 14px;
-    font-weight: 400;
-    border-radius: 2px;
-    transition: margin-left ease-in 200ms, background-color ease-in 200ms;
+    a {
+      display: flex;
+      align-items: center;
+      padding: ${$spacing.sm} ${$spacing.md};
+      font-size: 14px;
+      font-weight: 400;
+      border-radius: 2px;
+      transition: margin-left ease-in 200ms, background-color ease-in 200ms;
 
-    > * + * {
-      margin-left: ${$spacing.md};
-    }
+      > * + * {
+        margin-left: ${$spacing.md};
+      }
 
-    :hover {
-      margin-left: ${$spacing.md};
-      background-color: ${theme.inverseHover};
-      transition: all 0.4s;
+      :hover {
+        margin-left: ${$spacing.md};
+        background-color: ${theme.inverseOverlayHover};
+        transition: all 0.4s;
+      }
     }
-  }
-`,
+  `,
 });

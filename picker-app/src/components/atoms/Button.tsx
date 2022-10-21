@@ -22,6 +22,7 @@ type Props = ComponentPropsWithoutRef<'button'> & {
   fontSize?: Size;
   iconPosition?: ButtonIconPosition;
   labelColor?: TypographyColors;
+  truncate?: boolean;
   className?: string;
   onClick?: MouseEventHandler;
 };
@@ -36,6 +37,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
   iconPosition = 'rightInline',
   fontSize,
   labelColor = 'default',
+  truncate,
   className,
   onClick,
   ...buttonProps
@@ -56,7 +58,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
     >
       {!!icon && <Icon icon={icon} className={styles.icon(iconPosition)} />}
       {!!label && (
-        <Span color={labelColor} semiBold>
+        <Span color={labelColor} truncate={truncate} semiBold>
           {label}
         </Span>
       )}

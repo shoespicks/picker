@@ -66,6 +66,7 @@ export function Select<T>({
                 iconPosition={'right'}
                 width="100%"
                 labelColor={isValueExist(value) ? 'default' : 'low'}
+                truncate
               ></Button>
             )}
           </Listbox.Button>

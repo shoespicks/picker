@@ -3,6 +3,8 @@ import { BreakpointCode, breakpoints } from 'shared/constants/styles/media-query
 
 /**
  * メディアクエリのjs版
+ * 使って出し分けを行うとSSRのhydration failedが出るので試行錯誤中。
+ * 解決するまで使えない
  */
 export const useMediaGraterThan = (code: BreakpointCode): boolean => {
   const getMatchMedia = useCallback(() => {

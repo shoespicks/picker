@@ -1,5 +1,5 @@
-import React, { type FC } from 'react';
-import { css } from '@emotion/css';
+import { type FC } from 'react';
+import { css, cx } from '@emotion/css';
 import { useTheme } from '@emotion/react';
 import { faArrowUpWideShort } from '@fortawesome/free-solid-svg-icons';
 import { IShoeSearchOrder, shoeSearchOrders } from 'picker-types/types/track-and-field/shoeSearchOrder';
@@ -14,9 +14,9 @@ import { TAFSearchFormCard } from 'features/track-and-field/search/searchForm/TA
 import { TAFSearchFormModal } from 'features/track-and-field/search/searchForm/TAFSearchFormModal';
 import { TAFSearchResultList } from 'features/track-and-field/search/searchResults/TAFSearchResultList';
 import { SpikesQuery } from 'graphql/generated/codegen-client';
+import { hideOverBreakPointStyle, visibleOverBreakPointStyle } from 'shared/constants/styles/media-query';
 import { $headerSize } from 'shared/constants/styles/size';
 import { $spacing } from 'shared/constants/styles/spacing';
-import { useMediaGraterThan } from 'shared/hooks/useMedia';
 import { useScroll } from 'shared/hooks/useScroll';
 
 type Props = {
@@ -36,45 +36,42 @@ export const TAFSearchTemplate: FC<Props> = ({
   setSearchOrder,
   onSubmit,
 }) => {
-  const isOverLargeMedia = useMediaGraterThan('lg');
   const { isScrolledTop } = useScroll();
   const theme = useTheme();
 
   return (
     <>
-      {!isOverLargeMedia ? (
-        <Container
-          className={css`
+      <Container
+        className={cx(
+          css`
             position: sticky;
             top: calc(${$headerSize});
             z-index: 10;
             background-color: ${theme.background};
             box-shadow: ${!isScrolledTop && theme.shadowLeft};
-          `}
-        >
-          <Spacer size={$spacing.md}></Spacer>
-          <TAFSearchFormModal
-            currentSearchCondition={currentSearchCondition}
-            isLoading={isLoading}
-            onSubmit={onSubmit}
-          />
-          <Spacer size={$spacing.md}></Spacer>
-        </Container>
-      ) : (
-        <Spacer size={$spacing.lg}></Spacer>
-      )}
+          `,
+          hideOverBreakPointStyle('md')
+        )}
+      >
+        <Spacer size={$spacing.md}></Spacer>
+        <TAFSearchFormModal currentSearchCondition={currentSearchCondition} isLoading={isLoading} onSubmit={onSubmit} />
+        <Spacer size={$spacing.md}></Spacer>
+      </Container>
+
+      <Spacer size={$spacing.lg} className={visibleOverBreakPointStyle('md')}></Spacer>
+
       <Container as="section">
         <MultiColumn
           leftColumnElement={
-            (isOverLargeMedia && (
+            <div>
               <TAFSearchFormCard
                 currentSearchCondition={currentSearchCondition}
                 isLoading={isLoading}
                 onSubmit={onSubmit}
               />
-            )) ||
-            undefined
+            </div>
           }
+          hideSideColumnInBreakPoint
         >
           <div
             className={css`

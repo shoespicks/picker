@@ -1,6 +1,6 @@
 import { ElementType, type FC, PropsWithChildren } from 'react';
 import { css, cx } from '@emotion/css';
-import { BreakpointCode, mediaGreaterThan } from 'shared/constants/styles/media-query';
+import { BreakpointCode, mediaGreaterThan, visibleOverBreakPointStyle } from 'shared/constants/styles/media-query';
 import { $sideColumnWidth } from 'shared/constants/styles/size';
 import { $spacing } from 'shared/constants/styles/spacing';
 
@@ -11,6 +11,7 @@ type Props = {
   sideColumnWidth?: string;
   stickyTop?: string;
   breakPoint?: BreakpointCode;
+  hideSideColumnInBreakPoint?: boolean; // Trueの場合、小さい画面ではの横カラムは消す
 };
 
 export const MultiColumn: FC<PropsWithChildren<Props>> = ({
@@ -20,6 +21,7 @@ export const MultiColumn: FC<PropsWithChildren<Props>> = ({
   sideColumnWidth = $sideColumnWidth,
   stickyTop,
   breakPoint = 'md',
+  hideSideColumnInBreakPoint = false,
   children,
 }) => {
   return (
@@ -36,7 +38,7 @@ export const MultiColumn: FC<PropsWithChildren<Props>> = ({
         `
       )}
     >
-      {leftColumnElement && columnContent(leftColumnElement, stickyTop)}
+      {leftColumnElement && columnContent(leftColumnElement, hideSideColumnInBreakPoint, breakPoint, stickyTop)}
 
       <CustomTag
         className={css`
@@ -46,13 +48,20 @@ export const MultiColumn: FC<PropsWithChildren<Props>> = ({
         {children}
       </CustomTag>
 
-      {rightColumnElement && columnContent(rightColumnElement, stickyTop)}
+      {rightColumnElement && columnContent(rightColumnElement, hideSideColumnInBreakPoint, breakPoint, stickyTop)}
     </div>
   );
 };
 
-const columnContent = (element: JSX.Element, stickyTop?: string) => (
-  <aside>{stickyTop ? <div className={styles.stickyContainer(stickyTop)}>{element}</div> : element}</aside>
+const columnContent = (
+  element: JSX.Element,
+  hideSideColumnInBreakPoint: boolean,
+  breakPoint: BreakpointCode,
+  stickyTop?: string
+) => (
+  <aside className={cx({ [visibleOverBreakPointStyle('md')]: hideSideColumnInBreakPoint })}>
+    <div className={styles.stickyContainer(stickyTop)}>{element}</div>
+  </aside>
 );
 
 const styles = {
@@ -60,8 +69,9 @@ const styles = {
     display: grid;
     gap: ${$spacing.lg};
   `,
-  stickyContainer: (top?: string) => css`
-    position: sticky;
-    top: ${top};
-  `,
+  stickyContainer: (stickyTop?: string) =>
+    css`
+      position: ${stickyTop && 'stickey'};
+      top: ${stickyTop};
+    `,
 };

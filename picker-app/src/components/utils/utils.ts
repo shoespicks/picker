@@ -16,7 +16,7 @@ export function isValueExist<T>(value?: T | T[]): boolean {
   return Array.isArray(value) ? !!value?.length : !!value;
 }
 
-export function createValueLabel<T>(value: T | T[], labelKey?: keyof T): string {
+export function createValueLabel<T>(value?: T | T[], labelKey?: keyof T): string {
   if (!value) {
     return '';
   }

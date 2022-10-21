@@ -1,19 +1,15 @@
-import { UseFormProps } from 'react-hook-form';
 import {
   SearchFormHasOptionKey,
   SearchFormInput,
   SearchFormInputDef,
+  searchFormInputDefaultValues,
   searchFormOptions,
 } from 'features/track-and-field/constants/search';
 
 import { useFormBase } from 'shared/hooks/useFormBase';
 
-export const useSearchSpikeForm = (
-  props: UseFormProps<SearchFormInputDef> & {
-    defaultValues: SearchFormInput;
-  }
-) => {
+export const useSearchSpikeForm = (defaultValues: SearchFormInput = searchFormInputDefaultValues) => {
   return {
-    ...useFormBase<SearchFormInputDef, SearchFormHasOptionKey>(props, searchFormOptions),
+    ...useFormBase<SearchFormInputDef, SearchFormHasOptionKey>({ defaultValues }, searchFormOptions),
   };
 };

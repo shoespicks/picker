@@ -40,6 +40,7 @@ export const FormInput = memo(function FormInput(props: {
         options={props.formOptions.events}
         idKey="id"
         labelKey="label"
+        placeholder="種目を選ぶ"
       ></SelectControl>
 
       <Label>ブランド</Label>
@@ -49,6 +50,7 @@ export const FormInput = memo(function FormInput(props: {
         options={props.formOptions.brands}
         idKey="id"
         labelKey="label"
+        placeholder="ブランドを選ぶ"
       ></SelectControl>
 
       <Label>発売年</Label>
@@ -58,6 +60,7 @@ export const FormInput = memo(function FormInput(props: {
         options={props.formOptions.years}
         idKey="id"
         labelKey="label"
+        placeholder="発売年を選ぶ"
       ></SelectControl>
       <Spacer size={$spacing.sm}></Spacer>
 

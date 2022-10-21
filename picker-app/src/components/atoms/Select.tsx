@@ -22,7 +22,7 @@ type Props<T> = {
   refName?: string;
   triggerContent?: JSX.Element;
   width?: Size;
-  onChange?(value: T | T[]): void;
+  onChange?(value?: T | T[]): void;
 };
 
 export function Select<T>({

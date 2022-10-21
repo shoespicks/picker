@@ -6,7 +6,7 @@ export const $spacing: { [key in SizeCode]: Size } = {
   md: '16px',
   lg: '24px',
   xl: '32px',
-  '2xl': '40px',
+  '2xl': '48px',
   '3xl': '64px',
   '4xl': '120px',
 };

@@ -21,7 +21,7 @@ export const TAFSearchFormCard: FC<Props> = ({
   isLoading,
   onSubmit,
 }) => {
-  const { formOptions, control, handleSubmit } = useSearchSpikeForm({ defaultValues: currentSearchCondition });
+  const { formOptions, control, handleSubmit } = useSearchSpikeForm(currentSearchCondition);
 
   const submit = handleSubmit(data => {
     onSubmit && onSubmit(data);

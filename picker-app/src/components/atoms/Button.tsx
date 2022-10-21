@@ -45,6 +45,7 @@ export const Button: FC<PropsWithChildren<Props>> = ({
   const styles = getStyles(useTheme());
   return (
     <button
+      type="button"
       {...buttonProps}
       className={cx(
         styles.button(iconPosition, fontSize, height),

@@ -47,6 +47,7 @@ export const SpikesInput = inputObjectType({
     t.field('order', {
       type: TAFShoeOrder,
     });
+    t.int('limit');
   },
 });
 

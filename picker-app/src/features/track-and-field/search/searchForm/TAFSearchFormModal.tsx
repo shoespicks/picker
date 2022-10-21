@@ -25,7 +25,7 @@ export const TAFSearchFormModal: FC<Props> = ({
   isLoading,
   onSubmit,
 }) => {
-  const { formOptions, control, handleSubmit } = useSearchSpikeForm({ defaultValues: currentSearchCondition });
+  const { formOptions, control, handleSubmit } = useSearchSpikeForm(currentSearchCondition);
   const { isModalOpen, close, setIsModalOpen } = useModal();
   const submit = handleSubmit(data => {
     onSubmit && onSubmit(data);

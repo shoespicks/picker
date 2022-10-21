@@ -5,16 +5,22 @@ import { IShoeSearchOrder } from 'picker-types/types/track-and-field/shoeSearchO
 import { useRecoilState } from 'recoil';
 import { SearchFormInput, searchFormInputDefaultValues } from 'features/track-and-field/constants/search';
 import { SpikesQueryVariables, useSpikesQuery } from 'graphql/generated/codegen-client';
-import { searchConditionState, searchOrderState } from 'shared/state/track-and-field.state';
+import { searchConditionState } from 'shared/state/track-and-field.state';
 
 export const useSearchSpike = () => {
   const [searchCondition, setSearchCondition] = useRecoilState(searchConditionState);
-  const [searchOrder, setSearchOrder] = useRecoilState<IShoeSearchOrder>(searchOrderState);
 
   const search = (input: SearchFormInput) => {
     setSearchCondition({
       ...searchFormInputDefaultValues,
       ...input,
+    });
+  };
+
+  const setSearchOrder = (order: IShoeSearchOrder) => {
+    setSearchCondition({
+      ...searchCondition,
+      order,
     });
   };
 
@@ -39,14 +45,13 @@ export const useSearchSpike = () => {
         priceRangeMax: searchCondition?.priceRange?.[1],
         pinCountRangeMin: searchCondition?.pinCountRange?.[0],
         pinCountRangeMax: searchCondition?.pinCountRange?.[1],
-        order: searchOrder?.id,
+        order: searchCondition?.order?.id,
       },
     };
-  }, [searchCondition, searchOrder]);
+  }, [searchCondition]);
 
   return {
     currentSearchCondition: searchCondition,
-    searchOrder,
     setSearchOrder,
     search,
     ...useSpikesQuery(convertInputToQueryVariables),

@@ -1,13 +1,9 @@
 import { type FC } from 'react';
 import { css, cx } from '@emotion/css';
 import { useTheme } from '@emotion/react';
-import { faArrowUpWideShort } from '@fortawesome/free-solid-svg-icons';
-import { IShoeSearchOrder, shoeSearchOrders } from 'picker-types/types/track-and-field/shoeSearchOrder';
-import { Button } from 'components/atoms/Button';
+import { IShoeSearchOrder } from 'picker-types/types/track-and-field/shoeSearchOrder';
 import { Container } from 'components/atoms/Container';
-import { Select } from 'components/atoms/Select';
 import { Spacer } from 'components/atoms/Spacer';
-import { Span, Strong } from 'components/atoms/Typography';
 import { MultiColumn } from 'components/layout/MultiColumn';
 import { SearchFormInput } from 'features/track-and-field/constants/search';
 import { TAFSearchFormCard } from 'features/track-and-field/search/searchForm/TAFSearchFormCard';
@@ -23,19 +19,11 @@ type Props = {
   data?: SpikesQuery;
   currentSearchCondition?: SearchFormInput;
   isLoading?: boolean;
-  searchOrder: IShoeSearchOrder;
   setSearchOrder?: (order: IShoeSearchOrder) => void;
   onSubmit?(input: SearchFormInput): void;
 };
 
-export const TAFSearchTemplate: FC<Props> = ({
-  data,
-  currentSearchCondition,
-  isLoading,
-  searchOrder,
-  setSearchOrder,
-  onSubmit,
-}) => {
+export const TAFSearchTemplate: FC<Props> = ({ data, currentSearchCondition, isLoading, setSearchOrder, onSubmit }) => {
   const { isScrolledTop } = useScroll();
   const theme = useTheme();
 
@@ -73,42 +61,12 @@ export const TAFSearchTemplate: FC<Props> = ({
           }
           hideSideColumnInBreakPoint
         >
-          <div
-            className={css`
-              display: flex;
-              align-items: center;
-              justify-content: space-between;
-            `}
-          >
-            <span
-              className={css`
-                margin-top: ${$spacing.xs};
-              `}
-            >
-              <Strong fontSize="24px" loud>
-                {data?.spikes?.length ?? 0}
-              </Strong>
-              <Span semiBold> 件</Span>
-            </span>
-            <Select<IShoeSearchOrder>
-              value={searchOrder}
-              options={Object.values(shoeSearchOrders)}
-              idKey="id"
-              labelKey="label"
-              onChange={setSearchOrder}
-              triggerContent={
-                <Button
-                  icon={faArrowUpWideShort}
-                  label={searchOrder.label}
-                  iconPosition="leftAbsolute"
-                  height="40px"
-                  width="180px"
-                ></Button>
-              }
-            ></Select>
-          </div>
-          <Spacer size={$spacing.md}></Spacer>
-          <TAFSearchResultList results={data?.spikes} isLoading={isLoading} />
+          <TAFSearchResultList
+            results={data?.spikes}
+            isLoading={isLoading}
+            order={currentSearchCondition?.order}
+            setSearchOrder={setSearchOrder}
+          />
         </MultiColumn>
       </Container>
       <Spacer size={$spacing['3xl']}></Spacer>

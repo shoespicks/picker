@@ -4,6 +4,7 @@ import { IShoeColor, shoeColors } from 'picker-types/types/track-and-field/shoeC
 import { IShoeEnvirloment, shoeEnviroments } from 'picker-types/types/track-and-field/shoeEnviroment';
 import { IEventItem, shoeEvents } from 'picker-types/types/track-and-field/shoeEvents';
 import { IShoeLaceType, shoeLaceTypes } from 'picker-types/types/track-and-field/shoeLaceTypes';
+import { IShoeSearchOrder, shoeSearchOrders } from 'picker-types/types/track-and-field/shoeSearchOrder';
 import { NumberRange } from 'shared/constants/type';
 import { FormHasOptionKey, FormOptions } from 'shared/hooks/useFormBase';
 
@@ -32,6 +33,7 @@ export type SearchFormInputDef = {
   shoeColor: IShoeColor[];
   priceRange: NumberRange;
   pinCountRange: NumberRange;
+  order: IShoeSearchOrder;
 };
 
 export type SearchFormInputKey = keyof SearchFormInputDef;
@@ -50,11 +52,12 @@ export const searchFormInputDefaultValues: SearchFormInput = {
   shoeColor: [],
   priceRange: [0, 50000],
   pinCountRange: [0, 15],
+  order: shoeSearchOrders.highscore,
 };
 
 export type SearchFormHasOptionKey = FormHasOptionKey<
   SearchFormInputDef,
-  'events' | 'brands' | 'years' | 'athleteLevel' | 'shoeEnviroments' | 'shoeLaceType' | 'shoeColor'
+  'events' | 'brands' | 'years' | 'athleteLevel' | 'shoeEnviroments' | 'shoeLaceType' | 'shoeColor' | 'order'
 >;
 
 export const searchFormOptions: FormOptions<
@@ -68,4 +71,5 @@ export const searchFormOptions: FormOptions<
   shoeEnviroments: Object.values(shoeEnviroments),
   shoeLaceType: Object.values(shoeLaceTypes),
   shoeColor: Object.values(shoeColors),
+  order: Object.values(shoeSearchOrders),
 };

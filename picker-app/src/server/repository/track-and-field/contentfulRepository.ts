@@ -79,6 +79,7 @@ const createSpikesSearchParams = (
     'fields.pinNumber[lte]': formValue?.pinCountRangeMax || undefined,
     'fields.colors[in]': formValue?.shoeColor?.join(',') || undefined,
     order: getOrderInput(formValue.order || undefined),
+    limit: formValue?.limit || undefined,
     ...overRideParams,
   };
 };

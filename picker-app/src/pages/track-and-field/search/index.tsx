@@ -6,7 +6,7 @@ import TAFLayout from 'layout/TrackAndField';
 import { NextPageWithLayout } from 'pages/_app';
 
 const TAFSearchPage: NextPageWithLayout = () => {
-  const { data, currentSearchCondition, searchOrder, setSearchOrder, isLoading, search } = useSearchSpike();
+  const { data, currentSearchCondition, setSearchOrder, isLoading, search } = useSearchSpike();
 
   const onSubmit = (input: SearchFormInput) => {
     console.log(input);
@@ -18,7 +18,6 @@ const TAFSearchPage: NextPageWithLayout = () => {
       <TAFSearchTemplate
         data={data}
         currentSearchCondition={currentSearchCondition}
-        searchOrder={searchOrder}
         setSearchOrder={setSearchOrder}
         isLoading={isLoading}
         onSubmit={onSubmit}

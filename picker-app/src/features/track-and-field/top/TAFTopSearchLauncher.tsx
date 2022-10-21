@@ -1,27 +1,25 @@
-import React, { type FC, useCallback } from 'react';
+import React, { type FC, useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
 import { css } from '@emotion/css';
 import { athleteLevels } from 'picker-types/types/track-and-field/athleteLevel';
-import { shoeEvents } from 'picker-types/types/track-and-field/shoeEvents';
+import { IEventItem, shoeEvents } from 'picker-types/types/track-and-field/shoeEvents';
 import { shoeSearchOrders } from 'picker-types/types/track-and-field/shoeSearchOrder';
 import { A } from 'components/atoms/A';
 import { Card } from 'components/atoms/Card';
 import { Divider } from 'components/atoms/Divider';
 import { Section } from 'components/atoms/Section';
+import { Select } from 'components/atoms/Select';
 import { Spacer } from 'components/atoms/Spacer';
 import { H3 } from 'components/atoms/Typography';
-import {
-  TAFEventSearchRauncher,
-  useTAFEventSearchRauncher,
-} from 'features/track-and-field/common/TAFEventSearchRauncher';
+
 import { TAFKeywordSearchInput, useTAFKeywordSearchInput } from 'features/track-and-field/common/TAFKeywordSearchInput';
 import { TAF_SEARCH_PAGE_PATH } from 'features/track-and-field/constants/routing';
+import { searchFormOptions } from 'features/track-and-field/constants/search';
 import { useSearchSpike } from 'features/track-and-field/hooks/useSearchSpike';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 export const TAFTopSearchLauncher: FC = () => {
   const { keywordSearch } = useTAFKeywordSearchInput();
-  const { eventSearch } = useTAFEventSearchRauncher();
 
   const router = useRouter();
   const { search, setSearchOrder } = useSearchSpike();
@@ -40,6 +38,16 @@ export const TAFTopSearchLauncher: FC = () => {
     search({ events: [shoeEvents.e110mH, shoeEvents.e400mH] });
     router.push(TAF_SEARCH_PAGE_PATH).then();
   }, [router, search]);
+
+  const [event, setEvent] = useState<IEventItem>();
+  const eventSearch = useCallback(
+    (event: IEventItem) => {
+      setEvent(event);
+      search({ events: [event] });
+      router.push(TAF_SEARCH_PAGE_PATH).then();
+    },
+    [router, search]
+  );
 
   return (
     <Card className={styles.searchLauncher} padding={$spacing.md}>
@@ -78,7 +86,13 @@ export const TAFTopSearchLauncher: FC = () => {
       <Section>
         <H3>種目から探す</H3>
         <Spacer size={$spacing.md}></Spacer>
-        <TAFEventSearchRauncher onSubmit={eventSearch} />
+        <Select<IEventItem>
+          value={event}
+          options={searchFormOptions.events}
+          idKey="id"
+          labelKey="label"
+          onChange={eventSearch}
+        ></Select>
       </Section>
     </Card>
   );

@@ -9,8 +9,12 @@ type Props = ComponentPropsWithoutRef<'form'> & {
 };
 
 export const Form: FC<PropsWithChildren<Props>> = ({ as: CustomTag = 'form', className, onSubmit, children }) => {
+  const handleSubmit: FormEventHandler = e => {
+    e.preventDefault();
+    onSubmit && onSubmit(e);
+  };
   return (
-    <CustomTag className={cx(styles.form, className)} onSubmit={onSubmit}>
+    <CustomTag className={cx(styles.form, className)} onSubmit={handleSubmit}>
       {children}
     </CustomTag>
   );

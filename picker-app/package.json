@@ -47,6 +47,7 @@
     "react-chartjs-2": "^4.3.1",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.37.0",
+    "recoil": "^0.7.6",
     "sass": "^1.55.0"
   },
   "devDependencies": {

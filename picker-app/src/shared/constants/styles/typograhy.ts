@@ -32,6 +32,7 @@ export const h5Style = css`
 
 export const aStyle = (underline?: boolean) => css`
   text-decoration: ${underline ? 'underline' : 'none'};
+  cursor: pointer;
 `;
 
 export const labelStyle = css`

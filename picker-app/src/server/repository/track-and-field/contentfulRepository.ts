@@ -68,7 +68,7 @@ const createSpikesSearchParams = (
     'fields.events[in]': formValue?.events?.join(',') || undefined,
     'fields.brand[in]': formValue?.brands?.join(',') || undefined,
     'fields.releaseYear[in]': formValue?.years?.join(',') || undefined,
-    'fields.newModels[exists]': formValue?.latestOnly === true ? true : undefined,
+    'fields.newModels[exists]': formValue?.latestOnly === true ? false : undefined,
     query: formValue?.keyword || undefined,
     'fields.level[in]': formValue?.athleteLevel?.join(',') || undefined,
     'fields.allWeatherOnly': formValue.allWeatherOnly,

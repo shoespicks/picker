@@ -6,10 +6,8 @@ import { A } from 'components/atoms/A';
 import { Container } from 'components/atoms/Container';
 import { Divider } from 'components/atoms/Divider';
 import { Section } from 'components/atoms/Section';
-import { Spacer } from 'components/atoms/Spacer';
-import { H3, H4 } from 'components/atoms/Typography';
+import { H3 } from 'components/atoms/Typography';
 import { HeaderNavigationLink } from 'features/common/HeaderNavigationLink';
-import { TAFKeywordSearchRauncher } from 'features/track-and-field/common/TAFKeywordSearchRauncher';
 import { routing } from 'shared/constants/routing';
 import { $headerSize } from 'shared/constants/styles/size';
 import { $spacing } from 'shared/constants/styles/spacing';
@@ -29,13 +27,6 @@ export const Header: FC<PropsWithChildren> = ({ children }) => {
             <div className={styles.navigationContent}>
               <Section>{children}</Section>
               <Section>
-                <Section>
-                  <Spacer size={$spacing.lg} />
-                  <H4>キーワード検索</H4>
-                  <Spacer size={$spacing.sm} />
-                  <TAFKeywordSearchRauncher />
-                </Section>
-                <Spacer size={$spacing.lg} />
                 <Divider color="inverse" />
                 <H3 className={styles.serviceTitle}>PICKER</H3>
                 <HeaderNavigationLink links={routing} />

@@ -1,13 +1,12 @@
 import { ReactElement } from 'react';
-import { SearchFormInput, searchFormInputDefaultValues } from 'features/track-and-field/constants/search';
+import { SearchFormInput } from 'features/track-and-field/constants/search';
 import { useSearchSpike } from 'features/track-and-field/hooks/useSearchSpike';
 import { TAFSearchTemplate } from 'features/track-and-field/search/TAFSearchTemplate';
 import TAFLayout from 'layout/TrackAndField';
 import { NextPageWithLayout } from 'pages/_app';
 
 const TAFSearchPage: NextPageWithLayout = () => {
-  const { data, currentSearchCondition, searchOrder, setSearchOrder, isLoading, search } =
-    useSearchSpike(searchFormInputDefaultValues);
+  const { data, currentSearchCondition, searchOrder, setSearchOrder, isLoading, search } = useSearchSpike();
 
   const onSubmit = (input: SearchFormInput) => {
     console.log(input);

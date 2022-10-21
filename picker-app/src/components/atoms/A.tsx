@@ -4,14 +4,20 @@ import Link from 'next/link';
 import { cx } from '@emotion/css';
 import { aStyle } from 'shared/constants/styles/typograhy';
 
-type TypographyProps = {
-  href: string | UrlObject;
+type Props = {
+  href?: string | UrlObject;
   underline?: boolean;
   className?: string;
+  onClick?: () => void; // hrefと共用はできない
 };
 
-export const A: FC<PropsWithChildren<TypographyProps>> = ({ children, href, underline, className }) => (
-  <Link href={href}>
-    <a className={cx(aStyle(underline), className)}>{children}</a>
-  </Link>
-);
+export const A: FC<PropsWithChildren<Props>> = ({ children, href, underline, className, onClick }) =>
+  href ? (
+    <Link href={href} passHref>
+      <span className={cx(aStyle(underline), className)}>{children}</span>
+    </Link>
+  ) : (
+    <span className={cx(aStyle(underline), className)} onClick={onClick}>
+      {children}
+    </span>
+  );

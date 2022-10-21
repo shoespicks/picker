@@ -3,9 +3,7 @@ import { ReactElement, ReactNode } from 'react';
 import { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import { config } from '@fortawesome/fontawesome-svg-core';
-import { QueryClient } from '@tanstack/query-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
-import { QueryClientProvider } from '@tanstack/react-query';
 import { DefaultSeo } from 'next-seo';
 config.autoAddCss = false;
 
@@ -19,7 +17,6 @@ type AppPropsWithLayout = AppProps & {
 
 const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout || (page => page);
-  const queryClient = new QueryClient();
 
   return getLayout(
     <>
@@ -48,9 +45,7 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
           cardType: 'summary_large_image',
         }}
       />
-      <QueryClientProvider client={queryClient}>
-        <Component {...pageProps} />
-      </QueryClientProvider>
+      <Component {...pageProps} />
     </>
   );
 };

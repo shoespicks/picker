@@ -3,7 +3,7 @@ import { css } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { A } from 'components/atoms/A';
-import { Icon } from 'components/atoms/Icon';
+import { IconText } from 'components/atoms/IconText';
 import { $spacing } from 'shared/constants/styles/spacing';
 import { Link } from 'shared/constants/type';
 
@@ -18,8 +18,7 @@ export const HeaderNavigationLink: FC<Props> = ({ links }) => {
       {links.map(l => (
         <li key={l.label}>
           <A href={l.href}>
-            <Icon icon={faChevronRight}></Icon>
-            <span>{l.label}</span>
+            <IconText icon={faChevronRight} text={l.label} gap="md"></IconText>
           </A>
         </li>
       ))}
@@ -31,7 +30,7 @@ const getStyles = (theme: Theme) => ({
   links: css`
     margin-left: -${$spacing.md};
 
-    a {
+    > li {
       display: flex;
       align-items: center;
       padding: ${$spacing.sm} ${$spacing.md};

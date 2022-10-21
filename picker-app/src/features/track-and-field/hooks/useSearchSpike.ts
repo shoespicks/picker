@@ -1,48 +1,54 @@
-import { useState } from 'react';
+import { useMemo } from 'react';
 import { map } from 'lodash-es';
 import { shoeEnviroments } from 'picker-types/types/track-and-field/shoeEnviroment';
-import { IShoeSearchOrder, shoeSearchOrders } from 'picker-types/types/track-and-field/shoeSearchOrder';
-import { SearchFormInput } from 'features/track-and-field/constants/search';
+import { IShoeSearchOrder } from 'picker-types/types/track-and-field/shoeSearchOrder';
+import { useRecoilState } from 'recoil';
+import { SearchFormInput, searchFormInputDefaultValues } from 'features/track-and-field/constants/search';
 import { SpikesQueryVariables, useSpikesQuery } from 'graphql/generated/codegen-client';
+import { searchConditionState, searchOrderState } from 'shared/state/track-and-field.state';
 
-export const useSearchSpike = (defaultCondition: SearchFormInput) => {
-  const [searchCondition, setSearchCondition] = useState<SearchFormInput>(defaultCondition);
-  const [searchOrder, setSearchOrder] = useState<IShoeSearchOrder>(shoeSearchOrders.highscore);
+export const useSearchSpike = () => {
+  const [searchCondition, setSearchCondition] = useRecoilState(searchConditionState);
+  const [searchOrder, setSearchOrder] = useRecoilState<IShoeSearchOrder>(searchOrderState);
 
   const search = (input: SearchFormInput) => {
-    setSearchCondition(input);
+    setSearchCondition({
+      ...searchFormInputDefaultValues,
+      ...input,
+    });
   };
+
+  const convertInputToQueryVariables = useMemo((): SpikesQueryVariables => {
+    console.log('convertInputToQueryVariables');
+    return {
+      input: {
+        events: map(searchCondition.events, 'id'),
+        brands: map(searchCondition.brands, 'id'),
+        years: map(searchCondition.years, 'id'),
+        latestOnly: searchCondition?.latestOnly ? true : undefined,
+        keyword: searchCondition.keyword,
+        athleteLevel: map(searchCondition.athleteLevel, 'id'),
+        allWeatherOnly:
+          !searchCondition.shoeEnviroments?.length ||
+          searchCondition.shoeEnviroments.length === Object.keys(shoeEnviroments).length
+            ? undefined
+            : searchCondition.shoeEnviroments.some(e => e.id === 'allweatherOnly'),
+        shoeLaceType: map(searchCondition.shoeLaceType, 'id'),
+        shoeColor: map(searchCondition.shoeColor, 'id'),
+        priceRangeMin: searchCondition?.priceRange?.[0],
+        priceRangeMax: searchCondition?.priceRange?.[1],
+        pinCountRangeMin: searchCondition?.pinCountRange?.[0],
+        pinCountRangeMax: searchCondition?.pinCountRange?.[1],
+        order: searchOrder?.id,
+      },
+    };
+  }, [searchCondition, searchOrder]);
 
   return {
     currentSearchCondition: searchCondition,
     searchOrder,
     setSearchOrder,
     search,
-    ...useSpikesQuery(convertInputToQueryVariables(searchCondition, searchOrder)),
-  };
-};
-
-const convertInputToQueryVariables = (input: SearchFormInput, searchOrder?: IShoeSearchOrder): SpikesQueryVariables => {
-  console.log('convertInputToQueryVariables');
-  return {
-    input: {
-      events: map(input.events, 'id'),
-      brands: map(input.brands, 'id'),
-      years: map(input.years, 'id'),
-      latestOnly: input?.latestOnly ? true : undefined,
-      keyword: input.keyword,
-      athleteLevel: map(input.athleteLevel, 'id'),
-      allWeatherOnly:
-        !input.shoeEnviroments?.length || input.shoeEnviroments.length === Object.keys(shoeEnviroments).length
-          ? undefined
-          : input.shoeEnviroments.some(e => e.id === 'allweatherOnly'),
-      shoeLaceType: map(input.shoeLaceType, 'id'),
-      shoeColor: map(input.shoeColor, 'id'),
-      priceRangeMin: input?.priceRange?.[0],
-      priceRangeMax: input?.priceRange?.[1],
-      pinCountRangeMin: input?.pinCountRange?.[0],
-      pinCountRangeMax: input?.pinCountRange?.[1],
-      order: searchOrder?.id,
-    },
+    ...useSpikesQuery(convertInputToQueryVariables),
   };
 };

@@ -1,4 +1,4 @@
-import React, { type FC, MouseEventHandler, PropsWithChildren } from 'react';
+import React, { ChangeEventHandler, type FC, PropsWithChildren, useState } from 'react';
 import { css, cx } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
@@ -13,7 +13,7 @@ type Props = {
   buttonLabel?: string;
   buttonWidth?: Size;
   placeholder?: string;
-  onClick?: MouseEventHandler;
+  onSubmit?: (value: string) => void;
 };
 
 export const InputButton: FC<PropsWithChildren<Props>> = ({
@@ -22,21 +22,31 @@ export const InputButton: FC<PropsWithChildren<Props>> = ({
   buttonLabel,
   buttonWidth,
   placeholder,
-  onClick,
+  onSubmit,
 }) => {
   const iconOnly = !!buttonIcon && !buttonLabel;
   const styles = getStyles(useTheme());
 
+  const [text, setText] = useState('');
+
+  const handleInputBlur: ChangeEventHandler = event => {
+    setText((event.target as HTMLInputElement)?.value);
+  };
+
+  const handleClick = () => {
+    return onSubmit && onSubmit(text);
+  };
+
   return (
     <div className={styles.InputButtonContainer}>
-      <Input placeholder={placeholder} className={styles.Input} />
+      <Input value={text} onChange={handleInputBlur} placeholder={placeholder} className={styles.Input} />
       <Button
         color={buttonColor}
         icon={buttonIcon}
         label={buttonLabel}
         width={iconOnly ? $inputDefaultHeight : buttonWidth}
         className={styles.Button}
-        onClick={onClick}
+        onClick={handleClick}
       />
     </div>
   );

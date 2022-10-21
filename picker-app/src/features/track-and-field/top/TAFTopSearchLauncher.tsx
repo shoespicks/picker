@@ -1,38 +1,50 @@
-import React, { type FC, useState } from 'react';
+import React, { type FC, useCallback } from 'react';
 import { useRouter } from 'next/router';
 import { css } from '@emotion/css';
+import { athleteLevels } from 'picker-types/types/track-and-field/athleteLevel';
+import { shoeEvents } from 'picker-types/types/track-and-field/shoeEvents';
+import { shoeSearchOrders } from 'picker-types/types/track-and-field/shoeSearchOrder';
 import { A } from 'components/atoms/A';
 import { Card } from 'components/atoms/Card';
 import { Divider } from 'components/atoms/Divider';
 import { Section } from 'components/atoms/Section';
-import { Select } from 'components/atoms/Select';
 import { Spacer } from 'components/atoms/Spacer';
 import { H3 } from 'components/atoms/Typography';
-import { TAFKeywordSearchRauncher } from 'features/track-and-field/common/TAFKeywordSearchRauncher';
+import {
+  TAFEventSearchRauncher,
+  useTAFEventSearchRauncher,
+} from 'features/track-and-field/common/TAFEventSearchRauncher';
+import { TAFKeywordSearchInput, useTAFKeywordSearchInput } from 'features/track-and-field/common/TAFKeywordSearchInput';
 import { TAF_SEARCH_PAGE_PATH } from 'features/track-and-field/constants/routing';
+import { useSearchSpike } from 'features/track-and-field/hooks/useSearchSpike';
 import { $spacing } from 'shared/constants/styles/spacing';
 
-type People = { id: number; name: string; unavailable: boolean };
-const people: People[] = [
-  { id: 1, name: 'Durward Reynolds', unavailable: false },
-  { id: 2, name: 'Kenton Towne', unavailable: false },
-  { id: 3, name: 'Therese Wunsch', unavailable: false },
-  { id: 4, name: 'Benedict Kessler', unavailable: true },
-  { id: 5, name: 'Katelyn Rohan', unavailable: false },
-];
-
 export const TAFTopSearchLauncher: FC = () => {
-  const router = useRouter();
-  const keywordSearch = () => {
-    router.push(TAF_SEARCH_PAGE_PATH).then();
-  };
+  const { keywordSearch } = useTAFKeywordSearchInput();
+  const { eventSearch } = useTAFEventSearchRauncher();
 
-  const [selectedPeople, setSelectedPeople] = useState(people[0]);
+  const router = useRouter();
+  const { search, setSearchOrder } = useSearchSpike();
+
+  const lightnessSearch = useCallback(() => {
+    setSearchOrder(shoeSearchOrders.light);
+    router.push(TAF_SEARCH_PAGE_PATH).then();
+  }, [router, setSearchOrder]);
+
+  const beginnerSearch = useCallback(() => {
+    search({ athleteLevel: [athleteLevels.beginner] });
+    router.push(TAF_SEARCH_PAGE_PATH).then();
+  }, [router, search]);
+
+  const hurdleSearch = useCallback(() => {
+    search({ events: [shoeEvents.e110mH, shoeEvents.e400mH] });
+    router.push(TAF_SEARCH_PAGE_PATH).then();
+  }, [router, search]);
 
   return (
     <Card className={styles.searchLauncher} padding={$spacing.md}>
       <Section>
-        <H3>おすすめキーワード: WIP</H3>
+        <H3>おすすめキーワード</H3>
         <Divider
           className={css`
             margin: ${$spacing.sm} 0 ${$spacing.md};
@@ -40,39 +52,33 @@ export const TAFTopSearchLauncher: FC = () => {
         ></Divider>
         <ul className={styles.linkContainer}>
           <li className={styles.link}>
-            <A href="/" underline>
+            <A onClick={lightnessSearch} underline>
               とにかく軽い
             </A>
           </li>
           <li className={styles.link}>
-            <A href="/" underline>
-              とにかく軽い
+            <A onClick={beginnerSearch} underline>
+              初心者向け
             </A>
-          </li>{' '}
+          </li>
           <li className={styles.link}>
-            <A href="/" underline>
-              とにかく軽い
+            <A onClick={hurdleSearch} underline>
+              ハードル競技に人気
             </A>
-          </li>{' '}
+          </li>
         </ul>
       </Section>
       <Spacer size={$spacing['2xl']}></Spacer>
       <Section>
-        <H3>フリーワードで探す: WIP</H3>
+        <H3>フリーワードで探す</H3>
         <Spacer size={$spacing.md}></Spacer>
-        <TAFKeywordSearchRauncher />
+        <TAFKeywordSearchInput onSubmit={keywordSearch} />
       </Section>
       <Spacer size={$spacing['2xl']}></Spacer>
       <Section>
-        <H3>種目から探す: WIP</H3>
+        <H3>種目から探す</H3>
         <Spacer size={$spacing.md}></Spacer>
-        <Select<People>
-          value={selectedPeople}
-          options={people}
-          idKey="id"
-          labelKey="name"
-          onChange={setSelectedPeople}
-        ></Select>
+        <TAFEventSearchRauncher onSubmit={eventSearch} />
       </Section>
     </Card>
   );

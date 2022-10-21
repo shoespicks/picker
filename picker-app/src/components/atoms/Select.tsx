@@ -13,7 +13,7 @@ import { Size } from 'shared/constants/styles/size';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 type Props<T> = {
-  value: T | T[];
+  value?: T | T[];
   options: T[];
   idKey?: keyof T;
   labelKey?: keyof T;
@@ -22,7 +22,7 @@ type Props<T> = {
   refName?: string;
   triggerContent?: JSX.Element;
   width?: Size;
-  onChange?(value: T): void;
+  onChange?(value: T | T[]): void;
 };
 
 export function Select<T>({

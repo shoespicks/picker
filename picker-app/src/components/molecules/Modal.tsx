@@ -79,13 +79,13 @@ const getStyles = (theme: Theme) => ({
   `,
   modalPanel: css`
     position: absolute;
+    top: 40px;
     right: 0;
     bottom: 0;
+    left: 0;
     z-index: 2000;
     display: flex;
     flex-direction: column;
-    width: 100vw;
-    height: calc(100vh - 30px);
     background-color: ${theme.background};
     border-radius: 20px 20px 0 0;
   `,
@@ -99,7 +99,6 @@ const getStyles = (theme: Theme) => ({
     flex: 0 0 auto;
     align-items: center;
     justify-content: center;
-    min-height: 56px;
     padding: ${$spacing.sm};
     border-bottom: 1px solid;
   `,
@@ -110,8 +109,8 @@ const getStyles = (theme: Theme) => ({
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 56px;
-    height: 56px;
+    width: 46px;
+    height: 46px;
     cursor: pointer;
     transform: translateY(-50%);
 

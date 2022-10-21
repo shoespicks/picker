@@ -9,11 +9,17 @@ export function selectedByKey<T>(value: T, selectedValues: T[], idKey?: keyof T)
   return selectedValues.some(s => compareByKey(idKey)(value, s));
 }
 
-export function isValueExist<T>(value: T | T[]): boolean {
+export function isValueExist<T>(value?: T | T[]): boolean {
+  if (value === undefined || value === null) {
+    return false;
+  }
   return Array.isArray(value) ? !!value?.length : !!value;
 }
 
 export function createValueLabel<T>(value: T | T[], labelKey?: keyof T): string {
+  if (!value) {
+    return '';
+  }
   return Array.isArray(value) ? value.map(v => getValueBykey(v, labelKey)).join(', ') : getValueBykey(value, labelKey);
 }
 

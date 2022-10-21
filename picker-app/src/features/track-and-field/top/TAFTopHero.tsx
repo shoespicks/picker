@@ -6,7 +6,7 @@ import { mediaGreaterThan } from 'shared/constants/styles/media-query';
 
 export const TAFTopHero: FC = () => (
   <Card height="600px" className={styles.topHeroCard}>
-    {/* <video
+    <video
       className={styles.heroVideo}
       src="/track-and-field/movies/hero-movie.mp4"
       poster="/track-and-field/images/hero-image.jpg"
@@ -14,7 +14,7 @@ export const TAFTopHero: FC = () => (
       autoPlay
       playsInline
       loop
-    ></video> */}
+    />
     <div className={styles.heroVideoFilter}></div>
     <TAFTopTitleCard className={styles.titleCard}></TAFTopTitleCard>
   </Card>
@@ -32,7 +32,7 @@ const styles = {
     width: 1080px;
     min-width: 100%;
     min-height: 100%;
-    filter: saturate(24%) blur(3px);
+    filter: saturate(50%) blur(4px);
     transform: translate(-50%, -50%);
 
     ${mediaGreaterThan('lg')} {

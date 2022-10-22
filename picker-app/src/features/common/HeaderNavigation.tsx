@@ -13,7 +13,7 @@ export const HeaderNavigation: FC<PropsWithChildren> = ({ children }) => {
     () =>
       setTimeout(() => {
         setHumbergerOpen(true);
-      }, 80),
+      }, 50),
     () => setHumbergerOpen(false)
   );
 

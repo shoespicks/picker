@@ -59,7 +59,7 @@ const columnContent = (
   breakPoint: BreakpointCode,
   stickyTop?: string
 ) => (
-  <aside className={cx({ [visibleOverBreakPointStyle('md')]: hideSideColumnInBreakPoint })}>
+  <aside className={cx({ [visibleOverBreakPointStyle(breakPoint)]: hideSideColumnInBreakPoint })}>
     <div className={styles.stickyContainer(stickyTop)}>{element}</div>
   </aside>
 );

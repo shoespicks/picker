@@ -38,7 +38,7 @@ export const TAFSearchTemplate: FC<Props> = ({ data, currentSearchCondition, isL
             background-color: ${theme.background};
             box-shadow: ${!isScrolledTop && theme.shadowLeft};
           `,
-          hideOverBreakPointStyle('md')
+          hideOverBreakPointStyle('lg')
         )}
       >
         <Spacer size={$spacing.md}></Spacer>
@@ -59,6 +59,7 @@ export const TAFSearchTemplate: FC<Props> = ({ data, currentSearchCondition, isL
               />
             </div>
           }
+          breakPoint="lg"
           hideSideColumnInBreakPoint
         >
           <TAFSearchResultList

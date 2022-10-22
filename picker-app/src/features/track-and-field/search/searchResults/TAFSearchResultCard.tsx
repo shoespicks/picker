@@ -61,7 +61,7 @@ export const TAFSearchResultCard: FC<Props> = ({ value, className, onClick }) =>
           className={css`
             display: grid;
             grid-template-columns: 1fr 2fr;
-            grid-gap: ${$spacing.md};
+            grid-gap: ${$spacing.lg};
           `}
         >
           <div
@@ -71,7 +71,7 @@ export const TAFSearchResultCard: FC<Props> = ({ value, className, onClick }) =>
               }
             `}
           >
-            <AspectRatio ratio={1}>
+            <AspectRatio ratio={4 / 3}>
               <Image src={color.imageUrls[0]} layout="fill" objectFit="contain" alt="" />
             </AspectRatio>
             <ColorRadio<ColorImagesFragment>

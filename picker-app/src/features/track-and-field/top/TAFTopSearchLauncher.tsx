@@ -15,14 +15,14 @@ import { H3 } from 'components/atoms/Typography';
 import { TAFKeywordSearchInput, useTAFKeywordSearchInput } from 'features/track-and-field/common/TAFKeywordSearchInput';
 import { TAF_SEARCH_PAGE_PATH } from 'features/track-and-field/constants/routing';
 import { searchFormOptions } from 'features/track-and-field/constants/search';
-import { useSearchSpike } from 'features/track-and-field/hooks/useSearchSpike';
+import { useSearchSpikesQueryCondition } from 'features/track-and-field/hooks/useSearchSpikesQuery';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 export const TAFTopSearchLauncher: FC = () => {
   const { keywordSearch } = useTAFKeywordSearchInput();
 
   const router = useRouter();
-  const { search, setSearchOrder } = useSearchSpike();
+  const { setSearchCondition, setSearchOrder } = useSearchSpikesQueryCondition();
 
   const lightnessSearch = useCallback(() => {
     setSearchOrder(shoeSearchOrders.light);
@@ -30,23 +30,23 @@ export const TAFTopSearchLauncher: FC = () => {
   }, [router, setSearchOrder]);
 
   const beginnerSearch = useCallback(() => {
-    search({ athleteLevel: [athleteLevels.beginner] });
+    setSearchCondition({ athleteLevel: [athleteLevels.beginner] });
     router.push(TAF_SEARCH_PAGE_PATH).then();
-  }, [router, search]);
+  }, [router, setSearchCondition]);
 
   const hurdleSearch = useCallback(() => {
-    search({ events: [shoeEvents.e110mH, shoeEvents.e400mH] });
+    setSearchCondition({ events: [shoeEvents.e110mH, shoeEvents.e400mH] });
     router.push(TAF_SEARCH_PAGE_PATH).then();
-  }, [router, search]);
+  }, [router, setSearchCondition]);
 
   const [event, setEvent] = useState<IEventItem>();
   const eventSearch = useCallback(
     (event: IEventItem) => {
       setEvent(event);
-      search({ events: [event] });
+      setSearchCondition({ events: [event] });
       router.push(TAF_SEARCH_PAGE_PATH).then();
     },
-    [router, search]
+    [router, setSearchCondition]
   );
 
   return (

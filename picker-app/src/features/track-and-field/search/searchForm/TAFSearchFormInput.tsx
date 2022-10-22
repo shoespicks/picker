@@ -81,6 +81,7 @@ export const FormInput = memo(function FormInput(props: {
         options={props.formOptions.athleteLevel}
         idKey="id"
         labelKey="label"
+        placeholder="競技レベルを選ぶ"
       ></SelectControl>
 
       <Label>対応環境</Label>

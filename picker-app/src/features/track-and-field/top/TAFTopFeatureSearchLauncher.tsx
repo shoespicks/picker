@@ -11,17 +11,17 @@ import { Span } from 'components/atoms/Typography';
 import { TAF_SEARCH_PAGE_PATH } from 'features/track-and-field/constants/routing';
 
 import { SearchFormInputDef } from 'features/track-and-field/constants/search';
-import { useSearchSpike } from 'features/track-and-field/hooks/useSearchSpike';
 import { useSearchSpikeForm } from 'features/track-and-field/hooks/useSearchSpikeForm';
+import { useSearchSpikesQueryCondition } from 'features/track-and-field/hooks/useSearchSpikesQuery';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 export const TAFTopFeatureSearchLauncher: FC = () => {
   const { formOptions, control, handleSubmit } = useSearchSpikeForm();
-  const { search } = useSearchSpike();
+  const { setSearchCondition } = useSearchSpikesQueryCondition();
   const router = useRouter();
 
   const handleSearch = handleSubmit(data => {
-    search(data);
+    setSearchCondition(data);
     router.push(TAF_SEARCH_PAGE_PATH).then();
   });
 

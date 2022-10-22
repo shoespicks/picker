@@ -9,20 +9,20 @@ import { Spacer } from 'components/atoms/Spacer';
 import { Spinner } from 'components/atoms/Spinner';
 import { Span, Strong } from 'components/atoms/Typography';
 import { TAF_SEARCH_PAGE_PATH } from 'features/track-and-field/constants/routing';
+import {
+  useSearchSpikesQuery,
+  useSearchSpikesQueryCondition,
+} from 'features/track-and-field/hooks/useSearchSpikesQuery';
 import { TAFSearchResultCard } from 'features/track-and-field/search/searchResults/TAFSearchResultCard';
-import { SpikeBase, SpikeBaseFragment } from 'graphql/generated/codegen-client';
+import { SpikeBaseFragment } from 'graphql/generated/codegen-client';
 import { $common } from 'shared/constants/styles/common';
 import { mediaGreaterThan } from 'shared/constants/styles/media-query';
 import { $spacing } from 'shared/constants/styles/spacing';
 
-type Props = {
-  results?: readonly SpikeBase[];
-  order?: IShoeSearchOrder;
-  isLoading?: boolean;
-  setSearchOrder?(order?: IShoeSearchOrder): void;
-};
+export const TAFSearchResultList: FC = () => {
+  const { searchCondition, setSearchOrder } = useSearchSpikesQueryCondition();
+  const { data, isLoading } = useSearchSpikesQuery();
 
-export const TAFSearchResultList: FC<Props> = ({ results, order, isLoading, setSearchOrder }) => {
   const router = useRouter();
 
   const handleClick = (value: SpikeBaseFragment) => {
@@ -44,12 +44,12 @@ export const TAFSearchResultList: FC<Props> = ({ results, order, isLoading, setS
           `}
         >
           <Strong fontSize="24px" loud>
-            {results?.length ?? 0}
+            {data?.spikes?.length ?? 0}
           </Strong>
           <Span semiBold> 件</Span>
         </span>
         <Select<IShoeSearchOrder>
-          value={order}
+          value={searchCondition?.order}
           options={Object.values(shoeSearchOrders)}
           idKey="id"
           labelKey="label"
@@ -57,7 +57,7 @@ export const TAFSearchResultList: FC<Props> = ({ results, order, isLoading, setS
           triggerContent={
             <Button
               icon={faArrowUpWideShort}
-              label={order?.label}
+              label={searchCondition?.order?.label}
               iconPosition="leftAbsolute"
               height="40px"
               width="180px"
@@ -66,9 +66,9 @@ export const TAFSearchResultList: FC<Props> = ({ results, order, isLoading, setS
         ></Select>
       </div>
       <Spacer size={$spacing.md}></Spacer>
-      {results && !isLoading ? (
+      {data && !isLoading ? (
         <ul className={styles.root}>
-          {results.map((value, index) => (
+          {data?.spikes?.map((value, index) => (
             <li key={index} className={$common.truncate}>
               <TAFSearchResultCard value={value} onClick={handleClick} />
             </li>

@@ -1,22 +1,13 @@
-import { useMemo } from 'react';
 import { map } from 'lodash-es';
 import { shoeEnviroments } from 'picker-types/types/track-and-field/shoeEnviroment';
 import { IShoeSearchOrder } from 'picker-types/types/track-and-field/shoeSearchOrder';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import { SearchFormInput, searchFormInputDefaultValues } from 'features/track-and-field/constants/search';
-import { SpikesQueryVariables, useSpikesQuery } from 'graphql/generated/codegen-client';
+import { useSpikesQuery } from 'graphql/generated/codegen-client';
 import { searchConditionState } from 'shared/state/track-and-field.state';
 
-export const useSearchSpike = () => {
+export const useSearchSpikesQueryCondition = () => {
   const [searchCondition, setSearchCondition] = useRecoilState(searchConditionState);
-
-  const search = (input: SearchFormInput) => {
-    setSearchCondition({
-      ...searchFormInputDefaultValues,
-      ...input,
-    });
-  };
-
   const setSearchOrder = (order: IShoeSearchOrder) => {
     setSearchCondition({
       ...searchCondition,
@@ -24,9 +15,21 @@ export const useSearchSpike = () => {
     });
   };
 
-  const convertInputToQueryVariables = useMemo((): SpikesQueryVariables => {
-    console.log('convertInputToQueryVariables');
-    return {
+  const handleSetSearchConditionInner = (condition: SearchFormInput) => {
+    setSearchCondition({
+      ...searchFormInputDefaultValues,
+      ...condition,
+    });
+  };
+
+  return { searchCondition, setSearchCondition: handleSetSearchConditionInner, setSearchOrder };
+};
+
+export const useSearchSpikesQuery = () => {
+  const searchCondition = useRecoilValue(searchConditionState);
+
+  return {
+    ...useSpikesQuery({
       input: {
         events: map(searchCondition.events, 'id'),
         brands: map(searchCondition.brands, 'id'),
@@ -47,13 +50,6 @@ export const useSearchSpike = () => {
         pinCountRangeMax: searchCondition?.pinCountRange?.[1],
         order: searchCondition?.order?.id,
       },
-    };
-  }, [searchCondition]);
-
-  return {
-    currentSearchCondition: searchCondition,
-    setSearchOrder,
-    search,
-    ...useSpikesQuery(convertInputToQueryVariables),
+    }),
   };
 };

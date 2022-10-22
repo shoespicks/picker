@@ -1,29 +1,18 @@
 import { type FC } from 'react';
 import { css, cx } from '@emotion/css';
 import { useTheme } from '@emotion/react';
-import { IShoeSearchOrder } from 'picker-types/types/track-and-field/shoeSearchOrder';
 import { Container } from 'components/atoms/Container';
 import { Spacer } from 'components/atoms/Spacer';
 import { MultiColumn } from 'components/layout/MultiColumn';
-import { SearchFormInput } from 'features/track-and-field/constants/search';
 import { TAFSearchFormCard } from 'features/track-and-field/search/searchForm/TAFSearchFormCard';
 import { TAFSearchFormModal } from 'features/track-and-field/search/searchForm/TAFSearchFormModal';
 import { TAFSearchResultList } from 'features/track-and-field/search/searchResults/TAFSearchResultList';
-import { SpikesQuery } from 'graphql/generated/codegen-client';
 import { hideOverBreakPointStyle, visibleOverBreakPointStyle } from 'shared/constants/styles/media-query';
 import { $headerSize } from 'shared/constants/styles/size';
 import { $spacing } from 'shared/constants/styles/spacing';
 import { useScroll } from 'shared/hooks/useScroll';
 
-type Props = {
-  data?: SpikesQuery;
-  currentSearchCondition?: SearchFormInput;
-  isLoading?: boolean;
-  setSearchOrder?: (order: IShoeSearchOrder) => void;
-  onSubmit?(input: SearchFormInput): void;
-};
-
-export const TAFSearchTemplate: FC<Props> = ({ data, currentSearchCondition, isLoading, setSearchOrder, onSubmit }) => {
+export const TAFSearchTemplate: FC = () => {
   const { isScrolledTop } = useScroll();
   const theme = useTheme();
 
@@ -42,7 +31,7 @@ export const TAFSearchTemplate: FC<Props> = ({ data, currentSearchCondition, isL
         )}
       >
         <Spacer size={$spacing.md}></Spacer>
-        <TAFSearchFormModal currentSearchCondition={currentSearchCondition} isLoading={isLoading} onSubmit={onSubmit} />
+        <TAFSearchFormModal />
         <Spacer size={$spacing.md}></Spacer>
       </Container>
 
@@ -52,22 +41,13 @@ export const TAFSearchTemplate: FC<Props> = ({ data, currentSearchCondition, isL
         <MultiColumn
           leftColumnElement={
             <div>
-              <TAFSearchFormCard
-                currentSearchCondition={currentSearchCondition}
-                isLoading={isLoading}
-                onSubmit={onSubmit}
-              />
+              <TAFSearchFormCard />
             </div>
           }
           breakPoint="lg"
           hideSideColumnInBreakPoint
         >
-          <TAFSearchResultList
-            results={data?.spikes}
-            isLoading={isLoading}
-            order={currentSearchCondition?.order}
-            setSearchOrder={setSearchOrder}
-          />
+          <TAFSearchResultList />
         </MultiColumn>
       </Container>
       <Spacer size={$spacing['3xl']}></Spacer>

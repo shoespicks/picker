@@ -1,4 +1,4 @@
-import React, { type FC } from 'react';
+import { FC } from 'react';
 import { css } from '@emotion/css';
 import { faChevronCircleRight, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { Button } from 'components/atoms/Button';
@@ -9,26 +9,18 @@ import { Spacer } from 'components/atoms/Spacer';
 import { Span } from 'components/atoms/Typography';
 import { useModal } from 'components/hooks/useModal';
 import { Modal } from 'components/molecules/Modal';
-import { SearchFormInput, searchFormInputDefaultValues } from 'features/track-and-field/constants/search';
 import { useSearchSpikeForm } from 'features/track-and-field/hooks/useSearchSpikeForm';
+import { useSearchSpikesQueryCondition } from 'features/track-and-field/hooks/useSearchSpikesQuery';
 import { FormInput } from 'features/track-and-field/search/searchForm/TAFSearchFormInput';
 import { $spacing } from 'shared/constants/styles/spacing';
 
-type Props = {
-  currentSearchCondition?: SearchFormInput;
-  isLoading?: boolean;
-  onSubmit?(input: SearchFormInput): void;
-};
+export const TAFSearchFormModal: FC = () => {
+  const { searchCondition, setSearchCondition } = useSearchSpikesQueryCondition();
+  const { formOptions, control, handleSubmit, watch } = useSearchSpikeForm(searchCondition);
 
-export const TAFSearchFormModal: FC<Props> = ({
-  currentSearchCondition = searchFormInputDefaultValues,
-  isLoading,
-  onSubmit,
-}) => {
-  const { formOptions, control, handleSubmit } = useSearchSpikeForm(currentSearchCondition);
   const { isModalOpen, close, setIsModalOpen } = useModal();
   const submit = handleSubmit(data => {
-    onSubmit && onSubmit(data);
+    setSearchCondition(data);
     close();
   });
 
@@ -57,8 +49,12 @@ export const TAFSearchFormModal: FC<Props> = ({
               semiBold
               truncate
             >
-              {currentSearchCondition?.events?.length ? (
-                <Span truncate>{currentSearchCondition?.events?.map(e => e.label).join(', ')} </Span>
+              {watch('events')?.length ? (
+                <Span truncate>
+                  {watch('events')
+                    ?.map(e => e.label)
+                    .join(', ')}{' '}
+                </Span>
               ) : (
                 <Span color="low" truncate>
                   種目を選択
@@ -75,8 +71,12 @@ export const TAFSearchFormModal: FC<Props> = ({
               semiBold
               truncate
             >
-              {currentSearchCondition?.athleteLevel?.length ? (
-                <Span truncate>{currentSearchCondition?.athleteLevel?.map(a => a.label).join(', ')} </Span>
+              {watch('athleteLevel')?.length ? (
+                <Span truncate>
+                  {watch('athleteLevel')
+                    ?.map(a => a.label)
+                    .join(', ')}{' '}
+                </Span>
               ) : (
                 <Span color="low" truncate>
                   競技レベルを選択
@@ -94,7 +94,6 @@ export const TAFSearchFormModal: FC<Props> = ({
           label="検索する"
           width="100%"
           iconPosition="rightAbsolute"
-          disabled={isLoading}
           onClick={submit}
         ></Button>
       }

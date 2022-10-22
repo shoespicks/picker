@@ -13,7 +13,7 @@
     "fix:css": "stylelint ./src/**/*.{css,js,jsx,ts,tsx} --fix",
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json}'",
     "codegen": "yarn workspace picker-types codegen && yarn codegen:nexus && yarn codegen:graphql",
-    "codegen:nexus": "ts-node -r tsconfig-paths/register --compiler-options '{\"module\":\"CommonJS\"}' --transpile-only src/graphql/nexus-schema.ts",
+    "codegen:nexus": "ts-node -r tsconfig-paths/register --compiler-options '{\"module\":\"CommonJS\"}' --transpile-only ./src/graphql/nexus-schema.ts",
     "codegen:graphql": "graphql-codegen --config src/graphql/codegen.ts",
     "sitemap": "next-sitemap --config next-sitemap.js"
   },

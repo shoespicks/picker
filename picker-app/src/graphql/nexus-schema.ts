@@ -13,4 +13,5 @@ export const schema = makeSchema({
       resolveType: false,
     },
   },
+  prettierConfig: path.join(process.cwd(), '../.prettierrc'),
 });

@@ -50,15 +50,12 @@
           </h3>
           <ul v-if="spike.strength">
             <li v-for="strength in spike.strength" :key="strength.label">
-              <span>
-                <v-icon left>{{ strength.icon }}</v-icon>
-              </span>
-              <div>
-                <p v-if="strength.label">{{ strength.label }}</p>
-                <small v-if="strength.description">{{
-                  strength.description
-                }}</small>
-              </div>
+              <IconText
+                :icon="strength.icon"
+                :label="strength.label"
+                :description="strength.description"
+                :icon-size="24"
+              ></IconText>
             </li>
           </ul>
         </section>
@@ -105,14 +102,15 @@ import {
   ref
 } from '@nuxtjs/composition-api';
 import Button from '~/components/atoms/Button.vue';
+import IconText from '~/components/atoms/IconText.vue';
 import ColorVariationsPicker from '~/components/molecules/ColorVariationsPicker.vue';
-import SimpleSpikeList from '~/components/molecules/spikeList/SimpleSpikeList.vue';
+import SimpleSpikeList from '~/components/molecules/spike-list/SimpleSpikeList.vue';
 import { ISpikeModel } from '~/store/model/spike';
 import { shoeBrands } from '~/types/shoes/shoeBrands';
 import { openNewTabByUrl } from '~/utils/navigateUtils';
 
 export default defineComponent({
-  components: { SimpleSpikeList, Button, ColorVariationsPicker },
+  components: { IconText, SimpleSpikeList, Button, ColorVariationsPicker },
   props: {
     spike: {
       type: Object as PropType<ISpikeModel>,
@@ -257,31 +255,6 @@ export default defineComponent({
         padding-left: 16px;
 
         > li {
-          display: flex;
-
-          > span {
-            display: inline-flex;
-            width: 30px;
-            height: 48px;
-            padding-top: 4px;
-            align-items: flex-start;
-            justify-content: center;
-
-            + * {
-              margin-left: 16px;
-            }
-          }
-
-          > div {
-            > p {
-              font-weight: 500;
-            }
-
-            > small {
-              color: gray;
-            }
-          }
-
           + li {
             margin-top: 16px;
           }
@@ -296,11 +269,12 @@ export default defineComponent({
     .spike-top-content-description-buy-actions {
       display: flex;
       align-items: center;
+      flex-wrap: wrap;
+      margin-left: -8px;
 
       > li {
-        + li {
-          margin-left: 8px;
-        }
+        margin-top: 8px;
+        margin-left: 8px;
       }
     }
   }

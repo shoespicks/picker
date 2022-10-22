@@ -120,7 +120,7 @@ $sideNavBreakPoint: 768px;
 .organisms-spike-detail-introduction-tab {
   > section {
     display: flex;
-    padding: 48px 264px 72px 32px;
+    padding: 48px 264px 48px 32px;
     flex-direction: column;
     align-items: center;
 

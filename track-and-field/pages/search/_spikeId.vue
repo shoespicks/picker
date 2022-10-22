@@ -1,6 +1,6 @@
 <template>
   <div v-if="!!spike" class="page-content">
-    <Container :max-width="1244" padding="0 34px">
+    <Container padding="0 34px">
       <v-breadcrumbs :items="breadcrumbs"></v-breadcrumbs>
     </Container>
     <SpikeDetail :spike="spike"></SpikeDetail>
@@ -41,7 +41,7 @@ export default defineComponent({
 
     useFetch(async () => {
       spike.value =
-        (await spikesStore.getBySlug(`${route.value.params.spikeId}`)) ||
+        (await spikesStore.findBySlug(`${route.value.params.spikeId}`)) ||
         undefined;
 
       spike.value?.name &&

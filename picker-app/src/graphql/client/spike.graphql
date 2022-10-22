@@ -1,0 +1,116 @@
+query Spikes($input: SpikesInput!) {
+    spikes(input: $input){
+        ...SpikeBase
+    }
+}
+
+query Spike($input: SpikeInput!) {
+    spike(input: $input){
+        ...Spike
+    }
+}
+
+fragment SpikeBase on SpikeBase {
+    id
+    name
+    nameEn
+    allWeatherOnly
+    angleScore
+    brand
+    events {
+        ...TAFShoeEvents
+    }
+    gripScore
+    hardnessScore
+    colorImages {
+        ...ColorImages
+    }
+    lightnessScore
+    price
+    score
+    weight
+    widthScore
+}
+
+fragment Spike on Spike {
+    id
+    name
+    nameEn
+    allWeatherOnly
+    angleScore
+    brand
+    events {
+        ...TAFShoeEvents
+    }
+    gripScore
+    hardnessScore
+    colorImages {
+        ...ColorImages
+    }
+    lightnessScore
+    price
+    score
+    weight
+    widthScore
+
+    amazonUrl
+    brandPageUrl
+    detailSpec {
+        ...SpikeDetailSpec
+    }
+    keyFeature {
+        ...AricleItem
+    }
+    newModels {
+        ...SpikeBase
+    }
+    rakutenUrl
+    recommendItems {
+        ...SpikeBase
+    }
+    recommendedFor
+    strength {
+        ...Strength
+    }
+}
+
+fragment SpikeDetailSpec on SpikeDetailSpec {
+    allWeatherOnly
+    athleteLevel
+    events
+    madeIn
+    size
+    name
+    pinDetail
+    price
+    releaseYear
+    shoeLaceType
+    soleMaterial
+    upperMaterial
+    weight
+}
+
+
+fragment ColorImages on ColorImages {
+    colorId
+    colorCode
+    imageUrls
+}
+
+fragment TAFShoeEvents on TAFShoeEvents {
+    id
+    label
+}
+
+fragment AricleItem on AricleItem {
+    id
+    title
+    imageUrls
+    description
+}
+
+fragment Strength on Strength {
+    description
+    icon
+    label
+}

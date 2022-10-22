@@ -14,15 +14,15 @@ export type ShoeSearchOrderCode =
   | 'highscore';
 
 export interface IShoeSearchOrder extends ISelectItem {
-  id: ShoeSearchOrderCode;
-  label: string;
-  labelAlias: string;
+  readonly id: ShoeSearchOrderCode;
+  readonly label: string;
+  readonly labelAlias: string;
 
   // ContentfulのContentModelのフィールド名
-  fieldId: keyof ISpikeShoesFields;
+  readonly fieldId: keyof ISpikeShoesFields;
 
   // フィールドの値の降順で検索する場合true
-  isReverseSearch: boolean;
+  readonly isReverseSearch: boolean;
 }
 
 export const shoeSearchOrders: {
@@ -37,10 +37,10 @@ export const shoeSearchOrders: {
   },
   light: {
     id: 'light',
-    label: 'アシックス',
+    label: '軽い順',
     labelAlias: 'とにかく軽い',
     fieldId: 'lightnessScore',
-    isReverseSearch: false
+    isReverseSearch: true
   },
   gripPower: {
     id: 'gripPower',
@@ -98,4 +98,4 @@ export const shoeSearchOrders: {
     fieldId: 'score',
     isReverseSearch: true
   }
-};
+} as const;

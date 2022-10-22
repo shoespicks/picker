@@ -1,5 +1,10 @@
 <template>
-  <v-btn v-bind="$props" :ripple="false" @click="onClick($event)">
+  <v-btn
+    v-bind="$props"
+    :ripple="false"
+    :width="full ? '100%' : width"
+    @click="onClick($event)"
+  >
     <slot></slot>
   </v-btn>
 </template>
@@ -25,6 +30,7 @@ export default defineComponent({
     },
     text: Boolean,
     tile: Boolean,
+    full: Boolean,
     type: {
       type: String,
       default: 'button'
@@ -63,4 +69,8 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.v-btn {
+  text-transform: none;
+}
+</style>

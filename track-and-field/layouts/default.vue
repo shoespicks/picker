@@ -1,6 +1,7 @@
 <template>
   <v-app class="app-default-layout">
-    <Header></Header>
+    <Header @clickHumberger="toggleDrawer()"></Header>
+    <NavigationDrawer v-model="drawerOpen"></NavigationDrawer>
     <v-main class="app-default-layout-content">
       <Nuxt />
     </v-main>
@@ -9,18 +10,29 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api';
+import { defineComponent, ref } from '@nuxtjs/composition-api';
 
 import Footer from '~/components/organisms/Footer.vue';
 import Header from '~/components/organisms/header/Header.vue';
+import NavigationDrawer from '~/components/organisms/navigation-drawer/NavigationDrawer.vue';
 
 export default defineComponent({
   name: 'DefaultLayout',
   components: {
     Header,
-    Footer
+    Footer,
+    NavigationDrawer
   },
-  setup() {}
+  setup() {
+    const drawerOpen = ref(false);
+
+    return {
+      drawerOpen,
+      toggleDrawer: () => {
+        drawerOpen.value = !drawerOpen.value;
+      }
+    };
+  }
 });
 </script>
 

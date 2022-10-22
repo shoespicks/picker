@@ -1,6 +1,6 @@
 # スプレッドシートの情報をContentfulにアップロード
 name: uploadSheetContents
-on: [workflow_dispatch]
+on: [ workflow_dispatch ]
 env:
   PICKER_AWS_ACCESS_KEY_ID: ${{secrets.PICKER_AWS_ACCESS_KEY_ID}}
   PICKER_AWS_SECRET_ACCESS_KEY: ${{secrets.PICKER_AWS_SECRET_ACCESS_KEY}}
@@ -9,25 +9,32 @@ env:
   PICKER_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN: ${{secrets.PICKER_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN}}
   PICKER_GCP_CLIENT_EMAIL: ${{secrets.PICKER_GCP_CLIENT_EMAIL}}
   PICKER_GCP_PRIVATE_KEY: ${{secrets.PICKER_GCP_PRIVATE_KEY}}
+  PICKER_AMPLIFY_DEPLOY_WEBHOOK_URL_STAGING: ${{secrets.PICKER_AMPLIFY_DEPLOY_WEBHOOK_URL_STAGING}}
 jobs:
   build:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: "./track-and-field"
+        working-directory: "./picker-scripts"
 
     strategy:
       matrix:
-        node-version: [16.x]
+        node-version: [ 18.x ]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
       - uses: actions/checkout@master
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v2
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v3
+        id: yarn-cache
         with:
-          node-version: ${{ matrix.node-version }}
-          cache: "npm"
-          cache-dependency-path: "**/package-lock.json"
-      - run: npm i
-      - run: npm run uploadContents
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - run: yarn install --prefer-offline
+      - run: yarn upload

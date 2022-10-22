@@ -1,21 +1,17 @@
-// ISpikeShoesFieldsのbrandsからコピー
+import { ISpikeShoesFields } from '~/types/generated/contentful';
 import { ISelectItem } from '~/types/selectItem';
 
-export type AthleteLevelCode =
-  | 'beginner'
-  | 'intermediate'
-  | 'advanced'
-  | 'professional';
+export type AthleteLevelCode = Exclude<ISpikeShoesFields['level'], undefined>
 
 export interface IAthleteLevel extends ISelectItem {
-  id: AthleteLevelCode;
-  label: string;
+  readonly id: AthleteLevelCode;
+  readonly label: string;
 }
 
 export const athleteLevels: { [key in AthleteLevelCode]: IAthleteLevel } = {
   beginner: {
     id: 'beginner',
-    label: '初心者'
+    label: '初級者'
   },
   intermediate: {
     id: 'intermediate',
@@ -29,4 +25,4 @@ export const athleteLevels: { [key in AthleteLevelCode]: IAthleteLevel } = {
     id: 'professional',
     label: 'エキスパート'
   }
-};
+} as const;

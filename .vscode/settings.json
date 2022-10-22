@@ -1,0 +1,22 @@
+{
+  "eslint.workingDirectories": [{ "mode": "auto" }],
+  "prettier.bracketSameLine": false,
+  "prettier.configPath": "./.prettierrc",
+  "prettier.prettierPath": "./node_modules/prettier",
+  "eslint.packageManager": "yarn",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.fixAll.stylelint": true
+  },
+  "stylelint.configBasedir": ".",
+  "stylelint.configFile": "./.stylelintrc.js",
+  "stylelint.packageManager": "yarn",
+  "stylelint.stylelintPath": "./node_modules/stylelint",
+  "stylelint.customSyntax": "@stylelint/postcss-css-in-js",
+  "stylelint.validate": ["css", "less", "postcss", "scss", "postcss-css-in-js", "typescriptreact", "javascriptreact"],
+  "stylelint.snippet": ["css", "less", "postcss", "tsx", "postcss-css-in-js", "typescriptreact", "javascriptreact"],
+  "eslint.run": "onType",
+  "eslint.alwaysShowStatus": true,
+  "eslint.format.enable": true
+}

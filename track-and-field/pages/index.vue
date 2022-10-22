@@ -73,7 +73,7 @@
             <v-col cols="12" md="6">
               <div class="d-flex align-center flex-wrap">
                 <div class="flex-grow-1" style="width: 200px">
-                  <Select
+                  <Select 
                     v-model="levelSearchValue.level"
                     :items="levels"
                     :height="40"
@@ -98,6 +98,15 @@
               >
             </v-col>
           </v-row>
+          <v-row>
+            <p v-if="levelSearchValue.event">
+              参考記録 <br>
+              初心者：{{(competitiveness[levelSearchValue.event.id]).beginner}} <br>
+              中級者：{{(competitiveness[levelSearchValue.event.id]).intermediate}} <br>
+              上級者：{{(competitiveness[levelSearchValue.event.id]).advanced}}<br>
+              エキスパート：{{(competitiveness[levelSearchValue.event.id]).professional}}
+            </p>
+          </v-row>
         </div>
       </Container>
     </section>
@@ -116,6 +125,16 @@
           <h3>長距離のおすすめ</h3>
           <SimpleSpikeList :spikes="longRankingSpikes"></SimpleSpikeList>
         </section>
+        <section v-if="highJumpRankingSpikes">
+          <h3>走幅跳・三段跳のおすすめ</h3>
+          <SimpleSpikeList
+            :spikes="longAndTripleJumpRankingSpikes"
+          ></SimpleSpikeList>
+        </section>
+        <section v-if="highJumpRankingSpikes">
+          <h3>走高跳のおすすめ</h3>
+          <SimpleSpikeList :spikes="highJumpRankingSpikes"></SimpleSpikeList>
+        </section>
       </Container>
     </section>
   </div>
@@ -132,14 +151,16 @@ import Button from '~/components/atoms/Button.vue';
 import Container from '~/components/atoms/Container.vue';
 import NumberHeading from '~/components/atoms/NumberHeading.vue';
 import Select from '~/components/atoms/Select.vue';
-import SimpleSpikeList from '~/components/molecules/spikeList/SimpleSpikeList.vue';
+import SimpleSpikeList from '~/components/molecules/spike-list/SimpleSpikeList.vue';
 import { spikesStore } from '~/store';
 import { ISpikeModel } from '~/store/model/spike';
 import { athleteLevels, IAthleteLevel } from '~/types/shoes/athleteLevel';
 import {
   IEventItem,
   shoeEventCategories,
-  shoeEvents
+  shoeEvents,
+  competitiveness,
+  ICompetitivenessItem
 } from '~/types/shoes/shoeEvents';
 import {
   IShoeSearchOrder,
@@ -154,19 +175,31 @@ export default defineComponent({
     const shortRankingSpikes = ref<ISpikeModel[]>();
     const middleRankingSpikes = ref<ISpikeModel[]>();
     const longRankingSpikes = ref<ISpikeModel[]>();
+    const longAndTripleJumpRankingSpikes = ref<ISpikeModel[]>();
+    const highJumpRankingSpikes = ref<ISpikeModel[]>();
 
     useFetch(async () => {
-      shortRankingSpikes.value = await spikesStore.getRankingByEventCategory(
-        shoeEventCategories.shortDistance
+      shortRankingSpikes.value = await spikesStore.getRankingByEventCodes(
+        shoeEventCategories.shortDistance.eventCodes
       );
 
-      middleRankingSpikes.value = await spikesStore.getRankingByEventCategory(
-        shoeEventCategories.middleDistance
+      middleRankingSpikes.value = await spikesStore.getRankingByEventCodes(
+        shoeEventCategories.middleDistance.eventCodes
       );
 
-      shortRankingSpikes.value = await spikesStore.getRankingByEventCategory(
-        shoeEventCategories.longDistance
+      longRankingSpikes.value = await spikesStore.getRankingByEventCodes(
+        shoeEventCategories.longDistance.eventCodes
       );
+
+      longAndTripleJumpRankingSpikes.value =
+        await spikesStore.getRankingByEventCodes([
+          ...shoeEvents.longJump.eventCodes,
+          ...shoeEvents.tripleJump.eventCodes
+        ]);
+
+      highJumpRankingSpikes.value = await spikesStore.getRankingByEventCodes([
+        ...shoeEvents.highJump.eventCodes
+      ]);
     });
 
     const featuresSearchValue = ref<{
@@ -183,27 +216,36 @@ export default defineComponent({
       shortRankingSpikes,
       middleRankingSpikes,
       longRankingSpikes,
+      longAndTripleJumpRankingSpikes,
+      highJumpRankingSpikes,
       featuresSearchValue,
       levelSearchValue,
       events: Object.values(shoeEvents),
       eventCategories: Object.values(shoeEventCategories),
       searchOrders: Object.values(shoeSearchOrders),
+      
+      //ゆーきここ直してみている
       levels: Object.values(athleteLevels),
+      //levels: Object.values(competitiveness),
+      competitiveness,
+
       searchByFeatures: () => {
-        spikesStore.updateSearchFormValue({
-          eventOrEventCategory: featuresSearchValue.value.eventCategory,
-          order: featuresSearchValue.value.features
-        });
+        featuresSearchValue.value.eventCategory &&
+          spikesStore.search({
+            events: [featuresSearchValue.value.eventCategory],
+            order: featuresSearchValue.value.features
+          });
         router.push('/search');
       },
       searchByLevel: () => {
-        spikesStore.updateSearchFormValue({
-          eventOrEventCategory: levelSearchValue.value.event,
-          level: levelSearchValue.value.level?.id
-            ? [levelSearchValue.value.level?.id]
-            : []
-        });
-        router.push('/search/');
+        levelSearchValue.value.event &&
+          spikesStore.search({
+            events: [levelSearchValue.value.event],
+            level: levelSearchValue.value.level
+              ? [levelSearchValue.value.level]
+              : []
+          });
+        router.push('/search');
       }
     };
   }

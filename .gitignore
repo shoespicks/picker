@@ -1,4 +1,7 @@
 # IDE / Editor
 .idea
-.vscode
 
+node_modules
+.gitconfig
+
+.env.local

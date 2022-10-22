@@ -31,6 +31,10 @@ export default defineComponent({
         'グリップ力    ',
         '反発性    '
       ]
+    },
+    small: {
+      type: Boolean,
+      default: false
     }
   },
   setup(props) {
@@ -69,13 +73,15 @@ export default defineComponent({
         elements: {
           point: {
             pointStyle: 'circle',
-            radius: 14,
-            hoverRadius: 18,
+            radius: props.small ? 12 : 14,
+            hoverRadius: props.small ? 14 : 18,
             borderWidth: 3,
             hoverBorderWidth: 3
           }
         },
-        layout: {},
+        layout: {
+          padding: 32
+        },
         responsive: true,
         scales: {
           r: {
@@ -88,12 +94,12 @@ export default defineComponent({
               stepSize: 1,
               backdropColor: 'transparent',
               font: {
-                size: 14
+                size: props.small ? 12 : 14
               }
             },
             pointLabels: {
               font: {
-                size: 16
+                size: props.small ? 12 : 16
               }
             }
           }
@@ -138,5 +144,12 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 div {
+  position: relative;
+  max-width: 100%;
+  max-height: 100%;
+
+  > canvas {
+    margin: -3rem -1.5rem;
+  }
 }
 </style>

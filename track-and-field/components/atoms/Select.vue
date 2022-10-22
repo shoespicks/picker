@@ -72,8 +72,14 @@ export default defineComponent({
 });
 </script>
 
-<style lang="scss" scoped>
-.v-ripple__container {
-  opacity: 0;
+<style lang="scss">
+.v-select-list {
+  .v-ripple__container {
+    opacity: 0;
+  }
+
+  .v-list-item > .v-list-item__action:first-child {
+    margin-right: 16px;
+  }
 }
 </style>

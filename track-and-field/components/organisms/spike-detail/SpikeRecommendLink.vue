@@ -1,15 +1,17 @@
 <template>
-  <section class="organisms-spike-recommend-link">
+  <section
+    v-if="spike.recommendItems && spike.recommendItems.length > 0"
+    class="organisms-spike-recommend-link"
+  >
     <h3>このスパイクを見ている人にオススメ</h3>
     <SimpleSpikeList
-      v-if="spike.recommendItems"
       :spikes="spike.recommendItems"
     ></SimpleSpikeList>
   </section>
 </template>
 <script lang="ts">
 import { defineComponent, PropType } from '@nuxtjs/composition-api';
-import SimpleSpikeList from '~/components/molecules/spikeList/SimpleSpikeList.vue';
+import SimpleSpikeList from '~/components/molecules/spike-list/SimpleSpikeList.vue';
 import { ISpikeModel } from '~/store/model/spike';
 import { shoeBrands } from '~/types/shoes/shoeBrands';
 

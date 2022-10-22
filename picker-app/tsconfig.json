@@ -1,0 +1,34 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "target": "ES2018",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "sourceMap": true,
+    "typeRoots": ["types", "node_modules/@types"],
+    "paths": {
+      "picker-types/*": ["../picker-types/*"],
+      "server/*": ["server/*"],
+      "features/*": ["features/*"],
+      "components/*": ["components/*"],
+      "graphql/*": ["graphql/*"],
+      "layout/*": ["layout/*"],
+      "pages/*": ["pages/*"],
+      "shared/*": ["shared/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}

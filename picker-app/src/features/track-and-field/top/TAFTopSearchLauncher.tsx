@@ -94,6 +94,7 @@ export const TAFTopSearchLauncher: FC = () => {
           onChange={eventSearch}
         ></Select>
       </Section>
+      <Spacer size={$spacing.md}></Spacer>
     </Card>
   );
 };

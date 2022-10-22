@@ -12,7 +12,7 @@ type Props = {
 };
 export const TAFTopTitleCard: FC<Props> = ({ className }) => (
   <Card className={className} borderWidthPx={2}>
-    <AspectRatio ratio={16 / 9}>
+    <AspectRatio ratio={17 / 9}>
       <div className={styles.titleContent}>
         <Strong noWrap className={styles.titleCaption}>
           陸上選手のためのスパイク比較サイト
@@ -42,11 +42,11 @@ const styles = {
     text-align: center;
 
     ${mediaGreaterThan('md')} {
-      padding: 0 ${$spacing.xl};
+      padding: 0 ${$spacing.lg};
     }
 
     ${mediaGreaterThan('lg')} {
-      padding: 0 ${$spacing['2xl']};
+      padding: 0 ${$spacing.xl};
     }
   `,
   titleCaption: css`

@@ -1,4 +1,5 @@
 import React, { type FC } from 'react';
+import { css, cx } from '@emotion/css';
 import { Container } from 'components/atoms/Container';
 import { Spacer } from 'components/atoms/Spacer';
 import { SideImageContent } from 'components/layout/SideImageContent';
@@ -9,6 +10,7 @@ import { TAFTopLevelSearchLauncher } from 'features/track-and-field/top/TAFTopLe
 import { TAFTopRecommends } from 'features/track-and-field/top/TAFTopRecommends';
 import { TAFTopSearchLauncher } from 'features/track-and-field/top/TAFTopSearchLauncher';
 import { SpikeBase } from 'graphql/generated/codegen-client';
+import { hideOverBreakPointStyle, visibleOverBreakPointStyle } from 'shared/constants/styles/media-query';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 export type TAFTopTemplateProps = {
@@ -22,11 +24,18 @@ export type TAFTopTemplateProps = {
 export const TAFTopTemplate: FC<TAFTopTemplateProps> = ({ ...spikesData }) => (
   <>
     <Spacer size={$spacing.lg}></Spacer>
-    <Container>
+    <Container
+      className={css`
+        position: relative;
+      `}
+    >
       <TAFTopHero></TAFTopHero>
+      <div className={styles.overlaySearchLaunchar}>
+        <TAFTopSearchLauncher></TAFTopSearchLauncher>
+      </div>
     </Container>
-    <Spacer size={$spacing.xl}></Spacer>
-    <Container>
+    <Container className={hideOverBreakPointStyle('lg')}>
+      <Spacer size={$spacing.xl}></Spacer>
       <TAFTopSearchLauncher></TAFTopSearchLauncher>
     </Container>
     <Spacer size={$spacing['3xl']}></Spacer>
@@ -54,3 +63,15 @@ export const TAFTopTemplate: FC<TAFTopTemplateProps> = ({ ...spikesData }) => (
     <Spacer size="176px"></Spacer>
   </>
 );
+
+const styles = {
+  overlaySearchLaunchar: cx(
+    css`
+      position: absolute;
+      top: ${$spacing.xl};
+      right: calc(${$spacing.lg} + ${$spacing.xl});
+      width: 30%;
+    `,
+    visibleOverBreakPointStyle('lg')
+  ),
+};

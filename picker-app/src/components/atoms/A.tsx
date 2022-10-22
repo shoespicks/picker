@@ -13,8 +13,8 @@ type Props = {
 
 export const A: FC<PropsWithChildren<Props>> = ({ children, href, underline, className, onClick }) =>
   href ? (
-    <Link href={href} passHref>
-      <span className={cx(aStyle(underline), className)}>{children}</span>
+    <Link href={href}>
+      <a className={cx(aStyle(underline), className)}>{children}</a>
     </Link>
   ) : (
     <span className={cx(aStyle(underline), className)} onClick={onClick}>

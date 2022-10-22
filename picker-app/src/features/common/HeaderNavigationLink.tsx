@@ -17,7 +17,7 @@ export const HeaderNavigationLink: FC<Props> = ({ links }) => {
     <ul className={styles.links}>
       {links.map(l => (
         <li key={l.label}>
-          <A href={l.href}>
+          <A href={l.href} className={styles.link}>
             <IconText icon={faChevronRight} text={l.label} gap="md"></IconText>
           </A>
         </li>
@@ -29,25 +29,25 @@ export const HeaderNavigationLink: FC<Props> = ({ links }) => {
 const getStyles = (theme: Theme) => ({
   links: css`
     margin-left: -${$spacing.md};
+  `,
+  link: css`
+    display: flex;
+    align-items: center;
+    padding: ${$spacing.sm} ${$spacing.md};
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: margin-left ease-in 200ms, background-color ease-in 200ms;
 
-    > li {
-      display: flex;
-      align-items: center;
-      padding: ${$spacing.sm} ${$spacing.md};
-      font-size: 14px;
-      font-weight: 400;
-      border-radius: 2px;
-      transition: margin-left ease-in 200ms, background-color ease-in 200ms;
+    > * + * {
+      margin-left: ${$spacing.md};
+    }
 
-      > * + * {
-        margin-left: ${$spacing.md};
-      }
-
-      :hover {
-        margin-left: ${$spacing.md};
-        background-color: ${theme.inverseOverlayHover};
-        transition: all 0.4s;
-      }
+    :hover {
+      margin-left: ${$spacing.md};
+      background-color: ${theme.inverseOverlayHover};
+      transition: all 0.4s;
     }
   `,
 });

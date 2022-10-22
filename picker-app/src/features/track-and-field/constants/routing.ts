@@ -11,20 +11,20 @@ export const routing: Link[] = [
     label: '検索',
     href: TAF_SEARCH_PAGE_PATH,
   },
-  {
-    label: '比較',
-    href: TAF_COMPARE_PAGE_PATH,
-  },
-  {
-    label: 'チャート',
-    href: TAF_CHART_PAGE_PATH,
-  },
-  {
-    label: 'ユーザーランキング',
-    href: TAF_RANKING_PAGE_PATH,
-  },
-  {
-    label: '記事一覧',
-    href: TAF_ARTICLE_PAGE_PATH,
-  },
+  // {
+  //   label: '比較',
+  //   href: TAF_COMPARE_PAGE_PATH,
+  // },
+  // {
+  //   label: 'チャート',
+  //   href: TAF_CHART_PAGE_PATH,
+  // },
+  // {
+  //   label: 'ユーザーランキング',
+  //   href: TAF_RANKING_PAGE_PATH,
+  // },
+  // {
+  //   label: '記事一覧',
+  //   href: TAF_ARTICLE_PAGE_PATH,
+  // },
 ];

@@ -4,11 +4,7 @@ import { Theme, useTheme } from '@emotion/react';
 import Image from 'next/future/image';
 import { A } from 'components/atoms/A';
 import { Container } from 'components/atoms/Container';
-import { Divider } from 'components/atoms/Divider';
 import { Section } from 'components/atoms/Section';
-import { H3 } from 'components/atoms/Typography';
-import { HeaderNavigationLink } from 'features/common/HeaderNavigationLink';
-import { routing } from 'shared/constants/routing';
 import { $headerSize } from 'shared/constants/styles/size';
 import { $spacing } from 'shared/constants/styles/spacing';
 import { HeaderNavigation } from './HeaderNavigation';
@@ -26,11 +22,11 @@ export const Header: FC<PropsWithChildren> = ({ children }) => {
           <HeaderNavigation>
             <div className={styles.navigationContent}>
               <Section>{children}</Section>
-              <Section>
-                <Divider color="inverse" />
-                <H3 className={styles.serviceTitle}>PICKER</H3>
-                <HeaderNavigationLink links={routing} />
-              </Section>
+              {/*<Section>*/}
+              {/*  <Divider color="inverse" />*/}
+              {/*  <H3 className={styles.serviceTitle}>PICKER</H3>*/}
+              {/*  <HeaderNavigationLink links={routing} />*/}
+              {/*</Section>*/}
             </div>
           </HeaderNavigation>
         </div>

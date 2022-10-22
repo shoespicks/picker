@@ -53,10 +53,18 @@ const styles = {
   `,
   titleCard: css`
     position: absolute;
-    bottom: 32px;
-    left: 32px;
-    width: 40%;
+    bottom: 50%;
+    left: 50%;
+    width: 60%;
     min-width: 280px;
+    transform: translate(-50%, 50%);
+
+    ${mediaGreaterThan('md')} {
+      bottom: 32px;
+      left: 32px;
+      width: 40%;
+      transform: translate(0, 0);
+    }
 
     ${mediaGreaterThan('lg')} {
       width: 30%;

@@ -11,6 +11,7 @@ import {
   h3Style,
   h4Style,
   h5Style,
+  noWrapStyle,
   preStyle,
   pStyle,
   semiBoldStyle,
@@ -29,6 +30,8 @@ type TypographyProps = {
   semiBold?: boolean;
   bold?: boolean;
   truncate?: boolean;
+  pre?: boolean;
+  noWrap?: boolean;
   className?: string;
 };
 
@@ -50,6 +53,8 @@ export const setTypographyStyle =
       { [textLoudStyle]: props?.loud },
       { [semiBoldStyle]: props?.semiBold },
       { [boldStyle]: props?.bold },
+      { [preStyle]: props?.pre },
+      { [noWrapStyle]: props?.noWrap },
       { [$common.truncate]: props?.truncate },
       css`
         font-size: ${props?.fontSize};

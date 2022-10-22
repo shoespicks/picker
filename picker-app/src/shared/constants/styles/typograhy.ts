@@ -55,8 +55,11 @@ export const pStyle = css`
 `;
 
 export const preStyle = css`
-  font-size: 16px;
   white-space: pre-line;
+`;
+
+export const noWrapStyle = css`
+  white-space: nowrap;
 `;
 
 export const spanStyle = css`

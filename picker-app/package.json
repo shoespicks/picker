@@ -48,7 +48,8 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.37.0",
     "recoil": "^0.7.6",
-    "sass": "^1.55.0"
+    "sass": "^1.55.0",
+    "use-react-router-breadcrumbs": "^4.0.1"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.10.2",

@@ -13,6 +13,7 @@ export const Footer: FC = () => {
 
   return (
     <footer className={styles.footer}>
+      {/* <Breadcrumbs /> */}
       <Container>
         <div className={styles.footerContent}>
           <div>

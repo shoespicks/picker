@@ -69,8 +69,8 @@ const getStyles = (theme: Theme) => ({
     position: relative;
     flex-grow: 1;
     background-color: ${theme.background};
-    border: 1px solid ${theme.main};
     border-radius: 9999px;
+    outline: 1px solid ${theme.main};
 
     &[data-orientation='horizontal'] {
       height: 4px;
@@ -84,8 +84,8 @@ const getStyles = (theme: Theme) => ({
   `,
   thumb: css`
     display: block;
-    width: 14px;
-    height: 14px;
+    width: 16px;
+    height: 16px;
     background-color: ${theme.main};
     border-radius: 50%;
   `,

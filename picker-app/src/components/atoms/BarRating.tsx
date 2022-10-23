@@ -23,14 +23,13 @@ const getStyles = (theme: Theme) => ({
   host: (max: number) => css`
     display: grid;
     grid-template-columns: repeat(${max}, 1fr);
-    gap: 1px;
+    gap: 3px;
   `,
   bar: (progress: number) => css`
     position: relative;
     height: 4px;
     overflow: hidden;
-    border: 1px solid ${theme.main};
-    border-radius: 1px;
+    outline: 1px solid ${theme.main};
 
     ::after {
       position: absolute;

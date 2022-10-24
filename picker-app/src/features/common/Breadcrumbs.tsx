@@ -1,46 +1,66 @@
 import { FC } from "react";
 import { css } from "@emotion/css";
 import { Theme, useTheme } from "@emotion/react";
-import { BreadcrumbJsonLd } from "next-seo";
+import { faChevronRight, faHomeAlt } from "@fortawesome/free-solid-svg-icons";
+import { A } from "components/atoms/A";
+import { IconText } from "components/atoms/IconText";
+import { $spacing } from "shared/constants/styles/spacing";
+import { Link } from 'shared/constants/type';
 
-export const Breadcrumbs: FC = () => {
-    const theme = useTheme();
-    const styles = getStyles(theme);
-  
+type Props = {
+    links: Link[];
+};
+
+export const Breadcrumbs: FC<Props> = ({ links }) => {
+    const styles = getStyles(useTheme());
+        
     return (
-  <>
-    <h1 className={styles.hoge}>Breadcrumb JSON-LD</h1>
-    <BreadcrumbJsonLd
-      itemListElements={[
-        {
-          position: 1,
-          name: 'Books',
-          item: 'https://example.com/books',
-        },
-        {
-          position: 2,
-          name: 'Authors',
-          item: 'https://example.com/books/authors',
-        },
-        {
-          position: 3,
-          name: 'Ann Leckie',
-          item: 'https://example.com/books/authors/annleckie',
-        },
-        {
-          position: 4,
-          name: 'Ancillary Justice',
-          item: 'https://example.com/books/authors/ancillaryjustice',
-        },
-      ]}
-    />
-  </>)
+    <ol aria-label="breadcrumb" className={styles.hoge}>
+        <li>
+            <A href="/track-and-field" className={styles.hogeIn}>
+            <IconText icon={faHomeAlt} text=""></IconText>
+            </A>
+        </li>
+        {links.map(l => (
+        <li key={l.label}>
+            <A href={l.href}>
+            <IconText icon={faChevronRight} text={l.label} gap="md"></IconText>
+            </A>
+        </li>
+        ))}
+    </ol>
+    );
 };
 
 
 const getStyles = (theme: Theme) => ({
     hoge: css`
-      color: ${theme.textInverse};
-    `,
-  });
-  
+        display: flex;
+        align-items: center;
+        padding: ${$spacing.sm} ${$spacing.md} ${$spacing.md};
+        background-color: ${theme.textDisable};
+
+        span{
+            font-size: 12px;
+        }
+        
+        svg{
+            margin-left: ${$spacing.md};
+            font-size: 9px;
+        }
+
+        li:last-child span{
+            color: ${theme.textLow};
+        }
+        `,
+    hogeIn: css`
+        svg:nth-child(1){
+            margin-top: ${$spacing.sm};
+            margin-left: 0;
+            font-size: 16px;
+        }
+        `,
+
+});
+
+

@@ -6,7 +6,6 @@ import Image from 'next/future/image';
 import { Container } from 'components/atoms/Container';
 import { Spacer } from 'components/atoms/Spacer';
 import { mediaGreaterThan } from 'shared/constants/styles/media-query';
-import { Breadcrumbs } from './Breadcrumbs';
 
 export const Footer: FC = () => {
   const theme = useTheme();
@@ -14,7 +13,6 @@ export const Footer: FC = () => {
 
   return (
     <footer className={styles.footer}>
-      <Breadcrumbs/>
       <Container>
         <div className={styles.footerContent}>
           <div>

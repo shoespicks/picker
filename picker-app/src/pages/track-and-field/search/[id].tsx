@@ -1,7 +1,7 @@
 import { ReactElement } from 'react';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import { NextSeo } from 'next-seo';
-import { Breadcrumbs } from 'features/common/Breadcrumbs';
+import { TAFBreadcrumbs } from 'features/track-and-field/common/TAFBreadcrumbs';
 import { TAF_SEARCH_PAGE_PATH } from 'features/track-and-field/constants/routing';
 import { TAFSpikeTemplate } from 'features/track-and-field/spike/TAFSpikeTemplate';
 import { Spike } from 'graphql/generated/codegen-client';
@@ -31,16 +31,10 @@ const TAFSpikePage: NextPageWithLayout<Props> = props => {
         }}
       />
       <TAFSpikeTemplate spike={props.spike}></TAFSpikeTemplate>
-      <Breadcrumbs links={[
-    {
-      label: "SHOWS PICKS",
-      href: "/track-and-field",
-    },
-    {
-      label: props.spike.name,// label: "最後は自分",
-      href: "",
-    }
-  ]}/>
+      <TAFBreadcrumbs links={[{
+        label: props.spike.name,// label: "最後は自分",
+        href: "",
+      }]}/>
     </>
   );
 };

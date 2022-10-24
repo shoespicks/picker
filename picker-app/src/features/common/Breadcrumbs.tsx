@@ -1,33 +1,23 @@
-import { FC } from "react";
+import {FC, PropsWithChildren } from "react";
 import { css } from "@emotion/css";
 import { Theme, useTheme } from "@emotion/react";
-import { faChevronRight, faHomeAlt } from "@fortawesome/free-solid-svg-icons";
+import { faHomeAlt } from "@fortawesome/free-solid-svg-icons";
 import { A } from "components/atoms/A";
 import { IconText } from "components/atoms/IconText";
 import { $spacing } from "shared/constants/styles/spacing";
-import { Link } from 'shared/constants/type';
 
-type Props = {
-    links: Link[];
-};
 
-export const Breadcrumbs: FC<Props> = ({ links }) => {
+export const Breadcrumbs: FC<PropsWithChildren> = ({ children }) => {
     const styles = getStyles(useTheme());
         
     return (
     <ol aria-label="breadcrumb" className={styles.hoge}>
         <li>
-            <A href="/track-and-field" className={styles.hogeIn}>
+            <A href="/track-and-field">
             <IconText icon={faHomeAlt} text=""></IconText>
             </A>
         </li>
-        {links.map(l => (
-        <li key={l.label}>
-            <A href={l.href}>
-            <IconText icon={faChevronRight} text={l.label} gap="md"></IconText>
-            </A>
-        </li>
-        ))}
+        {children}
     </ol>
     );
 };
@@ -37,7 +27,7 @@ const getStyles = (theme: Theme) => ({
     hoge: css`
         display: flex;
         align-items: center;
-        padding: ${$spacing.sm} ${$spacing.md} ${$spacing.md};
+        padding: ${$spacing.md};
         background-color: ${theme.textDisable};
 
         span{
@@ -52,15 +42,12 @@ const getStyles = (theme: Theme) => ({
         li:last-child span{
             color: ${theme.textLow};
         }
-        `,
-    hogeIn: css`
-        svg:nth-child(1){
-            margin-top: ${$spacing.sm};
+
+        li:first-child svg{
             margin-left: 0;
             font-size: 16px;
         }
         `,
-
 });
 
 

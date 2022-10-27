@@ -7,7 +7,7 @@ export const $behavior = {
    */
   hoverSwipe: (theme: Theme) => css`
     position: relative;
-    transition: color ease-in 100ms;
+    transition: color 100ms ease-in;
 
     &::after {
       position: absolute;
@@ -18,13 +18,13 @@ export const $behavior = {
       height: 100%;
       content: '';
       background-color: ${theme.main};
-      transition: transform ease-in-out 200ms, background-color ease-in 100ms;
+      transition: transform 200ms ease-in-out, background-color 100ms ease-in;
       transform: scale(0, 1);
       transform-origin: left top;
     }
 
     > * {
-      transition: color ease-in 100ms;
+      transition: color 100ms ease-in;
     }
 
     &:hover {
@@ -70,7 +70,7 @@ export const $behavior = {
       pointer-events: none;
       content: '';
       background-color: transparent;
-      transition: background-color ease-in 150ms;
+      transition: background-color 150ms ease-in;
     }
 
     &:hover {

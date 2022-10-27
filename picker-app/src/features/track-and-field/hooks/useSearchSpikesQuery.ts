@@ -52,7 +52,7 @@ export const useSearchSpikesQuery = () => {
           order: searchCondition?.order?.id,
         },
       },
-      { staleTime: 1000000 }
+      { staleTime: 1000000, refetchOnMount: false, refetchOnWindowFocus: false }
     ),
   };
 };

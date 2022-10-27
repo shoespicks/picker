@@ -34,9 +34,7 @@ export const TAFSearchTemplate: FC = () => {
         <TAFSearchFormModal />
         <Spacer size={$spacing.md}></Spacer>
       </Container>
-
       <Spacer size={$spacing.lg} className={visibleOverBreakPointStyle('md')}></Spacer>
-
       <Container as="section">
         <MultiColumn
           leftColumnElement={

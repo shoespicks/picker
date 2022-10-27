@@ -5,10 +5,10 @@ const nextConfig = {
   swcMinify: false,
   experimental: {
     externalDir: true,
+    scrollRestoration: true,
   },
   images: {
     domains: ['d1hmrym1m561hp.cloudfront.net'],
-    unoptimized: true, // true入れないとビルドできないけど外したい next/imageのImageタグの設定
   },
 };
 

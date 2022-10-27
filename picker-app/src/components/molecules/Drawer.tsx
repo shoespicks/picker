@@ -2,9 +2,6 @@ import { FC, PropsWithChildren } from 'react';
 import { css } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import { Dialog } from '@headlessui/react';
-import { QueryClient } from '@tanstack/query-core';
-import { QueryClientProvider } from '@tanstack/react-query';
-import { RecoilRoot } from 'recoil';
 import { Animation, AnimationChild } from 'components/atoms/Animation';
 import { useDialog } from 'components/hooks/useDialog';
 import { breakpoints, mediaGreaterThan } from 'shared/constants/styles/media-query';
@@ -19,23 +16,18 @@ type Props = {
 export const Drawer: FC<PropsWithChildren<Props>> = ({ isOpen, triggerElement, isOpenChange, children }) => {
   const { open, close } = useDialog(isOpenChange);
   const styles = getStyles(useTheme());
-  const queryClient = new QueryClient();
 
   return (
     <>
       <div onClick={open}>{triggerElement}</div>
-      <RecoilRoot>
-        <QueryClientProvider client={queryClient}>
-          <Animation show={isOpen}>
-            <Dialog as="div" className={styles.drawer} onClose={close}>
-              <div className={styles.drawerBackground} onClick={close}></div>
-              <AnimationChild name="slideIn" appear>
-                <Dialog.Panel className={styles.dialogPanel}>{children}</Dialog.Panel>
-              </AnimationChild>
-            </Dialog>
-          </Animation>
-        </QueryClientProvider>
-      </RecoilRoot>
+      <Animation show={isOpen}>
+        <Dialog as="div" className={styles.drawer} open={isOpen} onClose={close}>
+          <div className={styles.drawerBackground} onClick={close}></div>
+          <AnimationChild name="slideIn" appear>
+            <Dialog.Panel className={styles.dialogPanel}>{children}</Dialog.Panel>
+          </AnimationChild>
+        </Dialog>
+      </Animation>
     </>
   );
 };

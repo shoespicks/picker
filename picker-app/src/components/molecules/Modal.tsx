@@ -1,13 +1,13 @@
 import { FC, PropsWithChildren } from 'react';
-import { css } from '@emotion/css';
+import { css, cx } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
 import { Dialog } from '@headlessui/react';
 import { Animation, AnimationChild } from 'components/atoms/Animation';
 import { Icon } from 'components/atoms/Icon';
-import { ScrollArea } from 'components/atoms/ScrollArea';
 import { H3 } from 'components/atoms/Typography';
 import { useDialog } from 'components/hooks/useDialog';
+import { $behavior } from 'shared/constants/styles/behavior';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 type Props = {
@@ -38,16 +38,11 @@ export const Modal: FC<PropsWithChildren<Props>> = ({
           <div className={styles.modalBackground} onClick={close}></div>
           <AnimationChild name="popup" appear>
             <Dialog.Panel className={styles.modalPanel}>
-              <div className={styles.panelHeader}>
+              <div className={styles.panelHeader} onClick={close}>
                 <H3>{headerText}</H3>
-                <div className={styles.panelHeaderIconContainer} onClick={close}>
-                  <Icon icon={faCircleXmark} />
-                </div>
+                <Icon icon={faCircleXmark} className={styles.panelHeaderIcon} />
               </div>
-              <div className={styles.panelContent}>
-                <ScrollArea height="100%">{children}</ScrollArea>
-              </div>
-
+              <div className={styles.panelContent}>{children} </div>
               {footerElement && <div className={styles.panelFooter}>{footerElement}</div>}
             </Dialog.Panel>
           </AnimationChild>
@@ -92,31 +87,26 @@ const getStyles = (theme: Theme) => ({
   panelContent: css`
     flex: 1 1 auto;
     height: 1px;
+    overflow: auto;
   `,
-  panelHeader: css`
-    position: relative;
-    display: flex;
-    flex: 0 0 auto;
-    align-items: center;
-    justify-content: center;
-    padding: ${$spacing.sm};
-    border-bottom: 1px solid;
-  `,
-  panelHeaderIconContainer: css`
+  panelHeader: cx(
+    css`
+      position: relative;
+      display: flex;
+      flex: 0 0 auto;
+      align-items: center;
+      justify-content: center;
+      padding: ${$spacing.sm};
+      cursor: pointer;
+      border-bottom: 1px solid;
+    `,
+    $behavior.overlayHover(theme)
+  ),
+  panelHeaderIcon: css`
     position: absolute;
     top: 50%;
-    right: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 46px;
-    height: 46px;
-    cursor: pointer;
+    right: ${$spacing.md};
     transform: translateY(-50%);
-
-    &:hover {
-      color: ${theme.mainHover};
-    }
   `,
   panelFooter: css`
     flex: 0 0 auto;

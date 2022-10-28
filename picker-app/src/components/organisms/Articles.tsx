@@ -28,13 +28,13 @@ export const Articles: FC<Props> = ({ articles }) => {
             )}
           </div>
           {!!a.imageUrls?.length && (
-            <ul className={styles.sectionImages(a.imageUrls.length)}>
+            <div className={styles.sectionImages(a.imageUrls.length)}>
               {a.imageUrls?.map(i => (
                 <AspectRatio key={i} ratio={4 / 3}>
                   <Image src={i} layout="fill" objectFit="contain" alt="image" objectPosition="top"></Image>
                 </AspectRatio>
               ))}
-            </ul>
+            </div>
           )}
         </Section>
       ))}

@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
 import { Theme, useTheme } from '@emotion/react';
-import { ChartData, ChartOptions } from 'chart.js';
-import 'chart.js/auto';
+import { ChartData, ChartOptions, Chart, PointElement, LineElement, RadialLinearScale, Filler } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Radar as RCRadar } from 'react-chartjs-2';
 import { loudFontfamily } from 'shared/constants/styles/typograhy';
 import { AspectRatio } from './AspectRatio';
+
+Chart.register(RadialLinearScale, PointElement, LineElement, Filler);
 
 type Props = {
   data: number[];
@@ -79,12 +80,6 @@ const getChartOptions = (theme: Theme, small?: boolean): ChartOptions<'radar'> =
     },
   },
   plugins: {
-    legend: {
-      display: false,
-    },
-    tooltip: {
-      enabled: false,
-    },
     datalabels: {
       color: theme.border,
       font: {

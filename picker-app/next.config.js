@@ -3,6 +3,9 @@ const nextConfig = {
   target: 'serverless',
   reactStrictMode: true,
   swcMinify: false,
+  compiler: {
+    emotion: true,
+  },
   experimental: {
     externalDir: true,
     scrollRestoration: true,

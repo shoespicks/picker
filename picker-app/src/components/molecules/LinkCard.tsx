@@ -1,8 +1,8 @@
 import React, { type FC } from 'react';
 import Image from 'next/image';
 import { css } from '@emotion/css';
-import { AspectRatio } from '@radix-ui/react-aspect-ratio';
 import { A } from 'components/atoms/A';
+import { Ratio } from 'components/atoms/Ratio';
 import { Card } from 'components/atoms/Card';
 import { Spacer } from 'components/atoms/Spacer';
 import { Small, Span, Strong } from 'components/atoms/Typography';
@@ -23,9 +23,9 @@ export const LinkCard: FC<Props> = ({ href, title, imageUrl, caption, descriptio
       <Card width="200px" padding={$spacing.md} clickable>
         {imageUrl && (
           <>
-            <AspectRatio ratio={4 / 3}>
-              <Image src={imageUrl} layout="fill" objectFit="contain" alt={title || ''}></Image>
-            </AspectRatio>
+            <Ratio ratio={4 / 3}>
+              <Image src={imageUrl} fill sizes="width: 100%" alt={title || ''}></Image>
+            </Ratio>
             <Spacer size={$spacing.sm} />
           </>
         )}

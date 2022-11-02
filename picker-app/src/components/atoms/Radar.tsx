@@ -4,7 +4,7 @@ import { ChartData, ChartOptions, Chart, PointElement, LineElement, RadialLinear
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Radar as RCRadar } from 'react-chartjs-2';
 import { loudFontfamily } from 'shared/constants/styles/typograhy';
-import { AspectRatio } from './AspectRatio';
+import { Ratio } from './Ratio';
 
 Chart.register(RadialLinearScale, PointElement, LineElement, Filler);
 
@@ -34,9 +34,9 @@ export const Radar: FC<Props> = ({ data, labels, small }) => {
   };
 
   return (
-    <AspectRatio ratio={1}>
+    <Ratio ratio={1}>
       <RCRadar options={getChartOptions(theme, small)} data={chartData} plugins={[ChartDataLabels]} />
-    </AspectRatio>
+    </Ratio>
   );
 };
 

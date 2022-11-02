@@ -1,7 +1,7 @@
 import React, { PropsWithChildren, type FC } from 'react';
+import Image from 'next/image';
 import { css } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
-import Image from 'next/future/image';
 import { A } from 'components/atoms/A';
 import { Container } from 'components/atoms/Container';
 import { Section } from 'components/atoms/Section';

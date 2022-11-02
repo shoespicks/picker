@@ -3,8 +3,8 @@ import Image from 'next/image';
 import { css, cx } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { AspectRatio } from '@radix-ui/react-aspect-ratio';
 import { debounce } from 'lodash-es';
+import { Ratio } from 'components/atoms/Ratio';
 import { Icon } from 'components/atoms/Icon';
 import { Spacer } from 'components/atoms/Spacer';
 import { ColorRadio } from 'components/molecules/ColorRadio';
@@ -74,11 +74,11 @@ export const ColorImageViewer: FC<Props> = ({ colorImages }) => {
 
   return (
     <div>
-      <AspectRatio ratio={4 / 3}>
+      <Ratio ratio={4 / 3}>
         <ul ref={imagesRef} className={styles.images}>
           {imageUrls.map((i, index) => (
             <li key={index}>
-              <Image src={i} layout="fill" objectFit="cover" alt="" />
+              <Image src={i} fill sizes="width: 100%" alt="" />
             </li>
           ))}
         </ul>
@@ -86,7 +86,7 @@ export const ColorImageViewer: FC<Props> = ({ colorImages }) => {
           <div onClick={scrollToPrev}></div>
           <div onClick={scrollToNext}></div>
         </div>
-      </AspectRatio>
+      </Ratio>
       <div className={styles.imageIndicator}>
         <span className={styles.imageIndicatorArrow} onClick={scrollToPrev}>
           <Icon icon={faChevronLeft}></Icon>

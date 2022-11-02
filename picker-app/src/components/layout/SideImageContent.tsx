@@ -21,13 +21,13 @@ export const SideImageContent: FC<PropsWithChildren<Props>> = ({
     <div className={styles.container(!!leftColumnsImageSrc)}>
       {leftColumnsImageSrc && (
         <div className={styles.image(minHeight)}>
-          <Image src={leftColumnsImageSrc} layout="fill" objectFit="cover" alt="image"></Image>
+          <Image src={leftColumnsImageSrc} fill sizes="width: 100%" alt="image"></Image>
         </div>
       )}
       <div className={styles.content}>{children}</div>
       {rightColumnsImageSrc && (
         <div className={styles.image(minHeight)}>
-          <Image src={rightColumnsImageSrc} layout="fill" objectFit="cover" alt="image"></Image>
+          <Image src={rightColumnsImageSrc} fill sizes="width: 100%" alt="image"></Image>
         </div>
       )}
     </div>

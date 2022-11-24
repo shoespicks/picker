@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "yarn codegen && next dev",
     "build": "yarn codegen && next build && yarn sitemap",
+    "analyze": "ANALYZE=true&&yarn codegen && next build && yarn sitemap",
     "export": "yarn codegen && next build && next export",
     "start": "yarn codegen && next start",
     "lint": "next lint",
@@ -26,6 +27,7 @@
     "@fortawesome/free-solid-svg-icons": "^6.2.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
     "@headlessui/react": "^1.7.3",
+    "@next/bundle-analyzer": "^13.0.1",
     "@radix-ui/colors": "^0.1.8",
     "@radix-ui/react-aspect-ratio": "1.0.0",
     "@radix-ui/react-checkbox": "^1.0.0",
@@ -65,5 +67,8 @@
     "postcss-syntax": "^0.36.2",
     "tsconfig-paths": "^4.1.0",
     "typescript": "4.8.4"
+  },
+  "volta": {
+    "extends": "../package.json"
   }
 }

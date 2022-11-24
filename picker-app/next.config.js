@@ -1,5 +1,11 @@
+process.env.PICKER_ENV === 'local' && require('dotenv').config({ path: path.join(process.cwd(), '../.env.local') });
+
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: true,
+});
+
 /** @type {import('next').NextConfig} */
-const nextConfig = {
+const nextConfig = withBundleAnalyzer({
   reactStrictMode: true,
   swcMinify: false,
   compiler: {
@@ -12,8 +18,6 @@ const nextConfig = {
   images: {
     domains: ['d1hmrym1m561hp.cloudfront.net'],
   },
-};
-
-process.env.PICKER_ENV === 'local' && require('dotenv').config({ path: path.join(process.cwd(), '../.env.local') });
+});
 
 module.exports = nextConfig;

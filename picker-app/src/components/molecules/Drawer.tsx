@@ -21,7 +21,7 @@ export const Drawer: FC<PropsWithChildren<Props>> = ({ isOpen, triggerElement, i
     <>
       <div onClick={open}>{triggerElement}</div>
       <Animation show={isOpen}>
-        <Dialog as="div" className={styles.drawer} open={isOpen} onClose={close}>
+        <Dialog as="div" className={styles.drawer} onClose={close}>
           <div className={styles.drawerBackground} onClick={close}></div>
           <AnimationChild name="slideIn" appear>
             <Dialog.Panel className={styles.dialogPanel}>{children}</Dialog.Panel>

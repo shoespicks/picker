@@ -10,7 +10,7 @@ import { ShoeSearchOrderCode, shoeSearchOrders } from 'picker-types/types/track-
 import { NexusGenInputs, NexusGenRootTypes } from 'graphql/generated/nexus/types';
 
 (!process.env.PICKER_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN || !process.env.PICKER_CONTENTFUL_SPACE_ID) &&
-  config({ path: path.resolve(process.cwd(), '../.env.local') });
+  config({ path: path.resolve(process.cwd(), '../.env') });
 
 console.log('loadingContentfulRepository');
 

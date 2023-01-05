@@ -13,8 +13,6 @@ export const TAFHeader: FC = () => {
   return (
     <Header>
       <HeaderNavigationLink links={routing} />
-      <Spacer size={$spacing.lg} />
-      {/*<SignButtons></SignButtons>*/}
       <Section>
         <Spacer size={$spacing.lg} />
         <H4>キーワード検索</H4>

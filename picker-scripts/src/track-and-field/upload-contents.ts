@@ -77,7 +77,7 @@ export const S3_BUCKET = 'piker-trackandfield-images';
 export const CLOUDFRONT_BASE_URL = 'https://d1hmrym1m561hp.cloudfront.net/';
 
 (!process.env.PICKER_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN || !process.env.PICKER_CONTENTFUL_SPACE_ID) &&
-  config({ path: path.resolve(process.cwd(), '../.env.local') });
+  config({ path: path.resolve(process.cwd(), '../.env') });
 
 const managementAccessToken = process.env.PICKER_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN || '';
 const contentfulSpaceId = process.env.PICKER_CONTENTFUL_SPACE_ID || '';

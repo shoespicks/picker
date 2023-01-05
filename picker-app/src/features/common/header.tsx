@@ -2,7 +2,10 @@ import React, { PropsWithChildren, type FC } from 'react';
 import Image from 'next/image';
 import { css } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
+import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { signIn, signOut, useSession } from 'next-auth/react';
 import { A } from 'components/atoms/A';
+import { Button } from 'components/atoms/Button';
 import { Container } from 'components/atoms/Container';
 import { Section } from 'components/atoms/Section';
 import { $headerSize } from 'shared/constants/styles/size';
@@ -10,6 +13,7 @@ import { $spacing } from 'shared/constants/styles/spacing';
 import { HeaderNavigation } from './HeaderNavigation';
 
 export const Header: FC<PropsWithChildren> = ({ children }) => {
+  const { data: session } = useSession();
   const styles = getStyles(useTheme());
 
   return (
@@ -21,6 +25,22 @@ export const Header: FC<PropsWithChildren> = ({ children }) => {
           </A>
           <HeaderNavigation>
             <div className={styles.navigationContent}>
+              {!session && (
+                <Button
+                  label="Twitterでログイン"
+                  icon={faTwitter}
+                  iconPosition="leftInline"
+                  width="100%"
+                  fontSize="14px"
+                  onClick={() => signIn('twitter')}
+                ></Button>
+              )}
+              {session && (
+                <>
+                  <Button label="ログアウト" width="100%" fontSize="14px" onClick={() => signOut()}></Button>
+                  <p>{JSON.stringify(session)}</p>
+                </>
+              )}
               <Section>{children}</Section>
               {/*<Section>*/}
               {/*  <Divider color="inverse" />*/}

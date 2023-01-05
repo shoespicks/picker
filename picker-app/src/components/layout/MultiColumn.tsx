@@ -71,7 +71,7 @@ const styles = {
   `,
   stickyContainer: (stickyTop?: string) =>
     css`
-      position: ${stickyTop && 'stickey'};
+      position: ${stickyTop && 'sticky'};
       top: ${stickyTop};
     `,
 };

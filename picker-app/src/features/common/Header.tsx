@@ -36,7 +36,7 @@ export const Header: FC<PropsWithChildren<Props>> = ({ children, navigationLinks
           >
             <div className={styles.navigationContent}>
               <div>
-                <Spacer size={$spacing.xl} />
+                <Spacer size={$spacing.lg} />
                 <HeaderNavigationLink
                   links={
                     session

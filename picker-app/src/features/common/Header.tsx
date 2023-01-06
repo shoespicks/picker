@@ -5,10 +5,12 @@ import { Theme, useTheme } from '@emotion/react';
 import { useSession } from 'next-auth/react';
 import { A } from 'components/atoms/A';
 import { Container } from 'components/atoms/Container';
+import { Divider } from 'components/atoms/Divider';
 import { Section } from 'components/atoms/Section';
 import { Spacer } from 'components/atoms/Spacer';
 import { HeaderNavigationLink } from 'features/common/HeaderNavigationLink';
 import { LoginLauncher } from 'features/common/LoginLauncher';
+import { LogoutLauncher } from 'features/common/LogoutLauncher';
 import { $headerSize } from 'shared/constants/styles/size';
 import { $spacing } from 'shared/constants/styles/spacing';
 import { Link } from 'shared/constants/type';
@@ -34,12 +36,28 @@ export const Header: FC<PropsWithChildren<Props>> = ({ children, navigationLinks
           >
             <div className={styles.navigationContent}>
               <div>
+                <Spacer size={$spacing.xl} />
+                <HeaderNavigationLink
+                  links={
+                    session
+                      ? [...navigationLinks, { label: 'マイページ', href: `/user/${session.user.id}` }]
+                      : navigationLinks
+                  }
+                />
                 <Spacer size={$spacing.lg} />
-                {navigationLinks?.length && <HeaderNavigationLink links={navigationLinks} />}
-                <Spacer size={$spacing.md} />
                 {!session && <LoginLauncher />}
               </div>
-              <Section>{children}</Section>
+              <div>
+                <Section>{children}</Section>
+                {session && (
+                  <>
+                    <Spacer size={$spacing.xl} />
+                    <Divider orientation="horizontal" color="inverse"></Divider>
+                    <Spacer size={$spacing.xl} />
+                    <LogoutLauncher />
+                  </>
+                )}
+              </div>
             </div>
           </HeaderNavigation>
         </div>
@@ -75,9 +93,13 @@ const getStyles = (theme: Theme) => ({
     color: ${theme.textInverse};
     background-color: ${theme.main};
   `,
-  serviceTitle: css`
-    margin: 24px 0;
-    font-size: 24px;
-    font-weight: 700;
+  mypageLink: css`
+    display: flex;
+    gap: ${$spacing.md};
+    align-items: center;
+
+    &:hover {
+      background-color: ${theme.inverseOverlayHover};
+    }
   `,
 });

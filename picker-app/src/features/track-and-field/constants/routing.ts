@@ -6,7 +6,7 @@ export const TAF_RANKING_PAGE_PATH = `${TAF_INDEX_PAGE_PATH}/ranking`;
 export const TAF_ARTICLE_PAGE_PATH = `${TAF_INDEX_PAGE_PATH}/article`;
 
 import { Link } from 'shared/constants/type';
-export const routing: Link[] = [
+export const Routing: Link[] = [
   {
     label: '検索',
     href: TAF_SEARCH_PAGE_PATH,

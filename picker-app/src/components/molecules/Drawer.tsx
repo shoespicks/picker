@@ -19,7 +19,9 @@ export const Drawer: FC<PropsWithChildren<Props>> = ({ isOpen, triggerElement, i
 
   return (
     <>
-      <div onClick={open}>{triggerElement}</div>
+      <div className={styles.trigger} onClick={open}>
+        {triggerElement}
+      </div>
       <Animation show={isOpen}>
         <Dialog as="div" className={styles.drawer} onClose={close}>
           <div className={styles.drawerBackground} onClick={close}></div>
@@ -33,6 +35,9 @@ export const Drawer: FC<PropsWithChildren<Props>> = ({ isOpen, triggerElement, i
 };
 
 const getStyles = (theme: Theme) => ({
+  trigger: css`
+    cursor: pointer;
+  `,
   drawer: css`
     position: fixed;
     top: 0;

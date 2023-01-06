@@ -6,7 +6,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { Session } from 'next-auth';
 import { SessionProvider } from 'next-auth/react';
 import { RecoilRoot } from 'recoil';
-import { Footer } from 'features/common/footer';
+import { Footer } from 'features/common/Footer';
 import { homeTheme } from 'shared/constants/styles/colors';
 
 type Props = {

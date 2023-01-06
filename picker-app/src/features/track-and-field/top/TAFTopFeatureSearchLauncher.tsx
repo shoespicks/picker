@@ -9,8 +9,8 @@ import { Form } from 'components/atoms/Form';
 import { SelectControl } from 'components/atoms/Select';
 import { Span } from 'components/atoms/Typography';
 import { TAF_SEARCH_PAGE_PATH } from 'features/track-and-field/constants/routing';
-
 import { SearchFormInputDef } from 'features/track-and-field/constants/search';
+
 import { useSearchSpikeForm } from 'features/track-and-field/hooks/useSearchSpikeForm';
 import { useSearchSpikesQueryCondition } from 'features/track-and-field/hooks/useSearchSpikesQuery';
 import { $spacing } from 'shared/constants/styles/spacing';

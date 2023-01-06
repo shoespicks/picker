@@ -1,9 +1,6 @@
 import { ReactElement } from 'react';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, InferGetStaticPropsType } from 'next';
-import { NextSeo } from 'next-seo';
-import { TAFBreadcrumbs } from 'features/track-and-field/common/TAFBreadcrumbs';
 import { TAF_SEARCH_PAGE_PATH } from 'features/track-and-field/constants/routing';
-import { TAFSpikeTemplate } from 'features/track-and-field/spike/TAFSpikeTemplate';
 import { Spike } from 'graphql/generated/codegen-client';
 import TAFLayout from 'layout/TrackAndField';
 import { NextPageWithLayout } from 'pages/_app';
@@ -16,29 +13,7 @@ type Props = InferGetStaticPropsType<typeof getStaticProps> & {
 const TAFSpikePage: NextPageWithLayout<Props> = props => {
   return (
     <>
-      <NextSeo
-        title={props.spike.name}
-        description="ページの説明"
-        openGraph={{
-          url: 'ページのURL',
-          title: 'ページのタイトル',
-          description: 'ページの説明',
-          images: [
-            {
-              url: props.spike.colorImages[0].imageUrls[0],
-            },
-          ],
-        }}
-      />
-      <TAFSpikeTemplate spike={props.spike}></TAFSpikeTemplate>
-      <TAFBreadcrumbs
-        links={[
-          {
-            label: props.spike.name, // label: "最後は自分",
-            href: '',
-          },
-        ]}
-      />
+      <p>ユーザペ〜ジ！！！</p>
     </>
   );
 };

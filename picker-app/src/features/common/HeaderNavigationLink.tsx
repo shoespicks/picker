@@ -18,7 +18,7 @@ export const HeaderNavigationLink: FC<Props> = ({ links }) => {
       {links.map(l => (
         <li key={l.label}>
           <A href={l.href} className={styles.link}>
-            <IconText icon={faChevronRight} text={l.label} gap="md"></IconText>
+            <IconText icon={faChevronRight} text={l.label} gap="md" fontSize="16px"></IconText>
           </A>
         </li>
       ))}
@@ -33,8 +33,8 @@ const getStyles = (theme: Theme) => ({
   link: css`
     display: flex;
     align-items: center;
-    padding: ${$spacing.sm} ${$spacing.md};
-    font-size: 14px;
+    padding: ${$spacing.md} ${$spacing.md};
+    font-size: 16px;
     font-weight: 400;
     cursor: pointer;
     border-radius: 2px;

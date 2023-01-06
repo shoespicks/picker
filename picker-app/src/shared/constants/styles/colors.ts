@@ -37,7 +37,7 @@ const themeBaseTypographyColors: { [key in TypographyColors]: string } = {
 /**
  * 色や色の用途が増えたら追加する
  */
-const themeBase = {
+export const themeBase = {
   main: $pallete.black,
   primary: $pallete.black,
   background: $pallete.white,
@@ -60,18 +60,11 @@ const themeBase = {
 
   shadowLeft: $shadowPallete.left,
 };
-
-type PickerTheme = typeof themeBase;
-
-// ThemeProviderのthemeに渡したものをuseThemeで受け取るときの型を上書き
-declare module '@emotion/react' {
-  interface Theme extends PickerTheme {
-    main: string; // interfaceは差分なしで拡張できないのでやむなく追加
-  }
-}
-
 export const homeTheme: Theme = themeBase;
 
+/**
+ * 陸上の専用色はここで上書きする
+ */
 export const trackAndFieldTheme: Theme = {
   ...themeBase,
   primary: $pallete.lightBlue,

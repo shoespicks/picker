@@ -22,7 +22,7 @@ export const h3Style = css`
 
 export const h4Style = css`
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 500;
 `;
 
 export const h5Style = css`

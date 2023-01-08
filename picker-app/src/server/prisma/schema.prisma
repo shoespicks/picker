@@ -9,6 +9,10 @@ generator client {
   previewFeatures = ["referentialActions"] // You won't need this in Prisma 3.X or higher.
 }
 
+generator nexusPrisma {
+  provider = "nexus-prisma"
+}
+
 model Account {
   id                 String  @id @default(cuid())
   userId             String
@@ -38,14 +42,26 @@ model Session {
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
+model UserProfile {
+  id     String @id @default(cuid())
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @unique
+
+  gender       Gender
+  birthdate    DateTime
+  prefecture   Prefecture
+  introduction String?
+}
+
 model User {
-  id            String    @id @default(cuid())
+  id            String       @id @default(cuid())
   name          String?
-  email         String?   @unique
+  email         String?      @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
   sessions      Session[]
+  profile       UserProfile?
 }
 
 model VerificationToken {
@@ -54,4 +70,16 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+enum Prefecture {
+  TOKYO
+  KANAGAWA
+  SAITAMA
 }

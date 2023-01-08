@@ -6,7 +6,7 @@ import {
   TAFEvents,
   TAFShoeLaceType,
   TAFShoeOrder,
-} from 'graphql/server/track-and-field/types';
+} from 'graphql/schema/track-and-field/types';
 import { spikesLoader } from 'server/loader/track-and-field/spikeLoader';
 
 export const SpikeBase = objectType({

@@ -1,0 +1,22 @@
+query User($id: String!) {
+    user(id: $id){
+        ...MyProfile
+    }
+}
+
+fragment MyProfile on User {
+    id
+    name
+    email
+    image
+    profile {
+        ...MyProfileDetail
+    }
+}
+
+fragment MyProfileDetail on UserProfile {
+    birthdate
+    gender
+    introduction
+    prefecture
+}

@@ -3,6 +3,71 @@
  * Do not make changes to this file directly
  */
 
+import type { Context } from './../../context';
+import type { core } from 'nexus';
+declare global {
+  interface NexusGenCustomInputMethods<TypeName extends string> {
+    /**
+     * The `BigInt` scalar type represents non-fractional signed whole numeric values.
+     * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt
+     */
+    bigInt<FieldName extends string>(
+      fieldName: FieldName,
+      opts?: core.CommonInputFieldConfig<TypeName, FieldName>
+    ): void; // "BigInt";
+    /**
+     * The `Byte` scalar type represents byte value as a Buffer
+     */
+    bytes<FieldName extends string>(
+      fieldName: FieldName,
+      opts?: core.CommonInputFieldConfig<TypeName, FieldName>
+    ): void; // "Bytes";
+    /**
+     * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+     */
+    dateTime<FieldName extends string>(
+      fieldName: FieldName,
+      opts?: core.CommonInputFieldConfig<TypeName, FieldName>
+    ): void; // "DateTime";
+    /**
+     * An arbitrary-precision Decimal type
+     */
+    decimal<FieldName extends string>(
+      fieldName: FieldName,
+      opts?: core.CommonInputFieldConfig<TypeName, FieldName>
+    ): void; // "Decimal";
+    /**
+     * The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+     */
+    json<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void; // "Json";
+  }
+}
+declare global {
+  interface NexusGenCustomOutputMethods<TypeName extends string> {
+    /**
+     * The `BigInt` scalar type represents non-fractional signed whole numeric values.
+     * @see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt
+     */
+    bigInt<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void; // "BigInt";
+    /**
+     * The `Byte` scalar type represents byte value as a Buffer
+     */
+    bytes<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void; // "Bytes";
+    /**
+     * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+     */
+    dateTime<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void; // "DateTime";
+    /**
+     * An arbitrary-precision Decimal type
+     */
+    decimal<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void; // "Decimal";
+    /**
+     * The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+     */
+    json<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void; // "Json";
+  }
+}
+
 declare global {
   interface NexusGen extends NexusGenTypes {}
 }
@@ -33,6 +98,8 @@ export interface NexusGenInputs {
 }
 
 export interface NexusGenEnums {
+  Gender: 'FEMALE' | 'MALE' | 'OTHER';
+  Prefecture: 'KANAGAWA' | 'SAITAMA' | 'TOKYO';
   TAFAthleteLevel: 'advanced' | 'beginner' | 'intermediate' | 'professional';
   TAFBrands: 'adidas' | 'asics' | 'mizuno' | 'newBalance' | 'nike';
   TAFEvents:
@@ -75,6 +142,11 @@ export interface NexusGenScalars {
   Float: number;
   Boolean: boolean;
   ID: string;
+  BigInt: any;
+  Bytes: any;
+  DateTime: any;
+  Decimal: any;
+  Json: any;
 }
 
 export interface NexusGenObjects {
@@ -164,6 +236,21 @@ export interface NexusGenObjects {
     id: NexusGenEnums['TAFEvents']; // TAFEvents!
     label: string; // String!
   };
+  User: {
+    // root type
+    email?: string | null; // String
+    id: string; // ID!
+    image?: string | null; // String
+    name?: string | null; // String
+    profile?: NexusGenRootTypes['UserProfile'] | null; // UserProfile
+  };
+  UserProfile: {
+    // root type
+    birthdate: NexusGenScalars['DateTime']; // DateTime!
+    gender: NexusGenEnums['Gender']; // Gender!
+    introduction?: string | null; // String
+    prefecture: NexusGenEnums['Prefecture']; // Prefecture!
+  };
 }
 
 export interface NexusGenInterfaces {
@@ -195,6 +282,7 @@ export interface NexusGenFieldTypes {
     // field return type
     spike: NexusGenRootTypes['Spike'] | null; // Spike
     spikes: NexusGenRootTypes['SpikeBase'][]; // [SpikeBase!]!
+    user: NexusGenRootTypes['User'] | null; // User
   };
   Spike: {
     // field return type
@@ -268,6 +356,21 @@ export interface NexusGenFieldTypes {
     id: NexusGenEnums['TAFEvents']; // TAFEvents!
     label: string; // String!
   };
+  User: {
+    // field return type
+    email: string | null; // String
+    id: string; // ID!
+    image: string | null; // String
+    name: string | null; // String
+    profile: NexusGenRootTypes['UserProfile'] | null; // UserProfile
+  };
+  UserProfile: {
+    // field return type
+    birthdate: NexusGenScalars['DateTime']; // DateTime!
+    gender: NexusGenEnums['Gender']; // Gender!
+    introduction: string | null; // String
+    prefecture: NexusGenEnums['Prefecture']; // Prefecture!
+  };
   ISpikeBase: {
     // field return type
     allWeatherOnly: boolean | null; // Boolean
@@ -318,6 +421,7 @@ export interface NexusGenFieldTypeNames {
     // field return type name
     spike: 'Spike';
     spikes: 'SpikeBase';
+    user: 'User';
   };
   Spike: {
     // field return type name
@@ -391,6 +495,21 @@ export interface NexusGenFieldTypeNames {
     id: 'TAFEvents';
     label: 'String';
   };
+  User: {
+    // field return type name
+    email: 'String';
+    id: 'ID';
+    image: 'String';
+    name: 'String';
+    profile: 'UserProfile';
+  };
+  UserProfile: {
+    // field return type name
+    birthdate: 'DateTime';
+    gender: 'Gender';
+    introduction: 'String';
+    prefecture: 'Prefecture';
+  };
   ISpikeBase: {
     // field return type name
     allWeatherOnly: 'Boolean';
@@ -433,6 +552,10 @@ export interface NexusGenArgTypes {
       // args
       input: NexusGenInputs['SpikesInput']; // SpikesInput!
     };
+    user: {
+      // args
+      id: string; // String!
+    };
   };
 }
 
@@ -471,7 +594,7 @@ export type NexusGenFeaturesConfig = {
 };
 
 export interface NexusGenTypes {
-  context: any;
+  context: Context;
   inputTypes: NexusGenInputs;
   rootTypes: NexusGenRootTypes;
   inputTypeShapes: NexusGenInputs & NexusGenEnums & NexusGenScalars;

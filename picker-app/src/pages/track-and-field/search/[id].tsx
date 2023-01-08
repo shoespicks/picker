@@ -35,7 +35,7 @@ const TAFSpikePage: NextPageWithLayout<Props> = props => {
 };
 
 TAFSpikePage.getLayout = (page: ReactElement) => {
-  return <TAFLayout links={[TAF_INDEX_PAGE_LINK, { label: "検索結果一覧", href: TAF_SEARCH_PAGE_PATH }, { label: "スパイク自身" }]}>{page}</TAFLayout>;
+  return <TAFLayout links={[TAF_INDEX_PAGE_LINK, { label: "検索結果一覧", href: TAF_SEARCH_PAGE_PATH }, { label: "スパイク詳細" }]}>{page}</TAFLayout>;
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext) => {

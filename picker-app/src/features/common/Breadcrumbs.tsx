@@ -15,17 +15,18 @@ export const Breadcrumbs: FC<Props> = ({ links }) => {
     const styles = getStyles(useTheme());
         
     return (
-    <ol aria-label="breadcrumb" className={styles.hoge}>
+    <ol aria-label="breadcrumb" className={styles.breadcrumbStyle}>
         <li>
             <A href="/track-and-field">
             <IconText icon={faHomeAlt} text=""></IconText>
             </A>
         </li>
-        {links.map(l => (
+        {links.map((l,i) => (
         <li key={l.label}>
             <A href={l.href}>
             <IconText icon={faChevronRight} text={l.label} gap="md"></IconText>
             </A>
+            <meta itemProp="position" content={`${i+1}`} />
         </li>
         ))}
     </ol>
@@ -34,11 +35,15 @@ export const Breadcrumbs: FC<Props> = ({ links }) => {
 
 
 const getStyles = (theme: Theme) => ({
-    hoge: css`
+    breadcrumbStyle: css`
         display: flex;
         align-items: center;
         padding: ${$spacing.md};
         background-color: ${theme.textDisable};
+
+        > li, a{
+            display: inline-flex;
+        }
 
         span{
             font-size: 12px;

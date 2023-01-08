@@ -1,13 +1,17 @@
-import {FC, PropsWithChildren } from "react";
+import { FC } from "react";
 import { css } from "@emotion/css";
 import { Theme, useTheme } from "@emotion/react";
-import { faHomeAlt } from "@fortawesome/free-solid-svg-icons";
+import { faChevronRight , faHomeAlt } from "@fortawesome/free-solid-svg-icons";
 import { A } from "components/atoms/A";
 import { IconText } from "components/atoms/IconText";
 import { $spacing } from "shared/constants/styles/spacing";
+import { Link } from "shared/constants/type";
 
+type Props = {
+    links: Link[];
+};
 
-export const Breadcrumbs: FC<PropsWithChildren> = ({ children }) => {
+export const Breadcrumbs: FC<Props> = ({ links }) => {
     const styles = getStyles(useTheme());
         
     return (
@@ -17,7 +21,13 @@ export const Breadcrumbs: FC<PropsWithChildren> = ({ children }) => {
             <IconText icon={faHomeAlt} text=""></IconText>
             </A>
         </li>
-        {children}
+        {links.map(l => (
+        <li key={l.label}>
+            <A href={l.href}>
+            <IconText icon={faChevronRight} text={l.label} gap="md"></IconText>
+            </A>
+        </li>
+        ))}
     </ol>
     );
 };
@@ -46,6 +56,12 @@ const getStyles = (theme: Theme) => ({
         li:first-child svg{
             margin-left: 0;
             font-size: 16px;
+        }
+        `,
+        hoge2: css`
+        svg{
+            margin-left: ${$spacing.md};
+            font-size: 9px;
         }
         `,
 });

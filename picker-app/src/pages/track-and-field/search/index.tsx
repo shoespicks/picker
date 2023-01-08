@@ -1,5 +1,5 @@
 import { ReactElement } from 'react';
-import { TAFBreadcrumbs } from 'features/track-and-field/common/TAFBreadcrumbs';
+import { TAF_INDEX_PAGE_LINK } from 'features/track-and-field/constants/routing';
 import { TAFSearchTemplate } from 'features/track-and-field/search/TAFSearchTemplate';
 import TAFLayout from 'layout/TrackAndField';
 import { NextPageWithLayout } from 'pages/_app';
@@ -8,13 +8,12 @@ const TAFSearchPage: NextPageWithLayout = () => {
   return (
     <>
       <TAFSearchTemplate></TAFSearchTemplate>
-      <TAFBreadcrumbs links={[]}/>
     </>
   );
 };
 
 TAFSearchPage.getLayout = (page: ReactElement) => {
-  return <TAFLayout>{page}</TAFLayout>;
+  return <TAFLayout links={[TAF_INDEX_PAGE_LINK, { label: "検索結果一覧" }]}>{page}</TAFLayout>;
 };
 
 export default TAFSearchPage;

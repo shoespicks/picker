@@ -6,6 +6,7 @@ import TAFLayout from 'layout/TrackAndField';
 import { NextPageWithLayout } from 'pages/_app';
 import { spikesLoader } from 'server/loader/track-and-field/spikeLoader';
 
+
 const TAFIndexPage: NextPageWithLayout<TAFTopTemplateProps> = props => {
   return (
     <>
@@ -15,7 +16,7 @@ const TAFIndexPage: NextPageWithLayout<TAFTopTemplateProps> = props => {
 };
 
 TAFIndexPage.getLayout = (page: ReactElement) => {
-  return <TAFLayout>{page}</TAFLayout>;
+  return <TAFLayout links={[{ label: "SHOWS PICKS" }]}>{page}</TAFLayout>;
 };
 
 export default TAFIndexPage;

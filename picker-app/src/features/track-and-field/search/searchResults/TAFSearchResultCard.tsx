@@ -3,12 +3,12 @@ import Image from 'next/image';
 import { css, cx } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import { faWeightScale } from '@fortawesome/free-solid-svg-icons';
-import { AspectRatio } from '@radix-ui/react-aspect-ratio';
 import { shoeEnviroments } from 'picker-types/types/track-and-field/shoeEnviroment';
 import { BarRating } from 'components/atoms/BarRating';
 import { Card } from 'components/atoms/Card';
 import { Divider } from 'components/atoms/Divider';
 import { IconText } from 'components/atoms/IconText';
+import { Ratio } from 'components/atoms/Ratio';
 import { Spacer } from 'components/atoms/Spacer';
 import { H5, Small, Strong } from 'components/atoms/Typography';
 import { ColorRadio } from 'components/molecules/ColorRadio';
@@ -71,9 +71,9 @@ export const TAFSearchResultCard: FC<Props> = ({ value, className, onClick }) =>
               }
             `}
           >
-            <AspectRatio ratio={4 / 3}>
-              <Image src={color.imageUrls[0]} layout="fill" objectFit="contain" alt="" />
-            </AspectRatio>
+            <Ratio ratio={4 / 3}>
+              <Image src={color.imageUrls[0]} fill sizes="width: 100%" alt="" />
+            </Ratio>
             <ColorRadio<ColorImagesFragment>
               value={color}
               options={colorImages ?? []}

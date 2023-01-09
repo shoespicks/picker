@@ -11,8 +11,8 @@ import { useModal } from 'components/hooks/useModal';
 import { Modal } from 'components/molecules/Modal';
 import { useSearchSpikeForm } from 'features/track-and-field/hooks/useSearchSpikeForm';
 import { useSearchSpikesQueryCondition } from 'features/track-and-field/hooks/useSearchSpikesQuery';
-import { FormInput } from 'features/track-and-field/search/searchForm/TAFSearchFormInput';
 import { $spacing } from 'shared/constants/styles/spacing';
+import { FormInput } from './TAFSearchFormInput';
 
 export const TAFSearchFormModal: FC = () => {
   const { searchCondition, setSearchCondition } = useSearchSpikesQueryCondition();

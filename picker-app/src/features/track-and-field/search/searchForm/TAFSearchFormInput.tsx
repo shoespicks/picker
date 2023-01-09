@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import React, { memo } from 'react';
 import { css } from '@emotion/css';
 import { IAthleteLevel } from 'picker-types/types/track-and-field/athleteLevel';
 import { IShoeBrand } from 'picker-types/types/track-and-field/shoeBrands';
@@ -23,14 +23,6 @@ export const FormInput = memo(function FormInput(props: {
   control: Control<SearchFormInputDef>;
   formOptions: FormOptions<SearchFormInputDef, SearchFormHasOptionKey>;
 }) {
-  useEffect(() => {
-    console.log('FormInputUseEfectStart');
-
-    return () => {
-      console.log('FormInputUseEfectEnd');
-    };
-  });
-  console.log('FormInput');
   return (
     <>
       <Label>種目</Label>

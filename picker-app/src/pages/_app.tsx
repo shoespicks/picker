@@ -7,6 +7,8 @@ import { QueryClient } from '@tanstack/query-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { DefaultSeo } from 'next-seo';
+import GoogleTagManager, { GoogleTagManagerId } from 'components/GoogleTagManager';
+import { googleTagManagerId } from 'components/utils/gtm';
 config.autoAddCss = false;
 
 export type NextPageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<P, IP> & {
@@ -48,6 +50,7 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
           cardType: 'summary_large_image',
         }}
       />
+      <GoogleTagManager googleTagManagerId={googleTagManagerId as GoogleTagManagerId}/>
       <QueryClientProvider client={queryClient}>
         <Component {...pageProps} />
       </QueryClientProvider>

@@ -14,11 +14,11 @@ const disableStyle = css`pointer-events:none;`
 
 export const A: FC<PropsWithChildren<Props>> = ({ children, href, underline, className, onClick }) =>
   href ? (
-    <Link href={href} className={cx(aStyle(underline), className)} itemProp="name">
+    <Link href={href} className={cx(aStyle(underline), className)} itemProp="item">
       {children}
     </Link>
   ) : (
-    <span className={cx(aStyle(underline),{[disableStyle]:!onClick}, className)} onClick={onClick} itemProp="name">
+    <span className={cx(aStyle(underline),{[disableStyle]:!onClick}, className)} onClick={onClick} itemProp="item">
       {children}
     </span>
   );

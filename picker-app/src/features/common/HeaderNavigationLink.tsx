@@ -38,7 +38,7 @@ const getStyles = (theme: Theme) => ({
     font-weight: 400;
     cursor: pointer;
     border-radius: 2px;
-    transition: margin-left ease-in 200ms, background-color ease-in 200ms;
+    transition: margin-left 200ms ease-in, background-color 200ms ease-in;
 
     > * + * {
       margin-left: ${$spacing.md};
@@ -47,7 +47,6 @@ const getStyles = (theme: Theme) => ({
     :hover {
       margin-left: ${$spacing.md};
       background-color: ${theme.inverseOverlayHover};
-      transition: all 0.4s;
     }
   `,
 });

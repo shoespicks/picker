@@ -1,8 +1,8 @@
 import React, { type FC } from 'react';
+import Image from 'next/image';
 import { css } from '@emotion/css';
-import Image from 'next/future/image';
-import { AspectRatio } from 'components/atoms/AspectRatio';
 import { Card } from 'components/atoms/Card';
+import { Ratio } from 'components/atoms/Ratio';
 import { Strong } from 'components/atoms/Typography';
 import { mediaGreaterThan } from 'shared/constants/styles/media-query';
 import { $spacing } from 'shared/constants/styles/spacing';
@@ -12,19 +12,19 @@ type Props = {
 };
 export const TAFTopTitleCard: FC<Props> = ({ className }) => (
   <Card className={className} borderWidthPx={2}>
-    <AspectRatio ratio={17 / 9}>
+    <Ratio ratio={17 / 9}>
       <div className={styles.titleContent}>
         <Strong noWrap className={styles.titleCaption}>
           陸上選手のためのスパイク比較サイト
         </Strong>
-        <AspectRatio ratio={6.2}>
+        <Ratio ratio={6.2}>
           <span className={styles.titleLogoFrame}>
-            <Image src="/picker-black.svg" fill alt="picker" />
+            <Image src="/picker-black.svg" fill sizes="width: 100%" alt="picker" />
           </span>
-        </AspectRatio>
+        </Ratio>
         <span className={styles.titleSubText}>for Track and Field</span>
       </div>
-    </AspectRatio>
+    </Ratio>
   </Card>
 );
 

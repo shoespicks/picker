@@ -12,5 +12,7 @@
     "dotenv": "^16.0.3",
     "typescript": "^4.8.4"
   },
-  "dependencies": {}
+  "volta": {
+    "extends": "../package.json"
+  }
 }

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Image from 'next/image';
 import { css } from '@emotion/css';
-import { AspectRatio } from '@radix-ui/react-aspect-ratio';
+import { Ratio } from 'components/atoms/Ratio';
 import { Section } from 'components/atoms/Section';
 import { Spacer } from 'components/atoms/Spacer';
 import { H4, Pre } from 'components/atoms/Typography';
@@ -28,13 +28,28 @@ export const Articles: FC<Props> = ({ articles }) => {
             )}
           </div>
           {!!a.imageUrls?.length && (
-            <ul className={styles.sectionImages(a.imageUrls.length)}>
+            <div className={styles.sectionImages(a.imageUrls.length)}>
               {a.imageUrls?.map(i => (
-                <AspectRatio key={i} ratio={4 / 3}>
-                  <Image src={i} layout="fill" objectFit="contain" alt="image" objectPosition="top"></Image>
-                </AspectRatio>
+                <Ratio
+                  key={i}
+                  ratio={4 / 3}
+                  className={css`
+                    height: auto;
+                  `}
+                >
+                  <Image
+                    src={i}
+                    fill
+                    sizes="width: 100%"
+                    className={css`
+                      object-fit: contain;
+                      object-position: top;
+                    `}
+                    alt="image"
+                  ></Image>
+                </Ratio>
               ))}
-            </ul>
+            </div>
           )}
         </Section>
       ))}

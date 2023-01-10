@@ -1,15 +1,15 @@
 import React, { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
-import { css } from '@emotion/css';
+import { css, cx } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
-import { AspectRatio } from '@radix-ui/react-aspect-ratio';
 import { debounce } from 'lodash-es';
 import { Icon } from 'components/atoms/Icon';
+import { Ratio } from 'components/atoms/Ratio';
 import { Spacer } from 'components/atoms/Spacer';
 import { ColorRadio } from 'components/molecules/ColorRadio';
 import { ColorImagesFragment } from 'graphql/generated/codegen-client';
-import { mediaGreaterThan } from 'shared/constants/styles/media-query';
+import { mediaGreaterThan, visibleOverBreakPointStyle } from 'shared/constants/styles/media-query';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 type Props = {
@@ -74,11 +74,11 @@ export const ColorImageViewer: FC<Props> = ({ colorImages }) => {
 
   return (
     <div>
-      <AspectRatio ratio={4 / 3}>
+      <Ratio ratio={4 / 3}>
         <ul ref={imagesRef} className={styles.images}>
           {imageUrls.map((i, index) => (
             <li key={index}>
-              <Image src={i} layout="fill" objectFit="cover" alt="" />
+              <Image src={i} fill sizes="width: 100%" alt="" />
             </li>
           ))}
         </ul>
@@ -86,7 +86,7 @@ export const ColorImageViewer: FC<Props> = ({ colorImages }) => {
           <div onClick={scrollToPrev}></div>
           <div onClick={scrollToNext}></div>
         </div>
-      </AspectRatio>
+      </Ratio>
       <div className={styles.imageIndicator}>
         <span className={styles.imageIndicatorArrow} onClick={scrollToPrev}>
           <Icon icon={faChevronLeft}></Icon>
@@ -143,16 +143,19 @@ const getStyles = (theme: Theme) => ({
     }
   `,
 
-  imagesOverlay: css`
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    cursor: pointer;
-  `,
+  imagesOverlay: cx(
+    css`
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      cursor: pointer;
+    `,
+    visibleOverBreakPointStyle('md')
+  ),
   imageIndicator: css`
     display: flex;
     flex: 0 0 auto;

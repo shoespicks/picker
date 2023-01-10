@@ -72,7 +72,7 @@ const getStyles = (theme: Theme) => ({
   icon: (checked?: boolean) =>
     css`
       color: ${checked ? theme.main : theme.textDisable};
-      transition: color ease-in 200ms;
+      transition: color 200ms ease-in;
     `,
   label: (small?: boolean) =>
     css`

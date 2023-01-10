@@ -84,7 +84,7 @@ export function Select<T>({
                         icon={faCircleCheck}
                         className={css`
                           color: ${selected ? theme.main : theme.textDisable};
-                          transition: color ease-in 200ms;
+                          transition: color 200ms ease-in;
                         `}
                       />
                       <span className={styles.selectOptionLabel}>{getValueBykey(option, labelKey)}</span>

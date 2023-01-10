@@ -23,19 +23,18 @@ const getStyles = (theme: Theme) => ({
   host: (max: number) => css`
     display: grid;
     grid-template-columns: repeat(${max}, 1fr);
-    gap: 1px;
+    gap: 3px;
   `,
   bar: (progress: number) => css`
     position: relative;
     height: 4px;
     overflow: hidden;
-    border: 1px solid ${theme.main};
-    border-radius: 1px;
+    outline: 1px solid ${theme.main};
 
     ::after {
       position: absolute;
-      width: 100%;
-      height: 100%;
+      width: calc(100% + 2px);
+      height: calc(100% + 2px);
       content: '';
       background-color: ${theme.main};
       transform: scale(${progress}, 1);

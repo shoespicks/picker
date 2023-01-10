@@ -1,8 +1,8 @@
 import React, { type FC } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import { css } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
-import Image from 'next/future/image';
 import { Container } from 'components/atoms/Container';
 import { Spacer } from 'components/atoms/Spacer';
 import { mediaGreaterThan } from 'shared/constants/styles/media-query';
@@ -16,10 +16,8 @@ export const Footer: FC = () => {
       <Container>
         <div className={styles.footerContent}>
           <div>
-            <Link href="/track-and-field">
-              <a className={styles.footerLogoFrame}>
-                <Image src="/picker.svg" fill alt="picker" />
-              </a>
+            <Link href="/track-and-field" className={styles.footerLogoFrame}>
+              <Image src="/picker.svg" fill sizes="width: 100%" alt="picker" />
             </Link>
           </div>
           <Spacer size={'16px'} axis={'vertical'}></Spacer>

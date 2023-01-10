@@ -111,5 +111,5 @@ export const Strong: FC<PropsWithChildren<TypographyProps>> = ({ children, ...pr
 
 export const Span: FC<PropsWithChildren<TypographyProps>> = ({ children, ...props }) => {
   const { setTypographyStyle } = useTypography();
-  return <span className={setTypographyStyle({ baseClassName: spanStyle, ...props })}>{children}</span>;
+  return <span className={setTypographyStyle({ baseClassName: spanStyle, ...props })} itemProp="name">{children}</span>;
 };

@@ -7,14 +7,14 @@ import { trackAndFieldTheme } from 'shared/constants/styles/colors';
 import { Link } from 'shared/constants/type';
 
 type Props = {
-  links: Link[];
+  links?: Link[];
 };
 
 const TAFLayout: FC<PropsWithChildren<Props>> = ({ links, children }) => {
-    return (
-      <DefaultLayout theme={trackAndFieldTheme} headerElement={<TAFHeader></TAFHeader>}>
-        <InitProfileGuard>{children}</InitProfileGuard>
-      <Breadcrumbs links={links}/>
+  return (
+    <DefaultLayout theme={trackAndFieldTheme} headerElement={<TAFHeader></TAFHeader>}>
+      <InitProfileGuard>{children}</InitProfileGuard>
+      {links && <Breadcrumbs links={links} />}
     </DefaultLayout>
   );
 };

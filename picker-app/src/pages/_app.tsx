@@ -5,6 +5,8 @@ import type { AppProps } from 'next/app';
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 import { DefaultSeo } from 'next-seo';
+import GoogleTagManager, { GoogleTagManagerId } from 'components/GoogleTagManager';
+import { googleTagManagerId } from 'components/utils/gtm';
 config.autoAddCss = false;
 
 export type NextPageWithLayout<P = Record<string, unknown>, IP = P> = NextPage<P, IP> & {
@@ -45,6 +47,7 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
           cardType: 'summary_large_image',
         }}
       />
+      <GoogleTagManager googleTagManagerId={googleTagManagerId as GoogleTagManagerId}/>
       <Component {...pageProps} />
     </>
   );

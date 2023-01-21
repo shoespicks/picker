@@ -7,6 +7,13 @@ export type FormOptions<T, K extends keyof T> = {
 
 export type FormHasOptionKey<T, K extends keyof T> = keyof Pick<T, K>;
 
+/**
+ *
+ * @param props
+ * @param formOptions
+ * FormInputDef -> フォーム入力値の型
+ * HasOptionKeys -> FormInputDefのpropertyのkeyのうち、選択肢から選ぶ項目のkeyを列挙したもの
+ */
 export const useFormBase = <FormInputDef extends FieldValues, HasOptionKeys extends keyof FormInputDef = never>(
   props: UseFormProps<FormInputDef> & {
     defaultValues: Partial<FormInputDef>;

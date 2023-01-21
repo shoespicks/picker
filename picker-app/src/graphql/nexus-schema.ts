@@ -1,10 +1,9 @@
 import path from 'path';
 import { makeSchema } from 'nexus';
-import NexusPrismaScalars from 'nexus-prisma/scalars';
 import * as nexusDefs from './schema';
 
 export const schema = makeSchema({
-  types: [nexusDefs, NexusPrismaScalars],
+  types: [nexusDefs], // NexusPrismaScalarsをここで読むとエラーになるのでscalar.tsで読み込んでいる
   contextType: {
     module: path.join(process.cwd(), 'src/graphql/context.ts'),
     export: 'Context',

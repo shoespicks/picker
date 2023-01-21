@@ -1,16 +1,13 @@
 import { PropsWithChildren } from 'react';
-import { Session } from 'next-auth';
 import { TAFHeader } from 'features/track-and-field/common/TAFHeader';
 import DefaultLayout from 'layout/Default';
+import { InitProfileGuard } from 'layout/guard/InitProfileGuard';
 import { trackAndFieldTheme } from 'shared/constants/styles/colors';
 
-type Props = {
-  session?: Session | null;
-};
-const TAFLayout = ({ children, session }: PropsWithChildren<Props>) => {
+const TAFLayout = ({ children }: PropsWithChildren) => {
   return (
-    <DefaultLayout theme={trackAndFieldTheme} headerElement={<TAFHeader></TAFHeader>} session={session}>
-      {children}
+    <DefaultLayout theme={trackAndFieldTheme} headerElement={<TAFHeader></TAFHeader>}>
+      <InitProfileGuard>{children}</InitProfileGuard>
     </DefaultLayout>
   );
 };

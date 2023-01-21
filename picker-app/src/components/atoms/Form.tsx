@@ -24,13 +24,13 @@ const styles = {
   form: css`
     display: block;
 
-    [role='label'] {
+    label {
       + * {
         margin-top: ${$spacing.xs};
       }
     }
 
-    * + [role='label'] {
+    * + label {
       margin-top: ${$spacing.md};
     }
   `,

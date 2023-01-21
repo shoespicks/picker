@@ -35,8 +35,6 @@ export const FormInput = memo(function FormInput(props: {
         placeholder="種目を選ぶ"
       ></SelectControl>
 
-      <Spacer size={$spacing.sm} />
-
       <Label>ブランド</Label>
       <SelectControl<IShoeBrand, SearchFormInputDef>
         name="brands"
@@ -46,8 +44,6 @@ export const FormInput = memo(function FormInput(props: {
         labelKey="label"
         placeholder="ブランドを選ぶ"
       ></SelectControl>
-
-      <Spacer size={$spacing.sm} />
 
       <Label>発売年</Label>
       <SelectControl<IYears, SearchFormInputDef>
@@ -71,8 +67,6 @@ export const FormInput = memo(function FormInput(props: {
         control={props.control}
       />
 
-      <Spacer size={$spacing.sm} />
-
       <Label>競技レベル</Label>
       <SelectControl<IAthleteLevel, SearchFormInputDef>
         name="athleteLevel"
@@ -83,8 +77,6 @@ export const FormInput = memo(function FormInput(props: {
         placeholder="競技レベルを選ぶ"
       ></SelectControl>
 
-      <Spacer size={$spacing.sm} />
-
       <Label>対応環境</Label>
       <CheckboxesControl<IShoeEnvirloment, SearchFormInputDef>
         name="shoeEnviroments"
@@ -94,8 +86,6 @@ export const FormInput = memo(function FormInput(props: {
         labelKey="label"
       ></CheckboxesControl>
 
-      <Spacer size={$spacing.sm} />
-
       <Label>靴紐タイプ</Label>
       <CheckboxesControl<IShoeLaceType, SearchFormInputDef>
         name="shoeLaceType"
@@ -104,8 +94,6 @@ export const FormInput = memo(function FormInput(props: {
         idKey="id"
         labelKey="label"
       ></CheckboxesControl>
-
-      <Spacer size={$spacing.sm} />
 
       <Label>価格</Label>
       <RangeSliderControl<SearchFormInputDef>
@@ -118,8 +106,6 @@ export const FormInput = memo(function FormInput(props: {
         `}
       />
 
-      <Spacer size={$spacing.sm} />
-
       <Label>ピンの本数</Label>
       <RangeSliderControl<SearchFormInputDef>
         name="pinCountRange"
@@ -129,8 +115,6 @@ export const FormInput = memo(function FormInput(props: {
           margin-top: -5px !important;
         `}
       />
-
-      <Spacer size={$spacing.sm} />
 
       <Label>カラー</Label>
       <ColorSelectControl<IShoeColor, SearchFormInputDef>

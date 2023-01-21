@@ -1,12 +1,12 @@
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { PrismaClient } from '@prisma/client';
-import NextAuth from 'next-auth';
+import NextAuth, { AuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import LineProvider from 'next-auth/providers/line';
 import TwitterProvider from 'next-auth/providers/twitter';
 
 const prisma = new PrismaClient();
-export default NextAuth({
+export const authOptions: AuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
@@ -26,14 +26,24 @@ export default NextAuth({
     async session({ session, user }) {
       if (session.user) {
         session.user.id = user.id;
+
+        const count = await prisma.userProfile.count({
+          where: {
+            userId: user.id,
+          },
+        });
+
+        session.user.hasProfile = !!count;
       }
 
       return session;
     },
   },
   pages: {
-    signIn: '/auth/errors', // Error code passed in query string as ?error=
-    error: '/auth/errors', // Error code passed in query string as ?error=
-    newUser: '/auth/welcome', // New users will be directed here on first sign in (leave the property out if not of interest)
+    signIn: '/auth/login',
+    error: '/auth/login', // Error code passed in query string as ?error=
+    newUser: '/profile/edit', // New users will be directed here on first sign in (leave the property out if not of interest)
   },
-});
+};
+
+export default NextAuth(authOptions);

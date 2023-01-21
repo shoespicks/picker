@@ -1,0 +1,27 @@
+query UserProfile($id: String!) {
+    userProfile(id: $id){
+        ...UserProfile
+    }
+}
+
+fragment UserProfile on User {
+    id
+    name
+    email
+    image
+    profile {
+        ...Profile
+    }
+}
+
+fragment Profile on UserProfile {
+    introduction
+    prefecture
+    birthdate
+    gender
+}
+
+
+mutation UpdateUserProfile($id: String!, $profileInput: UpdateProfileInput!, $userInput: UpdateUserInput!) {
+    updateUserProfile(id: $id, profileInput: $profileInput, userInput: $userInput)
+}

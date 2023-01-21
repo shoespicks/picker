@@ -11,7 +11,7 @@ type Props = ComponentPropsWithoutRef<'input'> & {
   errorMessage?: string;
 };
 export const Input = forwardRef<HTMLInputElement, Props>(function Input(
-  { className, width, errorMessage, ...inputProps },
+  { className, width, errorMessage, type, ...inputProps },
   ref
 ) {
   const theme = useTheme();
@@ -20,7 +20,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(function Input(
     <>
       <input
         ref={ref}
-        type="text"
+        type={type}
         className={cx(
           css`
             display: inline-flex;

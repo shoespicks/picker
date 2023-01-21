@@ -8,9 +8,9 @@ import { Container } from 'components/atoms/Container';
 import { Divider } from 'components/atoms/Divider';
 import { Section } from 'components/atoms/Section';
 import { Spacer } from 'components/atoms/Spacer';
+import { LoginLauncher } from 'features/auth/LoginLauncher';
+import { LogoutLauncher } from 'features/auth/LogoutLauncher';
 import { HeaderNavigationLink } from 'features/common/HeaderNavigationLink';
-import { LoginLauncher } from 'features/common/LoginLauncher';
-import { LogoutLauncher } from 'features/common/LogoutLauncher';
 import { $headerSize } from 'shared/constants/styles/size';
 import { $spacing } from 'shared/constants/styles/spacing';
 import { Link } from 'shared/constants/type';
@@ -40,7 +40,7 @@ export const Header: FC<PropsWithChildren<Props>> = ({ children, navigationLinks
                 <HeaderNavigationLink
                   links={
                     session
-                      ? [...navigationLinks, { label: 'マイページ', href: `/user/${session.user.id}` }]
+                      ? [...navigationLinks, { label: 'マイページ', href: `/profile/${session.user.id}` }]
                       : navigationLinks
                   }
                 />

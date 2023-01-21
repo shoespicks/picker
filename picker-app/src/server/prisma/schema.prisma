@@ -5,8 +5,7 @@ datasource db {
 }
 
 generator client {
-  provider        = "prisma-client-js"
-  previewFeatures = ["referentialActions"] // You won't need this in Prisma 3.X or higher.
+  provider = "prisma-client-js"
 }
 
 generator nexusPrisma {
@@ -47,9 +46,9 @@ model UserProfile {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique
 
-  gender       Gender
-  birthdate    DateTime
-  prefecture   Prefecture
+  gender       GenderEnum
+  birthdate    DateTime       @db.Date
+  prefecture   PrefectureEnum
   introduction String?
 }
 
@@ -72,13 +71,13 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-enum Gender {
+enum GenderEnum {
   MALE
   FEMALE
   OTHER
 }
 
-enum Prefecture {
+enum PrefectureEnum {
   TOKYO
   KANAGAWA
   SAITAMA

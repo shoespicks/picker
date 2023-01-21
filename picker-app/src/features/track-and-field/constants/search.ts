@@ -60,10 +60,7 @@ export type SearchFormHasOptionKey = FormHasOptionKey<
   'events' | 'brands' | 'years' | 'athleteLevel' | 'shoeEnviroments' | 'shoeLaceType' | 'shoeColor' | 'order'
 >;
 
-export const searchFormOptions: FormOptions<
-  SearchFormInputDef,
-  FormHasOptionKey<SearchFormInputDef, SearchFormHasOptionKey>
-> = {
+export const searchFormOptions: FormOptions<SearchFormInputDef, SearchFormHasOptionKey> = {
   events: Object.values(shoeEvents),
   brands: Object.values(shoeBrands),
   years: yearSearchOptions,

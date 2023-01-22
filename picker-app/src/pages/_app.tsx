@@ -23,6 +23,9 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   const getLayout = Component.getLayout || (page => page);
   const [queryClient] = useState(() => new QueryClient());
 
+  console.log('環境変数TEST');
+  console.log(process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID);
+
   return getLayout(
     <>
       <DefaultSeo
@@ -50,7 +53,7 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
           cardType: 'summary_large_image',
         }}
       />
-      <GoogleTagManager googleTagManagerId={googleTagManagerId as GoogleTagManagerId}/>
+      <GoogleTagManager googleTagManagerId={googleTagManagerId as GoogleTagManagerId} />
       <QueryClientProvider client={queryClient}>
         <Component {...pageProps} />
       </QueryClientProvider>

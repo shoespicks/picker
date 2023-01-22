@@ -1,6 +1,6 @@
 import path from 'path';
 import { makeSchema } from 'nexus';
-import * as nexusDefs from './schema';
+import * as nexusDefs from './nexus';
 
 export const schema = makeSchema({
   types: [nexusDefs], // NexusPrismaScalarsをここで読むとエラーになるのでscalar.tsで読み込んでいる
@@ -10,7 +10,7 @@ export const schema = makeSchema({
   },
   outputs: {
     schema: path.join(process.cwd(), 'src/api/graphql/generated/nexus/schema.graphqls'),
-    typegen: path.join(process.cwd(), 'src/ap/graphql/generated/nexus/types.ts'),
+    typegen: path.join(process.cwd(), 'src/api/graphql/generated/nexus/types.ts'),
   },
   features: {
     abstractTypeStrategies: {

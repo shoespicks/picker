@@ -1,5 +1,6 @@
 import React, { type FC } from 'react';
 import { css, cx } from '@emotion/css';
+import { SpikeBase } from 'api/graphql/generated/codegen-client';
 import { Container } from 'components/atoms/Container';
 import { Spacer } from 'components/atoms/Spacer';
 import { SideImageContent } from 'components/layout/SideImageContent';
@@ -9,7 +10,6 @@ import { TAFTopHero } from 'features/track-and-field/top/TAFTopHero';
 import { TAFTopLevelSearchLauncher } from 'features/track-and-field/top/TAFTopLevelSearchLauncher';
 import { TAFTopRecommends } from 'features/track-and-field/top/TAFTopRecommends';
 import { TAFTopSearchLauncher } from 'features/track-and-field/top/TAFTopSearchLauncher';
-import { SpikeBase } from 'graphql/generated/codegen-client';
 import { hideOverBreakPointStyle, visibleOverBreakPointStyle } from 'shared/constants/styles/media-query';
 import { $spacing } from 'shared/constants/styles/spacing';
 

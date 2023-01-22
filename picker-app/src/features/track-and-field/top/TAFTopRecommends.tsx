@@ -1,11 +1,11 @@
 import React, { type FC } from 'react';
 import { css } from '@emotion/css';
+import { SpikeBase } from 'api/graphql/generated/codegen-client';
 import { Section } from 'components/atoms/Section';
 import { Spacer } from 'components/atoms/Spacer';
 import { H3 } from 'components/atoms/Typography';
 
 import { TAFSpikeCardCarousel } from 'features/track-and-field/common/TAFSpikeCardCarousel';
-import { SpikeBase } from 'graphql/generated/codegen-client';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 export type Props = {

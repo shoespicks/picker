@@ -14,10 +14,10 @@
     "fix:css": "stylelint ./src/**/*.{css,js,jsx,ts,tsx} --fix",
     "format": "prettier --write --ignore-path .gitignore './**/*.{js,jsx,ts,tsx,json}'",
     "codegen": "yarn workspace picker-types codegen && yarn codegen:prisma && yarn codegen:nexus && yarn codegen:graphql",
-    "codegen:nexus": "ts-node -r tsconfig-paths/register --compiler-options '{\"module\":\"CommonJS\"}' --transpile-only ./src/graphql/nexus-schema.ts",
-    "codegen:graphql": "graphql-codegen --config src/graphql/codegen.ts",
-    "codegen:prisma": "prisma generate --schema=src/server/prisma/schema.prisma",
-    "migrate:prisma": "dotenv -e ../.env -- prisma migrate dev --schema=src/server/prisma/schema.prisma",
+    "codegen:nexus": "ts-node -r tsconfig-paths/register --compiler-options '{\"module\":\"CommonJS\"}' --transpile-only ./src/api/graphql/nexus-schema.ts",
+    "codegen:graphql": "graphql-codegen --config src/api/graphql/codegen.ts",
+    "codegen:prisma": "prisma generate --schema=src/api/prisma/schema.prisma",
+    "migrate:prisma": "dotenv -e ../.env -- prisma migrate dev --schema=src/api/prisma/schema.prisma",
     "sitemap": "next-sitemap --config next-sitemap.js"
   },
   "dependencies": {

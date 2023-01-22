@@ -1,10 +1,10 @@
 import React, { type FC } from 'react';
 import { css } from '@emotion/css';
+import { SpikeFragment } from 'api/graphql/generated/codegen-client';
 import { Card } from 'components/atoms/Card';
 import { Spacer } from 'components/atoms/Spacer';
 import { Span, Strong } from 'components/atoms/Typography';
 import { BuyButtons } from 'components/organisms/BuyButtons';
-import { SpikeFragment } from 'graphql/generated/codegen-client';
 import { mediaLessThan } from 'shared/constants/styles/media-query';
 import { $spacing } from 'shared/constants/styles/spacing';
 

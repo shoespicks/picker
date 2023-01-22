@@ -7,7 +7,7 @@ import { shoeEnviroments } from 'picker-types/types/track-and-field/shoeEnvirome
 import { shoeEvents } from 'picker-types/types/track-and-field/shoeEvents';
 import { shoeLaceTypes } from 'picker-types/types/track-and-field/shoeLaceTypes';
 import { ShoeSearchOrderCode, shoeSearchOrders } from 'picker-types/types/track-and-field/shoeSearchOrder';
-import { NexusGenInputs, NexusGenRootTypes } from 'graphql/generated/nexus/types';
+import { NexusGenInputs, NexusGenRootTypes } from 'api/graphql/generated/nexus/types';
 
 (!process.env.PICKER_CONTENTFUL_MANAGEMENT_ACCESS_TOKEN || !process.env.PICKER_CONTENTFUL_SPACE_ID) &&
   config({ path: path.resolve(process.cwd(), '../.env') });

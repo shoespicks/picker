@@ -1,12 +1,12 @@
 import { ReactElement } from 'react';
 import { GetStaticPaths, GetStaticProps, GetStaticPropsContext, InferGetStaticPropsType } from 'next';
 import { NextSeo } from 'next-seo';
+import { Spike } from 'api/graphql/generated/codegen-client';
+import { spikeLoader, spikesLoader } from 'api/loader/track-and-field/spikeLoader';
 import { TAF_INDEX_PAGE_LINK, TAF_SEARCH_PAGE_PATH } from 'features/track-and-field/constants/routing';
 import { TAFSpikeTemplate } from 'features/track-and-field/spike/TAFSpikeTemplate';
-import { Spike } from 'graphql/generated/codegen-client';
 import TAFLayout from 'layout/TrackAndField';
 import { NextPageWithLayout } from 'pages/_app';
-import { spikeLoader, spikesLoader } from 'server/loader/track-and-field/spikeLoader';
 
 type Props = InferGetStaticPropsType<typeof getStaticProps> & {
   spike: Spike;
@@ -35,7 +35,13 @@ const TAFSpikePage: NextPageWithLayout<Props> = props => {
 };
 
 TAFSpikePage.getLayout = (page: ReactElement) => {
-  return <TAFLayout links={[TAF_INDEX_PAGE_LINK, { label: "検索結果一覧", href: TAF_SEARCH_PAGE_PATH }, { label: "スパイク詳細" }]}>{page}</TAFLayout>;
+  return (
+    <TAFLayout
+      links={[TAF_INDEX_PAGE_LINK, { label: '検索結果一覧', href: TAF_SEARCH_PAGE_PATH }, { label: 'スパイク詳細' }]}
+    >
+      {page}
+    </TAFLayout>
+  );
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }: GetStaticPropsContext) => {

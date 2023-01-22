@@ -1,9 +1,9 @@
 import React, { type FC, Fragment } from 'react';
 import { css } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
+import { SpikeDetailSpecFragment } from 'api/graphql/generated/codegen-client';
 import { Divider } from 'components/atoms/Divider';
 import { Strong } from 'components/atoms/Typography';
-import { SpikeDetailSpecFragment } from 'graphql/generated/codegen-client';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 type Props = {

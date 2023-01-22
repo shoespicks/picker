@@ -3,7 +3,7 @@
  * Do not make changes to this file directly
  */
 
-import type { Context } from './../../context';
+import type { Context } from '../../context';
 import type { core } from 'nexus';
 declare global {
   interface NexusGenCustomInputMethods<TypeName extends string> {
@@ -26,7 +26,7 @@ declare global {
 }
 
 declare global {
-  interface NexusGen extends NexusGenTypes {}
+  type NexusGen = NexusGenTypes;
 }
 
 export interface NexusGenInputs {

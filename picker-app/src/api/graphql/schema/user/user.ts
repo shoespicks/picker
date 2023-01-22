@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client';
 import { arg, enumType, extendType, inputObjectType, mutationField, nonNull, objectType } from 'nexus';
 import { User, UserProfile, PrefectureEnum, GenderEnum } from 'nexus-prisma';
-import { NexusGenInputs, NexusGenRootTypes } from 'graphql/generated/nexus/types';
+import { NexusGenInputs, NexusGenRootTypes } from '../../generated/nexus/types';
 
 export const Prefecture = enumType(PrefectureEnum);
 export const Gender = enumType(GenderEnum);

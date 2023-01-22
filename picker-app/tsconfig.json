@@ -20,7 +20,7 @@
     "typeRoots": ["types", "node_modules/@types"],
     "paths": {
       "picker-types/*": ["../picker-types/*"],
-      "server/*": ["server/*"],
+      "api/*": ["api/*"],
       "features/*": ["features/*"],
       "components/*": ["components/*"],
       "graphql/*": ["graphql/*"],

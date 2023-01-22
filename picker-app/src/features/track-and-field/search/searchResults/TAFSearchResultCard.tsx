@@ -12,9 +12,9 @@ import { Ratio } from 'components/atoms/Ratio';
 import { Spacer } from 'components/atoms/Spacer';
 import { H5, Small, Strong } from 'components/atoms/Typography';
 import { ColorRadio } from 'components/molecules/ColorRadio';
-import { ColorImagesFragment, SpikeBaseFragment } from 'graphql/generated/codegen-client';
 import { $common } from 'shared/constants/styles/common';
 import { $spacing } from 'shared/constants/styles/spacing';
+import { ColorImagesFragment, SpikeBaseFragment } from '../api/graphql/generated/codegen-client';
 
 type Props = {
   value: SpikeBaseFragment;

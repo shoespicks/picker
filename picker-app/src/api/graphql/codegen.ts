@@ -1,16 +1,16 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
 const codegen: CodegenConfig = {
-  schema: './src/graphql/generated/nexus/schema.graphqls',
-  documents: './src/graphql/client/*.graphql',
+  schema: './src/api/graphql/generated/nexus/schema.graphqls',
+  documents: './src/api/graphql/client/*.graphql',
   generates: {
-    './src/graphql/generated/codegen-client.ts': {
+    './src/api/graphql/generated/codegen-client.ts': {
       config: {
         useIndexSignature: true,
         immutableTypes: true,
         enumsAsConst: true,
         fetcher: {
-          func: 'graphql/custom-fetcher#useFetchData',
+          func: 'api/graphql/custom-fetcher#useFetchData',
           isReactHook: true,
         },
       },

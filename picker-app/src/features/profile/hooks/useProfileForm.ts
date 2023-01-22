@@ -1,5 +1,4 @@
-import { GenderEnum, PrefectureEnum, User, UserProfile } from 'graphql/generated/codegen-client';
-
+import { GenderEnum, PrefectureEnum, User, UserProfile } from 'api/graphql/generated/codegen-client';
 import { FormOptions, useFormBase } from 'shared/hooks/useFormBase';
 
 export type ILabelItem<T extends string> = {

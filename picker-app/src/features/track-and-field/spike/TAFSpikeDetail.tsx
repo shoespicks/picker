@@ -3,6 +3,7 @@ import { css } from '@emotion/css';
 import { faRectangleList } from '@fortawesome/free-regular-svg-icons';
 import { faLightbulb } from '@fortawesome/free-solid-svg-icons';
 import { IconName } from 'picker-types/types/track-and-field/icons';
+import { SpikeFragment } from 'api/graphql/generated/codegen-client';
 import { Divider } from 'components/atoms/Divider';
 import { IconText } from 'components/atoms/IconText';
 import { Radar } from 'components/atoms/Radar';
@@ -12,7 +13,6 @@ import { IconDescription } from 'components/molecules/IconDescription';
 import { Articles } from 'components/organisms/Articles';
 import { spikeIconMap } from 'features/track-and-field/constants/spikeIconMap';
 import { TAFSpikeDetailSpec } from 'features/track-and-field/spike/TAFSpikeDetailSpec';
-import { SpikeFragment } from 'graphql/generated/codegen-client';
 import { mediaGreaterThan } from 'shared/constants/styles/media-query';
 import { $spacing } from 'shared/constants/styles/spacing';
 

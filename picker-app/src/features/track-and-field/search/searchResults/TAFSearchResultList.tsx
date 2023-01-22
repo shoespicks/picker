@@ -14,10 +14,10 @@ import {
   useSearchSpikesQueryCondition,
 } from 'features/track-and-field/hooks/useSearchSpikesQuery';
 import { TAFSearchResultCard } from 'features/track-and-field/search/searchResults/TAFSearchResultCard';
-import { SpikeBaseFragment } from 'graphql/generated/codegen-client';
 import { $common } from 'shared/constants/styles/common';
 import { mediaGreaterThan } from 'shared/constants/styles/media-query';
 import { $spacing } from 'shared/constants/styles/spacing';
+import { SpikeBaseFragment } from '../api/graphql/generated/codegen-client';
 
 export const TAFSearchResultList: FC = () => {
   const { searchCondition, setSearchOrder } = useSearchSpikesQueryCondition();

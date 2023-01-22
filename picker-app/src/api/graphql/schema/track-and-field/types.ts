@@ -4,7 +4,7 @@ import { shoeBrands } from 'picker-types/types/track-and-field/shoeBrands';
 import { shoeEvents } from 'picker-types/types/track-and-field/shoeEvents';
 import { shoeLaceTypes } from 'picker-types/types/track-and-field/shoeLaceTypes';
 import { shoeSearchOrders } from 'picker-types/types/track-and-field/shoeSearchOrder';
-import { ColorImages } from 'graphql/schema/common';
+import { ColorImages } from '../common';
 
 export const ISpikeBase = interfaceType({
   name: 'ISpikeBase',

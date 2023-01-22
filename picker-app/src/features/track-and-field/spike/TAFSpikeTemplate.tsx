@@ -2,6 +2,7 @@ import React, { type FC } from 'react';
 import { css } from '@emotion/css';
 import { useTheme } from '@emotion/react';
 import { faChevronCircleLeft } from '@fortawesome/free-solid-svg-icons';
+import { Spike } from 'api/graphql/generated/codegen-client';
 import { A } from 'components/atoms/A';
 import { Button } from 'components/atoms/Button';
 import { Container } from 'components/atoms/Container';
@@ -14,7 +15,6 @@ import { TAF_SEARCH_PAGE_PATH } from 'features/track-and-field/constants/routing
 import { TAFSpikeActionBar } from 'features/track-and-field/spike/TAFSpikeActionBar';
 import { TAFSpikeDetail } from 'features/track-and-field/spike/TAFSpikeDetail';
 import { TAFSpikeOverview } from 'features/track-and-field/spike/TAFSpikeOverview';
-import { Spike } from 'graphql/generated/codegen-client';
 import { mediaGreaterThan } from 'shared/constants/styles/media-query';
 import { $headerSize } from 'shared/constants/styles/size';
 import { $spacing } from 'shared/constants/styles/spacing';

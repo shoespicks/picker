@@ -1,5 +1,5 @@
-import { NexusGenInputs, NexusGenRootTypes } from 'graphql/generated/nexus/types';
-import { spikeEntryBySlug, spikesEntries } from 'server/contentful/track-and-field/contentfulRepository';
+import { spikeEntryBySlug, spikesEntries } from 'api/contentful/track-and-field/contentfulRepository';
+import { NexusGenInputs, NexusGenRootTypes } from 'api/graphql/generated/nexus/types';
 
 export const spikesLoader = (input: NexusGenInputs['SpikesInput']): Promise<NexusGenRootTypes['SpikeBase'][]> => {
   return spikesEntries(input).then(e => {

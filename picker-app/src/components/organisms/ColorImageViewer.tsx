@@ -4,11 +4,11 @@ import { css, cx } from '@emotion/css';
 import { Theme, useTheme } from '@emotion/react';
 import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { debounce } from 'lodash-es';
+import { ColorImagesFragment } from 'api/graphql/generated/codegen-client';
 import { Icon } from 'components/atoms/Icon';
 import { Ratio } from 'components/atoms/Ratio';
 import { Spacer } from 'components/atoms/Spacer';
 import { ColorRadio } from 'components/molecules/ColorRadio';
-import { ColorImagesFragment } from 'graphql/generated/codegen-client';
 import { mediaGreaterThan, visibleOverBreakPointStyle } from 'shared/constants/styles/media-query';
 import { $spacing } from 'shared/constants/styles/spacing';
 

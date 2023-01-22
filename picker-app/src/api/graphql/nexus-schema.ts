@@ -5,12 +5,12 @@ import * as nexusDefs from './schema';
 export const schema = makeSchema({
   types: [nexusDefs], // NexusPrismaScalarsをここで読むとエラーになるのでscalar.tsで読み込んでいる
   contextType: {
-    module: path.join(process.cwd(), 'src/graphql/context.ts'),
+    module: path.join(process.cwd(), 'src/api/graphql/context.ts'),
     export: 'Context',
   },
   outputs: {
-    schema: path.join(process.cwd(), 'src/graphql/generated/nexus/schema.graphqls'),
-    typegen: path.join(process.cwd(), 'src/graphql/generated/nexus/types.ts'),
+    schema: path.join(process.cwd(), 'src/api/graphql/generated/nexus/schema.graphqls'),
+    typegen: path.join(process.cwd(), 'src/ap/graphql/generated/nexus/types.ts'),
   },
   features: {
     abstractTypeStrategies: {

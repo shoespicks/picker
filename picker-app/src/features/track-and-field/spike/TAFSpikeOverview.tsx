@@ -1,10 +1,10 @@
 import React, { type FC } from 'react';
 import { css } from '@emotion/css';
+import { SpikeFragment } from 'api/graphql/generated/codegen-client';
 import { Divider } from 'components/atoms/Divider';
 import { Spacer } from 'components/atoms/Spacer';
 import { H1, Span } from 'components/atoms/Typography';
 import { ColorImageViewer } from 'components/organisms/ColorImageViewer';
-import { SpikeFragment } from 'graphql/generated/codegen-client';
 import { hideOverBreakPointStyle } from 'shared/constants/styles/media-query';
 import { $spacing } from 'shared/constants/styles/spacing';
 

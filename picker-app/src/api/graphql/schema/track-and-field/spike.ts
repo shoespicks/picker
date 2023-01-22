@@ -1,7 +1,7 @@
 import { extendType, inputObjectType, interfaceType, nonNull, objectType } from 'nexus';
-import { AricleItem, Strength } from 'graphql/schema';
-import { ISpikeBase } from 'graphql/schema/track-and-field/types';
-import { spikeLoader } from 'server/loader/track-and-field/spikeLoader';
+import { spikeLoader } from '../../../loader/track-and-field/spikeLoader';
+import { AricleItem, Strength } from '../index';
+import { ISpikeBase } from './types';
 
 export const SpikeDetailSpec = objectType({
   name: 'SpikeDetailSpec',

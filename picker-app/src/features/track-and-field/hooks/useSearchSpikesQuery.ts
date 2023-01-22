@@ -2,8 +2,8 @@ import { map } from 'lodash-es';
 import { shoeEnviroments } from 'picker-types/types/track-and-field/shoeEnviroment';
 import { IShoeSearchOrder } from 'picker-types/types/track-and-field/shoeSearchOrder';
 import { useRecoilState, useRecoilValue } from 'recoil';
+import { useSpikesQuery } from 'api/graphql/generated/codegen-client';
 import { SearchFormInput, searchFormInputDefaultValues } from 'features/track-and-field/constants/search';
-import { useSpikesQuery } from 'graphql/generated/codegen-client';
 import { searchConditionState } from 'shared/state/track-and-field.state';
 
 export const useSearchSpikesQueryCondition = () => {

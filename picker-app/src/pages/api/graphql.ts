@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import { ApolloServer } from 'apollo-server-micro';
-import { context } from 'graphql/context';
-import { schema } from 'graphql/nexus-schema';
+import { context } from 'api/graphql/context';
+import { schema } from 'api/graphql/nexus-schema';
 
 const apolloServer = new ApolloServer({ schema, context });
 const startServer = apolloServer.start();

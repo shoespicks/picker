@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import Image from 'next/image';
 import { css } from '@emotion/css';
+import { AricleItemFragment } from 'api/graphql/generated/codegen-client';
 import { Ratio } from 'components/atoms/Ratio';
 import { Section } from 'components/atoms/Section';
 import { Spacer } from 'components/atoms/Spacer';
 import { H4, Pre } from 'components/atoms/Typography';
-import { AricleItemFragment } from 'graphql/generated/codegen-client';
 import { mediaGreaterThan } from 'shared/constants/styles/media-query';
 import { $spacing } from 'shared/constants/styles/spacing';
 

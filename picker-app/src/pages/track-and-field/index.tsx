@@ -1,11 +1,10 @@
 import { ReactElement } from 'react';
 import { GetStaticProps } from 'next';
 import { shoeEventCategories } from 'picker-types/types/track-and-field/shoeEvents';
+import { spikesLoader } from 'api/loader/track-and-field/spikeLoader';
 import { TAFTopTemplate, TAFTopTemplateProps } from 'features/track-and-field/top/TAFTopTemplate';
 import TAFLayout from 'layout/TrackAndField';
 import { NextPageWithLayout } from 'pages/_app';
-import { spikesLoader } from 'server/loader/track-and-field/spikeLoader';
-
 
 const TAFIndexPage: NextPageWithLayout<TAFTopTemplateProps> = props => {
   return (
@@ -16,7 +15,7 @@ const TAFIndexPage: NextPageWithLayout<TAFTopTemplateProps> = props => {
 };
 
 TAFIndexPage.getLayout = (page: ReactElement) => {
-  return <TAFLayout links={[{ label: "SHOWS PICKS" }]}>{page}</TAFLayout>;
+  return <TAFLayout links={[{ label: 'SHOWS PICKS' }]}>{page}</TAFLayout>;
 };
 
 export default TAFIndexPage;

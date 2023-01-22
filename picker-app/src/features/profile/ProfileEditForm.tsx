@@ -3,6 +3,11 @@ import { useRouter } from 'next/router';
 import { css } from '@emotion/css';
 import { faChevronCircleRight } from '@fortawesome/free-solid-svg-icons';
 import { isString } from 'lodash-es';
+import {
+  PrefectureEnum,
+  UserProfileFragment,
+  useUpdateUserProfileMutation,
+} from 'api/graphql/generated/codegen-client';
 import { Button } from 'components/atoms/Button';
 import { Form } from 'components/atoms/Form';
 import { InputControl } from 'components/atoms/input/Input';
@@ -17,7 +22,6 @@ import {
   useProfileForm,
   UserFormInputDef,
 } from 'features/profile/hooks/useProfileForm';
-import { PrefectureEnum, UserProfileFragment, useUpdateUserProfileMutation } from 'graphql/generated/codegen-client';
 import { $spacing } from 'shared/constants/styles/spacing';
 import { createDateStringForInputElement } from 'shared/utils/dateUtils';
 

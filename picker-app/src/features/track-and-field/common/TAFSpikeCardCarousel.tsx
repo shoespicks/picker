@@ -1,9 +1,9 @@
 import React, { type FC } from 'react';
 import { css } from '@emotion/css';
+import { ISpikeBase } from 'api/graphql/generated/codegen-client';
 import { ScrollArea } from 'components/atoms/ScrollArea';
 import { LinkCard } from 'components/molecules/LinkCard';
 import { TAF_SEARCH_PAGE_PATH } from 'features/track-and-field/constants/routing';
-import { ISpikeBase } from 'graphql/generated/codegen-client';
 import { $spacing } from 'shared/constants/styles/spacing';
 
 type Props = {

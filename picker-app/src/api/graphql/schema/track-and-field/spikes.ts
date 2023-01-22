@@ -1,13 +1,6 @@
 import { extendType, inputObjectType, nonNull, objectType } from 'nexus';
-import {
-  ISpikeBase,
-  TAFAthleteLevel,
-  TAFBrands,
-  TAFEvents,
-  TAFShoeLaceType,
-  TAFShoeOrder,
-} from 'graphql/schema/track-and-field/types';
-import { spikesLoader } from 'server/loader/track-and-field/spikeLoader';
+import { spikesLoader } from '../../../loader/track-and-field/spikeLoader';
+import { ISpikeBase, TAFAthleteLevel, TAFBrands, TAFEvents, TAFShoeLaceType, TAFShoeOrder } from './types';
 
 export const SpikeBase = objectType({
   name: 'SpikeBase',
